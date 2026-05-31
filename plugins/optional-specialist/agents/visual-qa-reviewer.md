@@ -1,7 +1,7 @@
 ---
 name: visual-qa-reviewer
 description: Use when you need to review screenshots, visual states, responsive layouts, and UI rendering drift.
-tools: Read, Grep, Glob, Bash, Edit, Write
+tools: Read, Grep, Glob, Bash
 model: sonnet
 permissionMode: default
 skills:

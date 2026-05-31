@@ -2,7 +2,7 @@
 
 OmniAgent redistributes skill and agent content from the open-source projects below, kept under `community/<source>/`. Each project's content remains under its original license, reproduced in full here and kept alongside the content as `community/<source>/LICENSE`.
 
-All redistributed sources use permissive licenses (MIT). Sources whose terms do not permit redistribution were **excluded** (see the end of this file).
+All redistributed sources use permissive licenses (MIT). Sources whose terms do not permit redistribution were excluded (see end).
 
 
 ---
@@ -82,7 +82,7 @@ SOFTWARE.
 - **License:** MIT
 - **Upstream:** https://github.com/Donchitos/Claude-Code-Game-Studios
 - **Redistributed:** 23 skills, 49 agents
-- **Used for:** Game-studio workflow skills and engine-specialist agents (gamedev-* namespace).
+- **Used for:** Game-studio workflow skills and engine-specialist agents.
 - **Local path:** `community/Donchitos-Claude-Code-Game-Studios/`
 
 <details><summary>Original license text</summary>
@@ -152,7 +152,7 @@ SOFTWARE.
 - **License:** MIT
 - **Upstream:** https://github.com/addyosmani/web-quality-skills
 - **Redistributed:** 2 skills
-- **Used for:** Web performance & quality (Core Web Vitals, SEO).
+- **Used for:** Web performance & quality.
 - **Local path:** `community/addyosmani-web-quality-skills/`
 
 <details><summary>Original license text</summary>
@@ -223,5 +223,5 @@ SOFTWARE.
 
 ## Excluded sources (NOT redistributed)
 
-- **openai/skills** — governed by the OpenAI Services Agreement, not an open-source redistribution license. Five skills sourced from it during development (chatgpt-apps, cli-creator, doc, playwright, playwright-interactive) were **removed** from this repository. Where equivalent capability is needed, author an original skill instead or install those directly from OpenAI's own distribution.
+- **openai/skills** — governed by the OpenAI Services Agreement, not an open-source redistribution license. Five skills sourced from it during development (chatgpt-apps, cli-creator, doc, playwright, playwright-interactive) were removed from this repository.
 
