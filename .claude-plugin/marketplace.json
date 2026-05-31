@@ -3,7 +3,7 @@
   "name": "omniagent",
   "owner": {
     "name": "FluxonLab",
-    "url": "FLUXONLAB_URL"
+    "url": "https://fluxonlab.com"
   },
   "description": "Installable, permission-bounded, multi-platform agent skills & subagents by FluxonLab.",
   "plugins": [

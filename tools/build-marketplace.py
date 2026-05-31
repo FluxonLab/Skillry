@@ -52,7 +52,7 @@ for d in sorted(PLUGINS.iterdir()):
 marketplace = {
     "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
     "name": "omniagent",
-    "owner": {"name": "FluxonLab", "url": "FLUXONLAB_URL"},
+    "owner": {"name": "FluxonLab", "url": "https://fluxonlab.com"},
     "description": "Installable, permission-bounded, multi-platform agent skills & subagents by FluxonLab.",
     "plugins": plugins,
 }
