@@ -2,7 +2,7 @@
 
 # OmniAgent
 
-**Installable, permission-bounded, multi-platform agent skills & subagents — by [FluxonLab](FLUXONLAB_URL).**
+**Installable, permission-bounded, multi-platform agent skills & subagents — by [FluxonLab](https://fluxonlab.com).**
 
 One source of truth. Install the same curated skills, subagents, and slash commands into
 **Claude Code, OpenAI Codex, GitHub Copilot, and Google Antigravity (Gemini)** — with real
@@ -113,7 +113,7 @@ PRs that add third-party content must include correct attribution and a license 
 
 ## License & credits
 
-Original work © 2026 FluxonLab — [YOUR_NAME](PERSONAL_URL) — under the [MIT License](LICENSE).
+Original work © 2026 FluxonLab — [Çağrı Bozgeyik](https://cagribozgeyik.com) — under the [MIT License](LICENSE).
 Redistributed content under `community/` keeps its upstream license; see
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). Built and maintained by
-**[FluxonLab](FLUXONLAB_URL)**.
+**[FluxonLab](https://fluxonlab.com)**.

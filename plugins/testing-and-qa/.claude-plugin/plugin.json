@@ -4,8 +4,8 @@
   "version": "0.1.0",
   "author": {
     "name": "FluxonLab",
-    "url": "FLUXONLAB_URL"
+    "url": "https://fluxonlab.com"
   },
-  "homepage": "FLUXONLAB_URL",
+  "homepage": "https://fluxonlab.com",
   "license": "MIT"
 }

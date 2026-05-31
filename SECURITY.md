@@ -30,7 +30,7 @@ If you find a security issue (malicious skill content, a permission-escalation p
 attribution/license problem, or an injection vector), please open a private report:
 
 - Preferred: GitHub Security Advisory ("Report a vulnerability") on this repository.
-- Or contact FluxonLab via FLUXONLAB_URL.
+- Or contact FluxonLab via https://fluxonlab.com.
 
 Please do not open a public issue for undisclosed vulnerabilities. We aim to acknowledge
 within a few days.
