@@ -4,25 +4,22 @@ Copyright (c) 2026 FluxonLab — YOUR_NAME
 This product includes original work licensed under the MIT License (see LICENSE)
 and redistributed third-party content that retains its own upstream licenses.
 
-Third-party content lives under `community/` and is redistributed in compliance
-with each source's license. Full attribution and the complete original license
-text for every source are in THIRD-PARTY-NOTICES.md.
+Third-party content lives under the community/ directory and is redistributed in
+compliance with each source's license. Full attribution and the complete original
+license text for every source are in THIRD-PARTY-NOTICES.md.
 
-Redistributed sources (all permissive: MIT or ISC):
+Redistributed sources (all permissive — MIT):
 
-  - github/awesome-copilot          MIT   (c) 2025 hesreallyhim
-  - wshobson/agents                 MIT   (c) 2025 Seth Hobson
-  - Donchitos/Claude-Code-Game-Studios  MIT   (c) 2025 Donchitos
-  - addyosmani/agent-skills         MIT   (c) 2025 Addy Osmani
-  - addyosmani/web-quality-skills   MIT   (c) 2025 Addy Osmani
-  - jaktestowac/awesome-copilot-for-testers  MIT  (c) 2025 jaktestowac.com
-  - Code-and-Sorts/awesome-copilot-agents    ISC  (c) 2025 Code & Sorts
+  - github/awesome-copilot               (c) GitHub, Inc.
+  - wshobson/agents                      (c) 2024 Seth Hobson
+  - Donchitos/Claude-Code-Game-Studios   (c) 2026 Donchitos
+  - addyosmani/agent-skills              (c) 2025 Addy Osmani
+  - addyosmani/web-quality-skills        (c) 2026 Addy Osmani
+  - jaktestowac/awesome-copilot-for-testers  (c) jaktestowac.com
 
-Each redistributed source's directory under `community/<source>/` also contains
-a copy of that source's original LICENSE file.
+Each source's directory under community/<source>/ also contains a copy of that
+source's original LICENSE file.
 
-NOT REDISTRIBUTED: Some upstream collections reviewed during development are
-NOT included here because their terms do not permit redistribution (e.g.
-content under the OpenAI Services Agreement rather than an open-source license).
-Those skills were excluded; where equivalent functionality was needed it was
-authored originally by FluxonLab.
+NOT REDISTRIBUTED: Content under the OpenAI Services Agreement (openai/skills) is
+NOT included here because its terms do not permit redistribution. Skills sourced
+from it during development were removed; see THIRD-PARTY-NOTICES.md.
