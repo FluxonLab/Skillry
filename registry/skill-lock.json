@@ -1,0 +1,1594 @@
+{
+  "version": "0.1.0",
+  "counts": {
+    "original": 100,
+    "community": 98,
+    "total": 198
+  },
+  "skills": [
+    {
+      "id": "agent-workflow-design",
+      "folder": "40-agent-workflow-design",
+      "department": "ai-and-agent-systems",
+      "origin": "original",
+      "lines": 122,
+      "checksum": "566cd70eb77bbb6807fb84d16eb9af6290aedddc98c1ac180ef162c1df84fe9a"
+    },
+    {
+      "id": "agent-governance-review",
+      "folder": "41-agent-governance-review",
+      "department": "ai-and-agent-systems",
+      "origin": "original",
+      "lines": 129,
+      "checksum": "36eef350d470dd1a43aae811c6da577634fcffb3c42d3d87b43188f630d67dad"
+    },
+    {
+      "id": "prompt-systems-review",
+      "folder": "42-prompt-systems-review",
+      "department": "ai-and-agent-systems",
+      "origin": "original",
+      "lines": 132,
+      "checksum": "82b98822efe6d222c8507908c33599397adbd31452384f8cd1f2458755818872"
+    },
+    {
+      "id": "rag-vector-search-review",
+      "folder": "43-rag-vector-search-review",
+      "department": "ai-and-agent-systems",
+      "origin": "original",
+      "lines": 133,
+      "checksum": "4f193abddb88752ab92ba1faef243157224c3774359cfa20ce84cd3a48834d02"
+    },
+    {
+      "id": "llm-evaluation-review",
+      "folder": "44-llm-evaluation-review",
+      "department": "ai-and-agent-systems",
+      "origin": "original",
+      "lines": 123,
+      "checksum": "51500aa9dc9791fe83162eababeaa0f94c13af11b781fdb920bbfca9b8ac247b"
+    },
+    {
+      "id": "automation-mcp-gatekeeping",
+      "folder": "45-automation-mcp-gatekeeping",
+      "department": "ai-and-agent-systems",
+      "origin": "original",
+      "lines": 103,
+      "checksum": "26edd5e10e017c3d98bbe4d59da63b7c56b7ee9b27070a67add774742c824976"
+    },
+    {
+      "id": "agent-supply-chain-review",
+      "folder": "46-agent-supply-chain-review",
+      "department": "ai-and-agent-systems",
+      "origin": "original",
+      "lines": 131,
+      "checksum": "c9acb72e25a9d0dac02233f23f4cb96e4d661ba401708d9f1fd752452718c7ae"
+    },
+    {
+      "id": "api-and-interface-design",
+      "folder": "12-api-and-interface-design",
+      "department": "backend-and-api",
+      "origin": "original",
+      "lines": 310,
+      "checksum": "8a074df97e9c89aa851d8336f1f8c009ebe390ae66e9c2c34b7597df59c9dcbd"
+    },
+    {
+      "id": "backend-implementation-review",
+      "folder": "13-backend-implementation-review",
+      "department": "backend-and-api",
+      "origin": "original",
+      "lines": 79,
+      "checksum": "db4f8e3494b34ee1a19446e642cbf2d48983ddb79b73311d014aa5a836109d52"
+    },
+    {
+      "id": "auth-session-review",
+      "folder": "14-auth-session-review",
+      "department": "backend-and-api",
+      "origin": "original",
+      "lines": 101,
+      "checksum": "f250d28b899d349f18f0d855a32d783dae92eda2e0bcdb9b8065e66e97ee4cd9"
+    },
+    {
+      "id": "integration-boundary-review",
+      "folder": "15-integration-boundary-review",
+      "department": "backend-and-api",
+      "origin": "original",
+      "lines": 83,
+      "checksum": "9f92a36741138571a0d2a298e0fc6449c2903032d29c965200080afc66c23dfc"
+    },
+    {
+      "id": "error-handling-observability",
+      "folder": "16-error-handling-observability",
+      "department": "backend-and-api",
+      "origin": "original",
+      "lines": 91,
+      "checksum": "513cec955f129f25d7d021471e120216e50f99a8b62d0b10b6bf0a2c2f51eee7"
+    },
+    {
+      "id": "python-project-review",
+      "folder": "94-python-project-review",
+      "department": "backend-and-api",
+      "origin": "original",
+      "lines": 271,
+      "checksum": "f6ae9cdd4136775d7ac2d6666f372f1efea4c2aab5dd5ca6997dcba2b9f6c2c0"
+    },
+    {
+      "id": "repo-diagnostics",
+      "folder": "01-repo-diagnostics",
+      "department": "core-operations",
+      "origin": "original",
+      "lines": 61,
+      "checksum": "5e516746accd6ccc13f2034ece85eed53f570afcec5d13c679acd05b533484c8"
+    },
+    {
+      "id": "codebase-cartography",
+      "folder": "02-codebase-cartography",
+      "department": "core-operations",
+      "origin": "original",
+      "lines": 74,
+      "checksum": "2ff50238fac904c7de38860a3e1fabb196ca9f1e5df2d211d84639b2500f112e"
+    },
+    {
+      "id": "architecture-review",
+      "folder": "03-architecture-review",
+      "department": "core-operations",
+      "origin": "original",
+      "lines": 63,
+      "checksum": "da663a4d7a79a83d8b30495e33d32fc623d580c4eebc8e98b35cee02a1f16f89"
+    },
+    {
+      "id": "implementation-plan",
+      "folder": "04-implementation-plan",
+      "department": "core-operations",
+      "origin": "original",
+      "lines": 75,
+      "checksum": "b48b9b057396bf6e545d9de45d98a0f778633e424cdfcc8666021fe3146d671c"
+    },
+    {
+      "id": "refactor-safety",
+      "folder": "05-refactor-safety",
+      "department": "core-operations",
+      "origin": "original",
+      "lines": 76,
+      "checksum": "94b90d315dc06ba1fe210731537a2c7e467deb92fce3cb1c83e37ffe26fddf20"
+    },
+    {
+      "id": "release-readiness-check",
+      "folder": "06-release-readiness-check",
+      "department": "core-operations",
+      "origin": "original",
+      "lines": 63,
+      "checksum": "f6d14791bb12493e093ae370aa9554a2cc5762b5660668b563f226093bdd9399"
+    },
+    {
+      "id": "project-agent-bootstrap",
+      "folder": "89-project-agent-bootstrap",
+      "department": "core-operations",
+      "origin": "original",
+      "lines": 88,
+      "checksum": "d153a392ca3ef06a20b1d21f64b1fee2badf37a3c3797cea5104211b99a0630a"
+    },
+    {
+      "id": "supabase-rls-edge-functions",
+      "folder": "257-supabase-rls-edge-functions",
+      "department": "database-and-data",
+      "origin": "original",
+      "lines": 371,
+      "checksum": "314bd05b97065ebf0b6095754aa379c8e521fa8d1bd01ebab7dccbd4a823fb66"
+    },
+    {
+      "id": "database-and-prisma-review",
+      "folder": "35-database-and-prisma-review",
+      "department": "database-and-data",
+      "origin": "original",
+      "lines": 65,
+      "checksum": "cf7ab1d2fe3cfe542888f48cf8d19823bd3455c9961d7ca36ae2bf3fbd07dbaa"
+    },
+    {
+      "id": "postgres-supabase-review",
+      "folder": "36-postgres-supabase-review",
+      "department": "database-and-data",
+      "origin": "original",
+      "lines": 204,
+      "checksum": "8e8c818e4c11abc8bd6034c8dae5ad2daf11bd7a6449fb67e94d04832cdb4f3f"
+    },
+    {
+      "id": "data-migration-safety",
+      "folder": "37-data-migration-safety",
+      "department": "database-and-data",
+      "origin": "original",
+      "lines": 242,
+      "checksum": "2b6edd907461ed51da9a0f3d9ac41c4729439b455bf73ec2cd54e20b3554e501"
+    },
+    {
+      "id": "seed-and-fixture-review",
+      "folder": "38-seed-and-fixture-review",
+      "department": "database-and-data",
+      "origin": "original",
+      "lines": 265,
+      "checksum": "4be5ae5a5e1bfc8a60c60bbef6d6d5329c0c64451ff1fdee539eb5bc4f97c193"
+    },
+    {
+      "id": "query-performance-review",
+      "folder": "39-query-performance-review",
+      "department": "database-and-data",
+      "origin": "original",
+      "lines": 304,
+      "checksum": "6cac11221c61e6fce24f57ad8be83f43851b0e4638fe94cff5f3bc4b5348078b"
+    },
+    {
+      "id": "ci-cd-pipeline-review",
+      "folder": "58-ci-cd-pipeline-review",
+      "department": "devops-and-release",
+      "origin": "original",
+      "lines": 132,
+      "checksum": "49355e073f18d8c9f36463d60eab19c84a34fbda5b6b4015879eb76e163cea92"
+    },
+    {
+      "id": "build-and-typecheck-review",
+      "folder": "59-build-and-typecheck-review",
+      "department": "devops-and-release",
+      "origin": "original",
+      "lines": 132,
+      "checksum": "6b6e5325dd827ad401b99aec52454ab1a1f699cc944abbd0fd1f6f8ab241a0d8"
+    },
+    {
+      "id": "deployment-preflight-review",
+      "folder": "60-deployment-preflight-review",
+      "department": "devops-and-release",
+      "origin": "original",
+      "lines": 129,
+      "checksum": "4c72b2dcd9585074fc1df8cb8bd2e9891796b8320f3f2ed4065b545075fc227b"
+    },
+    {
+      "id": "release-notes-generator",
+      "folder": "61-release-notes-generator",
+      "department": "devops-and-release",
+      "origin": "original",
+      "lines": 127,
+      "checksum": "fd463b945c788002d4d7e432078ba020b10147494f95fcf6ba65e8a7f71eef66"
+    },
+    {
+      "id": "handoff-readiness-check",
+      "folder": "62-handoff-readiness-check",
+      "department": "devops-and-release",
+      "origin": "original",
+      "lines": 159,
+      "checksum": "ae0ba6e61c7016bc93cf143c9ca92c13ccce06b1a8b6a06577d5b7aa8e42c968"
+    },
+    {
+      "id": "ui-consistency-review",
+      "folder": "17-ui-consistency-review",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "lines": 62,
+      "checksum": "0da7994658081adef9c32b7190ff94bd51bb8a9eabde76d6368114b94e3a4ca4"
+    },
+    {
+      "id": "web-design-review",
+      "folder": "18-web-design-review",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "lines": 72,
+      "checksum": "6176cba2fc7f8f0cdd6cf6a6ddabce998cbcf41cb71bad8d1358b871fde39f3c"
+    },
+    {
+      "id": "design-system-review",
+      "folder": "19-design-system-review",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "lines": 73,
+      "checksum": "2b5abf498a23074f5129c269e5a57a9fdba97ca39e4fcc6f72ebcaf1ee16b5ab"
+    },
+    {
+      "id": "accessibility-audit",
+      "folder": "20-accessibility-audit",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "lines": 82,
+      "checksum": "497db60be2808ae19a20d32b5ea3fa95b8b2c9189682293b75e8083e9a6f72a2"
+    },
+    {
+      "id": "dashboard-ux-review",
+      "folder": "21-dashboard-ux-review",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "lines": 79,
+      "checksum": "1b22d0b1384554d1a86f45101d072e3a885e9b220a556ab4b81698d5e252cf38"
+    },
+    {
+      "id": "landing-page-conversion-review",
+      "folder": "22-landing-page-conversion-review",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "lines": 80,
+      "checksum": "77b7338137f272edfcb13e78020a080b3c2980bda8fc0bb70511dc8a793dda06"
+    },
+    {
+      "id": "responsive-layout-review",
+      "folder": "23-responsive-layout-review",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "lines": 81,
+      "checksum": "f50fc8497d136978de156b1f33af5b56842f1a70afbc29d9ecdaecc831d0d9b5"
+    },
+    {
+      "id": "visual-polish-pass",
+      "folder": "24-visual-polish-pass",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "lines": 81,
+      "checksum": "03249b17c2f644dd840463565dc5d4b5c8cf0dac678f9af3552abfd21635211b"
+    },
+    {
+      "id": "shadcn-ui-components",
+      "folder": "256-shadcn-ui-components",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "lines": 341,
+      "checksum": "ff901bbed11a2a2d1d73b98680d1a22e2e656899d9ca708e48bcd9afd0494668"
+    },
+    {
+      "id": "i18n-locale-parity-review",
+      "folder": "91-i18n-locale-parity-review",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "lines": 242,
+      "checksum": "c72c0f8a44cf071d95b9480fdc2ff7b5d07fe45c5a3d318df5346645dfcfbf81"
+    },
+    {
+      "id": "next-app-router-rsc-review",
+      "folder": "92-next-app-router-rsc-review",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "lines": 211,
+      "checksum": "d940938cabc543dc52d86c262dfbccb9576334fcb7a53ffadae426f96b9244f3"
+    },
+    {
+      "id": "phaser-game-development",
+      "folder": "251-phaser-game-development",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "lines": 307,
+      "checksum": "ff17542d8a0221abc262c67f79141da715d27fe25bf585b35f0eaac673786c61"
+    },
+    {
+      "id": "threejs-webgl-patterns",
+      "folder": "252-threejs-webgl-patterns",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "lines": 301,
+      "checksum": "4c9a2040d3bdbbc7d177a8cb281fe8d7475fc3f9207d73fe0f12ee6352d4d19d"
+    },
+    {
+      "id": "pixijs-2d-rendering",
+      "folder": "253-pixijs-2d-rendering",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "lines": 308,
+      "checksum": "2ab14fecb7c2b950b0ece4dd467df7b43c33f97ec236c7ee23ae6c890b386fa2"
+    },
+    {
+      "id": "web-game-architecture",
+      "folder": "254-web-game-architecture",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "lines": 375,
+      "checksum": "e11e6721fe29b90a7258e9a8807a212af37f2401d3527101af75ca6a6df884f5"
+    },
+    {
+      "id": "web-game-performance",
+      "folder": "255-web-game-performance",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "lines": 315,
+      "checksum": "f49ee52e237dcd37ae498f75d79f70f55b748df070a51bacc0a3fcadc11e5184"
+    },
+    {
+      "id": "game-architecture-review",
+      "folder": "29-game-architecture-review",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "lines": 73,
+      "checksum": "bc2355351fbcc694b47df65879317aa2a2bbe85f371b032d2a464f7322e2478c"
+    },
+    {
+      "id": "gameplay-systems-review",
+      "folder": "30-gameplay-systems-review",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "lines": 74,
+      "checksum": "3967d3c2fde0d9e0a0a754a3c74a1bd77d660875ecc91d893a02f6468a7c84be"
+    },
+    {
+      "id": "game-ui-ux-review",
+      "folder": "31-game-ui-ux-review",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "lines": 74,
+      "checksum": "b45da1d3837b55e5ae1930e529ca955646086f9185cb1cebd622e37e211c17e1"
+    },
+    {
+      "id": "game-performance-review",
+      "folder": "32-game-performance-review",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "lines": 76,
+      "checksum": "adcbd46a982ba5dfab39a32a2f6591f8e5d6598f08f1f6be3a75b0d9ab0528cd"
+    },
+    {
+      "id": "interactive-prototype-review",
+      "folder": "33-interactive-prototype-review",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "lines": 73,
+      "checksum": "3f6dd8024339f40a2edf466645539f109d45331204e1f279d853ed0dc05451a3"
+    },
+    {
+      "id": "godot-unity-unreal-triage",
+      "folder": "34-godot-unity-unreal-triage",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "lines": 76,
+      "checksum": "a7887fffce3a54a8f194a414cc7f9012362fbd7b558f79d1b04e85ed1cb86999"
+    },
+    {
+      "id": "mobile-app-review",
+      "folder": "25-mobile-app-review",
+      "department": "mobile-desktop",
+      "origin": "original",
+      "lines": 72,
+      "checksum": "de3d11ec9806a3ae4dbd3ad4955d37f30afa32c107ef06b70ca4c8a3dbf403e8"
+    },
+    {
+      "id": "ios-hig-review",
+      "folder": "26-ios-hig-review",
+      "department": "mobile-desktop",
+      "origin": "original",
+      "lines": 74,
+      "checksum": "4b6636db3e37148b831a15250092dcbfcfd71fac1847f7f360f76375c18ff330"
+    },
+    {
+      "id": "android-material-review",
+      "folder": "27-android-material-review",
+      "department": "mobile-desktop",
+      "origin": "original",
+      "lines": 76,
+      "checksum": "09c80fb85b410ed90e07aed1071cdf7bf7440051501ea8220a32a33adfbfaff3"
+    },
+    {
+      "id": "desktop-launcher-review",
+      "folder": "28-desktop-launcher-review",
+      "department": "mobile-desktop",
+      "origin": "original",
+      "lines": 60,
+      "checksum": "b06a2281574af1263578e53b5bd731d817e1bb1fc32ada9bdfb5235fad850a60"
+    },
+    {
+      "id": "wordpress-woocommerce-review",
+      "folder": "76-wordpress-woocommerce-review",
+      "department": "optional-specialist",
+      "origin": "original",
+      "lines": 121,
+      "checksum": "9b4c5b8fcf6211800f3ede774d38883215db57d4e5df7d232f38df48994dcdb1"
+    },
+    {
+      "id": "ecommerce-integration-review",
+      "folder": "77-ecommerce-integration-review",
+      "department": "optional-specialist",
+      "origin": "original",
+      "lines": 122,
+      "checksum": "600d4540b19f97247e979f9f2058a99b8b6ed79d07a43159181a1e1fad1d4b52"
+    },
+    {
+      "id": "nfc-linktree-menu-builder-review",
+      "folder": "78-nfc-linktree-menu-builder-review",
+      "department": "optional-specialist",
+      "origin": "original",
+      "lines": 132,
+      "checksum": "98b7f47bc57c902d6ab508a39e76516a9cdb4c3ff819f9ebba3b25531cf01b30"
+    },
+    {
+      "id": "local-llm-runtime-review",
+      "folder": "79-local-llm-runtime-review",
+      "department": "optional-specialist",
+      "origin": "original",
+      "lines": 156,
+      "checksum": "5fe42a160a8b17d3b2080d326418de6e19f940215c67a9dcdb8de3e1f1bcc69f"
+    },
+    {
+      "id": "ai-studio-prototype-review",
+      "folder": "80-ai-studio-prototype-review",
+      "department": "optional-specialist",
+      "origin": "original",
+      "lines": 154,
+      "checksum": "b22f2254f88d308a21ef59ffd0dffb6bc20eecc24bfe44bab627c8d7c4013ea3"
+    },
+    {
+      "id": "chrome-extension-review",
+      "folder": "81-chrome-extension-review",
+      "department": "optional-specialist",
+      "origin": "original",
+      "lines": 143,
+      "checksum": "9cc6d3db2d6d60f0e29ba49b6d244431da110bc26cb215ab058602034307d1b6"
+    },
+    {
+      "id": "map-routing-geo-review",
+      "folder": "82-map-routing-geo-review",
+      "department": "optional-specialist",
+      "origin": "original",
+      "lines": 143,
+      "checksum": "469ea4f18999857c7d8522ee7c41320b6ef0c7f37c5219bd53e66f2a36c39f5c"
+    },
+    {
+      "id": "print-design-artifact-review",
+      "folder": "83-print-design-artifact-review",
+      "department": "optional-specialist",
+      "origin": "original",
+      "lines": 151,
+      "checksum": "6a2b5745a1cd91eaa3d79de873b691498221b256bcdbe7a67aad40314e9e926c"
+    },
+    {
+      "id": "analytics-tracking-review",
+      "folder": "84-analytics-tracking-review",
+      "department": "optional-specialist",
+      "origin": "original",
+      "lines": 137,
+      "checksum": "bd31239b5bcec759ccebc589d733d07328d219788307a8d813dc9cc6916b8030"
+    },
+    {
+      "id": "seo-content-ops-review",
+      "folder": "85-seo-content-ops-review",
+      "department": "optional-specialist",
+      "origin": "original",
+      "lines": 165,
+      "checksum": "4da4d3388cdf00eacdfd289811d03a38ede21d2b283b95f75bc40e7993702e3e"
+    },
+    {
+      "id": "cost-control-token-review",
+      "folder": "86-cost-control-token-review",
+      "department": "optional-specialist",
+      "origin": "original",
+      "lines": 170,
+      "checksum": "c3e0fb855728a5436b5ac59837df9c75fafea80bfa8bdbb394e232179e889872"
+    },
+    {
+      "id": "observability-otel-review",
+      "folder": "87-observability-otel-review",
+      "department": "optional-specialist",
+      "origin": "original",
+      "lines": 156,
+      "checksum": "154533fb99d678a7ed0e14da7a7c23918444b186cdaa3d5681b24893543d55fd"
+    },
+    {
+      "id": "monorepo-turborepo-review",
+      "folder": "88-monorepo-turborepo-review",
+      "department": "optional-specialist",
+      "origin": "original",
+      "lines": 148,
+      "checksum": "632c045b80258f4b3e27fd0240adb1d2efe5098dff408da88f4811a3b76489a0"
+    },
+    {
+      "id": "md-spec-generator",
+      "folder": "63-md-spec-generator",
+      "department": "product-docs-and-research",
+      "origin": "original",
+      "lines": 70,
+      "checksum": "1cd45fbea4b95f010a9e83d8cd57d4fd4ce810bcace30ccd6003b5f5800a6552"
+    },
+    {
+      "id": "codex-final-execution-prompt",
+      "folder": "64-codex-final-execution-prompt",
+      "department": "product-docs-and-research",
+      "origin": "original",
+      "lines": 75,
+      "checksum": "546c0c11c6e9e0369df97abdf6ccbf3e556e845b0aaba7cab813a2b52e02b75d"
+    },
+    {
+      "id": "product-requirements-review",
+      "folder": "65-product-requirements-review",
+      "department": "product-docs-and-research",
+      "origin": "original",
+      "lines": 105,
+      "checksum": "650aebcbdb1c9d6c7e7f72e76b82225056c1bcc8716780b7e0445b41c2ee86ec"
+    },
+    {
+      "id": "market-research-synthesis",
+      "folder": "66-market-research-synthesis",
+      "department": "product-docs-and-research",
+      "origin": "original",
+      "lines": 107,
+      "checksum": "509cd40e6808fe41cc7b215df14120abb35607dd24573cb1bbccba02b937919e"
+    },
+    {
+      "id": "business-model-review",
+      "folder": "67-business-model-review",
+      "department": "product-docs-and-research",
+      "origin": "original",
+      "lines": 116,
+      "checksum": "08c5a216f6497b876438e68e59478e6548c0637b7264984f846ceeb0f0aba7a9"
+    },
+    {
+      "id": "pricing-packaging-review",
+      "folder": "68-pricing-packaging-review",
+      "department": "product-docs-and-research",
+      "origin": "original",
+      "lines": 114,
+      "checksum": "338ca76a0928cc917ddd94f9f4ff76a5027e6b683c9ac7df0d263a1836ddf551"
+    },
+    {
+      "id": "technical-writing-review",
+      "folder": "69-technical-writing-review",
+      "department": "product-docs-and-research",
+      "origin": "original",
+      "lines": 121,
+      "checksum": "8b8eed8f96be5f122451e7f78327a4e09dacaf20348daeed93542ce2df1f15ab"
+    },
+    {
+      "id": "adr-generator",
+      "folder": "70-adr-generator",
+      "department": "product-docs-and-research",
+      "origin": "original",
+      "lines": 130,
+      "checksum": "2cc27159e551b0fa10c5099d20a5b147ab0b347d073e3e9c6c90c82f99407db4"
+    },
+    {
+      "id": "browser-first-local-app",
+      "folder": "07-browser-first-local-app",
+      "department": "runtime-and-local-app",
+      "origin": "original",
+      "lines": 66,
+      "checksum": "cee5850df54c1e32c5c99e1d4e2258d47f50a3528d7e967d2b2158830ebe9b59"
+    },
+    {
+      "id": "runtime-diagnostics",
+      "folder": "08-runtime-diagnostics",
+      "department": "runtime-and-local-app",
+      "origin": "original",
+      "lines": 74,
+      "checksum": "81113b02122db5227703132e9db71c2c7ce30dd4910e8d3e68688d79bf0ea4f0"
+    },
+    {
+      "id": "startup-health-readiness",
+      "folder": "09-startup-health-readiness",
+      "department": "runtime-and-local-app",
+      "origin": "original",
+      "lines": 109,
+      "checksum": "6a2c5c95fd675f4d856857e6f816c6c571ca70192563da112326f368a99bec41"
+    },
+    {
+      "id": "local-launcher-shortcuts",
+      "folder": "10-local-launcher-shortcuts",
+      "department": "runtime-and-local-app",
+      "origin": "original",
+      "lines": 72,
+      "checksum": "74724a2fb3dfffbe2099212084f2cf5ac065d6968cbaf6b9574ac8df63c78abd"
+    },
+    {
+      "id": "log-and-diagnostics-bundle",
+      "folder": "11-log-and-diagnostics-bundle",
+      "department": "runtime-and-local-app",
+      "origin": "original",
+      "lines": 109,
+      "checksum": "40ffb6bd2e103336569c6bf5439dcc0b85d64919ccc58b6823813d972a522fc8"
+    },
+    {
+      "id": "security-and-secrets-review",
+      "folder": "47-security-and-secrets-review",
+      "department": "security",
+      "origin": "original",
+      "lines": 68,
+      "checksum": "c8681be51e148faba0ddb9ea3014dded7dbdc85217ae9b53de09641a579b8fb0"
+    },
+    {
+      "id": "ai-security-review",
+      "folder": "48-ai-security-review",
+      "department": "security",
+      "origin": "original",
+      "lines": 138,
+      "checksum": "b1bb7671297a1921b7c73f45d199fa276e2f9e6b03cf8cd228db798536b776ec"
+    },
+    {
+      "id": "authz-permission-review",
+      "folder": "49-authz-permission-review",
+      "department": "security",
+      "origin": "original",
+      "lines": 102,
+      "checksum": "922736c4f71bcd2530b00e2006181dae0a51980946f89892c36bfb3a4e5ee38d"
+    },
+    {
+      "id": "dependency-supply-chain-review",
+      "folder": "50-dependency-supply-chain-review",
+      "department": "security",
+      "origin": "original",
+      "lines": 105,
+      "checksum": "bc010ab3f2531f25d6e7d6383d567e776d8e63db61abc8124e4cd86bf3ee5987"
+    },
+    {
+      "id": "env-config-hardening",
+      "folder": "51-env-config-hardening",
+      "department": "security",
+      "origin": "original",
+      "lines": 110,
+      "checksum": "4b00de67d638de9cf1ab944d9c543e4139c7197a2e10debfad70b723060a9e5c"
+    },
+    {
+      "id": "electron-app-security-review",
+      "folder": "93-electron-app-security-review",
+      "department": "security",
+      "origin": "original",
+      "lines": 263,
+      "checksum": "8771fd60169806c5bd39aec6d26a5daa71b25d969468d695dd19f04a6e6334f4"
+    },
+    {
+      "id": "skill-librarian",
+      "folder": "71-skill-librarian",
+      "department": "skill-library-and-installation",
+      "origin": "original",
+      "lines": 110,
+      "checksum": "980d69ea71544ab6e8da6d6159504c93a4d52821e3c1890f4ec10170c1acccc6"
+    },
+    {
+      "id": "skill-deduplication",
+      "folder": "72-skill-deduplication",
+      "department": "skill-library-and-installation",
+      "origin": "original",
+      "lines": 124,
+      "checksum": "18a6d5ec7b897d286f9e6e8899f6538f52219949318752703b3c3102b07261b2"
+    },
+    {
+      "id": "skill-to-agent-router",
+      "folder": "73-skill-to-agent-router",
+      "department": "skill-library-and-installation",
+      "origin": "original",
+      "lines": 128,
+      "checksum": "0b148978daef54d066c7d2e2d2f2250bf80dcd80d08aacef81e866df3733e7c5"
+    },
+    {
+      "id": "global-installation-audit",
+      "folder": "74-global-installation-audit",
+      "department": "skill-library-and-installation",
+      "origin": "original",
+      "lines": 215,
+      "checksum": "5793cd633ce1defae44fce5156367a28f7088022dbd18e19988e907e21cbdba6"
+    },
+    {
+      "id": "path-hygiene-repair",
+      "folder": "75-path-hygiene-repair",
+      "department": "skill-library-and-installation",
+      "origin": "original",
+      "lines": 225,
+      "checksum": "8bff2788a4ca4ee6eee6bf51af3399c0812c085ca5770c5b0a43fe0ab9ca6cf1"
+    },
+    {
+      "id": "smoke-test-and-repair",
+      "folder": "52-smoke-test-and-repair",
+      "department": "testing-and-qa",
+      "origin": "original",
+      "lines": 61,
+      "checksum": "5b0afd2304f858c30346665265f3d4a9c912af159aa8acfa5342311720eb2445"
+    },
+    {
+      "id": "playwright-e2e-audit",
+      "folder": "53-playwright-e2e-audit",
+      "department": "testing-and-qa",
+      "origin": "original",
+      "lines": 83,
+      "checksum": "2078994b9b050f7c49e2deb2c41a9db69b014e60c68eaf1ae926d1196d10e0b1"
+    },
+    {
+      "id": "regression-scope-analysis",
+      "folder": "54-regression-scope-analysis",
+      "department": "testing-and-qa",
+      "origin": "original",
+      "lines": 118,
+      "checksum": "9a017ca82bf2ce7fa1e0fa43ec8bb0a5f00322b17a96fa5c86177e0013c155c3"
+    },
+    {
+      "id": "api-test-suite-review",
+      "folder": "55-api-test-suite-review",
+      "department": "testing-and-qa",
+      "origin": "original",
+      "lines": 117,
+      "checksum": "12abbdb08ed8399262223d9cf6440572531d9d85706f08ce7d411e4246eb99a5"
+    },
+    {
+      "id": "visual-regression-review",
+      "folder": "56-visual-regression-review",
+      "department": "testing-and-qa",
+      "origin": "original",
+      "lines": 130,
+      "checksum": "655cafdaad7ac098de3426acb102e508f7264506857271f4b094a204c496744a"
+    },
+    {
+      "id": "uat-acceptance-review",
+      "folder": "57-uat-acceptance-review",
+      "department": "testing-and-qa",
+      "origin": "original",
+      "lines": 115,
+      "checksum": "3f33f242be1bfc7fd2522508c185f2274989ccb3dff129e807272096dd05a0a3"
+    },
+    {
+      "id": "182-gamedev-art-bible",
+      "folder": "182-gamedev-art-bible",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 248,
+      "checksum": "08be1a685728a8500537f447cbb7747de5131be6b91ce4cbeb2c0a311fbbae75"
+    },
+    {
+      "id": "185-gamedev-balance-check",
+      "folder": "185-gamedev-balance-check",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 118,
+      "checksum": "d3167a372a35eb05972136a02ed8cce63ba202cbc2ac6e19af39c65a3bd66d47"
+    },
+    {
+      "id": "186-gamedev-brainstorm",
+      "folder": "186-gamedev-brainstorm",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 350,
+      "checksum": "fecccbbbae1afc6e989425bfbe63ffe56f1156b48676d4fbeb7faa75d74a383f"
+    },
+    {
+      "id": "190-gamedev-code-review",
+      "folder": "190-gamedev-code-review",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 166,
+      "checksum": "906486209c2aeb36648c58abf097b17b86e349dd9a1f5f3d4f9a09ba95305296"
+    },
+    {
+      "id": "198-gamedev-design-review",
+      "folder": "198-gamedev-design-review",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 257,
+      "checksum": "5ab6a817a8387c1660e17a551bda4679bff94a300447d11f4cced3af43eb174d"
+    },
+    {
+      "id": "201-gamedev-estimate",
+      "folder": "201-gamedev-estimate",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 131,
+      "checksum": "b2740726188726da49bdabbd1672ed03b6c19e38c7810ff5395687e5811c9f60"
+    },
+    {
+      "id": "204-gamedev-hotfix",
+      "folder": "204-gamedev-hotfix",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 154,
+      "checksum": "693e9cc147597f03102c4275ab30f8b98a9189f95bd2e175918ad9c312272054"
+    },
+    {
+      "id": "207-gamedev-map-systems",
+      "folder": "207-gamedev-map-systems",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 363,
+      "checksum": "e808a902ea6cd04189e52298f8368e5f86f3a9703c2c02d9c3ca9575bba46678"
+    },
+    {
+      "id": "211-gamedev-perf-profile",
+      "folder": "211-gamedev-perf-profile",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 125,
+      "checksum": "f25e7c7f6c3234367e8db90ee66cb78bd567bb1ace08f033cba19d9261e3364c"
+    },
+    {
+      "id": "215-gamedev-prototype",
+      "folder": "215-gamedev-prototype",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 157,
+      "checksum": "593fca8dd4a31ea5a9a3896ef79e873bf39863fdfc4b43931923b806e7864fb9"
+    },
+    {
+      "id": "219-gamedev-release-checklist",
+      "folder": "219-gamedev-release-checklist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 181,
+      "checksum": "3439371f74661aa43f91bb2bb31b79006f41c1da6e7aa0b8b7e27d5fa5477dc2"
+    },
+    {
+      "id": "220-gamedev-retrospective",
+      "folder": "220-gamedev-retrospective",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 210,
+      "checksum": "d6c78a2c32fe6fa15683c502dc8cfb9ec1acea78978cb4fc66c7d457970f0a12"
+    },
+    {
+      "id": "235-gamedev-team-audio",
+      "folder": "235-gamedev-team-audio",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 129,
+      "checksum": "bbdfe40055c1b2f48f93e9b8ee2846233aa03cce1ff0d92a412da400f294c989"
+    },
+    {
+      "id": "236-gamedev-team-combat",
+      "folder": "236-gamedev-team-combat",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 120,
+      "checksum": "403f5f34fabe7e7de0464369bc0534bf014077370160a608b352124ae74feebc"
+    },
+    {
+      "id": "237-gamedev-team-level",
+      "folder": "237-gamedev-team-level",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 175,
+      "checksum": "dc1a683b89e4bd2b1e00b0e7df76b44446596cbc0385606f966da3e25f27f8bd"
+    },
+    {
+      "id": "238-gamedev-team-live-ops",
+      "folder": "238-gamedev-team-live-ops",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 145,
+      "checksum": "ef753f5e372823c003859d9c78aa25a9fbe202317a408f542e55a3a165f2f932"
+    },
+    {
+      "id": "239-gamedev-team-narrative",
+      "folder": "239-gamedev-team-narrative",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 111,
+      "checksum": "612c48c924c6150ef91da78485a2f2a4a5558211c41e87ef709861fd047e0964"
+    },
+    {
+      "id": "240-gamedev-team-polish",
+      "folder": "240-gamedev-team-polish",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 124,
+      "checksum": "6f9dd595c81e69226d4a522d32b7e0dd4e57c44fb3ddb31d0428511f00ee1cc2"
+    },
+    {
+      "id": "241-gamedev-team-qa",
+      "folder": "241-gamedev-team-qa",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 222,
+      "checksum": "ce859c1055b26ff76f4cc392e63debc942b19149737bb376e6e59f49e76326fc"
+    },
+    {
+      "id": "242-gamedev-team-release",
+      "folder": "242-gamedev-team-release",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 148,
+      "checksum": "a373a32007c9daf750406f707ed81cdb95e7ecb3503a0ba44b8003cdb88b79be"
+    },
+    {
+      "id": "243-gamedev-team-ui",
+      "folder": "243-gamedev-team-ui",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 170,
+      "checksum": "1d4f86490c67d1f3bd79ab9fda83d637163a03872f9de1b2e671743ba1aed9b6"
+    },
+    {
+      "id": "244-gamedev-tech-debt",
+      "folder": "244-gamedev-tech-debt",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 121,
+      "checksum": "c6cce1d76e6d7d05c7aab329a7d675447c8e75e50957c701b0d6875d285dfe3d"
+    },
+    {
+      "id": "250-gamedev-ux-review",
+      "folder": "250-gamedev-ux-review",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "lines": 262,
+      "checksum": "4a0c1f75c0cfd835ad762ae36c686fce5d33e545e34dbb5f2a21112708c88347"
+    },
+    {
+      "id": "browser-testing-with-devtools",
+      "folder": "browser-testing-with-devtools",
+      "source": "addyosmani-agent-skills",
+      "origin": "community",
+      "lines": 304,
+      "checksum": "fa066fbe432850d403b39f672792e07ece8eb5ecec1e1caf2ae07c8a36d5cb73"
+    },
+    {
+      "id": "context-engineering",
+      "folder": "context-engineering",
+      "source": "addyosmani-agent-skills",
+      "origin": "community",
+      "lines": 291,
+      "checksum": "61b341b45463652ab4c0e8a2cd929935d1f28b2022a6e9abadae99d596ea881b"
+    },
+    {
+      "id": "frontend-ui-engineering",
+      "folder": "frontend-ui-engineering",
+      "source": "addyosmani-agent-skills",
+      "origin": "community",
+      "lines": 330,
+      "checksum": "c56a7a0ad07344071e7fa9803aa9959d97fc2b2edcc26a7f19a03cf72e47eac8"
+    },
+    {
+      "id": "incremental-implementation",
+      "folder": "incremental-implementation",
+      "source": "addyosmani-agent-skills",
+      "origin": "community",
+      "lines": 243,
+      "checksum": "007ba5e6f304f3e3d88b6c8a83db30d22b42b8e05a59b1f6b145299989c5aadc"
+    },
+    {
+      "id": "performance-optimization",
+      "folder": "performance-optimization",
+      "source": "addyosmani-agent-skills",
+      "origin": "community",
+      "lines": 352,
+      "checksum": "ceaf48a5d181283028ac86cab09a3e5b73e903691e7fc25d5ffea0788cab60f5"
+    },
+    {
+      "id": "spec-driven-development",
+      "folder": "spec-driven-development",
+      "source": "addyosmani-agent-skills",
+      "origin": "community",
+      "lines": 202,
+      "checksum": "7cb459f09fa9e8503e2493a5d5a91a43dd3e87d5db9f0515d0eb6850550a7f63"
+    },
+    {
+      "id": "test-driven-development",
+      "folder": "test-driven-development",
+      "source": "addyosmani-agent-skills",
+      "origin": "community",
+      "lines": 381,
+      "checksum": "e3d078096c6f84a3c0f96777f0d4b923638542d6edd10599241b2695e6871b7b"
+    },
+    {
+      "id": "core-web-vitals",
+      "folder": "core-web-vitals",
+      "source": "addyosmani-web-quality-skills",
+      "origin": "community",
+      "lines": 443,
+      "checksum": "fef794ebd48f4bf015890ac9125633bc80acbd1e1d350a72fde644d3af0b6738"
+    },
+    {
+      "id": "seo",
+      "folder": "seo",
+      "source": "addyosmani-web-quality-skills",
+      "origin": "community",
+      "lines": 515,
+      "checksum": "bdd79fdd7a6167cf967a38700ae5d161055760690090af180449bb7b265ee615"
+    },
+    {
+      "id": "ai-prompt-engineering-safety-review",
+      "folder": "ai-prompt-engineering-safety-review",
+      "source": "github-awesome-copilot",
+      "origin": "community",
+      "lines": 232,
+      "checksum": "d4dfa1dc2bd172caf1a3197f3ab7f387981c232a3aedc9f3af5c0c263fdab5f6"
+    },
+    {
+      "id": "breakdown-feature-implementation",
+      "folder": "breakdown-feature-implementation",
+      "source": "github-awesome-copilot",
+      "origin": "community",
+      "lines": 130,
+      "checksum": "53a0c1e37b7458cdd3679988cad4ff50d1c8d865a2ac416f02db1558dd33dc8e"
+    },
+    {
+      "id": "copilot-sdk",
+      "folder": "copilot-sdk",
+      "source": "github-awesome-copilot",
+      "origin": "community",
+      "lines": 916,
+      "checksum": "22eda76efe6c50e7be17a6f35216265c513badca12740056248effdd4de69099"
+    },
+    {
+      "id": "multi-stage-dockerfile",
+      "folder": "multi-stage-dockerfile",
+      "source": "github-awesome-copilot",
+      "origin": "community",
+      "lines": 46,
+      "checksum": "7dfea7d31f3744930cb07869e15a79f90dbd47d2ddc56d165715fbd257db9ba7"
+    },
+    {
+      "id": "openapi-to-application-code",
+      "folder": "openapi-to-application-code",
+      "source": "github-awesome-copilot",
+      "origin": "community",
+      "lines": 114,
+      "checksum": "876fe058121dd563a3976a51620b01166fdaada52712494342c5aecae1c3c7c7"
+    },
+    {
+      "id": "postgresql-optimization",
+      "folder": "postgresql-optimization",
+      "source": "github-awesome-copilot",
+      "origin": "community",
+      "lines": 406,
+      "checksum": "bd9c4afa1ac5283887ea99142e4bab7d6e59f5006ce00ee94073250ec7b2c9c3"
+    },
+    {
+      "id": "premium-frontend-ui",
+      "folder": "premium-frontend-ui",
+      "source": "github-awesome-copilot",
+      "origin": "community",
+      "lines": 115,
+      "checksum": "f1c3363be941d4def40038d5bfe94c57d9bf2d4486e939ca055e2cef537512ff"
+    },
+    {
+      "id": "python-mcp-server-generator",
+      "folder": "python-mcp-server-generator",
+      "source": "github-awesome-copilot",
+      "origin": "community",
+      "lines": 107,
+      "checksum": "535a1c3ca5d543abc377f94658f03d0e2f31114ebfad5904032219115bb7eaa9"
+    },
+    {
+      "id": "python-pypi-package-builder",
+      "folder": "python-pypi-package-builder",
+      "source": "github-awesome-copilot",
+      "origin": "community",
+      "lines": 446,
+      "checksum": "c6e0621e6d1cdbc4de683520767362375d9499f39e8cf86594cbe3131435d7f3"
+    },
+    {
+      "id": "quality-playbook",
+      "folder": "quality-playbook",
+      "source": "github-awesome-copilot",
+      "origin": "community",
+      "lines": 481,
+      "checksum": "7a610413e953e41510113b45e15968659881d395bffb73bd9b01e43121593385"
+    },
+    {
+      "id": "react18-batching-patterns",
+      "folder": "react18-batching-patterns",
+      "source": "github-awesome-copilot",
+      "origin": "community",
+      "lines": 49,
+      "checksum": "df907b80fe528ca9cdcf9283951205271120a702372cf313e8769d4a5f506570"
+    },
+    {
+      "id": "refactor",
+      "folder": "refactor",
+      "source": "github-awesome-copilot",
+      "origin": "community",
+      "lines": 647,
+      "checksum": "04b9592d851f2e703f1bf81f4a0e7cda2e09fe1eab8c0fe22705172f3ac27eaf"
+    },
+    {
+      "id": "refactor-method-complexity-reduce",
+      "folder": "refactor-method-complexity-reduce",
+      "source": "github-awesome-copilot",
+      "origin": "community",
+      "lines": 100,
+      "checksum": "1f6909c1ec151bfb4e6dd1718ebfe9cd4ea1ca83570141aea462a4a29b85d372"
+    },
+    {
+      "id": "refactor-plan",
+      "folder": "refactor-plan",
+      "source": "github-awesome-copilot",
+      "origin": "community",
+      "lines": 67,
+      "checksum": "b6f283794192a7e5a663b55148df2603e928c1b8fc69b2bd9393306cd63fed61"
+    },
+    {
+      "id": "typescript-mcp-server-generator",
+      "folder": "typescript-mcp-server-generator",
+      "source": "github-awesome-copilot",
+      "origin": "community",
+      "lines": 92,
+      "checksum": "55351461c5ef43e52239421d947ac411d8fe08137333e933fdc111e4a41ed585"
+    },
+    {
+      "id": "update-implementation-plan",
+      "folder": "update-implementation-plan",
+      "source": "github-awesome-copilot",
+      "origin": "community",
+      "lines": 159,
+      "checksum": "0997031fb944d17165e2b1d248fdcc39bfb699a5ee72a95e1920c0edbc79e10f"
+    },
+    {
+      "id": "webapp-testing",
+      "folder": "webapp-testing",
+      "source": "github-awesome-copilot",
+      "origin": "community",
+      "lines": 135,
+      "checksum": "b2d799a989cc1cfeed4a03887cce8e26b0ed3ed65a4475f094107768872f2834"
+    },
+    {
+      "id": "api-playwright-test-developer",
+      "folder": "api-playwright-test-developer",
+      "source": "jaktestowac-awesome-copilot-for-testers",
+      "origin": "community",
+      "lines": 143,
+      "checksum": "b554301bae102934faa15686efa911dd6dd468af84769ab5bce4a7e304c0e168"
+    },
+    {
+      "id": "designing-functional-tests",
+      "folder": "designing-functional-tests",
+      "source": "jaktestowac-awesome-copilot-for-testers",
+      "origin": "community",
+      "lines": 175,
+      "checksum": "94732e03885a3863f463bc4f80cddb7b36de8989587a314aa6eaf395515e819e"
+    },
+    {
+      "id": "designing-test-data",
+      "folder": "designing-test-data",
+      "source": "jaktestowac-awesome-copilot-for-testers",
+      "origin": "community",
+      "lines": 116,
+      "checksum": "752a0907eb854c7b058cb8649d93d36b35037d9199d2ceeab2c4569d5371c63b"
+    },
+    {
+      "id": "requirements-test-coverage-mapper",
+      "folder": "requirements-test-coverage-mapper",
+      "source": "jaktestowac-awesome-copilot-for-testers",
+      "origin": "community",
+      "lines": 250,
+      "checksum": "374130b3588278f83e20bfa41a802c7d7bc7b15533246a00d4cfbe0c73189863"
+    },
+    {
+      "id": "api-design-principles",
+      "folder": "api-design-principles",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 520,
+      "checksum": "fc6475e907584815940a77d43b0ed3505752d273a83c191c43bf1fc4712b1925"
+    },
+    {
+      "id": "async-python-patterns",
+      "folder": "async-python-patterns",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 737,
+      "checksum": "518d22797b8bbd8431a7ac803c672d6e73ce520d1884cb6c30c115c2900e51ca"
+    },
+    {
+      "id": "bats-testing-patterns",
+      "folder": "bats-testing-patterns",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 626,
+      "checksum": "8dce01ff585aa6c7e56e0c0d3e5030e98ca31dfc4e4911778de98c4aa44a777b"
+    },
+    {
+      "id": "bazel-build-optimization",
+      "folder": "bazel-build-optimization",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 383,
+      "checksum": "59d3a575b57f5c37e4c9def944fef0ad3ee689533a34d77394573d2897bd1f8d"
+    },
+    {
+      "id": "database-migration",
+      "folder": "database-migration",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 405,
+      "checksum": "f8a866d69033730183cf6e8fc1f450b3a9620128e84e67184f23a4179d460227"
+    },
+    {
+      "id": "debugging-strategies",
+      "folder": "debugging-strategies",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 529,
+      "checksum": "9798bb98e676be77a46d73d004c7c703aca90bc1fee30f29afb6f3d104a5a224"
+    },
+    {
+      "id": "e2e-testing-patterns",
+      "folder": "e2e-testing-patterns",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 537,
+      "checksum": "2493a75be03a8c20fb489cb3c5f9401a911f37f409637232d7c5545497048cd6"
+    },
+    {
+      "id": "embedding-strategies",
+      "folder": "embedding-strategies",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 602,
+      "checksum": "95de35ed0afcfe26690f331bad39f2f212a2d98cf09e7873dbaa73ce87086f96"
+    },
+    {
+      "id": "error-handling-patterns",
+      "folder": "error-handling-patterns",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 634,
+      "checksum": "b3da3ec62c740850eb2d415f30f19dbb877d3083c4b196762f1b5236aa543d50"
+    },
+    {
+      "id": "fastapi-templates",
+      "folder": "fastapi-templates",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 542,
+      "checksum": "3c6d3d7db7294c7cb3ba1312f5b78de6b46e1e8c668232e7a6552154eda7827b"
+    },
+    {
+      "id": "git-advanced-workflows",
+      "folder": "git-advanced-workflows",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 398,
+      "checksum": "04ce7fa803673e69ff74095968da3e66272fc1ceea169a8636a833f86ab3da62"
+    },
+    {
+      "id": "hybrid-search-implementation",
+      "folder": "hybrid-search-implementation",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 566,
+      "checksum": "71f772d075cac102d0b987b625371e345dfe0bc856662be331ae23507fc0079e"
+    },
+    {
+      "id": "javascript-testing-patterns",
+      "folder": "javascript-testing-patterns",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 539,
+      "checksum": "b2d1b0484e916bdcca971f48035b51a845e99ee48f510dfdd4c6e228c1fb5b30"
+    },
+    {
+      "id": "langchain-architecture",
+      "folder": "langchain-architecture",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 636,
+      "checksum": "29ca3a029254a15b5a808d07927f594357743a9676001c6dd2cd75382dd42f09"
+    },
+    {
+      "id": "llm-evaluation",
+      "folder": "llm-evaluation",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 668,
+      "checksum": "ce27d6e2ccd221522a4d3e602b59405eface473604ce972a9ba5583589152876"
+    },
+    {
+      "id": "modern-javascript-patterns",
+      "folder": "modern-javascript-patterns",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 497,
+      "checksum": "0001dbcd995733cafe9a7229d28d97ddcb9bf3988aa44ae220a26717a5096241"
+    },
+    {
+      "id": "monorepo-management",
+      "folder": "monorepo-management",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 616,
+      "checksum": "5f54271b622a40a7b85d4a3c1fc2cfaa55577e408f2a700373569a20f82a57c6"
+    },
+    {
+      "id": "nextjs-app-router-patterns",
+      "folder": "nextjs-app-router-patterns",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 539,
+      "checksum": "f97cf61d9296d418763252538bd042ef0ce3e9c4ae41354007de37467e6086ea"
+    },
+    {
+      "id": "nx-workspace-patterns",
+      "folder": "nx-workspace-patterns",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 453,
+      "checksum": "2f077064794c1567b5a2923f392d3c5c283dc45a11268b3861065894f7897861"
+    },
+    {
+      "id": "openapi-spec-generation",
+      "folder": "openapi-spec-generation",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 538,
+      "checksum": "a33d9d40dd5e2ef7d9587ed4f97b0337ae1a30ab7d871305217210c627894fec"
+    },
+    {
+      "id": "postgresql-table-design",
+      "folder": "postgresql-table-design",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 204,
+      "checksum": "90fb47e1140e57aabe4b11a37836b04d8f586811662044eb2aa124626c16f5b1"
+    },
+    {
+      "id": "prompt-engineering-patterns",
+      "folder": "prompt-engineering-patterns",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 475,
+      "checksum": "dd86e294cf38f3e6879f1900a6e60bd17e6c4de6e9674feef1114b091c56a22b"
+    },
+    {
+      "id": "python-anti-patterns",
+      "folder": "python-anti-patterns",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 351,
+      "checksum": "cc5506db2891cb1e5f11d675cdc4f9cb122b77f226583ba6a5c036a27a1c58d3"
+    },
+    {
+      "id": "python-background-jobs",
+      "folder": "python-background-jobs",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 366,
+      "checksum": "a637523e0b0b351500017f0174a44b98383c71534524329711d98e2908dd81d5"
+    },
+    {
+      "id": "python-code-style",
+      "folder": "python-code-style",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 362,
+      "checksum": "b1110c915eac158f3d086f9d7ca1826726ad76645dcdeefbb57ff4ddbd8f5954"
+    },
+    {
+      "id": "python-configuration",
+      "folder": "python-configuration",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 370,
+      "checksum": "08a6fa528d5b2c00344a025bafa1b8b906b504e2a2afd9b89c43fe16e517ded6"
+    },
+    {
+      "id": "python-design-patterns",
+      "folder": "python-design-patterns",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 435,
+      "checksum": "69b89df44ef199e5415187edf3f64a222e2ffada3299edf0da808df33f423084"
+    },
+    {
+      "id": "python-error-handling",
+      "folder": "python-error-handling",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 361,
+      "checksum": "e85e8b9d1e628fcd66faef105124dc0cc479a4bce1818fb5dbd04a8660168d78"
+    },
+    {
+      "id": "python-observability",
+      "folder": "python-observability",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 402,
+      "checksum": "a39c5ea1893d3c27044d87e01421efcfab9f0884d4bfbfbd27490ae0bf859107"
+    },
+    {
+      "id": "python-packaging",
+      "folder": "python-packaging",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 512,
+      "checksum": "297c436fc0f6d8e5c66c87893d429498b4d5c744764423d7eaac059cb53599c6"
+    },
+    {
+      "id": "python-performance-optimization",
+      "folder": "python-performance-optimization",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 439,
+      "checksum": "4aa3799644ad6551a4750c23cd5a872e955bdfab01b657d338ae90bc6a307058"
+    },
+    {
+      "id": "python-resilience",
+      "folder": "python-resilience",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 378,
+      "checksum": "89e0f51edbf4dc3b08705b94be4289c1c9f827ab780efc957d948263cd247245"
+    },
+    {
+      "id": "python-resource-management",
+      "folder": "python-resource-management",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 423,
+      "checksum": "4087f355270310315aa8ad573d6d0fa08b26c632253963e16535fabf674ab0b1"
+    },
+    {
+      "id": "python-testing-patterns",
+      "folder": "python-testing-patterns",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 624,
+      "checksum": "15eeace77c4c15ed0c792a91ccc9d024bdd4bcfa515e597f8fc6ea1d017235fc"
+    },
+    {
+      "id": "rag-implementation",
+      "folder": "rag-implementation",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 544,
+      "checksum": "d3caf8d50f449d980c0aeb2945f48cc339e0b465f4b954d0989322a2819ea68c"
+    },
+    {
+      "id": "react-state-management",
+      "folder": "react-state-management",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 432,
+      "checksum": "3a271e2e3f837f58cd4d7d63244282893fd22f2142e1feddea6dea78bd63dea4"
+    },
+    {
+      "id": "sql-optimization-patterns",
+      "folder": "sql-optimization-patterns",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 501,
+      "checksum": "66394f5d4be5ba116f6f5cad717c157d8631f30da7ddb2b12bb60aa13c67bab3"
+    },
+    {
+      "id": "tailwind-design-system",
+      "folder": "tailwind-design-system",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 567,
+      "checksum": "ee8b69d49758faa82b8fc6d063b410d0a0d76e367d35b350dfbc06a1d3706888"
+    },
+    {
+      "id": "temporal-python-testing",
+      "folder": "temporal-python-testing",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 160,
+      "checksum": "b9df7ea4665efb320bbd6705b0ea0b862ffd5f9d661bfdc5f454f57533e548d3"
+    },
+    {
+      "id": "track-management",
+      "folder": "track-management",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 595,
+      "checksum": "b6edb14dafad38f0d3bdf122a104efaf58a9cf51dd771655df665ad164504fb3"
+    },
+    {
+      "id": "turborepo-caching",
+      "folder": "turborepo-caching",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 372,
+      "checksum": "d1550168b2278a3f331dda860bb2687a1e364e9dc5eb61504b4b9f626b15497b"
+    },
+    {
+      "id": "typescript-advanced-types",
+      "folder": "typescript-advanced-types",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 719,
+      "checksum": "4c4184cebea9ff2b2b1e9ee3bb1b48b8544cbe143895b10928a44219d1aa6046"
+    },
+    {
+      "id": "uv-package-manager",
+      "folder": "uv-package-manager",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 347,
+      "checksum": "5202bdc4cc58518aecdf0dbdf51e9fa93e9f63a88d9e34f94a12d90b9d241e58"
+    },
+    {
+      "id": "web-component-design",
+      "folder": "web-component-design",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 273,
+      "checksum": "5380ad2712b112f85330e8259ecaa818a4d52522583677938c827d7e1c030a1c"
+    },
+    {
+      "id": "workflow-patterns",
+      "folder": "workflow-patterns",
+      "source": "wshobson-agents",
+      "origin": "community",
+      "lines": 625,
+      "checksum": "65072c50de7bbb0dc4a3bec3d61e47147fed8101cb2edbc2adb9643972b01016"
+    }
+  ]
+}

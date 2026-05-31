@@ -1,0 +1,824 @@
+{
+  "version": "0.1.0",
+  "counts": {
+    "original": 65,
+    "community": 49,
+    "total": 114
+  },
+  "agents": [
+    {
+      "id": "backend-engineer",
+      "department": "backend-and-api",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "10b2bfb2fda8632a3d74d5488c953df776132dd5cd1e1e2c1511e0ad1eaab862"
+    },
+    {
+      "id": "frontend-engineer",
+      "department": "backend-and-api",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "53b7bdaa42abaf05ad35228ad2749508eb32d41a66bb151ae7c6a85e5c3e5d2c"
+    },
+    {
+      "id": "fullstack-integrator",
+      "department": "backend-and-api",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "8eee7167ea30e189aea601b069a53a390732abd09e8cb5491b585363d6654641"
+    },
+    {
+      "id": "implementation-worker",
+      "department": "backend-and-api",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "05001d16d61f453af10cb911c4243488a4c93d97ad659493da7af7b6e32cb6d9"
+    },
+    {
+      "id": "performance-engineer",
+      "department": "backend-and-api",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "6888d1bbd97ac56c3e27d3f06ad0df5ae78260566faa7551ec76d318f5c1ae0e"
+    },
+    {
+      "id": "refactor-engineer",
+      "department": "backend-and-api",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "99a355e0428532e7f9d5524cd4cf1b8f4609b8d568a78e54d5afff54a69051d2"
+    },
+    {
+      "id": "agent-governance-officer",
+      "department": "core-operations",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "083c0db0fb99400546489d94d8c5759647177a0c6897d0fd0876a7b485d959da"
+    },
+    {
+      "id": "chief-architect",
+      "department": "core-operations",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "187b74e3f2c157d282bf5fc335812104f2e5ee21b5bdac911692ecc24894f2f0"
+    },
+    {
+      "id": "system-orchestrator",
+      "department": "core-operations",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "dcabfe16ede0af66eb5dae01bfc27774f2172e2cdd5dd586e20eea22c80a317f"
+    },
+    {
+      "id": "workflow-dispatcher",
+      "department": "core-operations",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "045f3896eb87fc49c0f3706a859e67012c6511f8d3b0010d0b6b75afd831ddfe"
+    },
+    {
+      "id": "accessibility-auditor",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "cd8edbb0c7aa80c25715b415b995e9a1ce32dbd9fd1141f86270f90739947e64"
+    },
+    {
+      "id": "dashboard-ui-specialist",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "88338a3ccfb6e4339f24093eed135b865ee729b6dfeaaed8055355d9777ee767"
+    },
+    {
+      "id": "design-system-engineer",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "1f28a4dc0fc0682516a10724a079492408d9ea1d265a458de1251cb1b567dced"
+    },
+    {
+      "id": "landing-page-specialist",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "88dcf7be233bd5d811f9db0236304a172defa7f7aa8cf5733249527bf1eaed6d"
+    },
+    {
+      "id": "ui-ux-reviewer",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "f592348c8aff72a2a291990e7234c2ec9589f837992e442bd6ccedf293edf506"
+    },
+    {
+      "id": "web-design-director",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "47dca826f5284b6c3d12a980d4dfb3c470d05ad6914b570dfabb909fb8fc2d0f"
+    },
+    {
+      "id": "game-performance-optimizer",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "5932260284a983fb61e27f3f99fd0168187398f7c067c2609a6a10135b5ed23d"
+    },
+    {
+      "id": "game-studio-director",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "99862625fda6752b9bd783c12949e5a78bd77f016b5095108f03f298c52d2757"
+    },
+    {
+      "id": "game-systems-architect",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "c5e96f2f9412add591153d1c8038e2095c1fcf2ca34199dccdfa817b29207a8d"
+    },
+    {
+      "id": "game-ui-ux-designer",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "1114a130bdf5373ef5d8d5f7ea4391aa5fe1239635bd1f1641c41de205987f3d"
+    },
+    {
+      "id": "gameplay-engineer",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "899d7390fd60caf2fbd23c2e4f3dc37c208cc6e2f3cd1bb808e5601b94f71f47"
+    },
+    {
+      "id": "interactive-media-prototyper",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "3b86e47d61867b917b16c98d521982641b07679197d75cf33d465c30ee9f4d80"
+    },
+    {
+      "id": "web-game-engineer",
+      "department": "gaming-interactive-media",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "70bf4ba42113ab052555ebe30066daf27fa001fede8eca59f3500b3cb91bbb2b"
+    },
+    {
+      "id": "android-ux-reviewer",
+      "department": "mobile-desktop",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "5c76d1411b83e863993367089b610fab9c64028d044e4357db3baa7f8af607d2"
+    },
+    {
+      "id": "browser-first-local-app-engineer",
+      "department": "mobile-desktop",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "436a7e4399776abd7a0d3922e687b3ad171e86f7280d375e8a41f770cafbef88"
+    },
+    {
+      "id": "desktop-launcher-engineer",
+      "department": "mobile-desktop",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "b7bb0922e37da6b3c92e4284ed16ded337cd9921faa48990cc896d3307bfb306"
+    },
+    {
+      "id": "ios-ux-reviewer",
+      "department": "mobile-desktop",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "9a50128ffec614b112dc4962ad738d43b8ef0ea5434c6f46915039baeba18393"
+    },
+    {
+      "id": "mobile-app-engineer",
+      "department": "mobile-desktop",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "5dc1ea0be6fb9070fae8b07ce75f8dd2e30ce27c62cc9d171225e107c8e882e6"
+    },
+    {
+      "id": "agent-workflow-designer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "4b4b327b208a31081f21a6b60a937d49e7633157063f79a09bc869d725396b38"
+    },
+    {
+      "id": "agentic-security-reviewer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "3d04c79451792c8d38b73b8645eb75eac8cb7d43204b3057eb0f78fa3551c135"
+    },
+    {
+      "id": "ai-runtime-engineer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "8eda90fef6705873b0d1523d2d05b76f16590c0399a62dda2b9bd6cf03b9a991"
+    },
+    {
+      "id": "api-contract-designer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "e5e1bb8a664e0d8bc5edb0a2dae7dc677536bba9f1c0ddb105efdb9436f9957d"
+    },
+    {
+      "id": "architecture-planner",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "3a2b24e9fbfacbc780348e6d58489a2a6aae1d4f889337ddd3df97b99e3e094c"
+    },
+    {
+      "id": "auth-session-reviewer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "12afc5017636d8355d3d85657cb5873141ff17c4e81991f2b9f2fb8012c35850"
+    },
+    {
+      "id": "automation-mcp-gatekeeper",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "07498a4440fb0dc1952d2e4bcf8723c4a5f1516f42ccdac0b88b502b6e2f0664"
+    },
+    {
+      "id": "business-model-reviewer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "cb9c99cae905bfb89ad3e6fc4e6bed99d8c803ed011249ed4b1ad232c3145c44"
+    },
+    {
+      "id": "codebase-cartographer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "371c904ddec3da6c6f768c025da5fc12ecd889cfeb62243f9a82f859997b0ccd"
+    },
+    {
+      "id": "data-flow-architect",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "d02a6efb9ef37f43e0413451ab2dce99a921c2f59b2cb743db0123f8d56aee72"
+    },
+    {
+      "id": "data-migration-guardian",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "9558d832e6e9057321407b86aff1b799e66ac24ec32eb9b54ae3c063053da335"
+    },
+    {
+      "id": "database-persistence-reviewer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "e6a906ca8207c5ee2ea0a428ab333df19de551700efc98422fa0c80c68a0967a"
+    },
+    {
+      "id": "dependency-inspector",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "3ed012bc0deaf737b07ec1acf0843d5b7fbda32e28526034f76350ecab246603"
+    },
+    {
+      "id": "devops-ci-engineer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "6b07965211666cb43f477cc104c2f782bcd5b0e814d449e5a6765767fa1e3940"
+    },
+    {
+      "id": "docs-spec-writer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "52a386a54a911bd9c4291fb88aae020a853d7aaa7a140d7de2d908870097a177"
+    },
+    {
+      "id": "e2e-flow-designer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "e2efe8d1e187bc92c9ac222bf20712ed7b83a381917f314fdd0ba912eec9af9f"
+    },
+    {
+      "id": "github-researcher",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "0785a4a7b73213b08ca68b3c7f34b8b5e1c83abf2ef0273d2e3323a6a557a04c"
+    },
+    {
+      "id": "implementation-planner",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "f9b4676d7f5f04c817fe8e9f4846856ac900bddc2c4a4f20caa1365d708d973c"
+    },
+    {
+      "id": "installation-and-path-auditor",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "26df1f64b11682c630b1ffd31ead0b26a34b3e00d14d02cd5af6f7bcdf17ea67"
+    },
+    {
+      "id": "legacy-risk-analyst",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "29b8c8a0bc77026a95073e77526505d259c40e6c5a2821f3e1860bd025d6649b"
+    },
+    {
+      "id": "market-researcher",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "9d9a327e3d53c18c751d4e551252fb60a5b2cb2b8ba62845d27150c6ae34b051"
+    },
+    {
+      "id": "playwright-browser-tester",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "c38aed7703db2582afdd4634d3e36457834c33518806f5c7dae0fe1eaf98a927"
+    },
+    {
+      "id": "postgres-supabase-specialist",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "1d4bc7a7479222b509e09ee4c70c98f8dc857d9e418cce3fd2717064d20cd4cb"
+    },
+    {
+      "id": "prisma-schema-specialist",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "33ded88e24cb94c764241496f4849bcade05f708049f856600ab8a125a8beeeb"
+    },
+    {
+      "id": "product-owner-analyst",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "2e119f2b34af7f171ab715d731be22afb166c7ca063d945f9fbb5e637f07e0e0"
+    },
+    {
+      "id": "prompt-systems-engineer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "e1593dfad23f2473d6b5af5021a32247dcb7be6e57a04ce12afd737b6b297fc6"
+    },
+    {
+      "id": "rag-and-vector-search-engineer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "7d31f31d399267d6d74e9dbded62cde6c392e370916da39425de5ee1c1a36856"
+    },
+    {
+      "id": "regression-risk-analyst",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "01a6d41c603bb00bc45e406155921a88268a1667130a27fd70b38adce2384790"
+    },
+    {
+      "id": "release-readiness-reviewer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "33968ea2e9ce09dc92de122f04120b0b351094d0fd1a72d9d1c6ff02fdc0b56f"
+    },
+    {
+      "id": "repo-scout",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "69a1adb5a86747e7cc9f9ca6b57268d95c679e3ef86906a1450258e38a345925"
+    },
+    {
+      "id": "runtime-diagnostics-engineer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "5cbddf3381b9f88031b4c677786a08cb9ea2c27bcebe089bccc3b24c16429475"
+    },
+    {
+      "id": "security-secrets-reviewer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "f91b6caaeada0f5e64d56dd78f91b358ac5f76f1bbebf7422a7613f7973f091a"
+    },
+    {
+      "id": "skill-deduplicator",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "75d3d9d8b723365b5e0ea29719c717eb75ea923328d4b1c039bfd9e10a86ae65"
+    },
+    {
+      "id": "skill-librarian",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "326c55de01c580afa2f33121a416c071485ec7f0aec0e16eec0ee056446c0aa9"
+    },
+    {
+      "id": "supply-chain-risk-reviewer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "291bbc26394dc1d85278f567ce0f0f2908dd9d7f093d5c198abda2a4f0f1d75f"
+    },
+    {
+      "id": "test-repair-runner",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "f93d9411c324fdc9794234d28be04e104398e12a5b9bcd1736bb697ebb41c1f2"
+    },
+    {
+      "id": "visual-qa-reviewer",
+      "department": "optional-specialist",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "856bad24986f446f827288c1467230de63c863a1ad36e620815af3b1295031e3"
+    },
+    {
+      "id": "gamedev-accessibility-specialist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "1189dfcbbcfb12557451c13c6b233c9e2e134df2c8eebef35fa54c6a5ef9d818"
+    },
+    {
+      "id": "gamedev-ai-programmer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "f439190941d48a43a5624974c4249b0e138b714aefd5271a68d27cc9aac37f37"
+    },
+    {
+      "id": "gamedev-analytics-engineer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "797345420a1c2a7251f99a08ad9324179d8e53d6a83ed4cc357d4fa91eb14aea"
+    },
+    {
+      "id": "gamedev-art-director",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "f242fec50afc0cf6d75d896c39f6d7d1e4ece0537eb290b24cb6a01e169303a5"
+    },
+    {
+      "id": "gamedev-audio-director",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "8d9ed468aa12cced9bcb2e28f3feb17d256174aa96c2466a8e8ec97adaf23912"
+    },
+    {
+      "id": "gamedev-community-manager",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "f6f5aa69f1babb85283d6d7f8455feb7a7ed8fb30f2b37c6309898f29b6e42b3"
+    },
+    {
+      "id": "gamedev-creative-director",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "a8b3524140cf566ab5ed6d6214447e803363e5fab6eec4153c92e35fdce56fac"
+    },
+    {
+      "id": "gamedev-devops-engineer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "953b76dd7e1743e112e544113d4705241852db01908f8b19b40c57b29605e5b5"
+    },
+    {
+      "id": "gamedev-economy-designer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "20e8ad80785532e59a6de1c17db61a52dd704b65c903e00a8a323c495c906de9"
+    },
+    {
+      "id": "gamedev-engine-programmer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "26cab676972b48ccd48b2e0989729afd2c8a6eb48da63e2d2131dc4bac17d326"
+    },
+    {
+      "id": "gamedev-game-designer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "6fbce2428af0f569ffdd1590537a549bf308d0aae3d6cf487ca04450fd8b71ae"
+    },
+    {
+      "id": "gamedev-gameplay-programmer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "e1dbca291b47e6f80ee43f3d0aa8c1f8b4d86cf2d732bdb7e9e575601ca04ff8"
+    },
+    {
+      "id": "gamedev-godot-csharp-specialist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "f3a8a5156f21260a58beba56695acda2dd095d6812b8b82954c86c19a4094eff"
+    },
+    {
+      "id": "gamedev-godot-gdextension-specialist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "eada34bd999be1644b205dc01c5c79942d31d16e3cfe9ec0af58a1a053d7b4fe"
+    },
+    {
+      "id": "gamedev-godot-gdscript-specialist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "01ae7f59ffb2bcc512cc9205a791ec05221eb295e4e360fa8b7a033a6a1c4f13"
+    },
+    {
+      "id": "gamedev-godot-shader-specialist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "af147c2f32459378196e1d22261dbed799dd16e33cad0e90db85322479f215fe"
+    },
+    {
+      "id": "gamedev-godot-specialist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "1dd5babcfbce1cf774b525732301b708033d20765def377e57a50ba7e19ca436"
+    },
+    {
+      "id": "gamedev-lead-programmer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "dce002c3b3465fdfe2dbed013d670e6e0e68a2d7a4ba6ccf33c50354a815a63c"
+    },
+    {
+      "id": "gamedev-level-designer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "1b339766a1aa7f5b131aae36a2f2c2e58911319ae4d97d0992d9eee837727663"
+    },
+    {
+      "id": "gamedev-live-ops-designer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "0c737b6e4d8d99288e34f613f4bce01c95621aae441fbc709e67396635a1d482"
+    },
+    {
+      "id": "gamedev-localization-lead",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "1bd7b26b9a8a77e777bba47b112613812c8a78476ca357f4a98b2899ebd2757f"
+    },
+    {
+      "id": "gamedev-narrative-director",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "95ad891791fc8c8954fff4c6ba96f5984f2c2cc6e66968e9ed78d008c432ffbe"
+    },
+    {
+      "id": "gamedev-network-programmer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "3f15866555862e943a18e29d6ddfb55cba120222ab587aa235b7687a9d23b860"
+    },
+    {
+      "id": "gamedev-performance-analyst",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "069930c89b0057cae9eadff5f5e613860f6ca3eefacac7eff2a8253c3adbeca9"
+    },
+    {
+      "id": "gamedev-producer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "1b2f54ada608a4bd691cd3e08ea73aab49ec812c7e5ff9227fe0ad2e40f5dad5"
+    },
+    {
+      "id": "gamedev-prototyper",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "4fb6ed5efe29231b4cdc5dc668662727405b981924db5c71b9b9ef6da72d6033"
+    },
+    {
+      "id": "gamedev-qa-lead",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "41c2d98fbe866522188cba631e33f1c628e4ec2a0dac198ac7fe45502906f873"
+    },
+    {
+      "id": "gamedev-qa-tester",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "31ee3859dfec3a8824b14a037606455233132ed237c289e0500749086cb21b25"
+    },
+    {
+      "id": "gamedev-release-manager",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "99782dec53cffad88df6759f87f7cf2734d8e975b7ea42be80f2ad1d55590a5e"
+    },
+    {
+      "id": "gamedev-security-engineer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "1dd7234c2032a9cbe840ea0b65192cb29409e59ded70cf88b5a62fa4734d04e3"
+    },
+    {
+      "id": "gamedev-sound-designer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "df706ec39747dee07441a752cea454070110a4f76c768e3207a756ab25d3ba83"
+    },
+    {
+      "id": "gamedev-systems-designer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "7e4e45dbcaedd81191d13cc2845d9d40495167f4764836dd66bcaae5d532196c"
+    },
+    {
+      "id": "gamedev-technical-artist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "917e5681ad2b6bea8e4c5e4880ce79533a6929617603b6160e34af9a1799540c"
+    },
+    {
+      "id": "gamedev-technical-director",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "048347a1dc1e5d4bcd8972c84f454af99dfe77d1f66bf24081b8ca090934fa0d"
+    },
+    {
+      "id": "gamedev-tools-programmer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "daced5b2d17f99e94c50d094a8541f9ecb06269fe93fcb88d3b9903e02407998"
+    },
+    {
+      "id": "gamedev-ue-blueprint-specialist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "88c12e5b46897f1a3b1162bee22538f958d5f7d8ddc078565bbb218580308954"
+    },
+    {
+      "id": "gamedev-ue-gas-specialist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "b0d08dec594b140b4b216ae7bbb5b584482ad76ae8602dec8753e053d5f2c8b6"
+    },
+    {
+      "id": "gamedev-ue-replication-specialist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "61ffde783b91eeb1bfd671ee60086a302f6f5be685354f773d3f5a8b2bf14139"
+    },
+    {
+      "id": "gamedev-ue-umg-specialist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "fb9e064d4731376ad8e8d91c7d62cb33ffb43e321a6b09e923a0758494a265c1"
+    },
+    {
+      "id": "gamedev-ui-programmer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "3fdd6ea93eba240430d48096bf96f2b054631aced3b3eff74a186547070b58a1"
+    },
+    {
+      "id": "gamedev-unity-addressables-specialist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "643dc77c20d5477fc7c1a5f03fb77e4e4b82ee1ed1eb48d1bfac5545525d506b"
+    },
+    {
+      "id": "gamedev-unity-dots-specialist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "0f01fdf322cb6d5842ab6ea1465f7385fa669620ed414939555493c39585c801"
+    },
+    {
+      "id": "gamedev-unity-shader-specialist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "d7736229d4aa4fd50e04e5039052ef9671973d4eebab6f08a4f02e5c11f6c5b8"
+    },
+    {
+      "id": "gamedev-unity-specialist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "5e880d7c5a35a9fdb908e10c590928925a32381c34eceb0ce9bd1564d4f33836"
+    },
+    {
+      "id": "gamedev-unity-ui-specialist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "ef33b0f4a9fb99800dbbc63e4f875bd7c43600f3cfaef9c12dd4de81cf198157"
+    },
+    {
+      "id": "gamedev-unreal-specialist",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "b3dd283fe0f8bfc555c4f29c5c2c13a940e9be7bf323886ba1000cb7b7d65027"
+    },
+    {
+      "id": "gamedev-ux-designer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "7465200e6567dcc92e0a2f8c0835a8e852552103c06a94b3e8e6b5a46f6da281"
+    },
+    {
+      "id": "gamedev-world-builder",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "5598c51af913a06eacd6cdcb56b363014bee1a1c08edf154e94f896935d27ef6"
+    },
+    {
+      "id": "gamedev-writer",
+      "source": "Donchitos-Claude-Code-Game-Studios",
+      "origin": "community",
+      "checksum": "fb38175e608c07c22ba4401176273da6347b17a40a3eeb1b05a91c000c2fa389"
+    }
+  ]
+}

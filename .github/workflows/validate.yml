@@ -1,0 +1,50 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Structure, frontmatter, permissions & attribution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate repository (structure, frontmatter, least-privilege, attribution)
+        run: python3 tools/validate.py
+
+      - name: Rebuild marketplace.json and check it is committed
+        run: |
+          python3 tools/build-marketplace.py --apply
+          if ! git diff --quiet -- .claude-plugin/marketplace.json; then
+            echo "::error::marketplace.json is out of date. Run: python3 tools/build-marketplace.py --apply"
+            git --no-pager diff -- .claude-plugin/marketplace.json
+            exit 1
+          fi
+
+      - name: Dry-run installer for all platforms (no writes)
+        run: python3 tools/install.py --targets claude codex copilot antigravity
+
+  install-smoke:
+    name: Install into a throwaway HOME and re-validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install into isolated HOME (does not touch the runner's real config)
+        run: |
+          export HOME="$(mktemp -d)"
+          python3 tools/install.py --apply --targets claude codex copilot antigravity
+          echo "Installed skills (claude): $(find "$HOME/.claude/skills" -name SKILL.md | wc -l)"
+          test "$(find "$HOME/.claude/skills" -name SKILL.md | wc -l)" -ge 100
+          test "$(ls "$HOME/.codex/agents/"*.toml | wc -l)" -ge 60
