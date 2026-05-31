@@ -2,7 +2,7 @@
 
 Content from **[github/awesome-copilot](https://github.com/github/awesome-copilot)**, redistributed under its original **MIT** license. © GitHub, Inc..
 
-- **Skills:** 16
+- **Skills:** 17
 - **Agents:** 0
 - **Original license:** see [`LICENSE`](LICENSE) in this directory
 - **Upstream:** https://github.com/github/awesome-copilot
