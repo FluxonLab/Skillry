@@ -1,0 +1,11 @@
+{
+  "name": "omniagent-database-and-data",
+  "description": "Prisma, Postgres/Supabase, migrations, seeds/fixtures, query performance, and RLS/edge functions.",
+  "version": "0.1.0",
+  "author": {
+    "name": "FluxonLab",
+    "url": "FLUXONLAB_URL"
+  },
+  "homepage": "FLUXONLAB_URL",
+  "license": "MIT"
+}

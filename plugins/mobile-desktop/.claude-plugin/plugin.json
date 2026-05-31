@@ -1,0 +1,11 @@
+{
+  "name": "omniagent-mobile-desktop",
+  "description": "Mobile app review, iOS HIG, Android Material, and desktop launcher review.",
+  "version": "0.1.0",
+  "author": {
+    "name": "FluxonLab",
+    "url": "FLUXONLAB_URL"
+  },
+  "homepage": "FLUXONLAB_URL",
+  "license": "MIT"
+}

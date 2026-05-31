@@ -1,0 +1,11 @@
+{
+  "name": "omniagent-product-docs-and-research",
+  "description": "Spec/markdown generation, execution prompts, requirements, market research, business model, pricing, technical writing, and ADRs.",
+  "version": "0.1.0",
+  "author": {
+    "name": "FluxonLab",
+    "url": "FLUXONLAB_URL"
+  },
+  "homepage": "FLUXONLAB_URL",
+  "license": "MIT"
+}

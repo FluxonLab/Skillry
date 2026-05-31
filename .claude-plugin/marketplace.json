@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "omniagent",
+  "owner": {
+    "name": "FluxonLab",
+    "url": "FLUXONLAB_URL"
+  },
+  "description": "Installable, permission-bounded, multi-platform agent skills & subagents by FluxonLab.",
+  "plugins": [
+    {
+      "name": "omniagent-ai-and-agent-systems",
+      "source": "./plugins/ai-and-agent-systems",
+      "description": "Agent workflow design, governance, prompt systems, RAG/vector search, LLM evaluation, and MCP gatekeeping."
+    },
+    {
+      "name": "omniagent-backend-and-api",
+      "source": "./plugins/backend-and-api",
+      "description": "API/interface design, backend review, auth/session, integration boundaries, error handling, and Python project review."
+    },
+    {
+      "name": "omniagent-core-operations",
+      "source": "./plugins/core-operations",
+      "description": "Repo diagnostics, architecture review, implementation planning, refactor safety, release readiness, and project bootstrap."
+    },
+    {
+      "name": "omniagent-database-and-data",
+      "source": "./plugins/database-and-data",
+      "description": "Prisma, Postgres/Supabase, migrations, seeds/fixtures, query performance, and RLS/edge functions."
+    },
+    {
+      "name": "omniagent-devops-and-release",
+      "source": "./plugins/devops-and-release",
+      "description": "CI/CD, build & typecheck, deployment preflight, release notes, and handoff readiness."
+    },
+    {
+      "name": "omniagent-frontend-web-design",
+      "source": "./plugins/frontend-web-design",
+      "description": "UI consistency, web/design-system review, accessibility, dashboards, landing pages, responsive layout, i18n parity, Next.js RSC, and shadcn/ui."
+    },
+    {
+      "name": "omniagent-gaming-interactive-media",
+      "source": "./plugins/gaming-interactive-media",
+      "description": "Game architecture, gameplay systems, game UI/UX, performance, prototypes, engine triage, and browser-game stacks (Phaser, Three.js, PixiJS)."
+    },
+    {
+      "name": "omniagent-mobile-desktop",
+      "source": "./plugins/mobile-desktop",
+      "description": "Mobile app review, iOS HIG, Android Material, and desktop launcher review."
+    },
+    {
+      "name": "omniagent-optional-specialist",
+      "source": "./plugins/optional-specialist",
+      "description": "Domain specialists: WordPress/WooCommerce, e-commerce, NFC/linktree, local LLM runtime, Chrome extensions, maps/geo, print design, analytics, SEO, cost control, observability, and monorepo."
+    },
+    {
+      "name": "omniagent-product-docs-and-research",
+      "source": "./plugins/product-docs-and-research",
+      "description": "Spec/markdown generation, execution prompts, requirements, market research, business model, pricing, technical writing, and ADRs."
+    },
+    {
+      "name": "omniagent-runtime-and-local-app",
+      "source": "./plugins/runtime-and-local-app",
+      "description": "Local-first apps, runtime diagnostics, startup/health gates, launchers, and log bundles."
+    },
+    {
+      "name": "omniagent-security",
+      "source": "./plugins/security",
+      "description": "Secrets, AI/prompt-injection, authz/permissions, dependency supply chain, env hardening, and Electron app security."
+    },
+    {
+      "name": "omniagent-skill-library-and-installation",
+      "source": "./plugins/skill-library-and-installation",
+      "description": "Skill librarian, deduplication, skill-to-agent routing, installation audit, and path hygiene."
+    },
+    {
+      "name": "omniagent-testing-and-qa",
+      "source": "./plugins/testing-and-qa",
+      "description": "Smoke test & repair, Playwright E2E, regression scope, API test suites, visual regression, and UAT acceptance."
+    }
+  ]
+}

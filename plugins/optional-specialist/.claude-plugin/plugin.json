@@ -1,0 +1,11 @@
+{
+  "name": "omniagent-optional-specialist",
+  "description": "Domain specialists: WordPress/WooCommerce, e-commerce, NFC/linktree, local LLM runtime, Chrome extensions, maps/geo, print design, analytics, SEO, cost control, observability, and monorepo.",
+  "version": "0.1.0",
+  "author": {
+    "name": "FluxonLab",
+    "url": "FLUXONLAB_URL"
+  },
+  "homepage": "FLUXONLAB_URL",
+  "license": "MIT"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "omniagent-frontend-web-design",
+  "description": "UI consistency, web/design-system review, accessibility, dashboards, landing pages, responsive layout, i18n parity, Next.js RSC, and shadcn/ui.",
+  "version": "0.1.0",
+  "author": {
+    "name": "FluxonLab",
+    "url": "FLUXONLAB_URL"
+  },
+  "homepage": "FLUXONLAB_URL",
+  "license": "MIT"
+}

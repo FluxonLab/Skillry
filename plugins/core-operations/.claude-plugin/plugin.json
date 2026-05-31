@@ -1,0 +1,11 @@
+{
+  "name": "omniagent-core-operations",
+  "description": "Repo diagnostics, architecture review, implementation planning, refactor safety, release readiness, and project bootstrap.",
+  "version": "0.1.0",
+  "author": {
+    "name": "FluxonLab",
+    "url": "FLUXONLAB_URL"
+  },
+  "homepage": "FLUXONLAB_URL",
+  "license": "MIT"
+}

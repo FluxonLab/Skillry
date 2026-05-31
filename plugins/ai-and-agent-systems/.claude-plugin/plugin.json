@@ -1,0 +1,11 @@
+{
+  "name": "omniagent-ai-and-agent-systems",
+  "description": "Agent workflow design, governance, prompt systems, RAG/vector search, LLM evaluation, and MCP gatekeeping.",
+  "version": "0.1.0",
+  "author": {
+    "name": "FluxonLab",
+    "url": "FLUXONLAB_URL"
+  },
+  "homepage": "FLUXONLAB_URL",
+  "license": "MIT"
+}

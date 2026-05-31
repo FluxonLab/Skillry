@@ -1,0 +1,11 @@
+{
+  "name": "omniagent-security",
+  "description": "Secrets, AI/prompt-injection, authz/permissions, dependency supply chain, env hardening, and Electron app security.",
+  "version": "0.1.0",
+  "author": {
+    "name": "FluxonLab",
+    "url": "FLUXONLAB_URL"
+  },
+  "homepage": "FLUXONLAB_URL",
+  "license": "MIT"
+}

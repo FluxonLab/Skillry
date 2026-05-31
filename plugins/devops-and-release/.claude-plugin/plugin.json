@@ -1,0 +1,11 @@
+{
+  "name": "omniagent-devops-and-release",
+  "description": "CI/CD, build & typecheck, deployment preflight, release notes, and handoff readiness.",
+  "version": "0.1.0",
+  "author": {
+    "name": "FluxonLab",
+    "url": "FLUXONLAB_URL"
+  },
+  "homepage": "FLUXONLAB_URL",
+  "license": "MIT"
+}
