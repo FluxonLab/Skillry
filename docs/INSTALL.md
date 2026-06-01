@@ -26,11 +26,15 @@ npx github:FluxonLab/Skillry install                              # dry-run, all
 npx github:FluxonLab/Skillry install --apply --targets claude     # codex | copilot | antigravity
 npx github:FluxonLab/Skillry install --apply --targets claude --community
 
-# Or install the CLI globally:
-npm install -g skillry
+# Or install the CLI globally (from GitHub — works today):
+npm install -g github:FluxonLab/Skillry
 skillry install --apply --targets claude codex
 skillry validate
+skillry update      # check for a newer release and see how to update
 ```
+
+> The short registry name `npm install -g skillry` will work once published to the npm registry;
+> until then use the `github:FluxonLab/Skillry` form.
 
 ## Option C — Portable installer (Claude, Codex, Copilot, Gemini/Antigravity)
 

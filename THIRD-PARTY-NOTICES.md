@@ -11,7 +11,7 @@ All redistributed sources use permissive licenses (MIT). Sources whose terms do 
 ## github/awesome-copilot
 - **License:** MIT
 - **Upstream:** https://github.com/github/awesome-copilot
-- **Redistributed:** 16 skills
+- **Redistributed:** 17 skills
 - **Used for:** General-purpose engineering skills.
 - **Local path:** `community/github-awesome-copilot/`
 

@@ -4,6 +4,19 @@ All notable changes to Skillry are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.2.0] — 2026-06-01
+
+### Added
+- **`skillry version` and `skillry update`** CLI commands. `update` checks the latest GitHub
+  release against the installed version and prints the right update command for each install
+  method (Claude Code marketplace, npm global, npx, clone). Installed skill files never
+  self-update silently — `update` tells you exactly how to refresh them.
+
+### Fixed
+- Attribution accuracy: `THIRD-PARTY-NOTICES.md` now reports 17 redistributed skills for
+  `github/awesome-copilot` (was 16). Removed stale example counts from the global-installation-audit
+  skill. Refreshed the build-effort token figures.
+
 ## [1.1.0] — 2026-06-01
 
 ### Added

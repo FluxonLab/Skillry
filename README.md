@@ -12,7 +12,7 @@ permission boundaries, a validation harness, and full upstream attribution.
 
 [![CI](https://github.com/FluxonLab/Skillry/actions/workflows/validate.yml/badge.svg)](https://github.com/FluxonLab/Skillry/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](package.json)
+[![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)](package.json)
 ![Platforms](https://img.shields.io/badge/platforms-Claude%20%C2%B7%20Codex%20%C2%B7%20Copilot%20%C2%B7%20Gemini-7c3aed.svg)
 ![Skills](https://img.shields.io/badge/skills-125-success.svg)
 ![Subagents](https://img.shields.io/badge/subagents-73-success.svg)
@@ -60,11 +60,15 @@ npx github:FluxonLab/Skillry install                                  # dry-run,
 npx github:FluxonLab/Skillry install --apply --targets claude         # or: codex copilot antigravity
 npx github:FluxonLab/Skillry install --apply --targets claude --community   # include attributed 3rd-party skills
 
-# Or install the CLI globally:
-npm install -g skillry
+# Or install the CLI globally (from GitHub — works today):
+npm install -g github:FluxonLab/Skillry
 skillry install --apply --targets claude codex
 skillry validate
+skillry update      # check for a newer release
 ```
+
+> `npm install -g skillry` (the short registry name) will work once the package is published to
+> the npm registry; until then use the `github:FluxonLab/Skillry` form above.
 
 ### Portable installer (from a clone)
 
@@ -163,15 +167,15 @@ sub-agents doing the heavy lifting under close review.
 
 | Phase | Model compute (tokens processed) |
 |---|---:|
-| Building Skillry (this public repo: research → conversion → validation harness → multi-platform tooling) | **~1.7 billion** |
-| The private library it was distilled from (estimated ~3× the above) | **~5 billion** |
-| **Estimated total effort** | **~7 billion tokens** |
+| Building Skillry (this public repo: research → conversion → validation harness → multi-platform tooling → v1.2.0) | **~1.8 billion** |
+| The private library it was distilled from (estimated ~3× the above) | **~5.5 billion** |
+| **Estimated total effort** | **~7.5 billion tokens** |
 
-The ~1.7B figure for this repo is measured from real session usage — **~53M tokens of generated
-output across ~2,900 model turns and dozens of orchestrated sub-agents** (the larger number
-includes context-cache reads). The earlier figure for the original private library is a
-deliberately rough, slightly-rounded-up estimate. We share it not to brag, but so it's clear that
-what you're installing is the distilled result of a *lot* of iteration — not a thin template dump.
+The ~1.8B figure for this repo is measured from real session usage — **~54M tokens of generated
+output across ~3,300 model turns and 40+ orchestrated sub-agents** (the larger number includes
+context-cache reads). The earlier figure for the original private library is a deliberately rough,
+slightly-rounded-up estimate. We share it not to brag, but so it's clear that what you're
+installing is the distilled result of a *lot* of iteration — not a thin template dump.
 
 ## Acknowledgments
 

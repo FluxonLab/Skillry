@@ -51,8 +51,8 @@
       "folder": "45-automation-mcp-gatekeeping",
       "department": "ai-and-agent-systems",
       "origin": "original",
-      "lines": 103,
-      "checksum": "26edd5e10e017c3d98bbe4d59da63b7c56b7ee9b27070a67add774742c824976"
+      "lines": 226,
+      "checksum": "02a0430353c3ae48ecee6cecd5dc38afd3bb223b1db40e0201ae9de573f69d1d"
     },
     {
       "id": "agent-supply-chain-review",
@@ -83,8 +83,8 @@
       "folder": "14-auth-session-review",
       "department": "backend-and-api",
       "origin": "original",
-      "lines": 101,
-      "checksum": "f250d28b899d349f18f0d855a32d783dae92eda2e0bcdb9b8065e66e97ee4cd9"
+      "lines": 215,
+      "checksum": "6f141ab0619470bc9bc59385f33269ca29a3e869377d5cccbce6b7e94a2582a9"
     },
     {
       "id": "integration-boundary-review",
@@ -219,8 +219,8 @@
       "folder": "89-project-agent-bootstrap",
       "department": "core-operations",
       "origin": "original",
-      "lines": 88,
-      "checksum": "d153a392ca3ef06a20b1d21f64b1fee2badf37a3c3797cea5104211b99a0630a"
+      "lines": 227,
+      "checksum": "3acf522aae2c3c0f405c6cf47537658481bd379d1791be926fb9552497d4f271"
     },
     {
       "id": "data-pipeline-review",
@@ -435,8 +435,8 @@
       "folder": "20-accessibility-audit",
       "department": "frontend-web-design",
       "origin": "original",
-      "lines": 82,
-      "checksum": "497db60be2808ae19a20d32b5ea3fa95b8b2c9189682293b75e8083e9a6f72a2"
+      "lines": 199,
+      "checksum": "cf76d37f0353bfb66db32bb5c6bc05c50c7c504cd91a0687566a057086d26393"
     },
     {
       "id": "dashboard-ux-review",
@@ -787,32 +787,32 @@
       "folder": "65-product-requirements-review",
       "department": "product-docs-and-research",
       "origin": "original",
-      "lines": 105,
-      "checksum": "650aebcbdb1c9d6c7e7f72e76b82225056c1bcc8716780b7e0445b41c2ee86ec"
+      "lines": 152,
+      "checksum": "3520459ca063ade07fe5493f426fbac920e25015ec8a543b330013c5f9443c93"
     },
     {
       "id": "market-research-synthesis",
       "folder": "66-market-research-synthesis",
       "department": "product-docs-and-research",
       "origin": "original",
-      "lines": 107,
-      "checksum": "509cd40e6808fe41cc7b215df14120abb35607dd24573cb1bbccba02b937919e"
+      "lines": 150,
+      "checksum": "21624b2ed2dad65ce8178ee9181b6e507af79cf3ddd3edbed10c7a8c5d0b75a3"
     },
     {
       "id": "business-model-review",
       "folder": "67-business-model-review",
       "department": "product-docs-and-research",
       "origin": "original",
-      "lines": 116,
-      "checksum": "08c5a216f6497b876438e68e59478e6548c0637b7264984f846ceeb0f0aba7a9"
+      "lines": 155,
+      "checksum": "669cab155fa583a3608a121fdc5913150075f1ba43513cfa57abe4eec3768500"
     },
     {
       "id": "pricing-packaging-review",
       "folder": "68-pricing-packaging-review",
       "department": "product-docs-and-research",
       "origin": "original",
-      "lines": 114,
-      "checksum": "338ca76a0928cc917ddd94f9f4ff76a5027e6b683c9ac7df0d263a1836ddf551"
+      "lines": 151,
+      "checksum": "1b239182361529d2a76ae2868c76d27ae2e55f8186fde7aa360ff4e651c32d82"
     },
     {
       "id": "technical-writing-review",
@@ -851,8 +851,8 @@
       "folder": "09-startup-health-readiness",
       "department": "runtime-and-local-app",
       "origin": "original",
-      "lines": 109,
-      "checksum": "6a2c5c95fd675f4d856857e6f816c6c571ca70192563da112326f368a99bec41"
+      "lines": 236,
+      "checksum": "94248e960dbb9712302b1654fb7f5d690202e45947e5f0d4fe71983275684185"
     },
     {
       "id": "local-launcher-shortcuts",
@@ -867,8 +867,8 @@
       "folder": "11-log-and-diagnostics-bundle",
       "department": "runtime-and-local-app",
       "origin": "original",
-      "lines": 109,
-      "checksum": "40ffb6bd2e103336569c6bf5439dcc0b85d64919ccc58b6823813d972a522fc8"
+      "lines": 246,
+      "checksum": "34aabaa68229fe80141bc5dd60b4fc1edba14b957f1b59cb150d2ddc9cab23fc"
     },
     {
       "id": "security-and-secrets-review",
@@ -891,24 +891,24 @@
       "folder": "49-authz-permission-review",
       "department": "security",
       "origin": "original",
-      "lines": 102,
-      "checksum": "922736c4f71bcd2530b00e2006181dae0a51980946f89892c36bfb3a4e5ee38d"
+      "lines": 173,
+      "checksum": "95b6e44a021a08933c89169b4c9eb3eb323646597cbfcbc0215e4732c1e622c9"
     },
     {
       "id": "dependency-supply-chain-review",
       "folder": "50-dependency-supply-chain-review",
       "department": "security",
       "origin": "original",
-      "lines": 105,
-      "checksum": "bc010ab3f2531f25d6e7d6383d567e776d8e63db61abc8124e4cd86bf3ee5987"
+      "lines": 206,
+      "checksum": "e42d6c66cb8d454615cc1233d9dab9d3421fe6ce0f95c77191105619e9649032"
     },
     {
       "id": "env-config-hardening",
       "folder": "51-env-config-hardening",
       "department": "security",
       "origin": "original",
-      "lines": 110,
-      "checksum": "4b00de67d638de9cf1ab944d9c543e4139c7197a2e10debfad70b723060a9e5c"
+      "lines": 194,
+      "checksum": "afc83241162d041915d46bd9c2ff7f0c8af762191e27d94b238991a1bf87b8fe"
     },
     {
       "id": "electron-app-security-review",
@@ -948,7 +948,7 @@
       "department": "skill-library-and-installation",
       "origin": "original",
       "lines": 215,
-      "checksum": "5793cd633ce1defae44fce5156367a28f7088022dbd18e19988e907e21cbdba6"
+      "checksum": "f63d815758bea1aa850d2b3a5eab9f5aef9418b18428ee3b3fb0217e5d6da50b"
     },
     {
       "id": "path-hygiene-repair",
@@ -979,16 +979,16 @@
       "folder": "54-regression-scope-analysis",
       "department": "testing-and-qa",
       "origin": "original",
-      "lines": 118,
-      "checksum": "9a017ca82bf2ce7fa1e0fa43ec8bb0a5f00322b17a96fa5c86177e0013c155c3"
+      "lines": 174,
+      "checksum": "cef00579962aefc4d675b07d304adda329cd2aa86431d4c4a803b098a03d4909"
     },
     {
       "id": "api-test-suite-review",
       "folder": "55-api-test-suite-review",
       "department": "testing-and-qa",
       "origin": "original",
-      "lines": 117,
-      "checksum": "12abbdb08ed8399262223d9cf6440572531d9d85706f08ce7d411e4246eb99a5"
+      "lines": 238,
+      "checksum": "329b5f1766be43437702004aa1945d9c3f68cdd16e3caa7687fa0bc4bbe3e2fe"
     },
     {
       "id": "visual-regression-review",
@@ -1003,8 +1003,8 @@
       "folder": "57-uat-acceptance-review",
       "department": "testing-and-qa",
       "origin": "original",
-      "lines": 115,
-      "checksum": "3f33f242be1bfc7fd2522508c185f2274989ccb3dff129e807272096dd05a0a3"
+      "lines": 166,
+      "checksum": "c3bda6fede6a1add690bac2bf2de237f44efeb89b42ad36774f6e27acbf6ddda"
     },
     {
       "id": "182-gamedev-art-bible",

@@ -38,8 +38,8 @@ ls -la ~/.claude/
 Required paths:
 ```
 ~/.claude/
- skills/ # 90+ skill directories
- agents/ # 64 agent directories
+ skills/ # one directory per installed skill
+ agents/ # one entry per installed agent
  CLAUDE.md # Global system instruction file
  claude-system.toml # Version and configuration manifest
 ```
