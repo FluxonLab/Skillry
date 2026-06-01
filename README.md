@@ -10,7 +10,7 @@ One source of truth. Install the same curated skills, subagents, and slash comma
 **Claude Code, OpenAI Codex, GitHub Copilot, and Google Antigravity (Gemini)** — with real
 permission boundaries, a validation harness, and full upstream attribution.
 
-[Quickstart](#quickstart) · [Why Codex](#why-this-matters-for-codex) · [Demo](#demo) · [What's inside](#whats-inside) · [Multi-platform](#multi-platform) · [Safety](#safety--permissions) · [Governance](#maintainers--governance) · [Contributing](CONTRIBUTING.md)
+[Quickstart](#quickstart) · [Why Codex](#why-this-matters-for-codex) · [All platforms](#also-first-class-on-claude-copilot--antigravity) · [Demo](#demo) · [What's inside](#whats-inside) · [Safety](#safety--permissions) · [Governance](#maintainers--governance) · [Contributing](CONTRIBUTING.md)
 
 [![CI](https://github.com/FluxonLab/Skillry/actions/workflows/validate.yml/badge.svg)](https://github.com/FluxonLab/Skillry/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -43,6 +43,35 @@ One line, no clone:
 
 ```bash
 npx github:FluxonLab/Skillry install --apply --targets codex
+```
+
+## Also first-class on Claude, Copilot & Antigravity
+
+Same source of truth, platform-correct output. Each tool gets the behavior file it actually reads,
+skills in its native location, and agents converted to its format — all permission-bounded.
+
+### Claude Code
+Reads **`CLAUDE.md`** and has a native plugin marketplace. Skillry ships a
+`.claude-plugin/marketplace.json` (18 department plugins, SHA-pinnable for reproducible installs)
+plus auto-invoked skills and `agents/*.md`.
+```bash
+# in Claude Code:
+/plugin marketplace add FluxonLab/Skillry
+/plugin install core-operations@skillry
+```
+
+### GitHub Copilot (VS Code)
+Reads **`.github/copilot-instructions.md`** (and the `AGENTS.md` standard). Skillry installs skills
+plus `*.agent.md` agents into `~/.copilot/` + `~/.agents/` and generates the instructions file.
+```bash
+npx github:FluxonLab/Skillry install --apply --targets copilot --instructions .
+```
+
+### Google Antigravity (Gemini)
+Reads **`GEMINI.md` and `AGENTS.md`** (since Antigravity v1.20.3). Skillry generates both and installs
+skills + agents into `~/.gemini/antigravity/`.
+```bash
+npx github:FluxonLab/Skillry install --apply --targets antigravity --instructions .
 ```
 
 ## Demo
