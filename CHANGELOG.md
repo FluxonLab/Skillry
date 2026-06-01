@@ -4,6 +4,16 @@ All notable changes to Skillry are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- README: **Why this matters for Codex**, a real **Demo** (Codex dry-run transcript + `.toml` agent),
+  and a **Maintainers & governance** section; custom social-preview image used as the hero.
+- **GOVERNANCE.md** — maintainer, decision-making, release policy, contribution review, security.
+- A public **Roadmap** issue (npm publish, Codex installer hardening, example workflows,
+  security-review automation, docs).
+- Honest project-status framing: "early but infrastructure-level OSS" (no inflated metrics).
+
 ## [1.2.0] — 2026-06-01
 
 ### Added

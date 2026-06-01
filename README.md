@@ -10,7 +10,7 @@ One source of truth. Install the same curated skills, subagents, and slash comma
 **Claude Code, OpenAI Codex, GitHub Copilot, and Google Antigravity (Gemini)** — with real
 permission boundaries, a validation harness, and full upstream attribution.
 
-[Quickstart](#quickstart) · [What's inside](#whats-inside) · [Multi-platform](#multi-platform) · [Safety](#safety--permissions) · [Build effort](#build-effort--transparency) · [Contributing](CONTRIBUTING.md)
+[Quickstart](#quickstart) · [Why Codex](#why-this-matters-for-codex) · [Demo](#demo) · [What's inside](#whats-inside) · [Multi-platform](#multi-platform) · [Safety](#safety--permissions) · [Governance](#maintainers--governance) · [Contributing](CONTRIBUTING.md)
 
 [![CI](https://github.com/FluxonLab/Skillry/actions/workflows/validate.yml/badge.svg)](https://github.com/FluxonLab/Skillry/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -19,10 +19,61 @@ permission boundaries, a validation harness, and full upstream attribution.
 ![Skills](https://img.shields.io/badge/skills-125-success.svg)
 ![Subagents](https://img.shields.io/badge/subagents-73-success.svg)
 ![Departments](https://img.shields.io/badge/departments-18-success.svg)
+![Status](https://img.shields.io/badge/status-early%20%C2%B7%20infrastructure--level-orange.svg)
 
 </div>
 
 ---
+
+## Why this matters for Codex
+
+**In one line:** Skillry is the *safe-distribution layer* for Codex agent skills & subagents —
+install, validate, attribute, and permission-bound them instead of pasting files by hand.
+
+OpenAI Codex reads **`AGENTS.md`** (the open standard) and runs custom subagents. Skillry gives Codex users:
+
+- **125 installable skills + 73 subagents.** Each subagent is converted to Codex's native `.toml`
+  format with a `sandbox_mode` derived from its permissions — review/audit agents become `read-only`.
+- **A generated `AGENTS.md`** per project (from one canonical source), plus a `--instructions`
+  installer that **merges** into your existing `AGENTS.md` without clobbering your rules.
+- **A CI validation harness** and **full upstream attribution** for any redistributed third-party
+  content — the governance layer most skill collections skip.
+
+One line, no clone:
+
+```bash
+npx github:FluxonLab/Skillry install --apply --targets codex
+```
+
+## Demo
+
+Dry-run (writes nothing) for Codex — see exactly what would be installed:
+
+```text
+$ npx github:FluxonLab/Skillry install --targets codex --instructions .
+DRY-RUN — Skillry install
+Targets: codex   Community skills: no
+
+  codex        skills:125  agents:73  -> ~/.codex/skills
+
+Instruction files -> .
+  AGENTS.md                          [would-fresh]
+
+Done (dry-run — nothing written; re-run with --apply)
+```
+
+Each agent is converted to a Codex `.toml` with a permission-derived sandbox:
+
+```toml
+name = "accessibility_auditor"
+description = "Use when you need to audit accessibility and report concrete semantic, focus, contrast, and label issues."
+model_reasoning_effort = "medium"
+sandbox_mode = "read-only"            # review/audit agents get no write access
+developer_instructions = """ … """
+```
+
+Add `--apply` to write, and the canonical [`AGENTS.md`](AGENTS.md) shows the project behavior file
+Codex loads. (An animated terminal demo is on the [roadmap](https://github.com/FluxonLab/Skillry/issues).)
 
 ## Why Skillry
 
@@ -160,6 +211,17 @@ docs/                             # guides
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Skills are validated in CI (structure + frontmatter + permissions);
 PRs that add third-party content must include correct attribution and a license check.
+
+## Maintainers & governance
+
+- **Primary maintainer:** Çağrı Bozgeyik — [FluxonLab](https://fluxonlab.com) ([@FluxonLab](https://github.com/FluxonLab)).
+- **Governance, release & review policy:** [GOVERNANCE.md](GOVERNANCE.md) — SemVer, tagged releases
+  with a [CHANGELOG](CHANGELOG.md) entry, maintainer-reviewed PRs that must pass the validator and CI.
+- **Security:** report privately via [SECURITY.md](SECURITY.md) (GitHub Security Advisory preferred).
+- **Roadmap:** tracked in the pinned [Roadmap issue](https://github.com/FluxonLab/Skillry/issues).
+- **Project status:** **early but infrastructure-level OSS** — MIT, actively maintained. We make no
+  inflated star/download/usage claims; what's documented (skill counts, the token-effort figures) is
+  measured, and third-party content is fully attributed.
 
 ## Build effort & transparency
 
