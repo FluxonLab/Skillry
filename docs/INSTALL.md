@@ -64,7 +64,13 @@ and converts each agent to the platform's native format (e.g. Codex `.toml`).
 
 Skillry also ships a project behavior file for every platform, all generated from the canonical
 [`CLAUDE.md`](../CLAUDE.md). Add `--instructions <dir>` to drop the right one(s) into your project
-in the same command that installs the skills (existing files are backed up):
+in the same command that installs the skills.
+
+**Non-destructive merge.** If the target file already exists, your instructions are kept and
+Skillry's manual is **appended** under a `SKILLRY:MANUAL` block, with a one-time **first-run
+reconcile notice**: on the next session the agent announces the merge, asks how to resolve any
+duplicate/conflicting rules, applies your choice, then deletes the notice. A `*.bak-skillry` backup
+is written first; re-installs replace the prior block instead of appending a second copy.
 
 ```bash
 # skills/agents + the behavior file each target reads, written into ~/my-project:

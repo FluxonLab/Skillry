@@ -105,26 +105,70 @@ def install_target(name: str, cfg: dict, apply: bool, with_community: bool):
     print(f"  {name:12} skills:{n_sk}  agents:{n_ag}  -> {skdir}")
     return n_sk, n_ag
 
+MANUAL_BEGIN = "<!-- SKILLRY:MANUAL:BEGIN — added by Skillry; safe to edit or remove this block -->"
+MANUAL_END = "<!-- SKILLRY:MANUAL:END -->"
+RECONCILE = """<!-- SKILLRY:FIRST-RUN-RECONCILE:BEGIN -->
+> **First run — reconcile, then delete this block.** Skillry's engineering manual was added below,
+> *after* the project instructions that were already in this file (above the SKILLRY:MANUAL marker).
+> On your **first response in this session**, before starting the user's task:
+> 1. In one short message, tell the user that Skillry's guidance was merged into this file.
+> 2. Compare the Skillry section below with the user's existing rules above and find: (a) rules that
+>    **duplicate** something already stated, and (b) rules that **conflict** with the user's rules.
+> 3. List each overlap/conflict and ask the user how to resolve it — keep theirs, keep Skillry's, or
+>    merge — using the platform's question UI if it has one.
+> 4. Apply the user's choices by editing this file (remove duplicates, resolve conflicts).
+> 5. **Delete this entire notice** — the `SKILLRY:FIRST-RUN-RECONCILE` BEGIN…END markers and
+>    everything between them — so it never runs again. Leave the reconciled manual in place.
+>
+> If there are no duplicates or conflicts, still do step 1 and step 5 (briefly announce, then delete this notice).
+<!-- SKILLRY:FIRST-RUN-RECONCILE:END -->"""
+
+def strip_skillry_block(text: str) -> str:
+    """Remove a previously-installed SKILLRY:MANUAL block (for idempotent re-installs)."""
+    return re.sub(re.escape(MANUAL_BEGIN) + r".*?" + re.escape(MANUAL_END), "", text, flags=re.S).rstrip()
+
+def compose_instruction(existing: str, manual: str) -> tuple[str, str]:
+    """Return (new_content, mode). Preserves the user's own rules; appends Skillry under a marker.
+    mode: 'fresh' (no prior file), 'merge' (user rules kept, reconcile notice added), 'update'
+    (replacing a prior Skillry block)."""
+    had_skillry = MANUAL_BEGIN in existing
+    user_part = strip_skillry_block(existing) if had_skillry else existing.rstrip()
+    block = f"{MANUAL_BEGIN}\n{manual.rstrip()}\n{MANUAL_END}\n"
+    if not user_part.strip():
+        return block, ("update" if had_skillry else "fresh")
+    # user has their own instructions → keep them, append Skillry with a one-time reconcile notice
+    reconciled = f"{user_part}\n\n{MANUAL_BEGIN}\n{RECONCILE}\n\n{manual.rstrip()}\n{MANUAL_END}\n"
+    return reconciled, ("update" if had_skillry else "merge")
+
 def install_instructions(sel: list, dest_dir: pathlib.Path, apply: bool):
-    """Copy the behavior file(s) each selected platform reads into dest_dir."""
-    pairs = []  # de-duped (src, dst) — antigravity + codex both want AGENTS.md
-    seen = set()
+    """Install the behavior file(s) each selected platform reads into dest_dir.
+
+    Existing files are never clobbered: the user's own instructions are kept and Skillry's manual
+    is appended under a clearly-marked block. When appending to a non-empty user file, a self-
+    removing first-run reconcile notice is added so the agent reconciles duplicates/conflicts with
+    the user on first run. Re-installs replace the prior Skillry block (idempotent). A backup is
+    still written to *.bak-skillry before any change."""
+    pairs, seen = [], set()  # de-duped (src, dst) — antigravity + codex both want AGENTS.md
     for name in sel:
         for src_rel, dst_rel in INSTRUCTIONS.get(name, []):
-            if dst_rel in seen:
-                continue
-            seen.add(dst_rel)
-            pairs.append((src_rel, dst_rel))
+            if dst_rel not in seen:
+                seen.add(dst_rel)
+                pairs.append((src_rel, dst_rel))
     print(f"\nInstruction files -> {dest_dir}")
     for src_rel, dst_rel in pairs:
         src = REPO / src_rel
+        if not src.exists():
+            print(f"  {dst_rel:34} [missing-source]")
+            continue
         dst = dest_dir / dst_rel
-        status = "missing-source" if not src.exists() else ("write" if apply else "would-write")
-        print(f"  {dst_rel:34} [{status}]")
-        if apply and src.exists():
+        existing = dst.read_text(errors="ignore") if dst.exists() else ""
+        new_content, mode = compose_instruction(existing, src.read_text(errors="ignore"))
+        verb = mode if apply else f"would-{mode}"
+        print(f"  {dst_rel:34} [{verb}]")
+        if apply:
             dst.parent.mkdir(parents=True, exist_ok=True)
             backup(dst)
-            dst.write_text(src.read_text(errors="ignore"), encoding="utf-8")
+            dst.write_text(new_content, encoding="utf-8")
 
 def main():
     args = sys.argv[1:]

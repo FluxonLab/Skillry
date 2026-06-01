@@ -123,6 +123,12 @@ in the same command that installs the skills:
 python3 tools/install.py --apply --targets claude codex --instructions ~/my-project
 ```
 
+**Your existing instructions are never clobbered.** If the project already has a `CLAUDE.md`/`AGENTS.md`,
+Skillry's manual is **appended** under a clearly-marked block (your rules stay on top), plus a
+**one-time, self-removing reconcile notice**: on the first session the agent announces the merge,
+asks you how to resolve any duplicate/conflicting rules, applies your choice, and deletes the notice.
+A `*.bak-skillry` backup is written first, and re-installs replace the prior block (no duplicates).
+
 ## Safety & permissions
 
 - Every subagent declares a least-privilege `tools` allowlist; review agents get **no**
