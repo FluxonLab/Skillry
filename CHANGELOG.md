@@ -7,12 +7,16 @@ All notable changes to Skillry are documented here. The format is based on
 ## [Unreleased]
 
 ### Added
-- README: **Why this matters for Codex**, a real **Demo** (Codex dry-run transcript + `.toml` agent),
-  and a **Maintainers & governance** section; custom social-preview image used as the hero.
+- **Published to the npm registry** — [`npm install -g skillry`](https://www.npmjs.com/package/skillry)
+  now works (in addition to `npx github:FluxonLab/Skillry`).
+- README: **Why this matters for Codex**, per-platform sections for **Claude, Copilot & Antigravity**,
+  a real **Demo** (Codex dry-run transcript + `.toml` agent), and a **Maintainers & governance**
+  section; custom social-preview image used as the hero; dynamic npm version badge.
 - **GOVERNANCE.md** — maintainer, decision-making, release policy, contribution review, security.
 - A public **Roadmap** issue (npm publish, Codex installer hardening, example workflows,
   security-review automation, docs).
 - Honest project-status framing: "early but infrastructure-level OSS" (no inflated metrics).
+- Security contact is now a visible link to `fluxonlab.com/contact` (GOVERNANCE.md + SECURITY.md).
 
 ## [1.2.0] — 2026-06-01
 

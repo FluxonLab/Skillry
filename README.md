@@ -14,7 +14,7 @@ permission boundaries, a validation harness, and full upstream attribution.
 
 [![CI](https://github.com/FluxonLab/Skillry/actions/workflows/validate.yml/badge.svg)](https://github.com/FluxonLab/Skillry/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)](package.json)
+[![npm](https://img.shields.io/npm/v/skillry.svg?label=npm)](https://www.npmjs.com/package/skillry)
 ![Platforms](https://img.shields.io/badge/platforms-Claude%20%C2%B7%20Codex%20%C2%B7%20Copilot%20%C2%B7%20Gemini-7c3aed.svg)
 ![Skills](https://img.shields.io/badge/skills-125-success.svg)
 ![Subagents](https://img.shields.io/badge/subagents-73-success.svg)
@@ -133,8 +133,8 @@ npx github:FluxonLab/Skillry install --apply --targets claude codex    # pick pl
 npx github:FluxonLab/Skillry install --apply --targets claude --community      # + attributed 3rd-party skills
 npx github:FluxonLab/Skillry install --apply --targets codex --instructions .  # + behavior file into a project
 
-# global CLI (works today; short `skillry` name once published to npm):
-npm install -g github:FluxonLab/Skillry
+# global CLI (published on npm):
+npm install -g skillry
 skillry install --apply --targets claude codex
 skillry validate
 skillry update                                                         # check for a newer release
