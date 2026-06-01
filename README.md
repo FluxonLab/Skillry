@@ -1,6 +1,6 @@
 <div align="center">
 
-# OmniAgent
+# Skillry
 
 **Installable, permission-bounded, multi-platform agent skills & subagents — by [FluxonLab](https://fluxonlab.com).**
 
@@ -8,25 +8,31 @@ One source of truth. Install the same curated skills, subagents, and slash comma
 **Claude Code, OpenAI Codex, GitHub Copilot, and Google Antigravity (Gemini)** — with real
 permission boundaries, a validation harness, and full upstream attribution.
 
-[Quickstart](#quickstart) · [What's inside](#whats-inside) · [Multi-platform](#multi-platform) · [Safety](#safety--permissions) · [Contributing](CONTRIBUTING.md)
+[Quickstart](#quickstart) · [What's inside](#whats-inside) · [Multi-platform](#multi-platform) · [Safety](#safety--permissions) · [Build effort](#build-effort--transparency) · [Contributing](CONTRIBUTING.md)
 
-<!-- badges: add CI, license, version once published -->
+[![CI](https://github.com/FluxonLab/Skillry/actions/workflows/validate.yml/badge.svg)](https://github.com/FluxonLab/Skillry/actions/workflows/validate.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](package.json)
+![Platforms](https://img.shields.io/badge/platforms-Claude%20%C2%B7%20Codex%20%C2%B7%20Copilot%20%C2%B7%20Gemini-7c3aed.svg)
+![Skills](https://img.shields.io/badge/skills-124-success.svg)
+![Subagents](https://img.shields.io/badge/subagents-73-success.svg)
+![Departments](https://img.shields.io/badge/departments-18-success.svg)
 
 </div>
 
 ---
 
-## Why OmniAgent
+## Why Skillry
 
 Most Claude Code resource repos are **link lists** (you still copy files by hand) or are
-**Claude-only**. OmniAgent is different on five axes:
+**Claude-only**. Skillry is different on five axes:
 
-| | OmniAgent | Typical "awesome" list | Typical CLI installer |
+| | Skillry | Typical "awesome" list | Typical CLI installer |
 |---|:---:|:---:|:---:|
 | Installs actual skill/agent **files** (not links) | ✅ | ❌ | ✅ |
 | **Multi-platform** (Claude + Codex + Copilot + Gemini) | ✅ | ❌ | ❌ (Claude only) |
 | Per-agent **permission boundaries** (least-privilege `tools`) | ✅ | ❌ | ⚠️ |
-| **Validation harness** (smoke-check + frontmatter lint + lockfiles) | ✅ | ❌ | ⚠️ |
+| **Validation harness** (structure + frontmatter lint + permission + lockfiles) | ✅ | ❌ | ⚠️ |
 | **Skill-sync**: discover (license + risk scan), normalize (frontmatter + provenance), vet (staged, attributed, never auto-enabled) | ✅ | ❌ | ❌ |
 | Native plugin marketplace (sha-pinned, reproducible) | ✅ | ❌ | ⚠️ |
 | Full upstream **attribution** for redistributed content | ✅ | n/a | ⚠️ |
@@ -40,38 +46,55 @@ subagents, and auditing third-party skills before use.
 
 ```bash
 # In Claude Code:
-/plugin marketplace add FluxonLab/OmniAgent
-/plugin install core-operations@omniagent
+/plugin marketplace add FluxonLab/Skillry
+/plugin install core-operations@skillry
 ```
 
 Browse all departments with `/plugin marketplace` after adding.
 
-### Any platform (portable installer)
+### npm / npx (any platform, no clone, no publish needed)
 
 ```bash
-git clone https://github.com/FluxonLab/OmniAgent
-cd OmniAgent
+# Runs straight from GitHub — no global install, no npm account required:
+npx github:FluxonLab/Skillry install                                  # dry-run, all platforms
+npx github:FluxonLab/Skillry install --apply --targets claude         # or: codex copilot antigravity
+npx github:FluxonLab/Skillry install --apply --targets claude --community   # include attributed 3rd-party skills
+
+# Or install the CLI globally:
+npm install -g skillry
+skillry install --apply --targets claude codex
+skillry validate
+```
+
+### Portable installer (from a clone)
+
+```bash
+git clone https://github.com/FluxonLab/Skillry
+cd Skillry
 python3 tools/install.py            # dry-run: shows what will be installed
 python3 tools/install.py --apply --targets claude          # or: codex copilot antigravity
 ```
 
 The installer rewrites machine-specific paths to your `$HOME` and backs up any existing
-config before writing. Verify with `python3 tools/smoke-check.py`.
+config (`*.bak-skillry`) before writing. Dry-run is the default. Verify with
+`python3 tools/validate.py`.
 
 ## What's inside
 
-- **100+ original skills** across 14 departments — concrete procedures, real commands,
-  checklists, and safety rules (not generic templates).
-- **64 original subagents** with explicit `tools` allowlists and read-only vs. write scopes.
-- **A curated `community/` set** of high-quality third-party skills, redistributed with full
-  attribution (MIT/ISC only — see [NOTICE](NOTICE) and [THIRD-PARTY-NOTICES](THIRD-PARTY-NOTICES.md)).
+- **124 original skills** across **18 departments** — concrete procedures, real commands,
+  checklists, and safety rules (not generic templates); median ~150 lines of substance.
+- **73 original subagents** with explicit `tools` allowlists and read-only vs. write scopes.
+- **A curated `community/` set** — 98 skills + 49 agents from 6 permissively-licensed sources,
+  redistributed with full attribution (MIT/ISC only — see [NOTICE](NOTICE) and
+  [THIRD-PARTY-NOTICES](THIRD-PARTY-NOTICES.md)).
 
-<details><summary>Departments</summary>
+<details><summary>Departments (18)</summary>
 
 Core Operations · Runtime & Local App · Backend & API · Frontend & Web Design ·
 Mobile & Desktop · Gaming & Interactive Media · Database & Data · AI & Agent Systems ·
-Security · Testing & QA · DevOps & Release · Product/Docs/Research ·
-Skill Library & Installation · Optional Specialists
+Security · Testing & QA · DevOps & Release · Product, Docs & Research ·
+Documentation & Tech Writing · Data & ML / AI Engineering · Performance & Cost ·
+Cloud & Infrastructure · Skill Library & Installation · Optional Specialists
 
 </details>
 
@@ -101,15 +124,33 @@ One authored source → platform-correct output for each runtime:
 plugins/<department>/              # one plugin per department: skills/ agents/ commands/
 platforms/<platform>/             # generated, platform-specific output
 community/<source>/                # attributed third-party skills + their LICENSE
-tools/                            # installer, smoke-check, skill-sync (discover/import/normalize)
+tools/                            # validate, install, build-marketplace, build-lock, skill-sync
 registry/                         # skill/agent lock files
 docs/                             # guides
 ```
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Skills are validated in CI (frontmatter + smoke-check);
+See [CONTRIBUTING.md](CONTRIBUTING.md). Skills are validated in CI (structure + frontmatter + permissions);
 PRs that add third-party content must include correct attribution and a license check.
+
+## Build effort & transparency
+
+Skillry wasn't auto-generated in an afternoon. It was researched, written, de-duplicated,
+attribution-checked, and validated skill by skill, agent by agent — with a large fleet of AI
+sub-agents doing the heavy lifting under close review.
+
+| Phase | Model compute (tokens processed) |
+|---|---:|
+| Building Skillry (this public repo: research → conversion → validation harness → multi-platform tooling) | **~1.7 billion** |
+| The private library it was distilled from (estimated ~3× the above) | **~5 billion** |
+| **Estimated total effort** | **~7 billion tokens** |
+
+The ~1.7B figure for this repo is measured from real session usage — **~53M tokens of generated
+output across ~2,900 model turns and dozens of orchestrated sub-agents** (the larger number
+includes context-cache reads). The earlier figure for the original private library is a
+deliberately rough, slightly-rounded-up estimate. We share it not to brag, but so it's clear that
+what you're installing is the distilled result of a *lot* of iteration — not a thin template dump.
 
 ## License & credits
 

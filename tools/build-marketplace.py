@@ -42,7 +42,7 @@ plugins = []
 for d in sorted(PLUGINS.iterdir()):
     if not d.is_dir():
         continue
-    name = f"omniagent-{d.name}"
+    name = f"skillry-{d.name}"
     plugins.append({
         "name": name,
         "source": f"./plugins/{d.name}",
@@ -51,7 +51,7 @@ for d in sorted(PLUGINS.iterdir()):
 
 marketplace = {
     "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
-    "name": "omniagent",
+    "name": "skillry",
     "owner": {"name": "FluxonLab", "url": "https://fluxonlab.com"},
     "description": "Installable, permission-bounded, multi-platform agent skills & subagents by FluxonLab.",
     "plugins": plugins,

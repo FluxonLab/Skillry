@@ -107,8 +107,8 @@ def normalize_skill(text: str, slug: str, url: str, lic: str) -> str:
         fm = fm + f"\ndescription: {desc}"
     text = f"---\n{fm.strip()}\n---\n{rest}"
     # provenance marker right after the frontmatter, if absent
-    marker = f"<!-- omniagent:source {url} ({lic}) -->"
-    if "<!-- omniagent:source" not in text:
+    marker = f"<!-- skillry:source {url} ({lic}) -->"
+    if "<!-- skillry:source" not in text:
         head, body = _split_frontmatter(text)
         text = f"---\n{head.strip()}\n---\n{marker}\n{body.lstrip(chr(10))}"
     # normalize H1 to match the skill name only on a clear, safe mismatch
@@ -204,7 +204,7 @@ def cmd_normalize(target: str, apply: bool):
     changed = 0
     for f in files:
         text = f.read_text(errors="ignore")
-        m = re.search(r"<!-- omniagent:source (\S+) \(([^)]+)\) -->", text)
+        m = re.search(r"<!-- skillry:source (\S+) \(([^)]+)\) -->", text)
         url = m.group(1) if m else "unknown"
         lic = m.group(2) if m else "permissive"
         new = normalize_skill(text, f.parent.name, url, lic)

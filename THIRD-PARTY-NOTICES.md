@@ -1,6 +1,6 @@
 # Third-Party Notices
 
-OmniAgent redistributes skill and agent content from the open-source projects below, kept under `community/<source>/`. Each project's content remains under its original license, reproduced in full here and kept alongside the content as `community/<source>/LICENSE`.
+Skillry redistributes skill and agent content from the open-source projects below, kept under `community/<source>/`. Each project's content remains under its original license, reproduced in full here and kept alongside the content as `community/<source>/LICENSE`.
 
 All redistributed sources use permissive licenses (MIT). Sources whose terms do not permit redistribution were excluded (see end).
 

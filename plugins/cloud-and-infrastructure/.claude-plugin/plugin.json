@@ -1,5 +1,5 @@
 {
-  "name": "omniagent-cloud-and-infrastructure",
+  "name": "skillry-cloud-and-infrastructure",
   "description": "Cloud and infrastructure: Infrastructure-as-Code (Terraform), containers (Docker/Compose), Kubernetes, cloud provider services, networking/secrets, and deploy topology \u2014 distinct from CI/CD pipeline review.",
   "version": "0.1.0",
   "author": {

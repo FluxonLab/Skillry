@@ -1,7 +1,7 @@
 # Community Skills & Agents (third-party, attributed)
 
 Third-party skills and agents redistributed from open-source projects, kept separate from
-OmniAgent's original work under `plugins/`. Every source uses a permissive license (MIT) and
+Skillry's original work under `plugins/`. Every source uses a permissive license (MIT) and
 is credited in full.
 
 | Source | Skills | Agents | License |
@@ -16,7 +16,7 @@ is credited in full.
 Each source directory keeps its original `LICENSE` and a short `README.md`. Full notices:
 [`../NOTICE`](../NOTICE) and [`../THIRD-PARTY-NOTICES.md`](../THIRD-PARTY-NOTICES.md).
 
-**Why separate?** `plugins/` is OmniAgent's own authored, deepened, permission-bounded content.
+**Why separate?** `plugins/` is Skillry's own authored, deepened, permission-bounded content.
 `community/` is curated external content redistributed with credit. Keeping them apart makes
 provenance and licensing unambiguous.
 

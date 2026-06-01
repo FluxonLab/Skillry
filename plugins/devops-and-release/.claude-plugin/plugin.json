@@ -1,5 +1,5 @@
 {
-  "name": "omniagent-devops-and-release",
+  "name": "skillry-devops-and-release",
   "description": "CI/CD, build & typecheck, deployment preflight, release notes, and handoff readiness.",
   "version": "0.1.0",
   "author": {

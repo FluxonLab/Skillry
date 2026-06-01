@@ -1,5 +1,5 @@
 {
-  "name": "omniagent-database-and-data",
+  "name": "skillry-database-and-data",
   "description": "Prisma, Postgres/Supabase, migrations, seeds/fixtures, query performance, and RLS/edge functions.",
   "version": "0.1.0",
   "author": {

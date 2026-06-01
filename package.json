@@ -1,0 +1,63 @@
+{
+  "name": "skillry",
+  "version": "1.0.0",
+  "description": "Installable, permission-bounded, multi-platform agent skills & subagents for Claude Code, OpenAI Codex, GitHub Copilot, and Google Antigravity (Gemini).",
+  "keywords": [
+    "claude-code",
+    "claude",
+    "codex",
+    "copilot",
+    "antigravity",
+    "gemini",
+    "agent",
+    "agents",
+    "subagents",
+    "skills",
+    "ai-agents",
+    "plugin-marketplace",
+    "llm-tools",
+    "developer-tools"
+  ],
+  "homepage": "https://github.com/FluxonLab/Skillry#readme",
+  "bugs": {
+    "url": "https://github.com/FluxonLab/Skillry/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FluxonLab/Skillry.git"
+  },
+  "license": "MIT",
+  "author": "FluxonLab — Çağrı Bozgeyik (https://cagribozgeyik.com)",
+  "funding": "https://fluxonlab.com",
+  "type": "commonjs",
+  "bin": {
+    "skillry": "bin/skillry.js"
+  },
+  "files": [
+    "bin/",
+    "tools/",
+    "plugins/",
+    "community/",
+    ".claude-plugin/",
+    "registry/",
+    "docs/",
+    "CLAUDE.md",
+    "LICENSE",
+    "NOTICE",
+    "THIRD-PARTY-NOTICES.md",
+    "README.md"
+  ],
+  "scripts": {
+    "validate": "python3 tools/validate.py",
+    "skills:install": "python3 tools/install.py",
+    "skills:lock": "python3 tools/build-lock.py"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ]
+}

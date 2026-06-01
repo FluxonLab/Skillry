@@ -1,27 +1,42 @@
-# Installing OmniAgent
+# Installing Skillry
 
-OmniAgent ships **100 original, permission-bounded skills + 65 subagents** across 14
-departments, plus an attributed `community/` set. Install into one or more platforms.
+Skillry ships **124 original, permission-bounded skills + 73 subagents** across 18
+departments, plus an attributed `community/` set (98 skills + 49 agents from 6 MIT/ISC
+sources). Install into one or more platforms.
 
 ## Option A — Claude Code native marketplace (recommended for Claude)
 
 ```bash
 # inside Claude Code
-/plugin marketplace add FluxonLab/OmniAgent
-/plugin marketplace          # browse the 14 department plugins
-/plugin install omniagent-core-operations@omniagent
-/plugin install omniagent-frontend-web-design@omniagent
+/plugin marketplace add FluxonLab/Skillry
+/plugin marketplace          # browse the 18 department plugins
+/plugin install skillry-core-operations@skillry
+/plugin install skillry-frontend-web-design@skillry
 # ...install the departments you want
 ```
 
 Marketplace installs are reproducible: pin a plugin to a commit SHA in
 `.claude-plugin/marketplace.json` for version-locked installs.
 
-## Option B — Portable installer (Claude, Codex, Copilot, Gemini/Antigravity)
+## Option B — npm / npx (any platform, no clone)
 
 ```bash
-git clone https://github.com/FluxonLab/OmniAgent
-cd OmniAgent
+# Runs directly from GitHub — no global install, no npm account needed:
+npx github:FluxonLab/Skillry install                              # dry-run, all platforms
+npx github:FluxonLab/Skillry install --apply --targets claude     # codex | copilot | antigravity
+npx github:FluxonLab/Skillry install --apply --targets claude --community
+
+# Or install the CLI globally:
+npm install -g skillry
+skillry install --apply --targets claude codex
+skillry validate
+```
+
+## Option C — Portable installer (Claude, Codex, Copilot, Gemini/Antigravity)
+
+```bash
+git clone https://github.com/FluxonLab/Skillry
+cd Skillry
 
 # Preview (writes nothing):
 python3 tools/install.py --targets claude codex copilot antigravity
@@ -42,7 +57,7 @@ Install locations per platform:
 | GitHub Copilot | `~/.copilot/skills/<name>/SKILL.md` | `~/.copilot/agents/<name>.agent.md` |
 | Google Antigravity | `~/.gemini/antigravity/skills/<name>/SKILL.md` | `~/.gemini/antigravity/agents/<name>.md` |
 
-The installer **backs up** any existing file to `*.bak-omniagent` before overwriting,
+The installer **backs up** any existing file to `*.bak-skillry` before overwriting,
 and converts each agent to the platform's native format (e.g. Codex `.toml`).
 
 ## Verify
@@ -65,5 +80,5 @@ it never auto-enables anything.
 ## Uninstall
 
 Remove the installed `<name>` directories/files from the platform locations above
-(restore any `*.bak-omniagent` backups), or for Claude Code:
-`/plugin uninstall <plugin>@omniagent`.
+(restore any `*.bak-skillry` backups), or for Claude Code:
+`/plugin uninstall <plugin>@skillry`.

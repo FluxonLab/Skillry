@@ -1,6 +1,6 @@
 # Security Policy
 
-OmniAgent installs skills and subagents that an AI coding agent will execute with your
+Skillry installs skills and subagents that an AI coding agent will execute with your
 permissions. We take the supply-chain surface seriously.
 
 ## Principles
@@ -35,7 +35,7 @@ attribution/license problem, or an injection vector), please open a private repo
 Please do not open a public issue for undisclosed vulnerabilities. We aim to acknowledge
 within a few days.
 
-## Using OmniAgent safely
+## Using Skillry safely
 
 - Install only the departments/plugins you need.
 - Review a skill's body before relying on it for anything that touches production, secrets,

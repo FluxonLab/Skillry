@@ -1,5 +1,5 @@
 {
-  "name": "omniagent-runtime-and-local-app",
+  "name": "skillry-runtime-and-local-app",
   "description": "Local-first apps, runtime diagnostics, startup/health gates, launchers, and log bundles.",
   "version": "0.1.0",
   "author": {

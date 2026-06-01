@@ -1,5 +1,5 @@
 {
-  "name": "omniagent-skill-library-and-installation",
+  "name": "skillry-skill-library-and-installation",
   "description": "Skill librarian, deduplication, skill-to-agent routing, installation audit, and path hygiene.",
   "version": "0.1.0",
   "author": {

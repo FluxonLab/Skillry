@@ -1,6 +1,6 @@
-# Contributing to OmniAgent
+# Contributing to Skillry
 
-Thanks for helping improve OmniAgent. This project values **correctness, safety, and
+Thanks for helping improve Skillry. This project values **correctness, safety, and
 attribution** over raw volume. A few small, high-quality skills beat many shallow ones.
 
 ## Ground rules
@@ -31,8 +31,7 @@ and `## Safety`.
 Run the validators before opening a PR:
 
 ```bash
-python3 tools/validate.py        # frontmatter + structure lint
-python3 tools/smoke-check.py     # install + count consistency
+python3 tools/validate.py        # structure + frontmatter + permission + attribution lint
 ```
 
 CI runs the same checks; PRs must pass.

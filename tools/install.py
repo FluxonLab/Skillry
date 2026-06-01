@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""OmniAgent portable installer — install skills + agents into one or more AI coding
+"""Skillry portable installer — install skills + agents into one or more AI coding
 platforms from this repo's plugins/ tree.
 
 USAGE
@@ -12,7 +12,7 @@ WHAT IT DOES
   - Flattens plugins/<dept>/skills/* and plugins/<dept>/agents/* into each platform's
     native skill/agent location, converting agent format per platform.
   - With --community, also installs the attributed third-party skills under community/.
-  - Backs up any existing file to *.bak-omniagent before overwriting.
+  - Backs up any existing file to *.bak-skillry before overwriting.
   - Dry-run by default; nothing is written without --apply.
 
 PLATFORM TARGETS
@@ -22,7 +22,7 @@ PLATFORM TARGETS
   antigravity -> ~/.gemini/antigravity/skills/<name>/SKILL.md , .../agents/<name>.md
 
 Claude Code users can alternatively use the native plugin marketplace:
-  /plugin marketplace add FluxonLab/OmniAgent
+  /plugin marketplace add FluxonLab/Skillry
 """
 from __future__ import annotations
 import os, re, sys, pathlib, shutil
@@ -58,7 +58,7 @@ def md_to_toml_agent(text: str) -> str:
 
 def backup(dst: pathlib.Path):
     if dst.exists():
-        b = dst.with_suffix(dst.suffix + ".bak-omniagent")
+        b = dst.with_suffix(dst.suffix + ".bak-skillry")
         if not b.exists():
             shutil.copy2(dst, b)
 
@@ -105,7 +105,7 @@ def main():
     if bad:
         print("Unknown target(s):", bad, "\nValid:", list(TARGETS)); sys.exit(1)
 
-    print(f"{'APPLY' if apply else 'DRY-RUN'} — OmniAgent install")
+    print(f"{'APPLY' if apply else 'DRY-RUN'} — Skillry install")
     print(f"Targets: {', '.join(sel)}   Community skills: {'yes' if with_community else 'no'}\n")
     for name in sel:
         install_target(name, TARGETS[name], apply, with_community)

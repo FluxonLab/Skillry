@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""OmniAgent validator — checks structure, frontmatter, permissions, and attribution.
+"""Skillry validator — checks structure, frontmatter, permissions, and attribution.
 
 Run from anywhere: python3 tools/validate.py
 Exit code 0 = all checks pass, 1 = failures.
