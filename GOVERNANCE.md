@@ -2,11 +2,10 @@
 
 ## Project status
 
-Skillry is an **early but infrastructure-level** open-source project. It is young — **no inflated
-star, download, or usage claims** — and its value is *ecosystem importance, not adoption metrics*:
-it addresses a real gap in the agent-skills ecosystem — **safe distribution, validation, permission
-boundaries, provenance, and Codex-ready installation** for skills and subagents across Claude,
-Codex, Copilot, and Gemini/Antigravity. It is **MIT-licensed and actively maintained.**
+Skillry is an **early but infrastructure-level** open-source project. It is young (no inflated star,
+download, or user claims here) and is positioned as plumbing for the agent-skills ecosystem:
+safe distribution, validation, attribution, and permission boundaries for skills and subagents
+across multiple AI coding platforms. It is **MIT-licensed and actively maintained.**
 
 ## Maintainers
 
