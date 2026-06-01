@@ -6,78 +6,145 @@ description: Use when you need to review third-party service, webhook, queue, an
 # Integration Boundary Review
 
 ## Purpose
-This skill reviews the code that crosses a system boundary — outbound HTTP calls to third-party APIs, inbound webhook handlers, message queue producers/consumers, and internal service-to-service calls — for the reliability and correctness problems that only manifest under real network conditions: missing timeouts, no retry budget, webhook signature verification bypassed, duplicate message processing, and absent circuit breaking.
+Review the code that crosses a system boundary — outbound HTTP calls to third-party APIs, inbound webhook handlers, message-queue producers/consumers, and internal service-to-service calls — for the reliability and correctness failures that only appear under real network conditions: missing timeouts, retry storms without backoff, bypassed webhook signature verification, duplicate message processing, and absent circuit breaking. Each finding is rated by severity with a concrete fix, and any missing webhook signature check is treated as a critical, surface-immediately issue.
 
 ## When to use
-- Adding or reviewing a new integration with a third-party API (Stripe, Twilio, SendGrid, Slack, etc.).
+- Adding or reviewing a new integration with a third-party API (payments, SMS, email, chat, etc.).
 - Implementing or reviewing an inbound webhook handler that receives events from a third party.
-- Reviewing a message queue producer or consumer (RabbitMQ, Kafka, SQS, BullMQ) for correctness.
-- A payment or external event handler is processing duplicate events and causing double-billing or duplicate records.
-- A downstream service going slow or down is causing your service to cascade-fail.
+- Reviewing a queue producer or consumer (RabbitMQ, Kafka, SQS, BullMQ) for delivery and idempotency correctness.
+- A payment or event handler is processing duplicates and causing double-billing or duplicate records.
+- A slow or failing downstream is cascading into your own service's availability.
+- A queue consumer is dropping failed messages or looping forever on a poison message and needs a dead-letter strategy.
 
 ## When not to use
 - The integration is internal (same database, same process) — that is backend-implementation-review territory.
-- The concern is purely about rate limiting from your side (how much you call them), not about the reliability of the integration itself.
-- A third-party SDK handles all the complexity (e.g., official Stripe SDK with built-in retry) — verify the SDK configuration instead of reviewing raw HTTP calls.
+- The concern is only your own outbound rate (how much you call them), not the integration's reliability.
+- An official SDK already handles retries/timeouts — verify its configuration rather than reviewing raw HTTP calls.
 
 ## Procedure
+1. **Inventory all third-party call sites.** Search for `axios`, `fetch(`, `https.request`, `got(`, SDK client methods. For each, note the service, the operation, and whether it sits in a critical path (synchronous in a request handler) or a background path (worker, cron).
+2. **Verify timeouts on every outbound call.** Every external call needs an explicit timeout; the default (often infinite) is dangerous in a request handler. Use ~2–5s critical-path, ~10–30s background. A call with no timeout holds a connection open and exhausts the pool under a slow downstream.
+3. **Audit retry logic.** Retries must use exponential backoff with jitter (not fixed-interval loops that create a thundering herd during an outage), cap at 3–5 attempts, only auto-retry idempotent operations (POSTs need an idempotency key first), and never retry non-retryable codes (400/401/422).
+4. **Verify webhook signature validation** before any processing, with the **raw** body (not parsed JSON) for HMAC. Stripe: `stripe.webhooks.constructEvent(rawBody, sig, secret)`. GitHub: HMAC-SHA256 of the raw body. Twilio: `validateRequest(...)`. An unverified webhook is an unauthenticated write endpoint anyone can trigger.
+5. **Review idempotency in webhook/queue consumers.** At-least-once delivery (SQS, most webhooks) means duplicates. Confirm a dedup check at the top (`if exists(processed_events, event.id) return`) and a dedup write inside the same transaction as the business operation.
+6. **Check circuit breakers on critical dependencies.** A breaker (cockatiel, opossum, resilience4j) stops calling a failing dependency after N consecutive failures so it can recover. Without one, a slow third party blocks every handler until timeout and cascades into a full outage.
+7. **Review rate-limit handling.** `429 Too Many Requests` must trigger a backoff honoring the `Retry-After` header, not an immediate retry. A proactive client-side limiter or request queue protects strict monthly quotas.
+8. **Audit error surfacing.** A failed call should translate to a meaningful internal error (not a re-thrown raw HTTP body), log the third-party error code + request ID + attempted operation, and fire a metric/alert on sustained failure-rate increase.
+9. **Review queue producer guarantees.** Enqueue inside the DB transaction (outbox) or strictly after commit. Enqueuing after commit but in a separate step risks losing the event on a crash between the two — the outbox pattern removes that dual-write window.
+10. **Review failure routing for consumers.** A message that fails processing should retry a bounded number of times then move to a dead-letter queue for inspection — never drop silently (lost work) or re-queue forever (poison-message loop).
 
-1. **Inventory all third-party call sites.** Search for: `axios.get/post`, `fetch(`, `https.request(`, `got(`, `superagent(`, `request(`, or SDK client method calls. For each: note the target service, the operation, and whether it is in a critical path (synchronous in a request handler) or a background path (queue worker, cron).
+## Concrete checks
+- Explicit timeout on every outbound HTTP call (not OS/library default).
+- Retries use exponential backoff with jitter and a max attempt cap.
+- Non-idempotent POSTs carry an idempotency key before any auto-retry.
+- Non-retryable status codes (4xx except 429) are not retried.
+- Every inbound webhook validates the provider signature before processing.
+- Webhook signature uses the raw Buffer/bytes, not parsed JSON.
+- Queue and webhook consumers are idempotent against duplicate delivery.
+- The dedup record is written in the same transaction as the business operation.
+- A circuit breaker or bulkhead protects critical-path third-party calls.
+- `429` responses respect `Retry-After` and back off.
+- Integration failures are logged with the third-party error code and request ID.
+- Consumer failures route to a dead-letter queue (parked for inspection), not silently dropped or infinitely re-queued.
+- Queue messages are produced via outbox or strictly after commit.
+- Replay is prevented: events outside a timestamp tolerance are rejected and event IDs are deduped.
+- Webhook handlers acknowledge fast (queue heavy work) to stay within the provider's response deadline.
+- Failure logs contain the third-party error code and request ID, never auth headers or full payloads.
 
-2. **Verify timeout configuration on every outbound HTTP call.** Every external call must have an explicit timeout. Defaults (infinite or 120s) are dangerous in a request handler. Recommended: 2-5s for critical-path calls, 10-30s for background calls. Check: `axios.create({ timeout: 5000 })`, `fetch(url, { signal: AbortSignal.timeout(5000) })`. A call without a timeout will hold a connection open indefinitely and exhaust your connection pool under a slow third-party response.
+## Commands
+```bash
+# Inventory outbound call sites
+rg -n "axios\.|fetch\(|https?\.request|got\(|new .*Client\(" src/
 
-3. **Audit retry logic.** Check that: retries use exponential backoff with jitter (not fixed-interval retry loops that create thundering-herd on the third party during an outage). Retries are limited to a maximum count (3-5 for transient errors). Only idempotent operations are retried automatically — POST calls that create resources must use an idempotency key before retrying. Non-retryable errors (400 Bad Request, 401 Unauthorized, 422 Unprocessable Entity) are not retried.
+# Calls missing an explicit timeout
+rg -n "axios\.(get|post|put|delete|patch)\(" src/ | rg -v "timeout"
+rg -n "fetch\(" src/ | rg -v "signal|AbortSignal\.timeout"
 
-4. **Verify webhook signature validation.** For every inbound webhook handler: confirm the signature from the request header is validated before any processing. Examples:
- - Stripe: `stripe.webhooks.constructEvent(body, sig, endpointSecret)` — body must be the raw buffer, not the parsed JSON.
- - GitHub: HMAC-SHA256 of the raw body using the webhook secret.
- - Twilio: `twilio.validateRequest(authToken, sig, url, params)`.
- A webhook handler that processes events without signature validation is an unauthenticated write endpoint — any caller can trigger it.
+# Webhook handlers and whether they verify a signature
+rg -n "router\.(post|all).*webhook|/webhook" src/
+rg -n "constructEvent|validateRequest|hmac|createHmac|X-Hub-Signature|stripe-signature" src/
 
-5. **Review idempotency handling in webhook and queue consumers.** For every consumer: check whether it handles re-delivery of the same event correctly. Look for: a deduplication check at the top (`if (await db.exists('processed_events', { id: event.id })) return`) before processing, and a final write to the `processed_events` table inside the same transaction as the business operation. Events delivered `at-least-once` (SQS, most webhooks) will be delivered multiple times — the consumer must be idempotent.
+# Retry on non-retryable codes (smell: retrying 400/401/422)
+rg -nU "retry[\s\S]{0,120}(400|401|422)" src/
 
-6. **Check for circuit breaker patterns on critical dependencies.** For each third-party call on a critical path: is there a circuit breaker (using `cockatiel`, `opossum`, `resilience4j`, or similar) that stops calling the dependency after N consecutive failures and gives it time to recover? Without a circuit breaker, a slow or failing third party will cause all your request handlers to block until their timeout, exhausting the thread/connection pool and cascading to a full service outage.
+# Consumer idempotency: dedup check before processing
+rg -n "processed_events|idempotency|dedup|alreadyProcessed|message.*id" src/
 
-7. **Review rate limit handling.** Check: are `429 Too Many Requests` responses handled by backing off (using the `Retry-After` header value), not by retrying immediately? Is there a client-side rate limiter or request queue that prevents exceeding the third party's quota proactively (especially important for APIs with strict monthly quotas)?
+# Circuit breaker presence
+rg -n "opossum|cockatiel|circuitBreaker|resilience4j|breaker" src/
 
-8. **Audit error surfacing from integration failures.** When a third-party call fails: is the error translated to a meaningful internal error type (not `throw err` with the raw HTTP error body)? Is the failure logged with the third-party's error code, request ID, and the operation that was attempted? Is a metric or alert fired on sustained failure rate increase?
+# Queue producer relative to transaction commit (outbox?)
+rg -nU "(commit|COMMIT)[\s\S]{0,120}(publish|enqueue|sendMessage)" src/ ; rg -n "outbox" src/
+```
+```bash
+# Raw-body access for webhooks (HMAC needs bytes, not parsed JSON)
+rg -n "express\.raw\(|bodyParser\.raw|rawBody|request\.body\b" src/ | rg -i "webhook|stripe|hmac"
 
-9. **Review message queue producer guarantees.** For queue producers: is the message enqueued inside a database transaction (outbox pattern) or after the transaction commits? If after: a crash between commit and enqueue means the event is lost. An outbox pattern (write to an `outbox` table in the same transaction, then a background process publishes from the outbox) provides at-least-once delivery without dual-write risk.
+# Retry-After honored on 429?
+rg -nU "429[\s\S]{0,120}(Retry-After|retryAfter|getResponseHeader)" src/ || echo "429 backoff not found"
 
-## Checklist
-- [ ] Explicit timeout set on every outbound HTTP call (not relying on OS or library default)
-- [ ] Retry logic uses exponential backoff with jitter and a maximum retry count
-- [ ] Non-idempotent POST calls use an idempotency key before automatic retry
-- [ ] Non-retryable HTTP status codes (4xx except 429) are not retried
-- [ ] Every inbound webhook validates the provider signature before processing
-- [ ] Webhook body is the raw Buffer/bytes when validating HMAC signatures (not parsed JSON)
-- [ ] Queue and webhook consumers are idempotent — duplicate event delivery is handled safely
-- [ ] Deduplication record written in the same transaction as the business operation
-- [ ] Circuit breaker or bulkhead present on critical-path third-party calls
-- [ ] `429` responses respect the `Retry-After` header and back off
-- [ ] Integration failures logged with third-party error code and request ID
-- [ ] Queue message enqueued via outbox pattern or inside the same DB transaction
+# Timeouts that are dangerously high or absent on a critical path
+rg -n "timeout:\s*(0|[6-9][0-9]{4,}|[0-9]{6,})" src/   # 0 = infinite, or > ~60s
+
+# Replay protection: is the event timestamp checked against a tolerance window?
+rg -nU "(timestamp|event\.created|tolerance)[\s\S]{0,120}(Date\.now|now\(\)|maxAge)" src/ \
+  || echo "no replay/timestamp window found"
+
+# Heavy work done synchronously inside a webhook handler (deadline risk)
+rg -nU "(webhook|/hooks)[\s\S]{0,400}(sendEmail|await db\.|fetch\(|render)" src/ | head
+
+# DLQ / failure routing for consumers (dropped vs parked on failure)
+rg -n "deadLetter|dlq|nack|reject\(|moveToFailed|toDeadLetter" src/ || echo "no DLQ wiring found"
+```
+
+## Correct vs incorrect patterns
+```ts
+// WRONG: webhook trusted without verifying the signature
+app.post('/webhook', express.json(), (req, res) => {
+  fulfill(req.body.data.object);        // any caller can forge this
+  res.sendStatus(200);
+});
+
+// RIGHT: verify the signature against the RAW body before doing anything
+app.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
+  let event;
+  try { event = stripe.webhooks.constructEvent(req.body, req.headers['stripe-signature'], secret); }
+  catch { return res.sendStatus(400); }            // reject forged/replayed events
+  if (await seen(event.id)) return res.sendStatus(200);   // idempotent on re-delivery
+  await db.transaction(async (tx) => { await fulfill(tx, event); await markSeen(tx, event.id); });
+  res.sendStatus(200);
+});
+```
+
+## Webhook signature reference
+| Provider | Verify with | Body form |
+|----------|-------------|-----------|
+| Stripe   | `stripe.webhooks.constructEvent(raw, sig, secret)` | raw bytes |
+| GitHub   | HMAC-SHA256 of raw body vs `X-Hub-Signature-256`   | raw bytes |
+| Twilio   | `twilio.validateRequest(token, sig, url, params)`  | parsed params + URL |
+| Slack    | HMAC-SHA256 of `v0:ts:body` vs `X-Slack-Signature`  | raw body + timestamp |
 
 ## Common issues & anti-patterns
-
-- **Webhook processed without signature check**: the handler trusts the event payload without verifying it came from the actual provider. Any HTTP client can forge a Stripe payment event and trigger order fulfillment.
-- **Retry on all errors including 400**: a 400 Bad Request means the request is malformed — retrying will always fail and wastes quota. Only retry on 429, 500, 502, 503, 504, and network errors.
-- **No timeout on third-party call in a request handler**: Stripe's API takes 30 seconds to respond (during an incident), your handler waits, your connection pool is exhausted in 10 seconds, and your entire service is down — for a problem in Stripe's data center.
-- **Double processing without idempotency guard**: SQS delivers the same payment webhook twice (common), the consumer charges the customer twice, support tickets flood in.
-- **Synchronous webhook processing that can time out**: a webhook handler that does database work, sends emails, and calls other APIs in sequence can easily exceed the provider's 10-30s response deadline, causing the provider to retry — triggering the same processing again.
+- **Webhook processed without a signature check.** The handler trusts the payload; any client can forge a payment event and trigger fulfillment. Critical — surface immediately.
+- **Retry on all errors including 400.** A 400 is malformed and will always fail; retrying wastes quota. Retry only 429/500/502/503/504 and network errors.
+- **No timeout on a critical-path call.** The downstream takes 30s during an incident, your pool exhausts in 10s, and your whole service is down for a problem in *their* data center.
+- **Double processing without an idempotency guard.** The queue delivers the same event twice (normal), the consumer charges twice, support tickets flood in.
+- **Synchronous webhook doing heavy work.** A handler that writes to the DB, sends emails, and calls other APIs in sequence exceeds the provider's 10–30s deadline, the provider retries, and the same work runs again. Acknowledge fast, process on a queue.
+- **Parsed JSON used for HMAC.** Verifying the signature against `req.body` after a JSON middleware re-serialized it produces a different byte string and the check fails (or worse, is loosened to "skip if parse"). Capture the raw body.
+- **Replay not prevented.** Signature is valid but the same event is accepted forever. Reject events older than a tolerance window and dedup by event ID.
+- **Secrets logged on failure.** A catch block logs the full request including the `Authorization` header to a third party. Log the error code and request ID only.
+- **Fixed-interval retry storm.** Retrying every 1s during a provider outage hammers them and burns your quota. Use exponential backoff with jitter.
 
 ## Required output
-Report must include:
-- **Third-party call inventory**: service, operation, path (critical/background), timeout configured
-- **Retry configuration findings**: strategy, backoff, max count, non-retryable codes respected
-- **Webhook signature validation status**: per-provider — validated / missing / misconfigured
-- **Idempotency implementation status**: deduplication mechanism and transactional correctness
-- **Circuit breaker status**: present / absent / misconfigured per critical dependency
-- **Rate limit handling findings**: 429 backoff behavior
-- **Queue producer delivery guarantee**: outbox / post-commit / fire-and-forget
-- **Severity rating per finding**: critical / high / medium / low
+Report must include: **third-party call inventory** (service, operation, critical/background, timeout configured); **retry configuration findings** (strategy, backoff, max, non-retryable codes); **webhook signature status** per provider (validated / missing / misconfigured); **idempotency status** (dedup mechanism + transactional correctness); **circuit-breaker status** per critical dependency; **rate-limit handling** (429 backoff); **queue producer delivery guarantee** (outbox / post-commit / fire-and-forget); and a **severity rating per finding**.
 
 ## Safety
-- Do not store or log webhook payloads that may contain PII or payment card data from third parties.
+- Do not store or log webhook payloads that may contain PII or payment-card data from third parties.
+- Do not replay captured production webhooks against a live consumer; use the provider's test events.
+- Treat any outbound call with no timeout as a critical availability finding, not a style nit.
 - Do not disable signature validation "temporarily" for debugging — use the provider's test mode or replay tools instead.
 - Flag missing webhook signature validation as critical and surface it before completing the rest of the review.
+- Redact API keys, signing secrets, and request IDs that could be sensitive before quoting them.
+
+## Completion criteria
+Done means every boundary call site is inventoried with its timeout and retry posture, each webhook handler's signature verification is confirmed or flagged critical, consumer idempotency and queue-producer delivery guarantees are assessed, circuit-breaker and rate-limit handling are reported, and every finding has a severity and a concrete fix.

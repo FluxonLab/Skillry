@@ -18,9 +18,19 @@
       "description": "API/interface design, backend review, auth/session, integration boundaries, error handling, and Python project review."
     },
     {
+      "name": "omniagent-cloud-and-infrastructure",
+      "source": "./plugins/cloud-and-infrastructure",
+      "description": "Cloud and infrastructure: Infrastructure-as-Code (Terraform), containers (Docker/Compose), Kubernetes, cloud provider services, networking/secrets, and deploy topology \u2014 distinct from CI/CD pipeline review."
+    },
+    {
       "name": "omniagent-core-operations",
       "source": "./plugins/core-operations",
       "description": "Repo diagnostics, architecture review, implementation planning, refactor safety, release readiness, and project bootstrap."
+    },
+    {
+      "name": "omniagent-data-ml-ai-engineering",
+      "source": "./plugins/data-ml-ai-engineering",
+      "description": "Data and ML engineering: data pipelines, ETL/ELT, data quality & validation, feature engineering, notebook hygiene, model training/serving, experiment tracking, and dataset versioning."
     },
     {
       "name": "omniagent-database-and-data",
@@ -31,6 +41,11 @@
       "name": "omniagent-devops-and-release",
       "source": "./plugins/devops-and-release",
       "description": "CI/CD, build & typecheck, deployment preflight, release notes, and handoff readiness."
+    },
+    {
+      "name": "omniagent-documentation-and-tech-writing",
+      "source": "./plugins/documentation-and-tech-writing",
+      "description": "Technical documentation: README/architecture docs, API reference, changelogs, tutorials, runbooks, doc-site structure, and docx/pdf/markdown authoring quality."
     },
     {
       "name": "omniagent-frontend-web-design",
@@ -51,6 +66,11 @@
       "name": "omniagent-optional-specialist",
       "source": "./plugins/optional-specialist",
       "description": "Domain specialists: WordPress/WooCommerce, e-commerce, NFC/linktree, local LLM runtime, Chrome extensions, maps/geo, print design, analytics, SEO, cost control, observability, and monorepo."
+    },
+    {
+      "name": "omniagent-performance-and-cost",
+      "source": "./plugins/performance-and-cost",
+      "description": "Performance and cost engineering: profiling, frontend/runtime/query performance budgets, caching, bundle size, plus LLM/API token and cloud cost control."
     },
     {
       "name": "omniagent-product-docs-and-research",

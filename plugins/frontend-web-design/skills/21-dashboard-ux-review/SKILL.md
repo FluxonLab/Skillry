@@ -6,74 +6,146 @@ description: Use when you need to review dashboards, admin tools, density, scann
 # Dashboard UX Review
 
 ## Purpose
-Evaluate the usability of dashboards, admin panels, and operational tools: information density, scannability, table and chart readability, filter and search mechanics, empty and loading states, and workflow efficiency for power users. Produces prioritized findings tied to specific UI patterns, not general design principles.
+
+Evaluate the usability of dashboards, admin panels, and operational tools: information density, scannability, table and chart readability, filter and search mechanics, empty/loading/error states, and workflow efficiency for power users. Every finding is tied to a specific UI pattern and the primary user job — not generic design principles — and quantified where possible through column counts, click counts, and a missing-state inventory.
 
 ## When to use
+
 - A new dashboard page or admin screen is ready for UX review before release.
 - Users report confusion finding information or completing operational tasks.
-- A data table has grown beyond 5 columns and needs readability assessment.
+- A data table has grown beyond five columns and needs a readability assessment.
 - The dashboard has charts but no clear indication of what action they should drive.
 - Empty, loading, and error states have not been explicitly designed.
 
 ## When not to use
-- The request is about a public-facing marketing page or landing page (use `landing-page-conversion-review`).
-- The review is exclusively about accessibility (use `accessibility-audit`).
-- The dashboard has not been built yet and only wireframes exist — this skill reviews implemented UI, not concepts.
+
+- The request is about a public-facing marketing or landing page — use `landing-page-conversion-review`.
+- The review is exclusively about accessibility — use `accessibility-audit`.
+- The dashboard is not built yet and only wireframes exist — this skill reviews implemented UI, not concepts.
+- The request is about final pixel polish of an otherwise-sound layout — use `visual-polish-pass`.
 
 ## Procedure
 
-1. **Identify the primary user workflow.** Before evaluating anything visual, confirm: who is the user, what decision do they make most frequently, and what data do they need to make it? Every critique must reference this north star. A dashboard that looks cluttered to a casual observer may be appropriately dense for a stock trader checking positions.
+1. **Identify the primary user workflow.** Before evaluating anything visual, confirm who the user is, what decision they make most frequently, and what data they need to make it. Every critique references this north star — a layout that looks cluttered to an observer may be appropriately dense for a trader checking positions.
+2. **Audit the information hierarchy.** Identify the top three metrics above the fold and confirm they match the primary decision. A bare "Total users: 1,247,839" scores lower than the same number with a trend arrow, sparkline, or vs-target indicator — context is what drives action.
+3. **Evaluate table usability.** Per table, count columns (more than eight on desktop or four on mobile needs justification); confirm at least the primary identifier and primary numeric column are sortable; check long cells truncate with a tooltip or expand inline; confirm row actions (Edit, Delete, View) are discoverable — icon-only actions without labels or tooltips are a problem.
+4. **Review filters and search.** Filters must apply immediately on change OR via a visible Apply button — never ambiguously both. Active filters must be visually indicated and individually removable. A search input that silently searches all columns confuses users; date pickers should show the chosen range as a readable label after selection.
+5. **Assess chart communication.** Every chart needs a title stating what is measured, axis labels, a unit indicator (%, $, users), and a clear "so what" — a color threshold (red/green zone) or an annotation. A chart that requires hovering a tooltip to read any value is not dashboard-ready.
+6. **Check empty states.** Every list, table, and chart needs an explicit empty state: an icon or illustration, a brief reason ("No results match your filter"), and a suggested action ("Clear filters" or "Add your first project"). A blank box or a spinner that never resolves is unacceptable.
+7. **Check loading and error states.** Tables and charts must show skeleton loaders or spinners while fetching. Network errors must show a user-readable message with a retry action — never an unhandled exception or blank space.
+8. **Evaluate workflow efficiency.** Count clicks to complete the primary task (for example approving a pending item). More than three clicks for a repetitive operational action is a friction target. Bulk actions (select rows, apply once) should exist when the action is frequently repeated.
+9. **Review navigation and wayfinding.** The user should always know where they are in the hierarchy, what view they are on, and how to return to the overview. Breadcrumbs, active-nav highlighting, and page titles must be consistent.
 
-2. **Audit the information hierarchy.** Identify the top 3 metrics or data points visible above the fold. Confirm they match the primary decision the user makes. Metrics that are decorative (e.g., "Total users: 1,247,839" with no trend or threshold) score lower than metrics with context (e.g., trend arrow, sparkline, or vs. target indicator).
+## Concrete checks
 
-3. **Evaluate table usability.** For each data table: count the columns — tables with > 8 columns on desktop and > 4 on mobile need justification. Check whether columns are sortable (at minimum the primary identifier and the primary numeric column should be). Check whether long text cells truncate with a tooltip or expand inline. Check whether row actions (Edit, Delete, View) are discoverable — icon-only actions without tooltip labels are a problem.
+Hierarchy and density:
+- The top three above-the-fold metrics align with the primary decision.
+- Metrics include context (trend, vs-target, or threshold), not raw numbers alone.
+- Density matches the user: dense is fine for power users, sparse for occasional ones.
 
-4. **Review filters and search.** Confirm that filter controls apply immediately (on change) or have a visible Apply button — never ambiguously both. Check that active filters are visually indicated and individually removable. A search input that searches all columns without telling the user what it searches is a confusion source. Date range pickers should show the selected range as a readable label after selection.
+Tables:
+- No more than eight columns on desktop; columns beyond five are justified by the workflow.
+- The primary identifier and primary numeric column are sortable.
+- Long text cells truncate with a tooltip or expand inline.
+- Row actions have visible labels or persistent tooltips, not mystery icons.
 
-5. **Assess chart communication.** Every chart needs: a title that states what is being measured, axis labels, a unit indicator (%, $, users), and a clear "so what" — either via color threshold (red/green zones) or an annotation pointing to a notable event. A chart that requires reading a tooltip to understand any value is not dashboard-ready.
+Filters, search, charts:
+- Filters apply via one unambiguous mechanism; active filters are visible and individually clearable.
+- Search states what it searches; date pickers show the selected range as a label.
+- Every chart has a title, axis labels, a unit, and one "so what" indicator.
 
-6. **Check empty states.** Every list, table, and chart must have an explicit empty state: an illustration or icon, a brief explanation of why it's empty ("No results match your filter"), and a suggested action ("Clear filters" or "Add your first project"). A blank box or spinner that never resolves is unacceptable.
+States and efficiency:
+- Every list, table, and chart has explicit empty, loading, and error states.
+- Loading uses skeletons or spinners, never blank space.
+- Error states show a user-readable message plus a retry action.
+- Bulk actions exist where the same action repeats across rows.
+- The primary repetitive task completes in three clicks or fewer.
+- Page title and active nav item indicate the current location.
+- Drill-down views keep a breadcrumb back and preserve the prior scroll and filters.
 
-7. **Check loading and error states.** Tables and charts must show skeleton loaders or loading indicators while fetching. Network errors must display a user-readable message with a retry action — never an unhandled exception or blank space.
+## Commands
 
-8. **Evaluate workflow efficiency.** Count the clicks required to complete the primary task (e.g., approve a pending item). More than 3 clicks for a repetitive operational action is a friction target. Bulk actions (select multiple rows and perform one action) should be present when the task is frequently repeated.
+```bash
+# --- tables ---
+# locate table components and roughly count headers/columns
+rg -n '<th\b|columnHelper|accessorKey|<TableHead' src | head -40
 
-9. **Review navigation and wayfinding.** The user should always know: where they are in the dashboard hierarchy, what page/view they are on, and how to return to the overview. Breadcrumbs, active nav item highlighting, and page titles must be consistent.
+# detect icon-only row actions (icon button with no text/aria-label)
+rg -n '<button[^>]*>\s*<(svg|Icon)' src | head
 
-## Checklist
-- [ ] Top 3 above-the-fold metrics align with the user's primary decision-making need
-- [ ] Metrics include context (trend, vs. target, threshold indicator) — not raw numbers alone
-- [ ] Tables have <= 8 columns on desktop; columns beyond 5 are justified by workflow requirement
-- [ ] Primary identifier column and primary numeric column are sortable
-- [ ] Long text cells truncate with tooltip or expand-inline affordance
-- [ ] Row actions have visible labels or persistent tooltips (no icon-only mystery actions)
-- [ ] Active filters are visually distinct and individually clearable
-- [ ] Every chart has a title, axis labels, unit, and at least one "so what" indicator
-- [ ] Every empty list/table/chart has an explicit empty state with explanation and action
-- [ ] Loading states use skeleton loaders or spinners; never blank space
-- [ ] Error states show user-readable message with retry action
-- [ ] Bulk actions available for tables where the same action is performed on multiple rows
-- [ ] Page title and active nav item clearly indicate current location in the app
+# --- data fetching states ---
+# find data fetches — then check each for loading/error handling nearby
+rg -n 'useQuery|useSWR|fetch\(|axios\.' src | head -40
+
+# empty-state handling present (or absent)?
+rg -n 'No results|isEmpty|length === 0|EmptyState|empty' src | head
+
+# skeleton / spinner loading indicators
+rg -n 'Skeleton|Spinner|isLoading|isFetching' src | head
+
+# error + retry affordances
+rg -n 'isError|onRetry|retry|Try again' src | head
+
+# --- filters ---
+# how filters apply (onChange vs explicit Apply)
+rg -n 'onChange=|type="submit"|Apply|applyFilters' src | head -40
+
+# --- charts ---
+# charts that may be missing axis/unit labels
+rg -n '<(LineChart|BarChart|AreaChart|PieChart)' src | head
+
+# axis / unit labels actually declared on charts?
+rg -n 'XAxis|YAxis|label=|unit=|tickFormatter' src | head
+
+# --- bulk actions ---
+# multi-select / bulk-action affordances on tables
+rg -n 'selectedRows|onSelectAll|bulk|checkbox' src | head
+
+# --- wayfinding ---
+# breadcrumbs and active-nav highlighting
+rg -n 'Breadcrumb|aria-current|isActive|activeClassName' src | head
+
+# --- workflow click count ---
+# trace the primary action handler to count steps to completion
+rg -n 'onApprove|onConfirm|handleSubmit|mutate\(' src | head
+
+# --- date range labeling ---
+# date pickers — confirm the selected range renders as a label
+rg -n 'DateRangePicker|DatePicker|from.*to|selectedRange' src | head
+```
 
 ## Common issues & anti-patterns
-- **Vanity metric dominance:** large KPI cards showing all-time totals with no trend — looks impressive, drives no decision.
-- **The 12-column table:** every column the database has is shown because "the users might want it" — nobody can read it.
-- **Ambiguous filter application:** filter dropdowns that apply on select on some screens and require an Apply button on others — users never know when their filter took effect.
-- **Chart without a unit:** a line chart with Y-axis values `0, 200, 400, 600` — is that dollars, users, or requests?
+
+- **Vanity metric dominance:** large KPI cards showing all-time totals with no trend — impressive, drives no decision.
+- **The twelve-column table:** every database column shown because "users might want it"; nobody can read it.
+- **Ambiguous filter application:** dropdowns that apply on select on one screen and need an Apply button on another — users never know when a filter took effect.
+- **Chart without a unit:** a Y-axis of `0, 200, 400, 600` — dollars, users, or requests?
 - **Silent empty state:** a component that renders nothing when its data is empty — users assume it is loading forever.
-- **Icon-only row actions:** three icon buttons at the end of each table row with no labels or tooltips — new users cannot discover what they do.
-- **Orphan drill-down:** clicking a row opens a detail view with no breadcrumb back — users hit the browser back button and lose their scroll position and filters.
+- **Icon-only row actions:** three unlabeled icon buttons per row — new users cannot discover what they do.
+- **Orphan drill-down:** clicking a row opens a detail view with no breadcrumb back, so users hit browser-back and lose scroll position and filters.
+- **Infinite spinner:** a fetch that fails silently leaves a spinner forever, with no error message and no retry.
+- **Filter-and-forget:** applying a filter scrolls or re-renders the page so the active filter chips drop out of view, and the user re-applies the same filter minutes later.
+- **No bulk action on a queue:** an approvals table where each row must be approved individually, turning a 50-item queue into 50 separate three-click operations.
+- **Tooltip-only labels:** axis values, status colors, and KPIs that only reveal meaning on hover — unusable on touch devices and invisible at a glance.
 
 ## Required output
+
 Return a structured report with:
-1. **User workflow alignment** (1 paragraph): does the layout serve the stated primary user job?
-2. **Critical findings** (up to 3): specific UI element, exact problem, and fix.
-3. **Major findings** (up to 5): same format.
-4. **Quick wins** (up to 5 bullets): small fixes (< 30 min each) with highest user impact.
-5. **Missing states inventory**: list every identified missing empty, loading, or error state.
-6. **Efficiency score**: estimated click count for the primary workflow and target reduction.
+1. **User workflow alignment** (one paragraph): does the layout serve the stated primary job?
+2. **Critical findings** (up to three): the specific UI element, the exact problem, and the fix.
+3. **Major findings** (up to five): same format.
+4. **Quick wins** (up to five bullets): sub-30-minute fixes with the highest user impact.
+5. **Missing states inventory:** every identified missing empty, loading, or error state.
+6. **Efficiency score:** the estimated click count for the primary workflow and a target reduction.
 
 ## Safety
+
 - Do not alter database queries or API calls — this review focuses on the UI layer only.
 - Do not redesign navigation structure without first confirming the information architecture with the team.
-- Flag opinions that depend on knowing user behavior data the reviewer does not have — mark them as hypotheses.
+- Mark any opinion that depends on user-behavior data the reviewer lacks as a hypothesis, not a finding.
+- Static and visual review only — propose changes; do not refactor data-fetching as a side effect.
+- Redact any secret-like values surfaced while reading config or API code.
+
+## Completion criteria
+
+Done means the primary user workflow is named and used as the yardstick; tables, filters, charts, and navigation were each assessed against concrete criteria; every missing empty/loading/error state is inventoried; the primary task's click count is measured with a reduction target; and findings are severity-ranked with element-level fixes.

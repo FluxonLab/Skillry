@@ -11,7 +11,11 @@ USAGE
   python3 tools/skill-sync.py discover https://github.com/<owner>/<repo>
 
   # 2. Stage skills into community/<slug>/ with attribution + review report (dry-run):
+  #    --apply also normalizes each SKILL.md (frontmatter + provenance + H1).
   python3 tools/skill-sync.py import https://github.com/<owner>/<repo> [--apply]
+
+  # 3. Re-normalize an already-imported source in place (idempotent, dry-run):
+  python3 tools/skill-sync.py normalize community/<slug> [--apply]
 
 REQUIREMENTS: git, python3. No network beyond `git clone` of the source you name.
 
@@ -68,6 +72,53 @@ def frontmatter_ok(text: str) -> bool:
 def scan_risk(text: str) -> list[str]:
     return [name for name, rx in RISK_PATTERNS.items() if rx.search(text)]
 
+def _split_frontmatter(text: str) -> tuple[str, str]:
+    """Return (frontmatter_body, rest) where rest starts after the closing '---'.
+    If there's no frontmatter, returns ("", original_text)."""
+    m = re.match(r"^---\n(.*?)\n---[ \t]*\n?", text, re.S)
+    if not m:
+        return "", text
+    return m.group(1), text[m.end():]
+
+def _first_sentence(body: str) -> str:
+    """Best-effort one-line description from the first heading or sentence."""
+    for line in body.splitlines():
+        line = line.strip()
+        if not line or line.startswith(("<!--", "```")):
+            continue
+        line = re.sub(r"^#+\s*", "", line)  # strip heading markers
+        line = re.sub(r"[*_`]", "", line).strip()  # strip light md emphasis
+        if line:
+            sent = re.split(r"(?<=[.!?])\s", line)[0]
+            return sent[:160].rstrip()
+    return ""
+
+def normalize_skill(text: str, slug: str, url: str, lic: str) -> str:
+    """Light, idempotent normalization of one SKILL.md. Never rewrites the body."""
+    fm, rest = _split_frontmatter(text)
+    fields = dict(re.findall(r"(?m)^([A-Za-z0-9_-]+):[ \t]*(.*)$", fm))
+    name = fields.get("name", "").strip()
+    desc = fields.get("description", "").strip()
+    if not name:  # derive from folder name
+        name = re.sub(r"^\d+[-_]", "", slug).replace("_", "-")
+        fm = (fm + "\n" if fm.strip() else "") + f"name: {name}"
+    if not desc:  # synthesize from first heading/sentence
+        desc = _first_sentence(rest) or f"Imported skill: {name}."
+        fm = fm + f"\ndescription: {desc}"
+    text = f"---\n{fm.strip()}\n---\n{rest}"
+    # provenance marker right after the frontmatter, if absent
+    marker = f"<!-- omniagent:source {url} ({lic}) -->"
+    if "<!-- omniagent:source" not in text:
+        head, body = _split_frontmatter(text)
+        text = f"---\n{head.strip()}\n---\n{marker}\n{body.lstrip(chr(10))}"
+    # normalize H1 to match the skill name only on a clear, safe mismatch
+    def _fix_h1(m: re.Match) -> str:
+        cur = m.group(1).strip()
+        same = re.sub(r"[^a-z0-9]", "", cur.lower()) == re.sub(r"[^a-z0-9]", "", name.lower())
+        return m.group(0) if same else f"# {name}"
+    text = re.sub(r"(?m)^#[ \t]+(.+)$", _fix_h1, text, count=1)
+    return text
+
 def clone(url: str) -> pathlib.Path:
     tmp = pathlib.Path(tempfile.mkdtemp(prefix="skillsync-"))
     print(f"  cloning {url} (shallow) ...")
@@ -123,10 +174,7 @@ def cmd_import(url: str, apply: bool):
             if apply:
                 out = dest / "skills" / name / "SKILL.md"
                 out.parent.mkdir(parents=True, exist_ok=True)
-                # provenance marker
-                if "<!-- omniagent:source" not in text:
-                    text = text.replace("\n", f"\n<!-- omniagent:source {url} ({lic}) -->\n", 1) if False else text
-                out.write_text(text, encoding="utf-8")
+                out.write_text(normalize_skill(text, name, url, lic), encoding="utf-8")
                 staged += 1
         if apply:
             dest.mkdir(parents=True, exist_ok=True)
@@ -145,13 +193,39 @@ def cmd_import(url: str, apply: bool):
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
+def cmd_normalize(target: str, apply: bool):
+    """Re-normalize an already-imported community source, in place. Idempotent."""
+    base = pathlib.Path(target)
+    if not base.is_absolute() and not base.exists():
+        base = COMMUNITY / target  # treat bare arg as a community slug
+    files = list(base.rglob("SKILL.md")) if base.is_dir() else ([base] if base.name == "SKILL.md" else [])
+    if not files:
+        print(f"No SKILL.md found under {base}"); sys.exit(2)
+    changed = 0
+    for f in files:
+        text = f.read_text(errors="ignore")
+        m = re.search(r"<!-- omniagent:source (\S+) \(([^)]+)\) -->", text)
+        url = m.group(1) if m else "unknown"
+        lic = m.group(2) if m else "permissive"
+        new = normalize_skill(text, f.parent.name, url, lic)
+        status = "unchanged" if new == text else "NORMALIZED"
+        if new != text:
+            changed += 1
+            if apply:
+                f.write_text(new, encoding="utf-8")
+        print(f"  {status}: {f.relative_to(base.parent if base.is_dir() else base)}")
+    verb = f"Rewrote {changed}" if apply else f"{changed} would change"
+    print(f"\n{verb} of {len(files)} SKILL.md under {base}." + ("" if apply else " Re-run with --apply."))
+
 def main():
     args = sys.argv[1:]
-    if len(args) < 2 or args[0] not in ("discover", "import"):
+    if len(args) < 2 or args[0] not in ("discover", "import", "normalize"):
         print(__doc__); sys.exit(1)
     sub, url = args[0], args[1]
     if sub == "discover":
         cmd_discover(url)
+    elif sub == "normalize":
+        cmd_normalize(url, "--apply" in args)
     else:
         cmd_import(url, "--apply" in args)
 

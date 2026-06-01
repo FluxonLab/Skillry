@@ -1,9 +1,9 @@
 {
   "version": "0.1.0",
   "counts": {
-    "original": 65,
+    "original": 73,
     "community": 49,
-    "total": 114
+    "total": 122
   },
   "agents": [
     {
@@ -55,6 +55,22 @@
       "checksum": "99a355e0428532e7f9d5524cd4cf1b8f4609b8d568a78e54d5afff54a69051d2"
     },
     {
+      "id": "cloud-infra-reviewer",
+      "department": "cloud-and-infrastructure",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "24d5685bf7c565a7b2b3b52146bbbf4ee7a55e5683b3601247d6d738b9343912"
+    },
+    {
+      "id": "infrastructure-engineer",
+      "department": "cloud-and-infrastructure",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "e725a10370900db4cfeb31d5996281278dca990a2047f57717a78a21f3967c57"
+    },
+    {
       "id": "agent-governance-officer",
       "department": "core-operations",
       "origin": "original",
@@ -85,6 +101,38 @@
       "permission": "read-only",
       "tools": "Read, Grep, Glob, Bash",
       "checksum": "045f3896eb87fc49c0f3706a859e67012c6511f8d3b0010d0b6b75afd831ddfe"
+    },
+    {
+      "id": "data-engineer",
+      "department": "data-ml-ai-engineering",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "c2e2aff6091b5063a4707edd7a0521959dcddfb1035848960498fed37e1b5bdc"
+    },
+    {
+      "id": "ml-pipeline-reviewer",
+      "department": "data-ml-ai-engineering",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "70ab1c5609a62ac9fedf3e182a061d59660e289b709a14e60f0dc3e8e8fadc20"
+    },
+    {
+      "id": "docs-reviewer",
+      "department": "documentation-and-tech-writing",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "a815a3139b92948cc08f3ac0b18db8b74b19e1d292c217e69f9cc26beb046f18"
+    },
+    {
+      "id": "technical-writer",
+      "department": "documentation-and-tech-writing",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "a446037fde9234157d336fa52e8585d2d7c0168753ecc74eb21c7a684bb9d64a"
     },
     {
       "id": "accessibility-auditor",
@@ -525,6 +573,22 @@
       "permission": "read-only",
       "tools": "Read, Grep, Glob, Bash",
       "checksum": "856bad24986f446f827288c1467230de63c863a1ad36e620815af3b1295031e3"
+    },
+    {
+      "id": "app-performance-engineer",
+      "department": "performance-and-cost",
+      "origin": "original",
+      "permission": "write",
+      "tools": "Read, Grep, Glob, Bash, Edit, Write",
+      "checksum": "ccc236656e33ece2eca125eec5a9d1561483828dc3e2e379330604e9f210a2fa"
+    },
+    {
+      "id": "cost-optimization-reviewer",
+      "department": "performance-and-cost",
+      "origin": "original",
+      "permission": "read-only",
+      "tools": "Read, Grep, Glob, Bash",
+      "checksum": "058eae273ac7731ea757be38e342fb033a5570ce858c43d3269595079341f890"
     },
     {
       "id": "gamedev-accessibility-specialist",

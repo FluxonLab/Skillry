@@ -1,0 +1,11 @@
+{
+  "name": "omniagent-documentation-and-tech-writing",
+  "description": "Technical documentation: README/architecture docs, API reference, changelogs, tutorials, runbooks, doc-site structure, and docx/pdf/markdown authoring quality.",
+  "version": "0.1.0",
+  "author": {
+    "name": "FluxonLab",
+    "url": "https://fluxonlab.com"
+  },
+  "homepage": "https://fluxonlab.com",
+  "license": "MIT"
+}

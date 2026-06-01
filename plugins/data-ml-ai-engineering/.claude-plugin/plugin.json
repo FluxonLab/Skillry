@@ -1,0 +1,11 @@
+{
+  "name": "omniagent-data-ml-ai-engineering",
+  "description": "Data and ML engineering: data pipelines, ETL/ELT, data quality & validation, feature engineering, notebook hygiene, model training/serving, experiment tracking, and dataset versioning.",
+  "version": "0.1.0",
+  "author": {
+    "name": "FluxonLab",
+    "url": "https://fluxonlab.com"
+  },
+  "homepage": "https://fluxonlab.com",
+  "license": "MIT"
+}

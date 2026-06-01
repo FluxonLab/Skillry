@@ -7,7 +7,7 @@ description: Use when you need to design agent roles, handoffs, tool boundaries,
 
 ## Purpose
 
-Design multi-agent workflows with explicit role boundaries, handoff contracts, tool ownership, recursion limits, and state-passing schemas. Produces a concrete workflow specification — not a vague diagram — that a developer can implement directly in code.
+Design multi-agent workflows with explicit role boundaries, handoff contracts, tool ownership, recursion limits, and state-passing schemas. Produce a concrete workflow specification — not a vague diagram — that a developer can implement directly in code. Every agent has one job, every handoff is typed, every loop is bounded, and every write/destructive action passes a code-level approval gate.
 
 ## When to use
 
@@ -15,108 +15,142 @@ Design multi-agent workflows with explicit role boundaries, handoff contracts, t
 - An existing agent pipeline has unclear handoffs, role overlap, or runaway recursion.
 - A task requires orchestrator/worker separation and you need to define routing logic.
 - Tool sprawl is causing agents to misuse each other's tools.
-- You need to specify state shape passed between agents (not just "pass the context").
+- You need to specify the state shape passed between agents (not just "pass the context").
 - A multi-step workflow keeps failing partway through and the root cause is unclear handoff design.
-- You are onboarding a new developer to an agent system and need a written spec they can follow.
+- You are onboarding a developer to an agent system and need a written spec they can follow.
 
 ## When not to use
 
 - The task is a single-agent prompt with no delegation — no workflow design needed.
-- You only need to review security/permissions of an existing workflow (use `agent-governance-review`).
-- The question is purely about prompt quality, not agent coordination (use `prompt-systems-review`).
+- You only need to review security/permissions of an existing workflow (use `41-agent-governance-review`).
+- The question is purely about prompt quality, not coordination (use `42-prompt-systems-review`).
 - The system is already built and working; skip design and go straight to the specific fix.
-- The workflow has one agent and one tool — this is not multi-agent and needs no formal design.
 
 ## Procedure
 
-1. **Identify agents and roles.** List every agent in scope. For each, name its single responsibility in one sentence. If an agent has two unrelated jobs, split it into two agents. Use role names that describe function, not implementation: `retriever`, `reasoner`, `executor`, `validator`, `formatter` — not `agent_1`, `agent_2`.
+1. **Identify agents and roles.** List every agent in scope; name each one's single responsibility in one sentence. Split any agent with two unrelated jobs. Use function names (`retriever`, `reasoner`, `executor`, `validator`, `formatter`), not `agent_1`.
+2. **Draw the handoff chain.** For each edge, specify caller, callee, trigger condition, input schema, and expected output schema (table in Commands).
+3. **Assign tool ownership.** Each tool belongs to exactly one agent role, with a max-calls-per-turn and a side-effect level. Agents must not call tools owned by other roles without an explicit delegation pattern.
+4. **Set recursion and loop limits.** Define `max_depth` for any agent that spawns sub-agents and `max_iterations` for any retry/reflection loop, as hard-coded constants. Defaults: `max_depth = 3`, `max_iterations = 5` unless the use case requires more.
+5. **Define the state-passing schema.** Specify the JSON schema / TypedDict passed between agents, with at least `task_id`, `origin_agent`, `step_history`, `current_context`, `remaining_budget_tokens`, and `error_state`. Stateless raw-text handoffs are a red flag — the receiver cannot tell what was already tried.
+6. **Design the orchestrator/worker split.** Orchestrator routes, aggregates, decides termination, manages budget; workers execute one tool category and return structured results. Orchestrator must never call external APIs directly; workers must not talk to each other directly.
+7. **Define failure and fallback routing.** For each handoff specify behavior on timeout, tool error, and out-of-scope response — retry with backoff (max 3), escalate to human, or return a partial result in the error envelope.
+8. **Document approval gates.** Any `write`/`destructive` action requires an explicit code-level approval step before the tool call. Name the gate agent, the approval signal format, and the timeout behavior.
+9. **Verify with scenario traces.** Walk 2–3 realistic scenarios end-to-end plus one failure scenario; confirm termination and that no agent decides outside its role.
 
-2. **Draw the handoff chain.** Specify: which agent triggers which, what payload it sends, what it expects back. Use a table:
+## Concrete checks
 
- | Caller | Callee | Trigger condition | Input schema | Expected output schema |
- |---|---|---|---|---|
- | orchestrator | retriever | user query received | `{query: str, filters: dict}` | `{chunks: list[Chunk], scores: list[float]}` |
+- [ ] Every agent has exactly one stated responsibility (one sentence).
+- [ ] Agent names describe function, not implementation order.
+- [ ] All handoffs have typed input/output schemas, not free text.
+- [ ] Every tool is owned by exactly one agent; no shared ownership without a named broker.
+- [ ] `max_depth` and `max_iterations` are explicit integers, not "unlimited" or "default".
+- [ ] State object includes `task_id`, `step_history`, and `remaining_budget_tokens`.
+- [ ] Orchestrator does not directly call external APIs.
+- [ ] Workers do not communicate with each other directly.
+- [ ] Failure routing specified for timeout, tool error, and out-of-scope response.
+- [ ] Every write/destructive tool has a named code-level approval gate.
+- [ ] At least 2 happy-path and 1 failure-path scenarios traced end-to-end.
+- [ ] Error envelope standard defined: `{ok: bool, error_code: str, result: any}`.
 
-3. **Assign tool ownership.** Each tool belongs to exactly one agent role. Document as a table:
+## Commands or Templates
 
- | Tool | Owner agent | Max calls/turn | Side-effect level |
- |---|---|---|---|
- | web_search | retriever | 5 | read |
- | file_write | executor | 1 | destructive |
+```text
+Handoff table
+| Caller       | Callee    | Trigger condition    | Input schema                  | Output schema                          |
+|--------------|-----------|----------------------|-------------------------------|----------------------------------------|
+| orchestrator | retriever | user query received  | {query: str, filters: dict}   | {chunks: list[Chunk], scores: list[f]} |
 
- Agents must not call tools owned by other roles without an explicit delegation pattern.
+Tool ownership table
+| Tool        | Owner agent | Max calls/turn | Side-effect level |
+|-------------|-------------|----------------|-------------------|
+| web_search  | retriever   | 5              | read              |
+| file_write  | executor    | 1              | destructive       |
+```
 
-4. **Set recursion and loop limits.** Define `max_depth` for any agent that can spawn sub-agents. Define `max_iterations` for any retry or reflection loop. These must be hard-coded constants, not left as defaults or "unlimited." Recommended defaults: `max_depth = 3`, `max_iterations = 5` unless the use case explicitly requires more.
+```python
+# State object passed between agents (TypedDict)
+from typing import Optional, TypedDict
 
-5. **Define state-passing schema.** Specify the JSON schema (or TypedDict) for the state object passed between agents. Minimum required fields:
- - `task_id: str` — unique identifier for the top-level task
- - `origin_agent: str` — which agent created this state object
- - `step_history: list[StepRecord]` — every tool call and its outcome
- - `current_context: str` — the working context the next agent should use
- - `remaining_budget_tokens: int` — estimated tokens left in the session budget
- - `error_state: Optional[ErrorRecord]` — current error if in a recovery path
- Stateless handoffs that pass raw text are a red flag. The receiving agent cannot tell what was already tried.
+class StepRecord(TypedDict):
+    agent: str; tool: str; ok: bool; summary: str
 
-6. **Design the orchestrator/worker split.** The orchestrator: routes requests to workers, aggregates results, decides termination, manages the budget. Workers: execute a single tool category, return structured results to the orchestrator. Rules: the orchestrator must never directly call external APIs — only workers do. Workers must not communicate with each other directly — all routing goes through the orchestrator.
+class WorkflowState(TypedDict):
+    task_id: str                       # unique top-level task id
+    origin_agent: str                  # which agent created this state
+    step_history: list[StepRecord]     # every tool call + outcome
+    current_context: str               # working context for the next agent
+    remaining_budget_tokens: int       # estimated session budget left
+    error_state: Optional[dict]        # set on a recovery path
 
-7. **Define failure and fallback routing.** For each handoff, specify what happens on: timeout (worker takes more than N seconds), tool error (API failure, permission denied), out-of-scope response (worker returns a result it should not have). Fallback options: retry with exponential backoff (max 3 attempts), escalate to human-in-the-loop, return partial result with error flag in the error envelope.
+# Hard limits — constants, never "unlimited"
+MAX_DEPTH = 3
+MAX_ITERATIONS = 5
 
-8. **Document approval gates.** Any action with side-effect level `write` or `destructive` requires an explicit approval step before the tool call is executed. The gate must be implemented in code — not as a prompt instruction. Name the gate agent, the approval signal format, and the timeout behavior if no approval arrives.
+# Standard worker return envelope
+def envelope(ok: bool, result=None, error_code: str = "") -> dict:
+    return {"ok": ok, "error_code": error_code, "result": result}
+```
 
-9. **Verify the design with scenario traces.** Walk through 2-3 realistic scenarios end-to-end against the spec. For each: name the input, trace every agent activation and handoff, confirm termination, verify no agent makes a decision outside its role. Also trace one failure scenario to confirm recovery routing works.
+## Worked scenario traces
 
-## Checklist
+Traces are how you prove the design terminates and stays in-role before writing code. For a research-and-act workflow (orchestrator + retriever + executor + validator):
 
-- [ ] Every agent has exactly one stated responsibility (one sentence)
-- [ ] Agent names describe function, not implementation order
-- [ ] All handoffs have typed input/output schemas, not free-text
-- [ ] Every tool is owned by exactly one agent; no shared ownership without a named broker agent
-- [ ] `max_depth` is an explicit integer (not "unlimited" or "default")
-- [ ] `max_iterations` is an explicit integer for every retry or reflection loop
-- [ ] State object includes `task_id`, `step_history`, and `remaining_budget_tokens`
-- [ ] Orchestrator does not directly call external APIs
-- [ ] Workers do not communicate with each other directly
-- [ ] Failure routing specified for: timeout, tool error, out-of-scope response
-- [ ] Every write/destructive tool has a named code-level approval gate
-- [ ] At least 2 happy-path and 1 failure-path scenarios traced end-to-end
-- [ ] Error envelope standard defined: `{ok: bool, error_code: str, result: any}`
+```text
+Happy path — "summarize the latest pricing doc and update the cache"
+1. orchestrator receives task → routes to retriever (depth 1)
+   handoff: {query:"pricing doc", filters:{recency:"30d"}}
+2. retriever calls web_search (1/5 calls) → returns {chunks:[...], ok:true}
+3. orchestrator → reasoner: summarize chunks → {summary:"...", ok:true}
+4. summary has a write side-effect (cache update) → APPROVAL GATE
+   executor requests file_write; gate returns approved
+5. executor calls file_write (1/1) → {ok:true}
+6. orchestrator: all steps ok, no further work → TERMINATE. depth never exceeded 1.
+
+Failure path — web_search times out
+2'. retriever web_search times out → returns envelope {ok:false, error_code:"timeout"}
+3'. orchestrator sees ok:false → retry with backoff (attempt 1 of 3)
+4'. second attempt also fails → escalate per failure routing: return partial
+    result {summary:null, error_state:{code:"retrieval_failed"}} and STOP.
+    The executor is never reached, so no cache write happens on bad data.
+```
+
+The failure trace is the important one: it confirms the approval gate and the error envelope prevent a write from happening when upstream retrieval failed. A design whose failure trace ends in "executor writes anyway" or "loops forever" is not ready.
 
 ## Common issues & anti-patterns
 
-**God agent.** One agent does retrieval, reasoning, tool execution, and output formatting. Nobody can test any piece in isolation. When it fails, nobody knows which function broke. Split by capability: retriever, reasoner, executor, formatter. Each agent has one job and can be tested and replaced independently.
+- **God agent.** One agent does retrieval, reasoning, execution, and formatting; nothing can be tested in isolation. Split by capability.
+- **Stateless handoffs.** Passing a raw string means worker B cannot tell worker A already tried and failed; the system loops. Pass structured state with `step_history`.
+- **Unbounded recursion.** An orchestrator spawns a worker that spawns another orchestrator; without `max_depth` it loops until the budget is exhausted.
+- **Tool leakage.** Worker A calls worker B's `file_write` directly, breaking isolation so you cannot scope the tool. Enforce ownership; add a broker if cross-role use is genuinely needed.
+- **Missing termination condition.** A reflection loop runs until the model "feels done", which never happens. Set `max_iterations` plus a concrete exit criterion.
+- **Over-fanout.** Fanning out to 10 workers when 3 suffice multiplies cost and error surface. Prefer sequential with early exit by default.
+- **No error-propagation contract.** Workers return `null` on error; the orchestrator cannot distinguish "no result" from "tool failed". Require the standard envelope.
+- **Implicit state growth.** Each worker appends its full output; by worker 11 the context is exhausted. Prune to summaries of completed steps.
 
-**Stateless handoffs.** The orchestrator passes a raw string to each worker. Worker B has no idea Worker A already tried and failed this approach. The system loops. Always pass structured state with step_history so each agent knows what has been attempted.
+## Assigning model tiers
 
-**Unbounded recursion.** An orchestrator spawns a worker that spawns another orchestrator with a "refined" prompt, which spawns another worker. Without `max_depth`, this loops until context is exhausted or the API budget is hit. Set depth limits at design time.
+Cost and latency are part of the design, not an afterthought. Match each role to the smallest model that does its job reliably:
 
-**Tool leakage.** Worker A calls Worker B's file_write tool directly because "it's faster." This breaks isolation — now you cannot grant file_write only to the executor. Enforce tool ownership strictly; add a broker agent if cross-role tool use is genuinely required.
+- **Small/fast** — deterministic, narrow roles: routing, classification, schema validation, formatting. These rarely need a frontier model and run on every request, so they dominate cost if over-provisioned.
+- **Medium** — retrieval reasoning, summarization, single-step tool selection where some judgment is needed but the output space is bounded.
+- **Large/frontier** — open-ended reasoning, planning, or synthesis where quality directly drives the outcome and the call frequency is low.
 
-**Missing termination condition.** A reflection loop runs until the model decides it's done. The model never decides it's done because it keeps finding "one more thing to check." Define a hard `max_iterations` and a concrete exit criterion: confidence score above 0.9, explicit DONE signal in the output schema, or maximum turns reached.
-
-**Over-fanout.** An orchestrator fans out to 10 workers in parallel when 3 would suffice. Each fan-out multiplies token cost and error surface. A single bad worker blocks the aggregation step. Prefer sequential with early-exit over parallel by default; use parallel only when latency requirements force it and each worker is independently non-blocking.
-
-**No error propagation contract.** Workers return `null` or an empty string on error. The orchestrator cannot distinguish "no result found" from "tool execution failed." Require a standard error envelope for all worker returns. The orchestrator must check `ok: false` before passing a worker result downstream.
-
-**Implicit state growth.** Each worker appends its full output to the shared context. After 10 workers, the context is 40K tokens of overlapping outputs. The 11th worker receives all of it in its prompt and the context window is exhausted. Define an explicit context pruning strategy: keep only summaries of completed steps, not raw outputs.
+Record the tier in the agent roster so reviewers can see where budget goes. A common waste is running the orchestrator's routing decision on a frontier model when a small model with a typed output schema routes just as accurately at a fraction of the cost and latency.
 
 ## Required output
 
-Produce a workflow specification document containing:
-
-1. **Agent roster** — table: name, single-sentence role, model tier recommendation (small/medium/large), max turns
-2. **Handoff table** — caller, callee, trigger condition, input schema, expected output schema
-3. **Tool ownership table** — tool name, owner agent, max calls/turn, side-effect level
-4. **State schema** — JSON schema or TypedDict with all fields, types, and descriptions
-5. **Recursion limits** — `max_depth` and `max_iterations` stated as explicit integers, with rationale
-6. **Failure routing table** — handoff, failure type, fallback action, max retry count
-7. **Approval gates** — list: destructive action, gate agent, approval signal format, timeout behavior
-8. **Scenario traces** — 2 happy-path traces and 1 failure-path trace, step-by-step
+Produce a workflow specification document containing: (1) agent roster — name, one-sentence role, model tier, max turns; (2) handoff table; (3) tool ownership table; (4) state schema with field types and descriptions; (5) recursion limits as explicit integers with rationale; (6) failure routing table; (7) approval gates list; (8) 2 happy-path traces and 1 failure-path trace, step by step.
 
 ## Safety
 
 - Do not design workflows that allow any agent to modify its own system prompt or skill files at runtime.
-- Do not allow a worker agent to call another agent with higher privilege than the orchestrator that spawned it.
-- Document every agent that has write access to persistent storage — this is a high-risk role requiring a named owner.
+- Do not allow a worker to call another agent with higher privilege than the orchestrator that spawned it.
+- Document every agent with write access to persistent storage — a high-risk role requiring a named owner.
 - Never approve a workflow where a worker can bypass the orchestrator's approval gate via a direct tool call.
-- Flag any design where the orchestrator receives unvalidated external content (web, user upload, third-party API) and passes it directly to a tool with write or destructive capability.
+- Flag any design where the orchestrator passes unvalidated external content (web, user upload, third-party API) straight into a write/destructive tool.
 - Every workflow that touches production data or sends external requests requires a human approval gate for the first 30 days of operation.
+
+## Completion criteria
+
+Done means each agent has one role, all handoffs and tools are typed and owned, recursion/iteration limits are explicit integers, the state schema and error envelope are defined, failure routing and approval gates are specified, and the design is verified with at least two happy-path traces and one failure-path trace.

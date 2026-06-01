@@ -1,9 +1,9 @@
 {
   "version": "0.1.0",
   "counts": {
-    "original": 100,
+    "original": 124,
     "community": 98,
-    "total": 198
+    "total": 222
   },
   "skills": [
     {
@@ -11,8 +11,8 @@
       "folder": "40-agent-workflow-design",
       "department": "ai-and-agent-systems",
       "origin": "original",
-      "lines": 122,
-      "checksum": "566cd70eb77bbb6807fb84d16eb9af6290aedddc98c1ac180ef162c1df84fe9a"
+      "lines": 156,
+      "checksum": "5d49f64af7b7117bbdad85a2755e921bdafcf5e0b521f5977366281ba06149bc"
     },
     {
       "id": "agent-governance-review",
@@ -27,8 +27,8 @@
       "folder": "42-prompt-systems-review",
       "department": "ai-and-agent-systems",
       "origin": "original",
-      "lines": 132,
-      "checksum": "82b98822efe6d222c8507908c33599397adbd31452384f8cd1f2458755818872"
+      "lines": 153,
+      "checksum": "c1f2b0087c1ece12ffe503dd1ec19bac8ec8ac64b04647d0ed216c8b953bdf82"
     },
     {
       "id": "rag-vector-search-review",
@@ -75,8 +75,8 @@
       "folder": "13-backend-implementation-review",
       "department": "backend-and-api",
       "origin": "original",
-      "lines": 79,
-      "checksum": "db4f8e3494b34ee1a19446e642cbf2d48983ddb79b73311d014aa5a836109d52"
+      "lines": 154,
+      "checksum": "4a4bb777bc25325aa0c07ba5e63f91a3c85f7a0efa6af499350456b4b49653b2"
     },
     {
       "id": "auth-session-review",
@@ -91,16 +91,16 @@
       "folder": "15-integration-boundary-review",
       "department": "backend-and-api",
       "origin": "original",
-      "lines": 83,
-      "checksum": "9f92a36741138571a0d2a298e0fc6449c2903032d29c965200080afc66c23dfc"
+      "lines": 150,
+      "checksum": "4e6a36515006b749a4c8e9a899e5d9133504460802ffe1e5704f27467ba14ff0"
     },
     {
       "id": "error-handling-observability",
       "folder": "16-error-handling-observability",
       "department": "backend-and-api",
       "origin": "original",
-      "lines": 91,
-      "checksum": "513cec955f129f25d7d021471e120216e50f99a8b62d0b10b6bf0a2c2f51eee7"
+      "lines": 150,
+      "checksum": "3aff65a16af66cf1b136472f030707453ba61a67057a87733ef2484beaab112a"
     },
     {
       "id": "python-project-review",
@@ -111,52 +111,100 @@
       "checksum": "f6ae9cdd4136775d7ac2d6666f372f1efea4c2aab5dd5ca6997dcba2b9f6c2c0"
     },
     {
+      "id": "terraform-iac-review",
+      "folder": "331-terraform-iac-review",
+      "department": "cloud-and-infrastructure",
+      "origin": "original",
+      "lines": 184,
+      "checksum": "61a9cf584b7773cc53663a795dd9ab5b39390d4c0f070615907e45fe84c3b1b1"
+    },
+    {
+      "id": "docker-image-hardening",
+      "folder": "332-docker-image-hardening",
+      "department": "cloud-and-infrastructure",
+      "origin": "original",
+      "lines": 175,
+      "checksum": "2e5c943454ee0c0890ab5a41c16c33bcd93ea196c8a8848ae123f045be0127d6"
+    },
+    {
+      "id": "kubernetes-manifest-review",
+      "folder": "333-kubernetes-manifest-review",
+      "department": "cloud-and-infrastructure",
+      "origin": "original",
+      "lines": 183,
+      "checksum": "ccf9d9fb4c410213a1e708c1b20ad4cbfafee8cfb098fc1189090b4733e1e94e"
+    },
+    {
+      "id": "cloud-service-architecture",
+      "folder": "334-cloud-service-architecture",
+      "department": "cloud-and-infrastructure",
+      "origin": "original",
+      "lines": 159,
+      "checksum": "7425e3bcd382a6a8615bca1879ba0f3d6ad6e46ac5201bbe59a4f74f583fad7c"
+    },
+    {
+      "id": "secrets-and-config-management",
+      "folder": "335-secrets-and-config-management",
+      "department": "cloud-and-infrastructure",
+      "origin": "original",
+      "lines": 170,
+      "checksum": "bcd6c3e91df77f167bcaf8ae212ac9161e441bd8e55e33b501d73bab653a7697"
+    },
+    {
+      "id": "deploy-topology-and-rollback",
+      "folder": "336-deploy-topology-and-rollback",
+      "department": "cloud-and-infrastructure",
+      "origin": "original",
+      "lines": 170,
+      "checksum": "8eb9c33a6bbd092ae31c2c65af0bcd17e0221e26f561f2bac62ae640abc8e946"
+    },
+    {
       "id": "repo-diagnostics",
       "folder": "01-repo-diagnostics",
       "department": "core-operations",
       "origin": "original",
-      "lines": 61,
-      "checksum": "5e516746accd6ccc13f2034ece85eed53f570afcec5d13c679acd05b533484c8"
+      "lines": 150,
+      "checksum": "4b0e88a5f9c25d1fffbe9ea11869fbc71c552a9d0ff9c47da38b840adfc82842"
     },
     {
       "id": "codebase-cartography",
       "folder": "02-codebase-cartography",
       "department": "core-operations",
       "origin": "original",
-      "lines": 74,
-      "checksum": "2ff50238fac904c7de38860a3e1fabb196ca9f1e5df2d211d84639b2500f112e"
+      "lines": 150,
+      "checksum": "6e47b878a3e794d2569a2ef55e3a0ca91d07fabce0e779f3cbe44c194945d883"
     },
     {
       "id": "architecture-review",
       "folder": "03-architecture-review",
       "department": "core-operations",
       "origin": "original",
-      "lines": 63,
-      "checksum": "da663a4d7a79a83d8b30495e33d32fc623d580c4eebc8e98b35cee02a1f16f89"
+      "lines": 150,
+      "checksum": "40522d512162f1643d06147e635dc5a3eec73aab5fb73c17404b1dfe0dbd577c"
     },
     {
       "id": "implementation-plan",
       "folder": "04-implementation-plan",
       "department": "core-operations",
       "origin": "original",
-      "lines": 75,
-      "checksum": "b48b9b057396bf6e545d9de45d98a0f778633e424cdfcc8666021fe3146d671c"
+      "lines": 171,
+      "checksum": "62ede01fc071e98620ddc0ebaba2f00e4484ee470c87b4b9116897edb26b432f"
     },
     {
       "id": "refactor-safety",
       "folder": "05-refactor-safety",
       "department": "core-operations",
       "origin": "original",
-      "lines": 76,
-      "checksum": "94b90d315dc06ba1fe210731537a2c7e467deb92fce3cb1c83e37ffe26fddf20"
+      "lines": 153,
+      "checksum": "b6d4810b2cff1444bf69a6aa41fa911cc35ea62cd600c1c3f07a265e51f08c84"
     },
     {
       "id": "release-readiness-check",
       "folder": "06-release-readiness-check",
       "department": "core-operations",
       "origin": "original",
-      "lines": 63,
-      "checksum": "f6d14791bb12493e093ae370aa9554a2cc5762b5660668b563f226093bdd9399"
+      "lines": 154,
+      "checksum": "8d373965730c3a60896372282e16f127d85a3db93cf3597a985f623f3605eb1f"
     },
     {
       "id": "project-agent-bootstrap",
@@ -165,6 +213,54 @@
       "origin": "original",
       "lines": 88,
       "checksum": "d153a392ca3ef06a20b1d21f64b1fee2badf37a3c3797cea5104211b99a0630a"
+    },
+    {
+      "id": "data-pipeline-review",
+      "folder": "311-data-pipeline-review",
+      "department": "data-ml-ai-engineering",
+      "origin": "original",
+      "lines": 177,
+      "checksum": "beaa57db909d6d0419a76c9b10652d10b04682368a1c503926cd4c7ab9fbaa23"
+    },
+    {
+      "id": "data-quality-validation",
+      "folder": "312-data-quality-validation",
+      "department": "data-ml-ai-engineering",
+      "origin": "original",
+      "lines": 160,
+      "checksum": "488f78840a5ebf7b6a8a6917f7c153d1a1404db396a36419a03e13d563e76b01"
+    },
+    {
+      "id": "ml-training-pipeline-review",
+      "folder": "313-ml-training-pipeline-review",
+      "department": "data-ml-ai-engineering",
+      "origin": "original",
+      "lines": 170,
+      "checksum": "61b4f56c6de90120acf2fe3f230b2c21632c9a49d94917e6320ee856470e141c"
+    },
+    {
+      "id": "model-serving-and-inference",
+      "folder": "314-model-serving-and-inference",
+      "department": "data-ml-ai-engineering",
+      "origin": "original",
+      "lines": 177,
+      "checksum": "777ced53f273992243c9a098e38a813d2f60f23c6e2d76717a4c39878b572ec8"
+    },
+    {
+      "id": "notebook-hygiene",
+      "folder": "315-notebook-hygiene",
+      "department": "data-ml-ai-engineering",
+      "origin": "original",
+      "lines": 166,
+      "checksum": "9b45d24f6da769518cb99b8f53604e873e2b02e30ac19d46f69ea0e74c9ecfe8"
+    },
+    {
+      "id": "dataset-versioning-and-lineage",
+      "folder": "316-dataset-versioning-and-lineage",
+      "department": "data-ml-ai-engineering",
+      "origin": "original",
+      "lines": 169,
+      "checksum": "a8b187e37f8277bfa5f230bb34df2ef8595f92c380dd164d13cf056fe0a3d857"
     },
     {
       "id": "supabase-rls-edge-functions",
@@ -179,8 +275,8 @@
       "folder": "35-database-and-prisma-review",
       "department": "database-and-data",
       "origin": "original",
-      "lines": 65,
-      "checksum": "cf7ab1d2fe3cfe542888f48cf8d19823bd3455c9961d7ca36ae2bf3fbd07dbaa"
+      "lines": 151,
+      "checksum": "de9dafd63cb0f650976dbe1f771e1558e24b485885d9a12f41104684d2a4739c"
     },
     {
       "id": "postgres-supabase-review",
@@ -219,32 +315,32 @@
       "folder": "58-ci-cd-pipeline-review",
       "department": "devops-and-release",
       "origin": "original",
-      "lines": 132,
-      "checksum": "49355e073f18d8c9f36463d60eab19c84a34fbda5b6b4015879eb76e163cea92"
+      "lines": 157,
+      "checksum": "56d8545e5da57df03679bccccf9924d997e92f2e9b7e345c554332a866f1e107"
     },
     {
       "id": "build-and-typecheck-review",
       "folder": "59-build-and-typecheck-review",
       "department": "devops-and-release",
       "origin": "original",
-      "lines": 132,
-      "checksum": "6b6e5325dd827ad401b99aec52454ab1a1f699cc944abbd0fd1f6f8ab241a0d8"
+      "lines": 153,
+      "checksum": "9432c1956acbd6cf14a023c7bd9d61409b3ffc4bd0edbc3dd6cddac250353eb7"
     },
     {
       "id": "deployment-preflight-review",
       "folder": "60-deployment-preflight-review",
       "department": "devops-and-release",
       "origin": "original",
-      "lines": 129,
-      "checksum": "4c72b2dcd9585074fc1df8cb8bd2e9891796b8320f3f2ed4065b545075fc227b"
+      "lines": 156,
+      "checksum": "2927c49cd1ea7f55444f50702337d7629b752be70f05f08b223111aa2d41a3f0"
     },
     {
       "id": "release-notes-generator",
       "folder": "61-release-notes-generator",
       "department": "devops-and-release",
       "origin": "original",
-      "lines": 127,
-      "checksum": "fd463b945c788002d4d7e432078ba020b10147494f95fcf6ba65e8a7f71eef66"
+      "lines": 162,
+      "checksum": "fdb2c675dd2c530fe94c4f34e9f62d4d6f31f8809da5378f5c5d28f23f079481"
     },
     {
       "id": "handoff-readiness-check",
@@ -255,28 +351,76 @@
       "checksum": "ae0ba6e61c7016bc93cf143c9ca92c13ccce06b1a8b6a06577d5b7aa8e42c968"
     },
     {
+      "id": "readme-and-docs-structure",
+      "folder": "301-readme-and-docs-structure",
+      "department": "documentation-and-tech-writing",
+      "origin": "original",
+      "lines": 164,
+      "checksum": "43683de9ed7b3d399cd439c8ef82877838db11b8cb1cc7682598d2b2f9ef8846"
+    },
+    {
+      "id": "api-reference-docs",
+      "folder": "302-api-reference-docs",
+      "department": "documentation-and-tech-writing",
+      "origin": "original",
+      "lines": 152,
+      "checksum": "6d96466ab5e917a6cc8c884301c8d1de7616b63c050e08b7bab901ee9c15ca0a"
+    },
+    {
+      "id": "changelog-and-release-notes",
+      "folder": "303-changelog-and-release-notes",
+      "department": "documentation-and-tech-writing",
+      "origin": "original",
+      "lines": 148,
+      "checksum": "721b3322ba9be3fbbb9a9192d176d3d7d5e5c0d358764fd4ac53e05007f14841"
+    },
+    {
+      "id": "tutorial-and-how-to-writing",
+      "folder": "304-tutorial-and-how-to-writing",
+      "department": "documentation-and-tech-writing",
+      "origin": "original",
+      "lines": 143,
+      "checksum": "9674f4a0e1589d470a0da3c0e3966f81011149965f7fd7659af8daffd1650226"
+    },
+    {
+      "id": "runbook-and-operational-docs",
+      "folder": "305-runbook-and-operational-docs",
+      "department": "documentation-and-tech-writing",
+      "origin": "original",
+      "lines": 148,
+      "checksum": "de5ce0cbd37cb0c397447324f6b727549fc857877cb8b40dd9f010b003a594ae"
+    },
+    {
+      "id": "docs-quality-review",
+      "folder": "306-docs-quality-review",
+      "department": "documentation-and-tech-writing",
+      "origin": "original",
+      "lines": 146,
+      "checksum": "b85cb4be44f5c6b935f64985a86d07ac6c2731c455b81a1ecf8e3015564e183b"
+    },
+    {
       "id": "ui-consistency-review",
       "folder": "17-ui-consistency-review",
       "department": "frontend-web-design",
       "origin": "original",
-      "lines": 62,
-      "checksum": "0da7994658081adef9c32b7190ff94bd51bb8a9eabde76d6368114b94e3a4ca4"
+      "lines": 159,
+      "checksum": "1fec09b19da763f58c113dcdfb37338602412fc328badf6962d666f4a7bb2d3b"
     },
     {
       "id": "web-design-review",
       "folder": "18-web-design-review",
       "department": "frontend-web-design",
       "origin": "original",
-      "lines": 72,
-      "checksum": "6176cba2fc7f8f0cdd6cf6a6ddabce998cbcf41cb71bad8d1358b871fde39f3c"
+      "lines": 151,
+      "checksum": "34108f7aa4320506a4055f21bbff446f822dc574730b25ff3bc85a57e2fe2cd1"
     },
     {
       "id": "design-system-review",
       "folder": "19-design-system-review",
       "department": "frontend-web-design",
       "origin": "original",
-      "lines": 73,
-      "checksum": "2b5abf498a23074f5129c269e5a57a9fdba97ca39e4fcc6f72ebcaf1ee16b5ab"
+      "lines": 152,
+      "checksum": "649964a0dd82c493d6184f34c8db0478fb5fdd15153fc752b78e8a624b553376"
     },
     {
       "id": "accessibility-audit",
@@ -291,32 +435,32 @@
       "folder": "21-dashboard-ux-review",
       "department": "frontend-web-design",
       "origin": "original",
-      "lines": 79,
-      "checksum": "1b22d0b1384554d1a86f45101d072e3a885e9b220a556ab4b81698d5e252cf38"
+      "lines": 151,
+      "checksum": "59df22bf858250035396262532bf54c5a97e6f0f8405d78f6c3f151c3e7152b2"
     },
     {
       "id": "landing-page-conversion-review",
       "folder": "22-landing-page-conversion-review",
       "department": "frontend-web-design",
       "origin": "original",
-      "lines": 80,
-      "checksum": "77b7338137f272edfcb13e78020a080b3c2980bda8fc0bb70511dc8a793dda06"
+      "lines": 155,
+      "checksum": "99909fdc1a8eb40a2dca0f2816ff5299d98ee9456b304292c58e7d800aa437ed"
     },
     {
       "id": "responsive-layout-review",
       "folder": "23-responsive-layout-review",
       "department": "frontend-web-design",
       "origin": "original",
-      "lines": 81,
-      "checksum": "f50fc8497d136978de156b1f33af5b56842f1a70afbc29d9ecdaecc831d0d9b5"
+      "lines": 154,
+      "checksum": "a90871ad71abc9218f7e9162fa51eba658e0f1c57a6be4a99277189ce31eb7ca"
     },
     {
       "id": "visual-polish-pass",
       "folder": "24-visual-polish-pass",
       "department": "frontend-web-design",
       "origin": "original",
-      "lines": 81,
-      "checksum": "03249b17c2f644dd840463565dc5d4b5c8cf0dac678f9af3552abfd21635211b"
+      "lines": 150,
+      "checksum": "7d8433e7dfae63ca0caed00233c95d62a32343984ad8f37f291091442d927902"
     },
     {
       "id": "shadcn-ui-components",
@@ -387,80 +531,80 @@
       "folder": "29-game-architecture-review",
       "department": "gaming-interactive-media",
       "origin": "original",
-      "lines": 73,
-      "checksum": "bc2355351fbcc694b47df65879317aa2a2bbe85f371b032d2a464f7322e2478c"
+      "lines": 154,
+      "checksum": "d2cade66a5a8410fea6b98b6d355dba51888228f994b581c2672ad447e9857ef"
     },
     {
       "id": "gameplay-systems-review",
       "folder": "30-gameplay-systems-review",
       "department": "gaming-interactive-media",
       "origin": "original",
-      "lines": 74,
-      "checksum": "3967d3c2fde0d9e0a0a754a3c74a1bd77d660875ecc91d893a02f6468a7c84be"
+      "lines": 151,
+      "checksum": "00c7e6713324fd8cf8a778d8b3f8a1ab656125e4a8d753813e106ceee4f08266"
     },
     {
       "id": "game-ui-ux-review",
       "folder": "31-game-ui-ux-review",
       "department": "gaming-interactive-media",
       "origin": "original",
-      "lines": 74,
-      "checksum": "b45da1d3837b55e5ae1930e529ca955646086f9185cb1cebd622e37e211c17e1"
+      "lines": 151,
+      "checksum": "e8136c3c89567515dc1a945b7c122ac1df3831652e12e1e9ee1435d22218a0c4"
     },
     {
       "id": "game-performance-review",
       "folder": "32-game-performance-review",
       "department": "gaming-interactive-media",
       "origin": "original",
-      "lines": 76,
-      "checksum": "adcbd46a982ba5dfab39a32a2f6591f8e5d6598f08f1f6be3a75b0d9ab0528cd"
+      "lines": 153,
+      "checksum": "9b88c3660b20be493a68faa587e2e34cd2e5adaf92944e009f6c705904640aa5"
     },
     {
       "id": "interactive-prototype-review",
       "folder": "33-interactive-prototype-review",
       "department": "gaming-interactive-media",
       "origin": "original",
-      "lines": 73,
-      "checksum": "3f6dd8024339f40a2edf466645539f109d45331204e1f279d853ed0dc05451a3"
+      "lines": 151,
+      "checksum": "92697f9fb2e518f7cd4114444ff8ee05082d630cbab901cdbd9fe183cdbe871c"
     },
     {
       "id": "godot-unity-unreal-triage",
       "folder": "34-godot-unity-unreal-triage",
       "department": "gaming-interactive-media",
       "origin": "original",
-      "lines": 76,
-      "checksum": "a7887fffce3a54a8f194a414cc7f9012362fbd7b558f79d1b04e85ed1cb86999"
+      "lines": 151,
+      "checksum": "ef69c3cdc9d36abe424995b14fb89de8058186778a3c7050a6463e502cffd8a1"
     },
     {
       "id": "mobile-app-review",
       "folder": "25-mobile-app-review",
       "department": "mobile-desktop",
       "origin": "original",
-      "lines": 72,
-      "checksum": "de3d11ec9806a3ae4dbd3ad4955d37f30afa32c107ef06b70ca4c8a3dbf403e8"
+      "lines": 151,
+      "checksum": "1ee38faf677e1d862102d6714b946fd81a7ecb742a7bcedaa16b7870dbf5d732"
     },
     {
       "id": "ios-hig-review",
       "folder": "26-ios-hig-review",
       "department": "mobile-desktop",
       "origin": "original",
-      "lines": 74,
-      "checksum": "4b6636db3e37148b831a15250092dcbfcfd71fac1847f7f360f76375c18ff330"
+      "lines": 150,
+      "checksum": "61fd4ff037edc5a67c6db3938a74acb4c9e1f057f7a88f9f543dd5e71b8ec3e3"
     },
     {
       "id": "android-material-review",
       "folder": "27-android-material-review",
       "department": "mobile-desktop",
       "origin": "original",
-      "lines": 76,
-      "checksum": "09c80fb85b410ed90e07aed1071cdf7bf7440051501ea8220a32a33adfbfaff3"
+      "lines": 151,
+      "checksum": "ddca79496aa09c243f76d0d1774f1c10c13d129e3870fe548ac21e4314158d87"
     },
     {
       "id": "desktop-launcher-review",
       "folder": "28-desktop-launcher-review",
       "department": "mobile-desktop",
       "origin": "original",
-      "lines": 60,
-      "checksum": "b06a2281574af1263578e53b5bd731d817e1bb1fc32ada9bdfb5235fad850a60"
+      "lines": 150,
+      "checksum": "8bbee33a30975d046b3368acbaed249d4fdc7c6631b214af4d06100378604981"
     },
     {
       "id": "wordpress-woocommerce-review",
@@ -567,20 +711,68 @@
       "checksum": "632c045b80258f4b3e27fd0240adb1d2efe5098dff408da88f4811a3b76489a0"
     },
     {
+      "id": "frontend-performance-budget",
+      "folder": "321-frontend-performance-budget",
+      "department": "performance-and-cost",
+      "origin": "original",
+      "lines": 154,
+      "checksum": "9353fc7eb72b78b498225270b045b0b6c3b230fe0af99efa51a0e400cc63f660"
+    },
+    {
+      "id": "backend-latency-profiling",
+      "folder": "322-backend-latency-profiling",
+      "department": "performance-and-cost",
+      "origin": "original",
+      "lines": 151,
+      "checksum": "b8d9631e01a547ef2d7368bbb83d8d7534fb742804840223b88a66c5a073c59c"
+    },
+    {
+      "id": "caching-strategy",
+      "folder": "323-caching-strategy",
+      "department": "performance-and-cost",
+      "origin": "original",
+      "lines": 154,
+      "checksum": "966f799a9d21c6f16a314255107c8b39b4c593f6ed6b014ce5708adba7e0b131"
+    },
+    {
+      "id": "memory-and-resource-profiling",
+      "folder": "324-memory-and-resource-profiling",
+      "department": "performance-and-cost",
+      "origin": "original",
+      "lines": 150,
+      "checksum": "e8c70f4c08444d0fdccccab6a57adaaa763ebf4a1357cec36c089544038f477c"
+    },
+    {
+      "id": "llm-api-cost-optimization",
+      "folder": "325-llm-api-cost-optimization",
+      "department": "performance-and-cost",
+      "origin": "original",
+      "lines": 165,
+      "checksum": "aff1f38913f1728f7afc03caed5961c0356014e9770cb2980eb19faa27a780f8"
+    },
+    {
+      "id": "cloud-spend-review",
+      "folder": "326-cloud-spend-review",
+      "department": "performance-and-cost",
+      "origin": "original",
+      "lines": 159,
+      "checksum": "c2a9a5990529707c0b20cd2ad9784fb6dfcd776f8938da2af1bd1145f4683573"
+    },
+    {
       "id": "md-spec-generator",
       "folder": "63-md-spec-generator",
       "department": "product-docs-and-research",
       "origin": "original",
-      "lines": 70,
-      "checksum": "1cd45fbea4b95f010a9e83d8cd57d4fd4ce810bcace30ccd6003b5f5800a6552"
+      "lines": 156,
+      "checksum": "731bcf184914292d99f77c3d7c55ed0088aa12e77da830eafc7c7d8d1fb23d80"
     },
     {
       "id": "codex-final-execution-prompt",
       "folder": "64-codex-final-execution-prompt",
       "department": "product-docs-and-research",
       "origin": "original",
-      "lines": 75,
-      "checksum": "546c0c11c6e9e0369df97abdf6ccbf3e556e845b0aaba7cab813a2b52e02b75d"
+      "lines": 160,
+      "checksum": "161e83ee8b6d28e5fee3b1778983869e6eda551473cd5f7182569d5142bd81c6"
     },
     {
       "id": "product-requirements-review",
@@ -635,16 +827,16 @@
       "folder": "07-browser-first-local-app",
       "department": "runtime-and-local-app",
       "origin": "original",
-      "lines": 66,
-      "checksum": "cee5850df54c1e32c5c99e1d4e2258d47f50a3528d7e967d2b2158830ebe9b59"
+      "lines": 158,
+      "checksum": "9ea4efb73f24372df96a656a047789c93d4ad9429b348825c144ee555471226f"
     },
     {
       "id": "runtime-diagnostics",
       "folder": "08-runtime-diagnostics",
       "department": "runtime-and-local-app",
       "origin": "original",
-      "lines": 74,
-      "checksum": "81113b02122db5227703132e9db71c2c7ce30dd4910e8d3e68688d79bf0ea4f0"
+      "lines": 152,
+      "checksum": "8aa18b6fc58ce9dda7e5a8cca81eac3aede0571d2d39e4b16bf79fdd2f8c8bc6"
     },
     {
       "id": "startup-health-readiness",
@@ -659,8 +851,8 @@
       "folder": "10-local-launcher-shortcuts",
       "department": "runtime-and-local-app",
       "origin": "original",
-      "lines": 72,
-      "checksum": "74724a2fb3dfffbe2099212084f2cf5ac065d6968cbaf6b9574ac8df63c78abd"
+      "lines": 152,
+      "checksum": "10fbf9940525baef71a75c267556e7bf2790ae07302428f1d88c61b3baf59bfa"
     },
     {
       "id": "log-and-diagnostics-bundle",
@@ -675,8 +867,8 @@
       "folder": "47-security-and-secrets-review",
       "department": "security",
       "origin": "original",
-      "lines": 68,
-      "checksum": "c8681be51e148faba0ddb9ea3014dded7dbdc85217ae9b53de09641a579b8fb0"
+      "lines": 150,
+      "checksum": "48f26a05283cda8e9b0df4358e9ec9b6b3f1d0b0c0034f60e7f561d75158639e"
     },
     {
       "id": "ai-security-review",
@@ -723,24 +915,24 @@
       "folder": "71-skill-librarian",
       "department": "skill-library-and-installation",
       "origin": "original",
-      "lines": 110,
-      "checksum": "980d69ea71544ab6e8da6d6159504c93a4d52821e3c1890f4ec10170c1acccc6"
+      "lines": 157,
+      "checksum": "82fdb142c37fa7b0da87cb6aeab975bc0755800cc35523e0129124ebee8e31bb"
     },
     {
       "id": "skill-deduplication",
       "folder": "72-skill-deduplication",
       "department": "skill-library-and-installation",
       "origin": "original",
-      "lines": 124,
-      "checksum": "18a6d5ec7b897d286f9e6e8899f6538f52219949318752703b3c3102b07261b2"
+      "lines": 158,
+      "checksum": "61147ecd72767636557f0955f2c422ff12778dbce12ec53e8e87a54e691437d5"
     },
     {
       "id": "skill-to-agent-router",
       "folder": "73-skill-to-agent-router",
       "department": "skill-library-and-installation",
       "origin": "original",
-      "lines": 128,
-      "checksum": "0b148978daef54d066c7d2e2d2f2250bf80dcd80d08aacef81e866df3733e7c5"
+      "lines": 152,
+      "checksum": "6302f99ba670a51184b7a8e27a3b23dc957509f081f9c59ef68e212561537549"
     },
     {
       "id": "global-installation-audit",
@@ -763,16 +955,16 @@
       "folder": "52-smoke-test-and-repair",
       "department": "testing-and-qa",
       "origin": "original",
-      "lines": 61,
-      "checksum": "5b0afd2304f858c30346665265f3d4a9c912af159aa8acfa5342311720eb2445"
+      "lines": 152,
+      "checksum": "87553acb90bd6810e70f589b0a581c8dad77bd8665aa0eb4ea7419ec674bfe27"
     },
     {
       "id": "playwright-e2e-audit",
       "folder": "53-playwright-e2e-audit",
       "department": "testing-and-qa",
       "origin": "original",
-      "lines": 83,
-      "checksum": "2078994b9b050f7c49e2deb2c41a9db69b014e60c68eaf1ae926d1196d10e0b1"
+      "lines": 152,
+      "checksum": "dd38a11983279e77d45139899ba34e0c147d3609c9ad544836004ba1e0d5cbae"
     },
     {
       "id": "regression-scope-analysis",

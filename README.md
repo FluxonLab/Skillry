@@ -27,7 +27,7 @@ Most Claude Code resource repos are **link lists** (you still copy files by hand
 | **Multi-platform** (Claude + Codex + Copilot + Gemini) | ✅ | ❌ | ❌ (Claude only) |
 | Per-agent **permission boundaries** (least-privilege `tools`) | ✅ | ❌ | ⚠️ |
 | **Validation harness** (smoke-check + frontmatter lint + lockfiles) | ✅ | ❌ | ⚠️ |
-| **Skill-sync**: discover, normalize & vet new skills from GitHub | ✅ | ❌ | ❌ |
+| **Skill-sync**: discover (license + risk scan), normalize (frontmatter + provenance), vet (staged, attributed, never auto-enabled) | ✅ | ❌ | ❌ |
 | Native plugin marketplace (sha-pinned, reproducible) | ✅ | ❌ | ⚠️ |
 | Full upstream **attribution** for redistributed content | ✅ | n/a | ⚠️ |
 
@@ -101,7 +101,7 @@ One authored source → platform-correct output for each runtime:
 plugins/<department>/              # one plugin per department: skills/ agents/ commands/
 platforms/<platform>/             # generated, platform-specific output
 community/<source>/                # attributed third-party skills + their LICENSE
-tools/                            # installer, smoke-check, skill-sync
+tools/                            # installer, smoke-check, skill-sync (discover/import/normalize)
 registry/                         # skill/agent lock files
 docs/                             # guides
 ```

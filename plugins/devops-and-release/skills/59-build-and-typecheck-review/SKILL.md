@@ -7,63 +7,40 @@ description: Use when you need to review build, typecheck, compile, bundling, an
 
 ## Purpose
 
-Verify that the project builds cleanly with strict static analysis, catch TypeScript errors or compiler warnings that are suppressed or ignored, review `tsconfig.json` strictness settings, assess bundle size and tree-shaking configuration, confirm source maps are generated correctly, and identify build tooling anti-patterns that cause silent failures or non-reproducible builds.
+Verify the project builds cleanly with strict static analysis, catch suppressed or ignored TypeScript errors and compiler warnings, review `tsconfig.json` strictness, assess bundle size and tree-shaking, confirm source maps are generated correctly, and identify build-tooling anti-patterns that cause silent failures or non-reproducible builds. The review runs read-only static checks (`tsc --noEmit`, `grep`) and never emits build output or mutates config without instruction.
 
 ## When to use
 
 - `tsc --noEmit` is failing in CI and you need to triage and fix the errors.
-- A PR introduces `// @ts-ignore` or `@ts-expect-error` comments without justification.
-- The `tsconfig.json` has been modified and you want to confirm strict mode is preserved.
+- A PR introduces `// @ts-ignore` or `@ts-expect-error` without justification.
+- `tsconfig.json` was modified and you want to confirm strict mode is preserved.
 - Bundle size has grown unexpectedly and you need to identify the cause.
 - The build passes locally but fails in CI (environment-dependent build issues).
-- A new package is added and may not be tree-shakeable, increasing bundle size.
+- A new package is added and may not be tree-shakeable.
 
 ## When not to use
 
-- The project uses JavaScript only (no TypeScript) — skip the typecheck steps.
+- The project is JavaScript only (no TypeScript) — skip the typecheck steps.
 - The task is to implement a feature, not to review the build configuration.
-- Build issues are in a Docker layer or deployment step — use the deployment preflight skill.
+- Build issues are in a Docker layer or deployment step — use `60-deployment-preflight-review`.
 
 ## Procedure
 
-1. **Run `tsc --noEmit` and capture output.** This runs the type checker without emitting files, giving the full error list. If the project uses `ts-project-references`, run `tsc --build --noEmit` instead. Count errors by file and error code.
+1. **Run `tsc --noEmit` and capture output.** Type-check without emitting files for the full error list. For project references, run `tsc --build --noEmit`. Count errors by file and by error code.
+2. **Review `tsconfig.json` strict settings.** Check `"strict": true`; if absent, check `noImplicitAny`, `strictNullChecks`, `strictFunctionTypes`, `noUncheckedIndexedAccess`. Note `skipLibCheck: true` if it hides errors in `.d.ts` files the project owns. Confirm `noEmitOnError: true`.
+3. **Audit `@ts-ignore` / `@ts-expect-error`.** For each: is there a comment explaining why? Is it hiding a real error that should be fixed? Is `@ts-expect-error` used (preferred — fails if the error disappears)?
+4. **Check `any` usage.** Flag explicit `any` in non-test code, especially in function signatures and return types — it is a type-safety hole.
+5. **Verify build reproducibility.** Confirm the output hash is stable across two consecutive clean builds. Instability suggests timestamp injection, random IDs, or non-deterministic module ordering.
+6. **Review bundle size and tree-shaking.** Check `sideEffects: false` for library packages; dynamic `import()` for large sections; whole-library imports (`import _ from 'lodash'`) that should be path imports.
+7. **Check source map configuration.** Production maps should be external (`devtool: 'source-map'`), not inline; not served publicly; uploaded to an error tracker.
+8. **Verify build command consistency.** `package.json` scripts, the CI workflow, and the Dockerfile must call the same build command.
+9. **Check warnings treated as errors.** `--noUnusedLocals` and `--noUnusedParameters` enabled; bundler warnings (circular dependency, missing exports) surfaced, not suppressed.
+10. **Review path aliases.** `tsconfig.json` `paths` must match the bundler config and Jest `moduleNameMapper`; mismatches cause "module not found" in only one context.
 
-2. **Review `tsconfig.json` strict settings.** Check for these options explicitly:
- - `"strict": true` — enables all strict checks in one flag.
- - If `strict` is false or absent, check individual flags: `noImplicitAny`, `strictNullChecks`, `strictFunctionTypes`, `noUncheckedIndexedAccess`.
- - `"skipLibCheck": true` — acceptable for most projects; note if it is hiding errors in `.d.ts` files the project owns.
- - `"noEmitOnError": true` — confirms the build does not produce output when type errors exist.
-
-3. **Audit `// @ts-ignore` and `@ts-expect-error` usage.** Run `grep -rn "@ts-ignore\|@ts-expect-error" src/`. For each occurrence, determine:
- - Is there a comment explaining why suppression is needed?
- - Is it suppressing a real type error that should be fixed?
- - Is `@ts-expect-error` used instead of `@ts-ignore` (preferred — fails if the error disappears)?
-
-4. **Check `any` usage.** Run `grep -rn ": any\|as any\| any " src/ --include="*.ts" --include="*.tsx"`. Explicit `any` is a type safety hole. Flag usages in non-test files, especially in function signatures and return types.
-
-5. **Verify build reproducibility.** Confirm the build output hash is stable across two consecutive builds from a clean state. Non-reproducible builds suggest timestamp injection, random IDs in output, or non-deterministic module ordering.
-
-6. **Review bundle size and tree-shaking.** If a bundler is used (webpack, Rollup, esbuild, Vite), check:
- - Is `sideEffects: false` set in `package.json` for library packages?
- - Are dynamic imports (`import()`) used for code splitting on large page sections?
- - Run `npx bundlesize` or check the CI bundle size check if configured.
- - Flag packages imported entirely when only one utility is needed (`import _ from 'lodash'` instead of `import debounce from 'lodash/debounce'`).
-
-7. **Check source map configuration.** For production builds:
- - Source maps should be generated but not served publicly (they expose source code).
- - Confirm `devtool: 'source-map'` (external) not `'inline-source-map'` (embeds in bundle, increases size).
- - Confirm the CI artifact includes source maps in a separate upload to an error tracking service (Sentry, Datadog).
-
-8. **Verify build command consistency.** The build command in `package.json` scripts, the CI workflow, and the Dockerfile must all call the same command (`npm run build`), not different commands that may have different flags or environments.
-
-9. **Check for build warnings treated as errors.** TypeScript's `--noUnusedLocals` and `--noUnusedParameters` should be enabled to prevent dead code accumulation. Confirm that build warnings in the bundler (circular dependency, missing exports) are surfaced, not suppressed with `// eslint-disable`.
-
-10. **Review path aliases.** If `tsconfig.json` defines `paths` aliases (`@components`, `@utils`), confirm the bundler config has the matching aliases, and the Jest config also has matching `moduleNameMapper`. Misaligned aliases cause "module not found" errors that only appear in one context.
-
-## Checklist
+## Concrete checks
 
 - [ ] `tsc --noEmit` exits with zero errors.
-- [ ] `"strict": true` (or equivalent individual flags) is in `tsconfig.json`.
+- [ ] `"strict": true` (or equivalent individual flags) is set in `tsconfig.json`.
 - [ ] `"noEmitOnError": true` is set.
 - [ ] All `@ts-ignore` usages have an explanatory comment; none suppress real correctness bugs.
 - [ ] `as any` and `: any` usages in non-test code are minimal and justified.
@@ -74,59 +51,103 @@ Verify that the project builds cleanly with strict static analysis, catch TypeSc
 - [ ] Path aliases are consistent across `tsconfig.json`, bundler config, and Jest config.
 - [ ] `--noUnusedLocals` and `--noUnusedParameters` are enabled.
 
+## Commands or Templates
+
+```bash
+# Type gate: full error list, no emit (use --build for project references)
+npx tsc --noEmit 2>&1 | tee /tmp/tsc.txt
+grep -oE "error TS[0-9]+" /tmp/tsc.txt | sort | uniq -c | sort -rn   # errors by code
+
+# Strictness flags actually in effect
+npx tsc --showConfig | grep -E '"strict"|"noImplicitAny"|"strictNullChecks"|"noEmitOnError"|"noUnusedLocals"'
+
+# Suppressions and any-holes in non-test code
+grep -rn "@ts-ignore\|@ts-expect-error" src/
+grep -rnE ":\s*any\b|as any|as unknown as " src/ --include="*.ts" --include="*.tsx"
+
+# Whole-library imports that defeat tree-shaking
+grep -rnE "import .* from ['\"](lodash|moment|rxjs)['\"]" src/
+
+# Reproducibility: hash output twice from clean
+rm -rf dist && npm run build >/dev/null 2>&1 && find dist -type f -exec sha256sum {} + | sort > /tmp/b1
+rm -rf dist && npm run build >/dev/null 2>&1 && find dist -type f -exec sha256sum {} + | sort > /tmp/b2
+diff /tmp/b1 /tmp/b2 && echo "reproducible" || echo "NON-REPRODUCIBLE"
+```
+
+## tsconfig strictness reference
+
+`"strict": true` is the umbrella; when it is off, audit these individually because each closes a real class of bug:
+
+| Flag | What it catches | Risk if off |
+|------|-----------------|-------------|
+| `noImplicitAny` | params/vars with no inferable type | silent `any` everywhere |
+| `strictNullChecks` | `undefined`/`null` not in the type | `Cannot read properties of undefined` at runtime |
+| `strictFunctionTypes` | unsound callback parameter variance | wrong-shaped callbacks accepted |
+| `noUncheckedIndexedAccess` | `arr[i]` assumed defined | out-of-bounds reads typed as present |
+| `noEmitOnError` | emitting JS despite type errors | broken build artifacts ship |
+| `noUnusedLocals`/`Parameters` | dead bindings | code rot accumulates |
+
+`skipLibCheck: true` is acceptable for third-party `.d.ts` noise, but if the project *generates* its own declaration files, it also silences their errors — note that explicitly.
+
+## Worked error triage
+
+`tsc --noEmit` reports 38 errors. Grouping by code (the command in the templates) shows: 31× `TS2532 Object is possibly 'undefined'`, 5× `TS2345`, 2× `TS7006`. The 31 `TS2532` errors all trace to one source: `strictNullChecks` was just enabled and array/map lookups are no longer assumed defined. The fix is not 31 `as` casts — it is a few guard patterns at the lookup sites (`const u = users.get(id); if (!u) return;`). Triaging by error *code* rather than by file reveals that most of the count is a single root cause, so the report should say "31 errors, one cause (missing null guards after enabling strictNullChecks), ~6 guard sites to fix" — not "38 unrelated errors".
+
 ## Common issues & anti-patterns
 
-- **`strict: false` inherited from a template**: teams disable strict mode to suppress initial errors and never re-enable it; type safety degrades over time.
-- **`skipLibCheck: true` hiding owned `.d.ts` errors**: if the project generates `.d.ts` files, their errors are also skipped.
-- **Build succeeds but emits with errors**: `noEmitOnError` is false; the build produces broken JS from TypeScript files with type errors.
-- **`as unknown as Foo` cast chains**: `foo as unknown as Bar` defeats the type checker entirely — equivalent to `any` without the grep signal.
-- **Full lodash import in a bundle**: `import _ from 'lodash'` pulls in ~73KB minified; `import debounce from 'lodash/debounce'` pulls in ~2KB.
-- **Timestamp in bundle output filename without content hash**: `bundle.2026-05-31.js` invalidates CDN cache by date, not by content change; use `bundle.[contenthash].js`.
-- **Mismatched `target` and `lib`**: `target: "es5"` with `lib: ["esnext"]` generates ES5 code that calls ES2022 methods not present at runtime.
-- **Circular dependency between modules**: bundles silently work (modules initialize in undefined order) until an edge case triggers an undefined reference at runtime.
+- **`strict: false` inherited from a template.** Teams disable strict mode to suppress initial errors and never re-enable it; type safety degrades.
+- **`skipLibCheck: true` hiding owned `.d.ts` errors.** Errors in generated declaration files the project ships are also skipped.
+- **Build succeeds but emits with errors.** `noEmitOnError` is false; the build produces broken JS from files with type errors.
+- **`as unknown as Foo` cast chains.** Defeat the type checker entirely — equivalent to `any` without the grep signal for `any`.
+- **Full lodash import.** `import _ from 'lodash'` pulls ~73KB minified; `import debounce from 'lodash/debounce'` pulls ~2KB.
+- **Date-stamped bundle filename without content hash.** `bundle.2026-05-31.js` invalidates CDN cache by date, not content; use `bundle.[contenthash].js`.
+- **Mismatched `target` and `lib`.** `target: "es5"` with `lib: ["esnext"]` emits ES5 that calls ES2022 methods absent at runtime.
+- **Circular dependency.** Bundles work until an edge case triggers an undefined reference at runtime; surface the warning.
+- **Incremental build cache hiding errors.** A stale `tsBuildInfo` or bundler cache can report success on code that no longer compiles clean; verify from a clean state when in doubt.
+- **`transpileOnly` / Babel type-stripping treated as a typecheck.** `ts-node --transpileOnly`, `esbuild`, and `swc` strip types without checking them; the only real type gate is `tsc --noEmit`. A green dev server says nothing about type correctness.
+
+## Verify the typecheck is real
+
+A frequent false signal is "the app runs, so types are fine". Dev servers and bundlers transpile by stripping types, not checking them — so type errors pass straight through to runtime. Always run a dedicated `tsc --noEmit` (or `tsc --build --noEmit` for references) as the gate, separate from the build/run step, and confirm it is wired into CI. If the project's "typecheck" script secretly runs the bundler, it is not a type gate; flag that as a finding.
+
+## "Passes locally, fails in CI"
+
+This recurring class almost always traces to an environment difference, not a real code change. Check, in order:
+
+- **Filesystem case sensitivity.** macOS/Windows are case-insensitive; Linux CI is not. `import './Utils'` for a file named `utils.ts` passes locally and fails in CI with "module not found". Grep imports against actual filenames.
+- **Dependency drift.** Local `node_modules` was built from a stale lockfile; CI does a clean `npm ci`. A version that exists locally but not in the lockfile resolves differently. Reproduce with a clean install.
+- **`tsconfig` resolution differences.** A `paths` alias resolved by the IDE/`ts-node` locally but absent from the bundler or `tsc` build config used in CI.
+- **Node/TypeScript version mismatch.** Local Node 22 vs CI Node 18; a syntax or `lib` feature differs. Confirm `engines` and the CI matrix agree.
+- **Case-only env differences.** A type that depends on `process.env.NODE_ENV` being set narrows differently when the var is unset in CI.
+
+The fix is to make the local environment match CI (clean install, same Node, Linux-equivalent case behavior) and reproduce the failure — not to add a suppression so the local build stays green while CI stays red.
 
 ## Required output
 
 ```
 ## Build and Typecheck Review
-
 ### TypeScript errors
-- Total errors: N
-- Errors by file (top 5): file path — N errors
-- Error codes by frequency: TS2345 (N), TS2322 (N), ...
-
+- Total: N | Top files: path — N | Codes by frequency: TS2345 (N), TS2322 (N)
 ### tsconfig.json strictness
 | Option | Value | Status |
-|--------|-------|--------|
-| strict | true/false | ok/risk |
-| noEmitOnError | ... | ... |
-| noUnusedLocals | ... | ... |
-
 ### Type suppression audit
-- @ts-ignore usages: N (N without explanatory comment)
-- as any usages in non-test code: N
-- Files with most suppressions: list
-
+- @ts-ignore: N (N without comment) | as any in non-test: N | files with most suppressions
 ### Bundle analysis (if bundler configured)
-- Total bundle size (gzip): X KB
-- Largest chunks: list
-- Whole-library imports detected: list
-- Tree-shaking: enabled/disabled
-
+- Total (gzip): X KB | Largest chunks | Whole-library imports | Tree-shaking enabled/disabled
 ### Source maps
-- Format: external / inline / none
-- CI upload to error tracker: yes/no
-
+- Format: external/inline/none | CI upload to error tracker: yes/no
 ### Path alias consistency
-- tsconfig paths: list
-- Bundler aliases match: yes/no
-- Jest moduleNameMapper match: yes/no
-
+- tsconfig paths | Bundler match: yes/no | Jest moduleNameMapper match: yes/no
 ### Recommended fixes (priority order)
 1. ...
 ```
 
 ## Safety
 
-- Run only `tsc --noEmit`, `grep`, and read-only file inspection. Do not run `tsc` with emit, `npm run build`, or bundler commands unless the user asks.
+- Run only `tsc --noEmit`, `grep`, and read-only file inspection. Do not run `tsc` with emit, `npm run build`, or bundler commands unless the user asks (the reproducibility check is opt-in).
 - Do not modify `tsconfig.json`, `package.json`, or bundler config without explicit user instruction.
+- Do not weaken strictness flags to make errors disappear; report them instead.
+
+## Completion criteria
+
+Done means `tsc --noEmit` was run and its errors counted by file and code, strictness flags were audited, suppressions and `any` holes were listed with `file:line`, bundle and source-map config were assessed, alias consistency was checked, and fixes are ordered by priority.

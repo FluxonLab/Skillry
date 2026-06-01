@@ -1,0 +1,11 @@
+{
+  "name": "omniagent-performance-and-cost",
+  "description": "Performance and cost engineering: profiling, frontend/runtime/query performance budgets, caching, bundle size, plus LLM/API token and cloud cost control.",
+  "version": "0.1.0",
+  "author": {
+    "name": "FluxonLab",
+    "url": "https://fluxonlab.com"
+  },
+  "homepage": "https://fluxonlab.com",
+  "license": "MIT"
+}
