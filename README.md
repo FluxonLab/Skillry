@@ -124,45 +124,28 @@ subagents, and auditing third-party skills before use.
 
 ## Quickstart
 
-### Claude Code (native plugin marketplace — recommended)
+The per-platform one-liners are in the sections above. Full install reference (all methods + flags):
 
 ```bash
-# In Claude Code:
-/plugin marketplace add FluxonLab/Skillry
-/plugin install core-operations@skillry
-```
+# npx — no clone, no npm account:
+npx github:FluxonLab/Skillry install                                   # dry-run, all platforms
+npx github:FluxonLab/Skillry install --apply --targets claude codex    # pick platform(s)
+npx github:FluxonLab/Skillry install --apply --targets claude --community      # + attributed 3rd-party skills
+npx github:FluxonLab/Skillry install --apply --targets codex --instructions .  # + behavior file into a project
 
-Browse all departments with `/plugin marketplace` after adding.
-
-### npm / npx (any platform, no clone, no publish needed)
-
-```bash
-# Runs straight from GitHub — no global install, no npm account required:
-npx github:FluxonLab/Skillry install                                  # dry-run, all platforms
-npx github:FluxonLab/Skillry install --apply --targets claude         # or: codex copilot antigravity
-npx github:FluxonLab/Skillry install --apply --targets claude --community   # include attributed 3rd-party skills
-
-# Or install the CLI globally (from GitHub — works today):
+# global CLI (works today; short `skillry` name once published to npm):
 npm install -g github:FluxonLab/Skillry
 skillry install --apply --targets claude codex
 skillry validate
-skillry update      # check for a newer release
+skillry update                                                         # check for a newer release
+
+# from a clone:
+git clone https://github.com/FluxonLab/Skillry && cd Skillry
+python3 tools/install.py --apply --targets claude
 ```
 
-> `npm install -g skillry` (the short registry name) will work once the package is published to
-> the npm registry; until then use the `github:FluxonLab/Skillry` form above.
-
-### Portable installer (from a clone)
-
-```bash
-git clone https://github.com/FluxonLab/Skillry
-cd Skillry
-python3 tools/install.py            # dry-run: shows what will be installed
-python3 tools/install.py --apply --targets claude          # or: codex copilot antigravity
-```
-
-The installer rewrites machine-specific paths to your `$HOME` and backs up any existing
-config (`*.bak-skillry`) before writing. Dry-run is the default. Verify with
+Dry-run is the default; existing files are backed up (`*.bak-skillry`). Claude Code users can also use
+the native marketplace — `/plugin marketplace add FluxonLab/Skillry`. Verify any install with
 `python3 tools/validate.py`.
 
 ## What's inside
@@ -188,10 +171,10 @@ Cloud & Infrastructure · Skill Library & Installation · Optional Specialists
 
 </details>
 
-## Multi-platform
+## Multi-platform reference
 
-One authored source → platform-correct output for each runtime — skills, agents, **and the
-project behavior file** each tool actually reads:
+At a glance — what each runtime gets (skills, agents in its native format, **and the behavior file
+it actually reads**), and where it's installed:
 
 | Platform | Skills | Agents | Behavior file | Install target |
 |---|---|---|---|---|
