@@ -15,7 +15,7 @@ Redistributed sources (all permissive — MIT):
   - Donchitos/Claude-Code-Game-Studios   (c) 2026 Donchitos
   - addyosmani/agent-skills              (c) 2025 Addy Osmani
   - addyosmani/web-quality-skills        (c) 2026 Addy Osmani
-  - jaktestowac/awesome-copilot-for-testers  (c) jaktestowac.com
+  - jaktestowac/awesome-copilot-for-testers  (c) GitHub, Inc. (fork of github/awesome-copilot; original MIT copyright retained)
 
 Each source's directory under community/<source>/ also contains a copy of that
 source's original LICENSE file.

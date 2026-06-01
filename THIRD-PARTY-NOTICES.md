@@ -185,6 +185,7 @@ SOFTWARE.
 
 ## jaktestowac/awesome-copilot-for-testers
 - **License:** MIT
+- **Copyright:** GitHub, Inc. (this repo is a fork of github/awesome-copilot and retains the original MIT copyright notice)
 - **Upstream:** https://github.com/jaktestowac/awesome-copilot-for-testers
 - **Redistributed:** 4 skills
 - **Used for:** Test/QA skills.
