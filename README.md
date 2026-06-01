@@ -87,6 +87,10 @@ config (`*.bak-skillry`) before writing. Dry-run is the default. Verify with
 - **A curated `community/` set** — 98 skills + 49 agents from 6 permissively-licensed sources,
   redistributed with full attribution (MIT/ISC only — see [NOTICE](NOTICE) and
   [THIRD-PARTY-NOTICES](THIRD-PARTY-NOTICES.md)).
+- **A flagship [`CLAUDE.md`](CLAUDE.md)** — a project-agnostic engineering operating manual
+  (inspect-first, surgical changes, security, i18n + theme parity, dev-launch defaults, honest
+  verification). It governs this repo and is written to be **copied into your own project** as a
+  strong default: `cp CLAUDE.md /path/to/your/repo/CLAUDE.md`.
 
 <details><summary>Departments (18)</summary>
 
