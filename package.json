@@ -1,6 +1,6 @@
 {
   "name": "skillry",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Installable, permission-bounded, multi-platform agent skills & subagents for Claude Code, OpenAI Codex, GitHub Copilot, and Google Antigravity (Gemini).",
   "keywords": [
     "claude-code",
