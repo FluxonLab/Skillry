@@ -231,9 +231,11 @@ PRs that add third-party content must include correct attribution and a license 
   with a [CHANGELOG](CHANGELOG.md) entry, maintainer-reviewed PRs that must pass the validator and CI.
 - **Security:** report privately via [SECURITY.md](SECURITY.md) (GitHub Security Advisory preferred).
 - **Roadmap:** tracked in the pinned [Roadmap issue](https://github.com/FluxonLab/Skillry/issues).
-- **Project status:** **early but infrastructure-level OSS** — MIT, actively maintained. We make no
-  inflated star/download/usage claims; what's documented (skill counts, the token-effort figures) is
-  measured, and third-party content is fully attributed.
+- **Project status:** **early but infrastructure-level OSS** — MIT, actively maintained. The value
+  here is *ecosystem importance, not adoption metrics*: it addresses a real gap in the agent-skills
+  ecosystem — safe distribution, validation, permission boundaries, provenance, and Codex-ready
+  installation. We make **no inflated star/download/usage claims**; what's documented (skill counts,
+  token-effort figures) is measured, and third-party content is fully attributed.
 
 ## Build effort & transparency
 
