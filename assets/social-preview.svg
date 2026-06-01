@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1117"/>
+      <stop offset="1" stop-color="#161b22"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.82" cy="0.18" r="0.7">
+      <stop offset="0" stop-color="#7c3aed" stop-opacity="0.38"/>
+      <stop offset="1" stop-color="#7c3aed" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect width="1280" height="640" fill="url(#glow)"/>
+  <rect x="0" y="0" width="1280" height="8" fill="#7c3aed"/>
+
+  <!-- wordmark -->
+  <text x="80" y="210" font-size="132" font-weight="800" fill="#ffffff" letter-spacing="-2">Skillry</text>
+  <rect x="84" y="236" width="300" height="6" rx="3" fill="#7c3aed"/>
+
+  <!-- tagline -->
+  <text x="84" y="300" font-size="33" font-weight="500" fill="#c9d1d9">Installable, permission-bounded, multi-platform</text>
+  <text x="84" y="346" font-size="33" font-weight="500" fill="#c9d1d9">agent skills &amp; subagents.</text>
+
+  <!-- platform chips -->
+  <g font-size="26" font-weight="600">
+    <rect x="84"  y="392" width="150" height="52" rx="26" fill="#21262d" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="159" y="426" fill="#e6edf3" text-anchor="middle">Claude</text>
+    <rect x="250" y="392" width="140" height="52" rx="26" fill="#21262d" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="320" y="426" fill="#e6edf3" text-anchor="middle">Codex</text>
+    <rect x="406" y="392" width="160" height="52" rx="26" fill="#21262d" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="486" y="426" fill="#e6edf3" text-anchor="middle">Copilot</text>
+    <rect x="582" y="392" width="156" height="52" rx="26" fill="#21262d" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="660" y="426" fill="#e6edf3" text-anchor="middle">Gemini</text>
+  </g>
+
+  <!-- stats -->
+  <g>
+    <text x="84"  y="528" font-size="58" font-weight="800" fill="#ffffff">125</text>
+    <text x="84"  y="566" font-size="24" fill="#8b949e">skills</text>
+    <text x="300" y="528" font-size="58" font-weight="800" fill="#ffffff">73</text>
+    <text x="300" y="566" font-size="24" fill="#8b949e">subagents</text>
+    <text x="520" y="528" font-size="58" font-weight="800" fill="#ffffff">18</text>
+    <text x="520" y="566" font-size="24" fill="#8b949e">departments</text>
+    <text x="800" y="528" font-size="58" font-weight="800" fill="#ffffff">4</text>
+    <text x="800" y="566" font-size="24" fill="#8b949e">platforms</text>
+  </g>
+
+  <!-- footer -->
+  <text x="84" y="612" font-size="24" fill="#8b949e">MIT licensed &#183; full upstream attribution &#183; by FluxonLab</text>
+  <text x="1196" y="612" font-size="24" fill="#7c3aed" text-anchor="end" font-weight="600">github.com/FluxonLab/Skillry</text>
+</svg>
