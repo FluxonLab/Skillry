@@ -1,6 +1,6 @@
 # Installing Skillry
 
-Skillry ships **124 original, permission-bounded skills + 73 subagents** across 18
+Skillry ships **125 original, permission-bounded skills + 73 subagents** across 18
 departments, plus an attributed `community/` set (98 skills + 49 agents from 6 MIT/ISC
 sources). Install into one or more platforms.
 
@@ -59,6 +59,27 @@ Install locations per platform:
 
 The installer **backs up** any existing file to `*.bak-skillry` before overwriting,
 and converts each agent to the platform's native format (e.g. Codex `.toml`).
+
+## Behavior files (CLAUDE.md / AGENTS.md / GEMINI.md / copilot-instructions)
+
+Skillry also ships a project behavior file for every platform, all generated from the canonical
+[`CLAUDE.md`](../CLAUDE.md). Add `--instructions <dir>` to drop the right one(s) into your project
+in the same command that installs the skills (existing files are backed up):
+
+```bash
+# skills/agents + the behavior file each target reads, written into ~/my-project:
+python3 tools/install.py --apply --targets claude codex --instructions ~/my-project
+```
+
+| Target | File written into your project |
+|---|---|
+| `claude` | `CLAUDE.md` |
+| `codex` | `AGENTS.md` |
+| `copilot` | `.github/copilot-instructions.md` |
+| `antigravity` | `GEMINI.md` + `AGENTS.md` |
+
+Maintainers: edit `CLAUDE.md`, then regenerate the rest with
+`python3 tools/build-agent-instructions.py --apply` (CI fails if they drift).
 
 ## Verify
 

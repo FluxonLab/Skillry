@@ -30,8 +30,17 @@ jobs:
             exit 1
           fi
 
+      - name: Rebuild agent instruction files and check they are committed
+        run: |
+          python3 tools/build-agent-instructions.py --apply
+          if ! git diff --quiet -- AGENTS.md GEMINI.md .github/copilot-instructions.md; then
+            echo "::error::Agent instruction files are out of date. Run: python3 tools/build-agent-instructions.py --apply"
+            git --no-pager diff -- AGENTS.md GEMINI.md .github/copilot-instructions.md
+            exit 1
+          fi
+
       - name: Dry-run installer for all platforms (no writes)
-        run: python3 tools/install.py --targets claude codex copilot antigravity
+        run: python3 tools/install.py --targets claude codex copilot antigravity --instructions /tmp/skillry-instr-check
 
   install-smoke:
     name: Install into a throwaway HOME and re-validate

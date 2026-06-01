@@ -5,13 +5,18 @@ attribution** over raw volume. A few small, high-quality skills beat many shallo
 
 ## Ground rules
 
-1. **One source of truth.** Author skills/agents once under `plugins/<department>/`. The
-   per-platform output in `platforms/` is generated — do not hand-edit it.
+1. **One source of truth.** Author skills/agents once under `plugins/<department>/`. Generated
+   artifacts are never hand-edited: `.claude-plugin/marketplace.json` comes from
+   `tools/build-marketplace.py`, and the behavior files `AGENTS.md` / `GEMINI.md` /
+   `.github/copilot-instructions.md` come from `CLAUDE.md` via `tools/build-agent-instructions.py`.
+   Edit the source, then regenerate (CI fails if a generated file drifts).
 2. **Least privilege.** Every subagent must declare an explicit `tools` allowlist. Review/audit
    agents must not include `Edit` or `Write`.
 3. **Real content, not templates.** A skill must have concrete procedures, commands, checks,
    and a safety section — not a generic restated description.
-4. **English only** in public content.
+4. **Discoverable triggers.** A skill's `description` must start with "Use when …" and name the
+   concrete situations/phrases that should invoke it — this is what drives auto-invocation.
+5. **English only** in public content.
 
 ## Skill requirements
 

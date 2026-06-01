@@ -1,9 +1,9 @@
 {
   "version": "0.1.0",
   "counts": {
-    "original": 124,
+    "original": 125,
     "community": 98,
-    "total": 222
+    "total": 223
   },
   "skills": [
     {
@@ -205,6 +205,14 @@
       "origin": "original",
       "lines": 154,
       "checksum": "8d373965730c3a60896372282e16f127d85a3db93cf3597a985f623f3605eb1f"
+    },
+    {
+      "id": "diff-review",
+      "folder": "07-diff-review",
+      "department": "core-operations",
+      "origin": "original",
+      "lines": 92,
+      "checksum": "a825f448e12ab885b6257c0556f2fcbd9b00db69721a8ee2fe24c2b0cecb4801"
     },
     {
       "id": "project-agent-bootstrap",
