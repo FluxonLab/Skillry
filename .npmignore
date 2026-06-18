@@ -1,0 +1,28 @@
+# Local development artifacts
+.DS_Store
+**/.DS_Store
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local environments, logs, and package outputs
+.venv/
+venv/
+node_modules/
+*.log
+*.tgz
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Pre-public planning and one-off launch materials
+public-repo-plan/
+skillry-launch-kit/
+publish-skillry.sh

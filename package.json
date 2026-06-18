@@ -35,7 +35,12 @@
   },
   "files": [
     "bin/",
-    "tools/",
+    "tools/build-agent-instructions.py",
+    "tools/build-lock.py",
+    "tools/build-marketplace.py",
+    "tools/install.py",
+    "tools/skill-sync.py",
+    "tools/validate.py",
     "plugins/",
     "community/",
     ".claude-plugin/",
