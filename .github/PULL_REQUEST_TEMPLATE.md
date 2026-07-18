@@ -16,6 +16,7 @@
 
 - [ ] `python3 tools/validate.py` passes (0 failures).
 - [ ] If I changed `plugins/`, I regenerated the marketplace: `python3 tools/build-marketplace.py --apply`.
+- [ ] If I changed skills or agents, I regenerated the locks: `python3 tools/build-lock.py --apply`.
 - [ ] If I changed `CLAUDE.md`, I regenerated the behavior files: `python3 tools/build-agent-instructions.py --apply`.
 - [ ] New skills have valid frontmatter (`name` matches the folder minus `NN-`; `description` starts with "Use when …") and real Procedure / Concrete checks / Safety sections.
 - [ ] New subagents declare a least-privilege `tools` allowlist (review/audit agents have no `Edit`/`Write`).

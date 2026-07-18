@@ -30,6 +30,15 @@ jobs:
             exit 1
           fi
 
+      - name: Rebuild registry locks and check they are committed
+        run: |
+          python3 tools/build-lock.py --apply
+          if ! git diff --quiet -- registry/skill-lock.json registry/agent-lock.json; then
+            echo "::error::Registry locks are out of date. Run: python3 tools/build-lock.py --apply"
+            git --no-pager diff -- registry/skill-lock.json registry/agent-lock.json
+            exit 1
+          fi
+
       - name: Rebuild agent instruction files and check they are committed
         run: |
           python3 tools/build-agent-instructions.py --apply
@@ -52,8 +61,11 @@ jobs:
           python-version: "3.12"
       - name: Install into isolated HOME (does not touch the runner's real config)
         run: |
-          export HOME="$(mktemp -d)"
+          isolated_home="$(mktemp -d)"
+          export HOME="$isolated_home"
           python3 tools/install.py --apply --targets claude codex copilot antigravity
-          echo "Installed skills (claude): $(find "$HOME/.claude/skills" -name SKILL.md | wc -l)"
-          test "$(find "$HOME/.claude/skills" -name SKILL.md | wc -l)" -ge 100
-          test "$(ls "$HOME/.codex/agents/"*.toml | wc -l)" -ge 60
+          skill_count="$(find "$HOME/.claude/skills" -name SKILL.md | wc -l)"
+          agent_count="$(find "$HOME/.codex/agents" -name '*.toml' | wc -l)"
+          echo "Installed skills (claude): $skill_count"
+          test "$skill_count" -ge 100
+          test "$agent_count" -ge 60
