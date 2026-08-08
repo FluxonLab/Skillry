@@ -1,0 +1,197 @@
+"assistant_constraints":
+  "classification": "INFERRED"
+  "evidence": "derived from observed structure"
+  "value":
+    - "Use npm for dependency operations; do not switch package manager."
+    - "Node runtime pin is >=16."
+    - "No test script is defined; do not claim tests pass."
+    - "Existing assistant rule files: claude, codex, gemini."
+"capabilities":
+  "classification": "USER_DECIDED"
+  "evidence": "bounded deterministic selection"
+  "value":
+    - "policy.render_claude"
+    - "policy.drift_report"
+    - "project.inspect"
+    - "policy.compile_ir"
+    - "project.manifest_v2"
+"database":
+  "destructive_migrations_allowed":
+    "classification": "USER_DECIDED"
+    "evidence": "estate policy: never without an explicit task"
+    "value": false
+  "engine":
+    "classification": "UNKNOWN"
+    "evidence": "no engine marker found"
+    "value": null
+"deployment":
+  "classification": "USER_DECIDED"
+  "evidence": "estate policy: deployment is never incidental"
+  "value":
+    "allowed": false
+    "rationale": "Deployment is never a side effect of a governance or development task."
+"destructive_action_policy":
+  "classification": "USER_DECIDED"
+  "evidence": "estate policy"
+  "value":
+    - "Do not run installs, builds, migrations or applications as a side effect of analysis."
+    - "Do not read .env values; treat their existence as metadata only."
+    - "Do not commit, push, reset, clean or rewrite history without an explicit task."
+    - "Do not deploy or publish."
+    - "Do not assume version control exists here; this project is unversioned."
+"entrypoints":
+  "classification": "OBSERVED"
+  "evidence": "conventional paths"
+  "value":
+    - "bin/skillry.js"
+"environment_templates":
+  "classification": "OBSERVED"
+  "evidence": "filename classification"
+  "value": []
+"external_services":
+  "classification": "UNKNOWN"
+  "evidence": "manifest"
+  "value": []
+"frameworks":
+  "classification": "OBSERVED"
+  "evidence": "dependency and file markers"
+  "value": []
+"gates":
+  "build":
+    "classification": "UNKNOWN"
+    "evidence": "no build script declared"
+    "value": null
+  "test":
+    "classification": "UNKNOWN"
+    "evidence": "no test script declared"
+    "value": null
+"generated_paths":
+  "classification": "OBSERVED"
+  "evidence": "generator script scan"
+  "value":
+    - "tools/build-agent-instructions.py"
+"human_decisions":
+  "classification": "USER_DECIDED"
+  "evidence": "none recorded yet"
+  "value": []
+"ignored_cache_paths":
+  "classification": "USER_DECIDED"
+  "evidence": "estate convention"
+  "value":
+    - "node_modules"
+    - "dist"
+    - "build"
+    - ".next"
+    - "target"
+    - "coverage"
+"lockfiles":
+  "classification": "OBSERVED"
+  "evidence": "file presence"
+  "value": []
+"native_toolchains":
+  "classification": "OBSERVED"
+  "evidence": "toolchain markers"
+  "value": []
+"nested_components":
+  "classification": "OBSERVED"
+  "evidence": "directory scan"
+  "value": []
+"project":
+  "id":
+    "classification": "OBSERVED"
+    "evidence": "directory name"
+    "value": "skillry"
+  "kind":
+    "classification": "INFERRED"
+    "evidence": "manifest and nested manifest evidence"
+    "value": "cli"
+  "name":
+    "classification": "OBSERVED"
+    "evidence": "package.json or directory"
+    "value": "skillry"
+  "root":
+    "classification": "OBSERVED"
+    "evidence": "portable by construction"
+    "value": "."
+"provenance":
+  "files_seen":
+    "classification": "OBSERVED"
+    "evidence": "bounded traversal"
+    "value": 417
+  "inspector_version":
+    "classification": "OBSERVED"
+    "evidence": "inspector"
+    "value": "1.0.0"
+  "refused_paths":
+    "classification": "OBSERVED"
+    "evidence": "classified, never opened"
+    "value": 0
+"repository":
+  "branch":
+    "classification": "UNKNOWN"
+    "evidence": "git"
+    "value": null
+  "dirty_count":
+    "classification": "OBSERVED"
+    "evidence": "git status"
+    "value": 0
+  "source_of_truth":
+    "classification": "OBSERVED"
+    "evidence": "git remote presence"
+    "value": "unversioned"
+"runtime":
+  "node":
+    "classification": "OBSERVED"
+    "evidence": ".nvmrc / engines.node"
+    "value": ">=16"
+  "other_runtimes":
+    "classification": "OBSERVED"
+    "evidence": "toolchain markers"
+    "value": []
+  "package_manager":
+    "classification": "INFERRED"
+    "evidence": "lockfile"
+    "value": "npm"
+  "package_manager_version":
+    "classification": "UNKNOWN"
+    "evidence": "not present in project metadata"
+    "value": null
+"schema_version": "project-governance-output.v1"
+"scripts":
+  "build":
+    "classification": "UNKNOWN"
+    "evidence": "not present in project metadata"
+    "value": null
+  "check":
+    "classification": "OBSERVED"
+    "evidence": "package.json scripts"
+    "value": "npm run validate"
+  "install":
+    "classification": "OBSERVED"
+    "evidence": "package.json scripts"
+    "value": "npm install"
+  "test":
+    "classification": "UNKNOWN"
+    "evidence": "not present in project metadata"
+    "value": null
+"secret_filename_classes":
+  "classification": "OBSERVED"
+  "evidence": "filename classification only; contents never read"
+  "value": []
+"unknowns":
+  "classification": "UNKNOWN"
+  "evidence": "stated rather than guessed"
+  "value":
+    - "No build script identified"
+    - "No database engine detected"
+    - "No test script identified"
+    - "package.json present but no lockfile - dependency versions are not pinned"
+"workspace":
+  "layout":
+    "classification": "OBSERVED"
+    "evidence": "package workspaces / nested manifests"
+    "value": "single"
+  "package_roots":
+    "classification": "OBSERVED"
+    "evidence": "directory scan"
+    "value": []
