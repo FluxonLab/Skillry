@@ -10,7 +10,7 @@ One source of truth. Install the same curated skills, subagents, and slash comma
 **Claude Code, OpenAI Codex, GitHub Copilot, and Google Antigravity (Gemini)** — with real
 permission boundaries, a validation harness, and full upstream attribution.
 
-[Quickstart](#quickstart) · [Why Codex](#why-this-matters-for-codex) · [All platforms](#also-first-class-on-claude-copilot--antigravity) · [Demo](#demo) · [What's inside](#whats-inside) · [Safety](#safety--permissions) · [Governance](#maintainers--governance) · [Contributing](CONTRIBUTING.md)
+[Quickstart](#quickstart) · [Why Codex](#why-this-matters-for-codex) · [All platforms](#also-first-class-on-claude-copilot--antigravity) · [Demo](#demo) · [What's inside](#whats-inside) · [Safety](#safety--permissions) · [Project pack](docs/project/README.md) · [Governance](#maintainers--governance) · [Contributing](CONTRIBUTING.md)
 
 [![CI](https://github.com/FluxonLab/Skillry/actions/workflows/validate.yml/badge.svg)](https://github.com/FluxonLab/Skillry/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)

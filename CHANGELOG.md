@@ -7,6 +7,9 @@ All notable changes to Skillry are documented here. The format is based on
 ## [Unreleased]
 
 ### Added
+- **Portable project pack** under `docs/project/` with the canonical decision register,
+  maintainer handoff, evidence-first working method, research synthesis, roadmap, open questions,
+  and sanitized historical context for cross-computer continuity.
 - **Published to the npm registry** — [`npm install -g skillry`](https://www.npmjs.com/package/skillry)
   now works (in addition to `npx github:FluxonLab/Skillry`).
 - README: **Why this matters for Codex**, per-platform sections for **Claude, Copilot & Antigravity**,
