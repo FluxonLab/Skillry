@@ -4,7 +4,11 @@ on:
   push:
     branches: [main]
   pull_request:
+    branches: [main]
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   validate:
@@ -38,6 +42,9 @@ jobs:
             git --no-pager diff -- AGENTS.md GEMINI.md .github/copilot-instructions.md
             exit 1
           fi
+
+      - name: Validate generated-family assistant identity and policy delivery
+        run: python3 tests/test_agent_instruction_family.py
 
       - name: Dry-run installer for all platforms (no writes)
         run: python3 tools/install.py --targets claude codex copilot antigravity --instructions /tmp/skillry-instr-check
