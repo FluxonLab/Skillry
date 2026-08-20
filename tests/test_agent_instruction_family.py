@@ -226,5 +226,19 @@ class GeneratorContract(unittest.TestCase):
             self.assertEqual(read(rel), before[rel], "%s is stale" % rel)
 
 
+class WorkflowContract(unittest.TestCase):
+    def test_validate_workflow_cannot_skip_governance_changes(self):
+        workflow = read(".github/workflows/validate.yml")
+        self.assertRegex(workflow, r"pull_request:\n\s+branches: \[main\]")
+        self.assertRegex(workflow, r"permissions:\n\s+contents: read")
+        for forbidden in ("pull_request_target", "paths:", "paths-ignore:",
+                          "continue-on-error"):
+            self.assertNotIn(forbidden, workflow)
+
+    def test_validate_workflow_runs_generated_family_contract(self):
+        workflow = read(".github/workflows/validate.yml")
+        self.assertIn("python3 tests/test_agent_instruction_family.py", workflow)
+
+
 if __name__ == "__main__":
     unittest.main()

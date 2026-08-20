@@ -38,7 +38,6 @@
     - "Do not read .env values; treat their existence as metadata only."
     - "Do not commit, push, reset, clean or rewrite history without an explicit task."
     - "Do not deploy or publish."
-    - "Do not assume version control exists here; this project is unversioned."
 "entrypoints":
   "classification": "OBSERVED"
   "evidence": "conventional paths"
@@ -117,7 +116,7 @@
   "files_seen":
     "classification": "OBSERVED"
     "evidence": "bounded traversal"
-    "value": 417
+    "value": 415
   "inspector_version":
     "classification": "OBSERVED"
     "evidence": "inspector"
@@ -128,9 +127,9 @@
     "value": 0
 "repository":
   "branch":
-    "classification": "UNKNOWN"
+    "classification": "OBSERVED"
     "evidence": "git"
-    "value": null
+    "value": "main"
   "dirty_count":
     "classification": "OBSERVED"
     "evidence": "git status"
@@ -138,7 +137,7 @@
   "source_of_truth":
     "classification": "OBSERVED"
     "evidence": "git remote presence"
-    "value": "unversioned"
+    "value": "git_remote"
 "runtime":
   "node":
     "classification": "OBSERVED"
