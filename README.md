@@ -1,275 +1,129 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/FluxonLab/Skillry/main/assets/social-preview.png" alt="Skillry — multi-platform agent skills & subagents" width="680">
+<img src="https://raw.githubusercontent.com/FluxonLab/Skillry/main/assets/social-preview.png" alt="Skillry - multi-platform agent skills and agents" width="680">
 
 # Skillry
 
-**Installable, permission-bounded, multi-platform agent skills & subagents — by [FluxonLab](https://fluxonlab.com).**
+**Reusable, permission-bounded skills and agents for Claude Code, OpenAI Codex, Gemini, and GitHub Copilot.**
 
-One source of truth. Install the same curated skills, subagents, and slash commands into
-**Claude Code, OpenAI Codex, GitHub Copilot, and Google Antigravity (Gemini)** — with real
-permission boundaries, a validation harness, and full upstream attribution.
+One maintained library, adapted to each supported runtime without taking ownership of a project's
+instruction files.
 
-[Quickstart](#quickstart) · [Why Codex](#why-this-matters-for-codex) · [All platforms](#also-first-class-on-claude-copilot--antigravity) · [Demo](#demo) · [What's inside](#whats-inside) · [Safety](#safety--permissions) · [Governance](#maintainers--governance) · [Contributing](CONTRIBUTING.md)
+[Quickstart](#portable-installation) | [Platform contract](#platform-contract) | [Organization](#how-work-is-organized) | [Contributing](CONTRIBUTING.md)
 
 [![CI](https://github.com/FluxonLab/Skillry/actions/workflows/validate.yml/badge.svg)](https://github.com/FluxonLab/Skillry/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![npm](https://img.shields.io/npm/v/skillry.svg?label=npm)](https://www.npmjs.com/package/skillry)
-![Platforms](https://img.shields.io/badge/platforms-Claude%20%C2%B7%20Codex%20%C2%B7%20Copilot%20%C2%B7%20Gemini-7c3aed.svg)
-![Skills](https://img.shields.io/badge/skills-125-success.svg)
-![Subagents](https://img.shields.io/badge/subagents-73-success.svg)
-![Departments](https://img.shields.io/badge/departments-18-success.svg)
-![Status](https://img.shields.io/badge/status-early%20%C2%B7%20infrastructure--level-orange.svg)
 
 </div>
 
 ---
 
-## Why this matters for Codex
+## What Skillry provides
 
-**In one line:** Skillry is the *safe-distribution layer* for Codex agent skills & subagents —
-install, validate, attribute, and permission-bound them instead of pasting files by hand.
+- Platform-ready skills and agent definitions maintained from a shared library.
+- Capability routing across product, web, backend, mobile, desktop, UX, accessibility, SEO/GEO,
+  games, AI, data, platform, SRE, security, QA, media, assets, and knowledge operations.
+- Least-privilege agent boundaries and explicit attribution for redistributed community content.
+- A dry-run-first portable installer so users can inspect destinations and changes before writing.
 
-OpenAI Codex reads **`AGENTS.md`** (the open standard) and runs custom subagents. Skillry gives Codex users:
+Skillry is a capability library, not a simulated company. Departments are discovery and routing
+labels. They do not create permanent autonomous teams or require every task to pass through a
+fixed organization chart.
 
-- **125 installable skills + 73 subagents.** Each subagent is converted to Codex's native `.toml`
-  format with a `sandbox_mode` derived from its permissions — review/audit agents become `read-only`.
-- **A generated `AGENTS.md`** per project (from one canonical source), plus a `--instructions`
-  installer that **merges** into your existing `AGENTS.md` without clobbering your rules.
-- **A CI validation harness** and **full upstream attribution** for any redistributed third-party
-  content — the governance layer most skill collections skip.
+## Portable installation
 
-One line, no clone:
+Preview is the default and writes nothing:
 
-```bash
-npx github:FluxonLab/Skillry install --apply --targets codex
-```
+~~~bash
+npx github:FluxonLab/Skillry install
+~~~
 
-## Also first-class on Claude, Copilot & Antigravity
+After reviewing the plan, apply it explicitly:
 
-Same source of truth, platform-correct output. Each tool gets the behavior file it actually reads,
-skills in its native location, and agents converted to its format — all permission-bounded.
+~~~bash
+npx github:FluxonLab/Skillry install --apply
+~~~
 
-### Claude Code
-Reads **`CLAUDE.md`** and has a native plugin marketplace. Skillry ships a
-`.claude-plugin/marketplace.json` (18 department plugins, SHA-pinnable for reproducible installs)
-plus auto-invoked skills and `agents/*.md`.
-```bash
-# in Claude Code:
-/plugin marketplace add FluxonLab/Skillry
-/plugin install core-operations@skillry
-```
+Targets can be limited. For example:
 
-### GitHub Copilot (VS Code)
-Reads **`.github/copilot-instructions.md`** (and the `AGENTS.md` standard). Skillry installs skills
-plus `*.agent.md` agents into `~/.copilot/` + `~/.agents/` and generates the instructions file.
-```bash
-npx github:FluxonLab/Skillry install --apply --targets copilot --instructions .
-```
+~~~bash
+npx github:FluxonLab/Skillry install --targets claude codex
+npx github:FluxonLab/Skillry install --apply --targets claude codex
+~~~
 
-### Google Antigravity (Gemini)
-Reads **`GEMINI.md` and `AGENTS.md`** (since Antigravity v1.20.3). Skillry generates both and installs
-skills + agents into `~/.gemini/antigravity/`.
-```bash
-npx github:FluxonLab/Skillry install --apply --targets antigravity --instructions .
-```
+The dry-run for the selected release is the authority for exact destination paths and planned
+changes. Do not infer a destination from an old README, marketplace layout, or another runtime.
 
-## Demo
+## Platform contract
 
-Dry-run (writes nothing) for Codex — see exactly what would be installed:
+The portable installer installs only platform skills and agent definitions.
 
-```text
-$ npx github:FluxonLab/Skillry install --targets codex --instructions .
-DRY-RUN — Skillry install
-Targets: codex   Community skills: no
+| Platform | Installed payload | Project instructions remain project-owned |
+|---|---|---|
+| Claude Code | Skills and Claude-compatible agents | CLAUDE.md |
+| OpenAI Codex | Skills and Codex-compatible agent profiles | AGENTS.md |
+| Gemini | Skills and Gemini-compatible agents | GEMINI.md and AGENTS.md |
+| GitHub Copilot | Skills and Copilot-compatible custom agents | .github/copilot-instructions.md and AGENTS.md |
 
-  codex        skills:125  agents:73  -> ~/.codex/skills
+The installer does **not** copy, generate, merge, append, reconcile, back up, or otherwise modify
+project CLAUDE.md, AGENTS.md, GEMINI.md, or Copilot instruction files. Those files express local
+project policy and must be authored and maintained by that project.
 
-Instruction files -> .
-  AGENTS.md                          [would-fresh]
+The repository's own CLAUDE.md and AGENTS.md govern contributions to Skillry. They are not portable
+templates and are not installer payloads.
 
-Done (dry-run — nothing written; re-run with --apply)
-```
+## How work is organized
 
-Each agent is converted to a Codex `.toml` with a permission-derived sandbox:
+Skillry favors a small orchestration model:
 
-```toml
-name = "accessibility_auditor"
-description = "Use when you need to audit accessibility and report concrete semantic, focus, contrast, and label issues."
-model_reasoning_effort = "medium"
-sandbox_mode = "read-only"            # review/audit agents get no write access
-developer_instructions = """ … """
-```
+1. One lead owns scope, decisions, context, and the final result.
+2. One writer applies a change, avoiding concurrent edits to the same artifact.
+3. Temporary subagents are used only for bounded specialist work that benefits from isolation or
+   parallelism. Each returns evidence, decisions, open questions, and a concise handoff, then ends.
+4. Skills use progressive disclosure: route from metadata, load the selected SKILL.md, and open
+   supporting references only when the task requires them.
+5. Departments form a capability graph for routing and coverage. They are not standing managerial
+   layers, mandatory queues, or personas kept alive between tasks.
 
-Add `--apply` to write, and the canonical [`AGENTS.md`](AGENTS.md) shows the project behavior file
-Codex loads. (An animated terminal demo is on the [roadmap](https://github.com/FluxonLab/Skillry/issues).)
+This keeps routine work direct while retaining specialist depth for genuinely independent or
+high-risk work.
 
-## Why Skillry
+## Library structure
 
-Most Claude Code resource repos are **link lists** (you still copy files by hand) or are
-**Claude-only**. Skillry is different on five axes:
+- plugins/<department>/ contains first-party skills and agents grouped for discovery.
+- community/<source>/ contains attributed third-party material with its upstream license.
+- registry/ records distributable inventory and provenance.
+- tools/ contains repository maintenance and portable installation tooling.
+- docs/ contains public guides and durable project documentation.
+- CLAUDE.md and AGENTS.md contain repository-only contributor instructions.
 
-| | Skillry | Typical "awesome" list | Typical CLI installer |
-|---|:---:|:---:|:---:|
-| Installs actual skill/agent **files** (not links) | ✅ | ❌ | ✅ |
-| **Multi-platform** (Claude + Codex + Copilot + Gemini) | ✅ | ❌ | ❌ (Claude only) |
-| Per-agent **permission boundaries** (least-privilege `tools`) | ✅ | ❌ | ⚠️ |
-| **Validation harness** (structure + frontmatter lint + permission + lockfiles) | ✅ | ❌ | ⚠️ |
-| **Skill-sync**: discover (license + risk scan), normalize (frontmatter + provenance), vet (staged, attributed, never auto-enabled) | ✅ | ❌ | ❌ |
-| Native plugin marketplace (sha-pinned, reproducible) | ✅ | ❌ | ⚠️ |
-| Full upstream **attribution** for redistributed content | ✅ | n/a | ⚠️ |
+Counts and compatibility claims can change. Prefer the current registry, release notes, installer
+dry-run, and primary platform documentation over copied summaries.
 
-These directly reflect Anthropic's own guidance: least-privilege tools, single-responsibility
-subagents, and auditing third-party skills before use.
+## Safety and provenance
 
-## Quickstart
-
-The per-platform one-liners are in the sections above. Full install reference (all methods + flags):
-
-```bash
-# npx — no clone, no npm account:
-npx github:FluxonLab/Skillry install                                   # dry-run, all platforms
-npx github:FluxonLab/Skillry install --apply --targets claude codex    # pick platform(s)
-npx github:FluxonLab/Skillry install --apply --targets claude --community      # + attributed 3rd-party skills
-npx github:FluxonLab/Skillry install --apply --targets codex --instructions .  # + behavior file into a project
-
-# global CLI (published on npm):
-npm install -g skillry
-skillry install --apply --targets claude codex
-skillry validate
-skillry update                                                         # check for a newer release
-
-# from a clone:
-git clone https://github.com/FluxonLab/Skillry && cd Skillry
-python3 tools/install.py --apply --targets claude
-```
-
-Dry-run is the default; existing files are backed up (`*.bak-skillry`). Claude Code users can also use
-the native marketplace — `/plugin marketplace add FluxonLab/Skillry`. Verify any install with
-`python3 tools/validate.py`.
-
-## What's inside
-
-- **125 original skills** across **18 departments** — concrete procedures, real commands,
-  checklists, and safety rules (not generic templates); median ~150 lines of substance.
-- **73 original subagents** with explicit `tools` allowlists and read-only vs. write scopes.
-- **A curated `community/` set** — 98 skills + 49 agents from 6 permissively-licensed sources,
-  redistributed with full attribution (MIT/ISC only — see [NOTICE](NOTICE) and
-  [THIRD-PARTY-NOTICES](THIRD-PARTY-NOTICES.md)).
-- **A flagship [`CLAUDE.md`](CLAUDE.md)** — a project-agnostic engineering operating manual
-  (inspect-first, surgical changes, security, i18n + theme parity, dev-launch defaults, honest
-  verification). It governs this repo and is written to be **copied into your own project** as a
-  strong default: `cp CLAUDE.md /path/to/your/repo/CLAUDE.md`.
-
-<details><summary>Departments (18)</summary>
-
-Core Operations · Runtime & Local App · Backend & API · Frontend & Web Design ·
-Mobile & Desktop · Gaming & Interactive Media · Database & Data · AI & Agent Systems ·
-Security · Testing & QA · DevOps & Release · Product, Docs & Research ·
-Documentation & Tech Writing · Data & ML / AI Engineering · Performance & Cost ·
-Cloud & Infrastructure · Skill Library & Installation · Optional Specialists
-
-</details>
-
-## Multi-platform reference
-
-At a glance — what each runtime gets (skills, agents in its native format, **and the behavior file
-it actually reads**), and where it's installed:
-
-| Platform | Skills | Agents | Behavior file | Install target |
-|---|---|---|---|---|
-| Claude Code | `SKILL.md` | `agents/*.md` | `CLAUDE.md` | `~/.claude/` |
-| OpenAI Codex | `SKILL.md` | `agents/*.toml` | `AGENTS.md` | `~/.codex/` |
-| GitHub Copilot | `SKILL.md` | `agents/*.agent.md` | `.github/copilot-instructions.md` | `~/.copilot/` + `~/.agents/` |
-| Google Antigravity (Gemini) | `SKILL.md` | `agents/*.md` | `GEMINI.md` + `AGENTS.md` | `~/.gemini/antigravity/` |
-
-The behavior files all derive from the canonical [`CLAUDE.md`](CLAUDE.md) (regenerate with
-`python3 tools/build-agent-instructions.py --apply`). Drop the right one(s) into your own project
-in the same command that installs the skills:
-
-```bash
-# install skills/agents AND place the behavior file for each target into ~/my-project:
-python3 tools/install.py --apply --targets claude codex --instructions ~/my-project
-```
-
-**Your existing instructions are never clobbered.** If the project already has a `CLAUDE.md`/`AGENTS.md`,
-Skillry's manual is **appended** under a clearly-marked block (your rules stay on top), plus a
-**one-time, self-removing reconcile notice**: on the first session the agent announces the merge,
-asks you how to resolve any duplicate/conflicting rules, applies your choice, and deletes the notice.
-A `*.bak-skillry` backup is written first, and re-installs replace the prior block (no duplicates).
-
-## Safety & permissions
-
-- Every subagent declares a least-privilege `tools` allowlist; review agents get **no**
-  Edit/Write tools.
-- Redistributed third-party skills are kept in `community/` and were security-reviewed;
-  anything that runs commands or needs external services is flagged.
-- Sources whose license does **not** permit redistribution are excluded (not silently bundled).
-
-## Repository layout
-
-```
-.claude-plugin/marketplace.json   # native Claude Code plugin marketplace (sha-pinnable)
-plugins/<department>/             # one plugin per department: skills/ + agents/  (source of truth)
-community/<source>/               # attributed third-party skills + their LICENSE
-CLAUDE.md                         # canonical behavior file …
-AGENTS.md · GEMINI.md · .github/copilot-instructions.md   # … generated for each other platform
-tools/                            # validate, install, build-marketplace, build-agent-instructions, build-lock, skill-sync
-registry/                         # skill/agent lock files (SHA-256)
-docs/                             # guides
-```
+- Give each agent only the tools and access its task requires.
+- Keep review and audit work read-only unless mutation is explicitly requested.
+- Treat third-party skills and agents as untrusted until their source, license, permissions, and
+  behavior have been reviewed.
+- Separate community material from first-party material and preserve upstream attribution.
+- Make evidence-backed claims. Mark assumptions and unverified behavior instead of presenting them
+  as facts.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Skills are validated in CI (structure + frontmatter + permissions);
-PRs that add third-party content must include correct attribution and a license check.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for authoring and review requirements. Contributors working
+inside this repository must also follow [CLAUDE.md](CLAUDE.md) or [AGENTS.md](AGENTS.md), depending
+on the runtime they use. These files describe the same repository contract; neither is a template
+for unrelated projects.
 
-## Maintainers & governance
+Security issues should be reported through [SECURITY.md](SECURITY.md). Governance and release
+policy are documented in [GOVERNANCE.md](GOVERNANCE.md).
 
-- **Primary maintainer:** Çağrı Bozgeyik — [FluxonLab](https://fluxonlab.com) ([@FluxonLab](https://github.com/FluxonLab)).
-- **Governance, release & review policy:** [GOVERNANCE.md](GOVERNANCE.md) — SemVer, tagged releases
-  with a [CHANGELOG](CHANGELOG.md) entry, maintainer-reviewed PRs that must pass the validator and CI.
-- **Security:** report privately via [SECURITY.md](SECURITY.md) (GitHub Security Advisory preferred).
-- **Roadmap:** tracked in the pinned [Roadmap issue](https://github.com/FluxonLab/Skillry/issues).
-- **Project status:** **early but infrastructure-level OSS** — MIT, actively maintained. We make no
-  inflated star/download/usage claims; what's documented (skill counts, the token-effort figures) is
-  measured, and third-party content is fully attributed.
+## License and credits
 
-## Build effort & transparency
+Original Skillry work is available under the [MIT License](LICENSE). Redistributed community
+content retains its upstream license and attribution; see [NOTICE](NOTICE) and
+[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
 
-Skillry wasn't auto-generated in an afternoon. It was researched, written, de-duplicated,
-attribution-checked, and validated skill by skill, agent by agent — with a large fleet of AI
-sub-agents doing the heavy lifting under close review.
-
-| Phase | Model compute (tokens processed) |
-|---|---:|
-| Building Skillry (this public repo: research → conversion → validation harness → multi-platform tooling → v1.2.0) | **~1.8 billion** |
-| The private library it was distilled from (estimated ~3× the above) | **~5.5 billion** |
-| **Estimated total effort** | **~7.5 billion tokens** |
-
-The ~1.8B figure for this repo is measured from real session usage — **~54M tokens of generated
-output across ~3,300 model turns and 40+ orchestrated sub-agents** (the larger number includes
-context-cache reads). The earlier figure for the original private library is a deliberately rough,
-slightly-rounded-up estimate. We share it not to brag, but so it's clear that what you're
-installing is the distilled result of a *lot* of iteration — not a thin template dump.
-
-## Acknowledgments
-
-Skillry was built with — and stress-tested across — multiple AI coding agents, which is also why
-it targets all of them:
-
-- **[Claude](https://www.anthropic.com/claude) / Claude Code** (Anthropic) — primary build agent.
-- **[Codex](https://openai.com/codex)** (OpenAI) — used during construction and as a target platform.
-- **[Gemini](https://deepmind.google/technologies/gemini/) / Antigravity** (Google) — used during construction and as a target platform.
-
-The coding principles in [`CLAUDE.md`](CLAUDE.md) are distilled from public guidance by
-**[Andrej Karpathy](https://karpathy.ai)**; safety/permission practices follow **Anthropic's**
-published Claude Code guidance. Third-party skills under `community/` credit their upstream authors
-in [NOTICE](NOTICE) and [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
-
-## License & credits
-
-Original work © 2026 FluxonLab — [Çağrı Bozgeyik](https://cagribozgeyik.com) — under the [MIT License](LICENSE).
-Redistributed content under `community/` keeps its upstream license; see
-[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). Built and maintained by
-**[FluxonLab](https://fluxonlab.com)**.
+Built and maintained by [FluxonLab](https://fluxonlab.com).

@@ -1,0 +1,349 @@
+{
+  "entries": [
+    {
+      "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
+      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/python-pypi-package-builder/references/pyproject-toml.md",
+      "source_sha256": "9cd3c728765dcfd34d45ff523930791a40be332042683f2438f90402aea41479",
+      "targets": [
+        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/pyproject-toml.md"
+      ]
+    },
+    {
+      "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
+      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/python-pypi-package-builder/references/library-patterns.md",
+      "source_sha256": "bf10eb06c0bea2df3da29ba349ce3abf4095edb364802b2ae9b22767b3ad8b14",
+      "targets": [
+        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/library-patterns.md"
+      ]
+    },
+    {
+      "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
+      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/python-pypi-package-builder/references/testing-quality.md",
+      "source_sha256": "21cc6a734e66ffcab2e18723ebe76aefaad871f5d2bee5b3eae4e36156d2e3c8",
+      "targets": [
+        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/testing-quality.md"
+      ]
+    },
+    {
+      "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
+      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/python-pypi-package-builder/references/ci-publishing.md",
+      "source_sha256": "f5a1ccd246a5feabc03f0e42468e28119228c87a1a60c343f1d07abcb9cce8d3",
+      "targets": [
+        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/ci-publishing.md"
+      ]
+    },
+    {
+      "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
+      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/python-pypi-package-builder/references/community-docs.md",
+      "source_sha256": "e1d442d1ee120e614522100d2ef3feb016ea1ae4c29a20d6a4c656681fdd91ce",
+      "targets": [
+        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/community-docs.md"
+      ]
+    },
+    {
+      "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
+      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/python-pypi-package-builder/references/architecture-patterns.md",
+      "source_sha256": "238dc70ebf8c2470ba7a3595905bb10e42825fa5ebd19910ca4c0275121c0b50",
+      "targets": [
+        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/architecture-patterns.md"
+      ]
+    },
+    {
+      "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
+      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/python-pypi-package-builder/references/versioning-strategy.md",
+      "source_sha256": "cfb0d997b8cadc265beece2d727e5f31e07065729e65d38b1af1e5ce7a60abfa",
+      "targets": [
+        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/versioning-strategy.md"
+      ]
+    },
+    {
+      "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
+      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/python-pypi-package-builder/references/release-governance.md",
+      "source_sha256": "75951fd7c1bcc7d31646e79ece1b1a14bddeca4e9d4b8224712e223f017483d3",
+      "targets": [
+        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/release-governance.md"
+      ]
+    },
+    {
+      "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
+      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/python-pypi-package-builder/references/tooling-ruff.md",
+      "source_sha256": "b678426c3ab94615e56d362900daa60f846aacc3d1e561ed6b8fcaed01869fb1",
+      "targets": [
+        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/tooling-ruff.md"
+      ]
+    },
+    {
+      "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
+      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/python-pypi-package-builder/scripts/scaffold.py",
+      "source_sha256": "84ef1978a8d6928a3581e66f3fd7e304c094e51289ae7e87b2fa70e38841219e",
+      "targets": [
+        "community/github-awesome-copilot/skills/python-pypi-package-builder/scripts/scaffold.py"
+      ]
+    },
+    {
+      "commit": "74208f679bad31abcc5542572c1fc85434751683",
+      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/quality-playbook/references/defensive_patterns.md",
+      "source_sha256": "9e740465c3ef569cc40b72f16936c86aae16f5f7b563b782706e8ba7321e1d25",
+      "targets": [
+        "community/github-awesome-copilot/skills/quality-playbook/references/defensive_patterns.md"
+      ]
+    },
+    {
+      "commit": "74208f679bad31abcc5542572c1fc85434751683",
+      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/quality-playbook/references/schema_mapping.md",
+      "source_sha256": "7ddfc88d257987d5ba5da211f69075c41f6495bbf0f5d9a7b04d140e78e8e462",
+      "targets": [
+        "community/github-awesome-copilot/skills/quality-playbook/references/schema_mapping.md"
+      ]
+    },
+    {
+      "commit": "74208f679bad31abcc5542572c1fc85434751683",
+      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/quality-playbook/references/constitution.md",
+      "source_sha256": "d22b88cc5cac154b2dcfba686ba02977cfe54ceabd4f2cf6f9aa535055a2bffe",
+      "targets": [
+        "community/github-awesome-copilot/skills/quality-playbook/references/constitution.md"
+      ]
+    },
+    {
+      "commit": "74208f679bad31abcc5542572c1fc85434751683",
+      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/quality-playbook/references/functional_tests.md",
+      "source_sha256": "f41ba88381b80c91b6757455b3cb12a6029402b628206119a6fa0ccd709683d0",
+      "targets": [
+        "community/github-awesome-copilot/skills/quality-playbook/references/functional_tests.md"
+      ]
+    },
+    {
+      "commit": "74208f679bad31abcc5542572c1fc85434751683",
+      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/quality-playbook/references/review_protocols.md",
+      "source_sha256": "b1b5dad4cde9f050a1f3859f2e6f4c2e0bc1c7301175096844906d2ab818c481",
+      "targets": [
+        "community/github-awesome-copilot/skills/quality-playbook/references/review_protocols.md"
+      ]
+    },
+    {
+      "commit": "74208f679bad31abcc5542572c1fc85434751683",
+      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/quality-playbook/references/spec_audit.md",
+      "source_sha256": "3efb9b49b10d6d27410808a310b3c8a3ad37f60dd85f705b55c4206ce13ee6d0",
+      "targets": [
+        "community/github-awesome-copilot/skills/quality-playbook/references/spec_audit.md"
+      ]
+    },
+    {
+      "commit": "74208f679bad31abcc5542572c1fc85434751683",
+      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/quality-playbook/references/verification.md",
+      "source_sha256": "d812fe76dbbbdcf4373e919eaa480a501553eb94c391c934cac0e3251771c840",
+      "targets": [
+        "community/github-awesome-copilot/skills/quality-playbook/references/verification.md"
+      ]
+    },
+    {
+      "commit": "74208f679bad31abcc5542572c1fc85434751683",
+      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/quality-playbook/LICENSE.txt",
+      "source_sha256": "6b1ecb01f5669085bf814f1779a3c32e4d9de133f38a3851815012f4df5f4be6",
+      "targets": [
+        "community/github-awesome-copilot/skills/quality-playbook/LICENSE.txt"
+      ]
+    },
+    {
+      "commit": "7f7b1b9b46ac7fa0b8774ed6e3e0fa3e1f089a79",
+      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/react18-batching-patterns/references/batching-categories.md",
+      "source_sha256": "bc3b35cffc4ef226ac2bec5755eb1784fc7367b743ae152dda01d745ffc58b36",
+      "targets": [
+        "community/github-awesome-copilot/skills/react18-batching-patterns/references/batching-categories.md"
+      ]
+    },
+    {
+      "commit": "7f7b1b9b46ac7fa0b8774ed6e3e0fa3e1f089a79",
+      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/react18-batching-patterns/references/flushSync-guide.md",
+      "source_sha256": "20730a5da79c68fe5d7d678fa569c24e3b05ce57d4b96394889591e379a447d0",
+      "targets": [
+        "community/github-awesome-copilot/skills/react18-batching-patterns/references/flushSync-guide.md"
+      ]
+    },
+    {
+      "commit": "38e19c20d2b154510b0e624a2e3e186b19b5c527",
+      "evidence": "official upstream verification point; not a proven historical import pin",
+      "repository": "https://github.com/wshobson/agents",
+      "source_path": "plugins/javascript-typescript/skills/javascript-testing-patterns/references/advanced-testing-patterns.md",
+      "source_sha256": "c7aece88f868bb54b57cc7ea2ca87d3df0868ab32f974c22af247bb047ea353f",
+      "targets": [
+        "community/wshobson-agents/skills/javascript-testing-patterns/references/advanced-testing-patterns.md"
+      ]
+    },
+    {
+      "commit": "38e19c20d2b154510b0e624a2e3e186b19b5c527",
+      "evidence": "official upstream verification point; not a proven historical import pin",
+      "repository": "https://github.com/wshobson/agents",
+      "source_path": "plugins/javascript-typescript/skills/modern-javascript-patterns/references/advanced-patterns.md",
+      "source_sha256": "bd44770188cfa14d453b1c3026289cfaf7beff78f0eedbe47a9c6b9f24dfe3af",
+      "targets": [
+        "community/wshobson-agents/skills/modern-javascript-patterns/references/advanced-patterns.md"
+      ]
+    },
+    {
+      "commit": "38e19c20d2b154510b0e624a2e3e186b19b5c527",
+      "evidence": "official upstream verification point; not a proven historical import pin",
+      "repository": "https://github.com/wshobson/agents",
+      "source_path": "plugins/documentation-generation/skills/openapi-spec-generation/references/code-first-and-tooling.md",
+      "source_sha256": "533398d65b933040d13e642414e6b9846adbe7d5c95947223beffdb3ebe1590f",
+      "targets": [
+        "community/wshobson-agents/skills/openapi-spec-generation/references/code-first-and-tooling.md"
+      ]
+    },
+    {
+      "commit": "38e19c20d2b154510b0e624a2e3e186b19b5c527",
+      "evidence": "official upstream verification point; not a proven historical import pin",
+      "repository": "https://github.com/wshobson/agents",
+      "source_path": "plugins/python-development/skills/python-packaging/references/advanced-patterns.md",
+      "source_sha256": "ab47dec3bf71c066e5d262eb6159b966ea95067ac23b27d8607d36d89f0e00ca",
+      "targets": [
+        "community/wshobson-agents/skills/python-packaging/references/advanced-patterns.md"
+      ]
+    },
+    {
+      "commit": "38e19c20d2b154510b0e624a2e3e186b19b5c527",
+      "evidence": "official upstream verification point; not a proven historical import pin",
+      "repository": "https://github.com/wshobson/agents",
+      "source_path": "plugins/python-development/skills/python-performance-optimization/references/advanced-patterns.md",
+      "source_sha256": "dc1bca8a377572ba1583316b8288af0e5ca2d2be864dc33889b2d3b1ee5c2abf",
+      "targets": [
+        "community/wshobson-agents/skills/python-performance-optimization/references/advanced-patterns.md"
+      ]
+    },
+    {
+      "commit": "38e19c20d2b154510b0e624a2e3e186b19b5c527",
+      "evidence": "official upstream verification point; not a proven historical import pin",
+      "repository": "https://github.com/wshobson/agents",
+      "source_path": "plugins/python-development/skills/python-testing-patterns/references/advanced-patterns.md",
+      "source_sha256": "f560ee8b3cffc0fe971e78269bed21dc74f541c2056eae58d34259d9e537176a",
+      "targets": [
+        "community/wshobson-agents/skills/python-testing-patterns/references/advanced-patterns.md"
+      ]
+    },
+    {
+      "commit": "38e19c20d2b154510b0e624a2e3e186b19b5c527",
+      "evidence": "official upstream verification point; not a proven historical import pin",
+      "repository": "https://github.com/wshobson/agents",
+      "source_path": "plugins/frontend-mobile-development/skills/tailwind-design-system/references/advanced-patterns.md",
+      "source_sha256": "40a4a9fa931f4bc95213870ea1fe7c32ce50aacf3531af07954b660c4f51e1a2",
+      "targets": [
+        "community/wshobson-agents/skills/tailwind-design-system/references/advanced-patterns.md"
+      ]
+    },
+    {
+      "commit": "38e19c20d2b154510b0e624a2e3e186b19b5c527",
+      "evidence": "official upstream verification point; not a proven historical import pin",
+      "repository": "https://github.com/wshobson/agents",
+      "source_path": "plugins/python-development/skills/uv-package-manager/references/advanced-patterns.md",
+      "source_sha256": "5750de438fa2456c37640f6efcb87c423fe2919510da4e67e564b2af7972c0bc",
+      "targets": [
+        "community/wshobson-agents/skills/uv-package-manager/references/advanced-patterns.md"
+      ]
+    },
+    {
+      "commit": "6ce029897d2b794940325fc7148774a6ec51111c",
+      "evidence": "latest official commit before embedded 2026-05-31 import date; not a proven historical import pin",
+      "repository": "https://github.com/addyosmani/agent-skills",
+      "source_path": "references/accessibility-checklist.md",
+      "source_sha256": "61c759d94d52296231f5f310b92b401f56c44e4430dc3cc95ebac5d7b1d5ffac",
+      "targets": [
+        "community/addyosmani-agent-skills/skills/frontend-ui-engineering/references/accessibility-checklist.md"
+      ]
+    },
+    {
+      "commit": "6ce029897d2b794940325fc7148774a6ec51111c",
+      "evidence": "latest official commit before embedded 2026-05-31 import date; not a proven historical import pin",
+      "repository": "https://github.com/addyosmani/agent-skills",
+      "source_path": "references/performance-checklist.md",
+      "source_sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
+      "targets": [
+        "community/addyosmani-agent-skills/skills/performance-optimization/references/performance-checklist.md"
+      ]
+    },
+    {
+      "commit": "6ce029897d2b794940325fc7148774a6ec51111c",
+      "evidence": "latest official commit before embedded 2026-05-31 import date; not a proven historical import pin",
+      "repository": "https://github.com/addyosmani/agent-skills",
+      "source_path": "references/testing-patterns.md",
+      "source_sha256": "2502c02eee60a9e97f4256b318cdf2f1e22b045b78c6d9713fcb926b9dfc025e",
+      "targets": [
+        "community/addyosmani-agent-skills/skills/test-driven-development/references/testing-patterns.md"
+      ]
+    },
+    {
+      "commit": "984023ddac0d5e27624f2baacde6105e45de375f",
+      "evidence": "official immutable existence commit for transformed components; not a proven historical import pin",
+      "repository": "https://github.com/Donchitos/Claude-Code-Game-Studios",
+      "source_path": ".claude/docs/templates/game-concept.md",
+      "source_sha256": "fa94f05c71decac7183be449c87767acd99db822f05701121f45f5a5e2251156",
+      "targets": [
+        "community/Donchitos-Claude-Code-Game-Studios/skills/186-gamedev-brainstorm/templates/game-concept.md"
+      ]
+    },
+    {
+      "commit": "984023ddac0d5e27624f2baacde6105e45de375f",
+      "evidence": "official immutable existence commit for transformed components; not a proven historical import pin",
+      "repository": "https://github.com/Donchitos/Claude-Code-Game-Studios",
+      "source_path": ".claude/docs/templates/systems-index.md",
+      "source_sha256": "3c474f75f71d12c3175b7be58013f58f615f316ba8fa8533ebb94197c85634c1",
+      "targets": [
+        "community/Donchitos-Claude-Code-Game-Studios/skills/207-gamedev-map-systems/templates/systems-index.md"
+      ]
+    },
+    {
+      "commit": "984023ddac0d5e27624f2baacde6105e45de375f",
+      "evidence": "official immutable existence commit for transformed components; not a proven historical import pin",
+      "repository": "https://github.com/Donchitos/Claude-Code-Game-Studios",
+      "source_path": ".claude/docs/director-gates.md",
+      "source_sha256": "980605102b90a296c014c4ab00d80dbf0da252d9756d398e065f21e440f02ba0",
+      "targets": [
+        "community/Donchitos-Claude-Code-Game-Studios/skills/186-gamedev-brainstorm/references/director-gates.md",
+        "community/Donchitos-Claude-Code-Game-Studios/skills/207-gamedev-map-systems/references/director-gates.md"
+      ]
+    }
+  ],
+  "historical_provenance_status": "unknown because the original importer did not record immutable SHAs",
+  "kind": "community-recovery-evidence-v1",
+  "policy": "component-pinned, fail-closed, no moving HEAD",
+  "version": "1.0.0"
+}

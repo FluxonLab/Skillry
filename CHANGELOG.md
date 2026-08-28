@@ -6,17 +6,52 @@ All notable changes to Skillry are documented here. The format is based on
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-08-28
+
+### Breaking
+
+- The portable installer manages verified platform skills and agents only. It no
+  longer copies, merges or reconciles project AGENTS.md, CLAUDE.md, GEMINI.md or
+  Copilot instruction files.
+- Dry-run is the default. Filesystem changes require --apply, and unknown,
+  misspelled or empty target selections fail closed.
+- Existing untracked destination files and locally modified managed files are
+  preserved and refused instead of overwritten.
+
 ### Added
-- **Published to the npm registry** — [`npm install -g skillry`](https://www.npmjs.com/package/skillry)
-  now works (in addition to `npx github:FluxonLab/Skillry`).
-- README: **Why this matters for Codex**, per-platform sections for **Claude, Copilot & Antigravity**,
-  a real **Demo** (Codex dry-run transcript + `.toml` agent), and a **Maintainers & governance**
-  section; custom social-preview image used as the hero; dynamic npm version badge.
-- **GOVERNANCE.md** — maintainer, decision-making, release policy, contribution review, security.
-- A public **Roadmap** issue (npm publish, Codex installer hardening, example workflows,
-  security-review automation, docs).
-- Honest project-status framing: "early but infrastructure-level OSS" (no inflated metrics).
-- Security contact is now a visible link to `fluxonlab.com/contact` (GOVERNANCE.md + SECURITY.md).
+
+- Per-target managed-state manifests for idempotent installation and
+  hash-guarded stale managed-file removal.
+- A release gate covering source locks, validator checks, four clean target
+  installs, all Codex agent TOML files and every locked community sidecar.
+- Immutable community source provenance for 35 installed sidecar targets,
+  including references, templates, scripts and retained license files.
+- npm registry installation, public roadmap and expanded platform and
+  governance documentation.
+
+### Security
+
+- Import and installation paths are containment checked and symlink-sensitive.
+- Reviewed read-only agent classifications no longer treat general Bash access
+  as read-only.
+- Community source files and installed payloads are checked against generated
+  SHA-256 locks before release.
+
+### Fixed
+
+- Community skills now ship their required local references and helper files.
+- Codex agent TOML generation handles source escaping correctly; all 122
+  generated agent files parse in the release gate.
+- Canonical community skill names are derived from frontmatter when vendor
+  directory names are numeric or otherwise non-canonical.
+
+### Packaging
+
+- npm prepack runs the release gate.
+- The public package includes the portable installer, release gate, source
+  locks and all locked sidecars.
+- Private governance sources and the project-policy generator are excluded from
+  the published payload.
 
 ## [1.2.0] — 2026-06-01
 

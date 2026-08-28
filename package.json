@@ -1,6 +1,6 @@
 {
   "name": "skillry",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Installable, permission-bounded, multi-platform agent skills & subagents for Claude Code, OpenAI Codex, GitHub Copilot, and Google Antigravity (Gemini).",
   "keywords": [
     "claude-code",
@@ -35,28 +35,31 @@
   },
   "files": [
     "bin/",
-    "tools/build-agent-instructions.py",
     "tools/build-lock.py",
     "tools/build-marketplace.py",
     "tools/install.py",
+    "tools/release-gate.py",
     "tools/skill-sync.py",
     "tools/validate.py",
     "plugins/",
     "community/",
     ".claude-plugin/",
-    ".github/copilot-instructions.md",
     "registry/",
     "docs/",
-    "CLAUDE.md",
-    "AGENTS.md",
-    "GEMINI.md",
+    "CHANGELOG.md",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "GOVERNANCE.md",
     "LICENSE",
     "NOTICE",
-    "THIRD-PARTY-NOTICES.md",
-    "README.md"
+    "README.md",
+    "SECURITY.md",
+    "THIRD-PARTY-NOTICES.md"
   ],
   "scripts": {
     "validate": "python3 tools/validate.py",
+    "release-check": "python3 tools/release-gate.py",
+    "prepack": "python3 tools/release-gate.py",
     "skills:install": "python3 tools/install.py",
     "skills:lock": "python3 tools/build-lock.py"
   },

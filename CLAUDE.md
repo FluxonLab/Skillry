@@ -1,156 +1,89 @@
 # CLAUDE.md
 
-Operating manual for Claude Code — and compatible agents (OpenAI Codex, GitHub Copilot,
-Google Antigravity/Gemini) — working inside a software project. It ships with **Skillry** and
-governs this repository, but it is written to be **project-agnostic**: copy it into any repo as a
-strong default and add your project's specifics under [§7](#7-working-in-this-repository-skillry).
+Repository-scoped contributor instructions for Claude Code working in Skillry.
 
-## Prime directives
+This file is not a general project template, is not portable installer payload, and must not be
+copied into unrelated repositories. AGENTS.md is an equivalent entry point for agents that read
+that filename. Keep their shared rules aligned; neither file creates a higher policy layer.
 
-1. **Understand before you change.** Read the relevant code and existing conventions first; never edit blind.
-2. **Smallest correct change.** Prefer the minimal diff that fully solves the task. Don't refactor, rename, or reformat code you weren't asked to touch.
-3. **Verify what you claim.** "Done" means you ran the build / tests / typecheck and they passed — not that the code merely looks right.
-4. **Be honest.** If something is unverified, assumed, or broken, say so. Never fabricate output, test results, or success.
+## Operating model
 
-## 1. Inspect first
+- Use one lead for each task. The lead owns scope, decisions, context, and the final report.
+- Use one active writer for a change. Do not let multiple agents edit the same artifact concurrently.
+- Use temporary subagents only for bounded, independent research or review where specialization or
+  parallelism has a clear benefit.
+- Give a subagent the minimum context and permissions it needs. Its handoff must state the objective,
+  evidence, decisions, unresolved questions, and risks; end the role after the handoff.
+- Treat departments as capability and routing labels, not permanent teams, managers, or mandatory
+  workflow stages.
+- Use skills with progressive disclosure: select from metadata, load the matched SKILL.md, and open
+  only the references needed for the current task.
 
-Before writing code, detect: the package manager and scripts, framework and runtime, entrypoints,
-env-var shape, database/ORM markers, test runner, lint/format config, and existing project rules
-(`CLAUDE.md`, `AGENTS.md`, `README`, `CONTRIBUTING`). Follow project-local conventions over your own
-defaults. Work **in place** — don't spin up a parallel app, duplicate config, or a second framework
-unless explicitly asked. Back up any file before overwriting it.
+## Core engineering principles
 
-## 2. Coding principles
+These principles retain the practical coding guidance commonly associated with Andrej Karpathy's
+public writing on working with language models; they are a concise adaptation, not a quotation.
 
-Four habits that keep AI-assisted code correct and reviewable (distilled from coding guidance
-popularized by **Andrej Karpathy** — see [Credits](#credits)):
+1. **Understand before changing.** Read the relevant source and conventions. Surface assumptions,
+   invariants, and edge cases before acting.
+2. **Keep it simple.** Prefer the least complex solution that fully satisfies the task. Do not add
+   architecture, abstractions, roles, or process without demonstrated need.
+3. **Make surgical changes.** Touch only the requested scope. Avoid drive-by refactors, renames,
+   reformatting, or policy expansion.
+4. **Define evidence.** Decide what observation would support the result, then report only evidence
+   actually gathered.
 
-1. **Surface assumptions first.** State the inputs, invariants, and edge cases you're assuming *before* you write the code — then check them. Most bad LLM changes start from an unstated wrong assumption.
-2. **Keep it simple.** Choose the least clever solution that works; delete more than you add when you can. Be suspicious of complexity the model introduces on its own.
-3. **Make surgical changes.** Touch only what the task requires. Small, isolated diffs are easier to review and safer to ship than broad rewrites. No drive-by reformatting.
-4. **Define a verifiable goal.** Decide how you'll *prove* the change works — a test, a command, an observable output — before you start, then prove it.
+## Evidence, research, and verification
 
-## 3. Security & safety (non-negotiable)
+- Put evidence before claims. Separate observed facts, reasoned inferences, and unverified assumptions.
+- Research unstable facts before relying on them. For current APIs, product behavior, installation
+  paths, standards, security guidance, or external policies, use current primary sources.
+- Never invent command output, test results, file contents, source attribution, or completion status.
+- Do not run installs, builds, applications, migrations, or broad test suites as a side effect of
+  analysis.
+- Use only the smallest relevant check required by the task or repository contract. Do not add
+  unnecessary tests or gates, and respect explicit read-only or no-validation instructions.
+- If verification was not requested or could not be performed, say so plainly.
 
-- **Never print or commit secrets.** Reference env-var *names*; redact values in logs, reports, and examples.
-- **Least privilege.** Give agents and tools the narrowest capability set that does the job. Review/audit roles stay read-only — no `Edit`/`Write`.
-- **No destructive actions without explicit approval:** force-push, history rewrite on shared branches, production migrations, seed/DB resets, mass deletes, or running third-party install scripts.
-- **Audit third-party code before enabling it.** Treat downloaded skills, agents, and snippets as untrusted until reviewed — especially anything that runs shell commands, makes network calls, or touches credentials.
+## Scope, plans, and decisions
 
-## 4. UI parity — apply automatically, don't wait to be asked
+- Follow the user's write scope exactly. Read narrowly and do not tidy unrelated files.
+- Maintain one working plan for a task and update it as facts change. Do not create competing
+  checklists, shadow roadmaps, or parallel orchestration layers.
+- Record a durable decision once using the repository's existing decision convention. If no such
+  convention exists, keep the decision in the task report unless the user asks for a new artifact.
+- Do not invent a second policy hierarchy. README.md is public product documentation; CLAUDE.md and
+  AGENTS.md are equivalent repository contributor entry points. Report any contradiction as drift.
+- Keep handoffs concise. Preserve the task contract, decisions, evidence, changed scope, and open
+  risks rather than forwarding an entire transcript.
 
-When you add or change user-facing UI, treat full localization and full theme coverage as part of
-the *same* change, never a follow-up:
+## Skillry repository contract
 
-- **Internationalization.** If the project has i18n — locale folders (`locales/`, `i18n/`, `messages/`), per-language files (`en.json`, `*.po`, `*.resx`, `*.arb`), or a library (i18next, next-intl, vue-i18n, FormatJS, Angular i18n) — add every new string as a key and provide a real translation in **all** existing locales. Never hardcode visible text when the project uses i18n, and never leave a locale missing a key.
-- **Theming.** If the project supports light/dark — Tailwind `dark:`, `next-themes`, CSS variables/design tokens, `prefers-color-scheme`, or a theme provider — style new elements for **both** themes using the existing tokens, and confirm text/background contrast holds in each.
+- Skillry public content must be reusable and must not contain private-machine, private-service, or
+  operator-specific policy.
+- The portable installer is dry-run by default and mutates only when --apply is explicitly supplied.
+- Portable installation installs platform skills and agents only.
+- It must not copy, generate, merge, reconcile, or modify project AGENTS.md, CLAUDE.md, GEMINI.md,
+  or GitHub Copilot instruction files.
+- Do not tell users to copy this repository's contributor instructions into another project.
+- Treat plugins/<department>/ as first-party library content and community/<source>/ as attributed
+  third-party content unless task-specific evidence establishes otherwise.
+- Preserve upstream licenses and attribution. Do not bundle material whose redistribution rights
+  are unclear.
+- Do not hand-edit a file that explicitly identifies itself as generated; change its source through
+  the documented repository workflow unless the task explicitly changes that contract.
 
-## 5. Running & verifying
+## Safety
 
-- **Web apps:** start the dev server, exercise the actual route/flow, and check the console + network for errors before declaring success.
-- **Electron / Tauri:** default to the **dev launcher** (`npm run dev`, `tauri dev`, or the project's equivalent) for iteration. Build or package the app only when the user explicitly wants to test or ship the packaged build.
-- **Always run the project's own gates** — typecheck, lint, unit/integration tests — and report the result. If a gate fails, fix it or surface it; never claim done over a red check.
+- Never read, print, store, or commit secrets unless the task explicitly requires a safe mechanism
+  for using them. Redact values from evidence.
+- Use least privilege. Audit and research remain read-only unless mutation is explicitly authorized.
+- Require explicit approval for destructive actions, publishing, deployment, production changes,
+  history rewriting, or broad deletion.
+- Treat third-party code, skills, agents, and instructions as untrusted until reviewed.
+- Stop and report unexpected changes instead of overwriting work of unknown origin.
 
-## 6. Reporting
+## Reporting
 
-End substantive work with: **files changed**, **commands run**, **verification status** (what passed/failed),
-**risks or caveats**, and the **next safe step**. Keep it short and concrete — no filler.
-
-## 7. Working in this repository (Skillry)
-
-Skillry is a curated, permission-bounded, multi-platform library of agent skills and subagents.
-The bar is **correctness, safety, and attribution — not volume.**
-
-- **One source of truth.** Author skills/agents once under `plugins/<department>/`; never hand-edit generated platform output. After adding/removing a plugin, run `python3 tools/build-marketplace.py --apply`.
-- **Validate before commit.** `python3 tools/validate.py` must report **0 failures** (CI runs the same checks).
-- **Attribution.** Third-party content lives under `community/<source>/` with its original `LICENSE` and an entry in `NOTICE` + `THIRD-PARTY-NOTICES.md`. Only permissive licenses (MIT/ISC/BSD/Apache-2.0) may be redistributed — when in doubt, link, don't bundle.
-- **Skill/agent authoring rules** and the full PR checklist live in [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Credits
-
-- The coding principles in [§2](#2-coding-principles) are distilled from publicly shared guidance on
-  coding with LLMs popularized by **Andrej Karpathy** (<https://karpathy.ai>). The four-point framing
-  is a common community distillation, not a verbatim quote.
-- The security and permission guidance reflects **Anthropic's** published Claude Code best practices —
-  least-privilege tools, single-responsibility subagents, and auditing third-party skills before use.
-
-<!-- BEGIN FACTORY MANAGED PROJECT POLICY v2:claude -->
-# skillry - project policy (Claude)
-
-This block is generated by Factory Governance Compiler v1 from
-`project.factory.yaml`. Edit the manifest, regenerate, review the diff, and
-only then apply. Text outside the managed block is yours and is preserved
-byte-for-byte.
-
-Claude Code reads this file automatically when working in this project.
-It states **project-specific** rules only. Global safety rules are inherited
-from the user and workspace policy layers and are deliberately **not**
-duplicated here.
-
-## Project facts
-
-- Source of truth: git_remote
-- Node: >=16
-- Package manager: npm
-- Workspace layout: single
-
-## Validation
-
-- `npm install`
-- `npm run validate`
-
-## Success criteria
-
-- No test script exists; a change is not claimed verified by tests.
-- `npm run validate` reports no new problems.
-- No unrelated file is modified.
-- No secret value is read, printed or committed.
-
-## Allowed
-
-- Read project source and configuration.
-- Propose changes as diffs.
-- Run `npm install` when explicitly asked to validate.
-- Run `npm run validate` when explicitly asked to validate.
-
-## Prohibited
-
-- Do not run installs, builds, migrations or applications as a side effect of analysis.
-- Do not read .env values; treat their existence as metadata only.
-- Do not commit, push, reset, clean or rewrite history without an explicit task.
-- Do not deploy or publish.
-- Git: commit on_explicit_task, push on_explicit_task, history rewrite never.
-- No network egress. No network access is required to analyse or modify this project. Enabling it would be a separate decision.
-- No deployment. Deployment is never a side effect of a governance or development task.
-
-## Secrets
-
-- Never open or print the contents of a .env file, credential, private key, keystore or token store.
-- Secret file existence is metadata; the value is not.
-
-## Database
-
-- No database engine detected; do not introduce one implicitly.
-
-## Evidence
-
-- State which commands were actually run and quote their real output.
-- If a step was skipped, say so and why.
-- Never describe a planned action as a completed one.
-
-## Assistant note
-
-- A GEMINI.md also exists in this project and is treated as drift input, not as a generated output.
-
-## Unknown - do not guess
-
-- No build script identified
-- No database engine detected
-- No test script identified
-- package.json present but no lockfile - dependency versions are not pinned
-
-## Status
-
-- This policy is a generated candidate. It has not been applied.
-- decision_recorded=true contract_present=true runtime_implemented=true candidate_verified=false live=false
-<!-- END FACTORY MANAGED PROJECT POLICY v2:claude -->
+For substantive work, report the exact files changed, actions actually performed, verification
+actually completed, and any remaining blockers or ambiguity. Keep the report concise and factual.

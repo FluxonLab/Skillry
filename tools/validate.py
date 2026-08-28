@@ -1,127 +1,220 @@
 #!/usr/bin/env python3
-"""Skillry validator — checks structure, frontmatter, permissions, and attribution.
-
-Run from anywhere: python3 tools/validate.py
-Exit code 0 = all checks pass, 1 = failures.
-"""
+"""Skillry structural and policy validator."""
 from __future__ import annotations
-import json, pathlib, re, sys
+
+import json
+import pathlib
+import re
+import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 PLUGINS = ROOT / "plugins"
 COMMUNITY = ROOT / "community"
+READ_ONLY_TOOLS = frozenset({"Read", "Glob", "Grep", "WebSearch", "WebFetch"})
 checks: list[tuple[str, bool, str]] = []
 
-def ok(name: str, cond: bool, detail: str = "") -> None:
-    checks.append((name, bool(cond), detail))
+
+def ok(name: str, condition: bool, detail: str = "") -> None:
+    checks.append((name, bool(condition), detail))
+
 
 def frontmatter(text: str) -> dict:
-    m = re.match(r"^---\n(.*?)\n---", text, re.S)
-    if not m:
+    match = re.match(r"^---\n(.*?)\n---", text, re.S)
+    if not match:
         return {}
-    fm = {}
-    for line in m.group(1).splitlines():
-        mm = re.match(r"^([A-Za-z_]+):\s*(.*)$", line)
-        if mm:
-            fm[mm.group(1)] = mm.group(2).strip()
-    return fm
+    fields = {}
+    for line in match.group(1).splitlines():
+        field = re.match(r"^([A-Za-z_]+):\s*(.*)$", line)
+        if field:
+            fields[field.group(1)] = field.group(2).strip()
+    return fields
 
-# ---- skills (original, under plugins/) ----
+
+def tool_names(raw: str) -> set[str]:
+    return set(re.findall(r"[A-Za-z][A-Za-z0-9_-]*", raw))
+
+
+source_symlinks = []
+for source_root in (PLUGINS, COMMUNITY):
+    if source_root.exists():
+        source_symlinks.extend(
+            str(path.relative_to(ROOT))
+            for path in source_root.rglob("*")
+            if path.is_symlink()
+        )
+ok(
+    "packaged component trees contain no symlinks",
+    not source_symlinks,
+    "; ".join(source_symlinks[:8]),
+)
+
 skill_files = sorted(PLUGINS.glob("*/skills/*/SKILL.md"))
 ok("plugins have skills", len(skill_files) > 0, f"found {len(skill_files)}")
-bad_fm, shallow, name_mismatch = [], [], []
-for f in skill_files:
-    txt = f.read_text(errors="ignore")
-    fm = frontmatter(txt)
-    if not fm.get("name") or not fm.get("description"):
-        bad_fm.append(str(f.relative_to(ROOT)))
-    # folder name (minus NN- prefix) should match frontmatter name
-    folder = re.sub(r"^\d+-", "", f.parent.name)
-    if fm.get("name") and fm["name"] != folder:
-        name_mismatch.append(f"{f.parent.name} → name:{fm.get('name')}")
-    if len(txt.splitlines()) < 60:
-        shallow.append(f"{f.parent.name} ({len(txt.splitlines())})")
-ok("all skills have name+description", not bad_fm, "; ".join(bad_fm[:5]))
-ok("skill folder names match frontmatter", not name_mismatch, "; ".join(name_mismatch[:5]))
-ok("no shallow skills (<60 lines)", not shallow, "; ".join(shallow[:8]))
+bad_frontmatter = []
+shallow = []
+name_mismatch = []
+for skill_file in skill_files:
+    text = skill_file.read_text(encoding="utf-8")
+    fields = frontmatter(text)
+    if not fields.get("name") or not fields.get("description"):
+        bad_frontmatter.append(str(skill_file.relative_to(ROOT)))
+    folder = re.sub(r"^\d+-", "", skill_file.parent.name)
+    if fields.get("name") and fields["name"] != folder:
+        name_mismatch.append(
+            f"{skill_file.parent.name} -> name:{fields.get('name')}"
+        )
+    if len(text.splitlines()) < 60:
+        shallow.append(
+            f"{skill_file.parent.name} ({len(text.splitlines())})"
+        )
+ok(
+    "all skills have name+description",
+    not bad_frontmatter,
+    "; ".join(bad_frontmatter[:5]),
+)
+ok(
+    "skill folder names match frontmatter",
+    not name_mismatch,
+    "; ".join(name_mismatch[:5]),
+)
+ok(
+    "no shallow skills (<60 lines)",
+    not shallow,
+    "; ".join(shallow[:8]),
+)
 
-# ---- agents (original, under plugins/) ----
 agent_files = sorted(PLUGINS.glob("*/agents/*.md"))
 ok("plugins have agents", len(agent_files) > 0, f"found {len(agent_files)}")
-agent_no_tools, agent_bad_fm = [], []
-REVIEW_HINT = ("review", "auditor", "reviewer", "analyst", "researcher", "scout", "librarian", "gatekeeper")
-write_in_review = []
-for f in agent_files:
-    txt = f.read_text(errors="ignore")
-    fm = frontmatter(txt)
-    if not fm.get("name") or not fm.get("description"):
-        agent_bad_fm.append(f.name)
-    if "tools:" not in txt:
-        agent_no_tools.append(f.name)
-    # least-privilege heuristic: review/audit agents should not have Write/Edit,
-    # UNLESS their description explicitly states they make/repair/apply changes
-    # (some reviewers are write-limited editors by design).
-    low = f.stem.lower()
-    desc = (fm.get("description") or "").lower()
-    makes_changes = any(w in desc for w in ("make", "repair", "apply", "fix", "implement", "change"))
-    if any(h in low for h in REVIEW_HINT) and not makes_changes:
-        tools_line = next((l for l in txt.splitlines() if l.startswith("tools:")), "")
-        if "Write" in tools_line or "Edit" in tools_line:
-            write_in_review.append(f.name)
-ok("all agents declare name+description", not agent_bad_fm, "; ".join(agent_bad_fm[:5]))
-ok("all agents declare tools allowlist", not agent_no_tools, "; ".join(agent_no_tools[:5]))
-ok("review/audit agents have no Write/Edit (least privilege)", not write_in_review, "; ".join(write_in_review[:8]))
+agent_no_tools = []
+agent_bad_frontmatter = []
+unsafe_read_only_claims = []
+for agent_file in agent_files:
+    text = agent_file.read_text(encoding="utf-8")
+    fields = frontmatter(text)
+    if not fields.get("name") or not fields.get("description"):
+        agent_bad_frontmatter.append(agent_file.name)
+    if "tools:" not in text:
+        agent_no_tools.append(agent_file.name)
 
-# ---- plugin manifests ----
+    tools = tool_names(fields.get("tools", ""))
+    claimed = (
+        fields.get("permission", "")
+        or fields.get("sandbox_mode", "")
+    ).strip(chr(34) + chr(39))
+    if claimed == "read-only" and (
+        not tools or not tools <= READ_ONLY_TOOLS
+    ):
+        unsafe_read_only_claims.append(
+            f"{agent_file.name}: {', '.join(sorted(tools)) or 'no tools'}"
+        )
+
+ok(
+    "all agents declare name+description",
+    not agent_bad_frontmatter,
+    "; ".join(agent_bad_frontmatter[:5]),
+)
+ok(
+    "all agents declare tools allowlist",
+    not agent_no_tools,
+    "; ".join(agent_no_tools[:5]),
+)
+ok(
+    "read-only agent claims exclude write-capable tools",
+    not unsafe_read_only_claims,
+    "; ".join(unsafe_read_only_claims[:8]),
+)
+
 manifests = sorted(PLUGINS.glob("*/.claude-plugin/plugin.json"))
 bad_manifest = []
-for m in manifests:
+for manifest in manifests:
     try:
-        obj = json.loads(m.read_text())
+        obj = json.loads(manifest.read_text(encoding="utf-8"))
         if not obj.get("name"):
-            bad_manifest.append(str(m.relative_to(ROOT)))
-    except Exception as e:
-        bad_manifest.append(f"{m.relative_to(ROOT)}: {e}")
-ok("every department has a valid plugin.json", len(manifests) == len(list(d for d in PLUGINS.iterdir() if d.is_dir())), f"{len(manifests)} manifests")
-ok("plugin.json files parse + have name", not bad_manifest, "; ".join(bad_manifest[:5]))
+            bad_manifest.append(str(manifest.relative_to(ROOT)))
+    except Exception as exc:
+        bad_manifest.append(f"{manifest.relative_to(ROOT)}: {exc}")
 
-# ---- marketplace.json ----
-mkt = ROOT / ".claude-plugin" / "marketplace.json"
-if mkt.exists():
+department_count = len(
+    [path for path in PLUGINS.iterdir() if path.is_dir()]
+)
+ok(
+    "every department has a valid plugin.json",
+    len(manifests) == department_count,
+    f"{len(manifests)} manifests",
+)
+ok(
+    "plugin.json files parse + have name",
+    not bad_manifest,
+    "; ".join(bad_manifest[:5]),
+)
+
+marketplace = ROOT / ".claude-plugin" / "marketplace.json"
+if marketplace.exists():
     try:
-        mo = json.loads(mkt.read_text())
-        ok("marketplace.json has required fields", all(k in mo for k in ("name", "owner", "plugins")))
-        ok("marketplace owner has name", isinstance(mo.get("owner"), dict) and bool(mo["owner"].get("name")))
-        ok("marketplace lists all plugins", len(mo.get("plugins", [])) == len(manifests),
-           f"{len(mo.get('plugins', []))} vs {len(manifests)} departments")
-    except Exception as e:
-        ok("marketplace.json parses", False, str(e))
+        data = json.loads(marketplace.read_text(encoding="utf-8"))
+        ok(
+            "marketplace.json has required fields",
+            all(key in data for key in ("name", "owner", "plugins")),
+        )
+        ok(
+            "marketplace owner has name",
+            isinstance(data.get("owner"), dict)
+            and bool(data["owner"].get("name")),
+        )
+        ok(
+            "marketplace lists all plugins",
+            len(data.get("plugins", [])) == len(manifests),
+            f"{len(data.get('plugins', []))} vs {len(manifests)} departments",
+        )
+    except Exception as exc:
+        ok("marketplace.json parses", False, str(exc))
 else:
     ok("marketplace.json exists", False)
 
-# ---- community attribution ----
 if COMMUNITY.exists():
-    comm_dirs = [d for d in COMMUNITY.iterdir() if d.is_dir()]
-    missing_lic = [d.name for d in comm_dirs if not (d / "LICENSE").exists()]
-    missing_readme = [d.name for d in comm_dirs if not (d / "README.md").exists()]
-    ok("every community source has a LICENSE", not missing_lic, "; ".join(missing_lic))
-    ok("every community source has a README", not missing_readme, "; ".join(missing_readme))
+    community_dirs = [path for path in COMMUNITY.iterdir() if path.is_dir()]
+    missing_license = [
+        path.name for path in community_dirs if not (path / "LICENSE").exists()
+    ]
+    missing_readme = [
+        path.name for path in community_dirs if not (path / "README.md").exists()
+    ]
+    ok(
+        "every community source has a LICENSE",
+        not missing_license,
+        "; ".join(missing_license),
+    )
+    ok(
+        "every community source has a README",
+        not missing_readme,
+        "; ".join(missing_readme),
+    )
 
-# ---- no personal/brand leakage ----
-# Real leaks: the personal brand, or a personal user home path. Generic device
-# references like /Volumes/ are legitimate skill content (e.g. path-hygiene-repair).
-leak = []
-for f in list(skill_files) + list(agent_files):
-    t = f.read_text(errors="ignore")
-    if "Caarimu" in t or "caarimu" in t or re.search(r"/Users/[A-Za-z0-9]+-m1\b", t):
-        leak.append(f.name)
-ok("no personal brand/paths in plugins", not leak, "; ".join(leak[:5]))
+leaks = []
+for source_file in list(skill_files) + list(agent_files):
+    text = source_file.read_text(encoding="utf-8")
+    if (
+        "Caarimu" in text
+        or "caarimu" in text
+        or re.search(r"/Users/[A-Za-z0-9]+-m1\b", text)
+    ):
+        leaks.append(source_file.name)
+ok(
+    "no personal brand/paths in plugins",
+    not leaks,
+    "; ".join(leaks[:5]),
+)
 
-# ---- report ----
-fails = [c for c in checks if not c[1]]
+failures = [check for check in checks if not check[1]]
 for name, passed, detail in checks:
-    mark = "PASS" if passed else "FAIL"
-    suffix = f"  ({detail})" if detail and not passed else (f"  [{detail}]" if detail else "")
-    print(f"- {mark}: {name}{suffix}")
-print(f"\nChecks: {len(checks)}  Failures: {len(fails)}")
-sys.exit(1 if fails else 0)
+    marker = "PASS" if passed else "FAIL"
+    suffix = (
+        f"  ({detail})"
+        if detail and not passed
+        else f"  [{detail}]"
+        if detail
+        else ""
+    )
+    print(f"- {marker}: {name}{suffix}")
+print(f"\nChecks: {len(checks)}  Failures: {len(failures)}")
+sys.exit(1 if failures else 0)
