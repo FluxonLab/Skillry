@@ -12,6 +12,7 @@ is credited in full.
 | [addyosmani/agent-skills](addyosmani-agent-skills/) | 7 | 0 | MIT |
 | [addyosmani/web-quality-skills](addyosmani-web-quality-skills/) | 2 | 0 | MIT |
 | [jaktestowac/awesome-copilot-for-testers](jaktestowac-awesome-copilot-for-testers/) | 4 | 0 | MIT |
+| [Xquik-dev/hermes-tweet](Xquik-dev-hermes-tweet/) | 1 | 0 | MIT |
 
 Each source directory keeps its original `LICENSE` and a short `README.md`. Full notices:
 [`../NOTICE`](../NOTICE) and [`../THIRD-PARTY-NOTICES.md`](../THIRD-PARTY-NOTICES.md).

@@ -16,6 +16,7 @@ Redistributed sources (all permissive — MIT):
   - addyosmani/agent-skills              (c) 2025 Addy Osmani
   - addyosmani/web-quality-skills        (c) 2026 Addy Osmani
   - jaktestowac/awesome-copilot-for-testers  (c) GitHub, Inc. (fork of github/awesome-copilot; original MIT copyright retained)
+  - Xquik-dev/hermes-tweet               (c) 2026 Xquik
 
 Each source's directory under community/<source>/ also contains a copy of that
 source's original LICENSE file.
