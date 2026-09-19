@@ -1,12 +1,22 @@
 ---
 name: refactor-safety
-description: Use when you need to scope refactors safely, preserve behavior, avoid unrelated churn, and verify changed surfaces.
+description: "Refactor safely: scope, preserve behavior, cut complexity, sequence multi-file refactors, verify the changed surface."
 ---
 
 # Refactor Safety
 
 ## Purpose
 Enforce a disciplined process for structural code changes: lock in existing behavior with tests before touching anything, shrink the diff to only what is necessary, keep each step independently verifiable, and maintain a clear rollback path. This prevents the three most common refactor failures — silent behavior regressions, test-suite gaps masked by green CI, and scope creep that tangles unrelated concerns into one unreviewable PR. The defining rule: a refactor must not change observable behavior, so the test result before and after must be identical.
+
+## Absorbed skills (routing)
+
+Skillry 3.0.0 folded the skills below into `refactor-safety`. Each keeps its full guidance as a reference file; open only the one the task needs. The old names are routing keys, not separate skills.
+
+| Old skill | Reference | Open it for |
+|---|---|---|
+| `refactor` | [references/refactor.md](references/refactor.md) | refactoring techniques: extract function, rename, split god functions, type safety, code smells, patterns |
+| `refactor-plan` | [references/refactor-plan.md](references/refactor-plan.md) | planning a multi-file refactor with sequencing and rollback steps |
+| `refactor-method-complexity-reduce` | [references/refactor-method-complexity-reduce.md](references/refactor-method-complexity-reduce.md) | cutting one method's cognitive complexity below a threshold by extracting helpers |
 
 ## When to use
 - Renaming or relocating a function, class, or module called from more than three places.

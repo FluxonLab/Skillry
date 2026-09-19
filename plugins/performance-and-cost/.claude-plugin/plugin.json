@@ -1,6 +1,6 @@
 {
   "name": "skillry-performance-and-cost",
-  "description": "Performance and cost engineering: profiling, frontend/runtime/query performance budgets, caching, bundle size, plus LLM/API token and cloud cost control.",
+  "description": "Performance engineering: frontend performance budgets and Core Web Vitals, backend latency, memory and resource profiling, caching, and Python performance.",
   "version": "0.1.0",
   "author": {
     "name": "FluxonLab",

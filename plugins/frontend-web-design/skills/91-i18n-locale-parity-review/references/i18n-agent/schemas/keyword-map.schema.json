@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/keyword-map.schema.json",
+  "title": "KeywordMap",
+  "type": "object",
+  "required": ["version", "sourceLocale", "entries"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "string" },
+    "sourceLocale": { "type": "string" },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "locales"],
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Locale-agnostic path key, e.g. /pricing"
+          },
+          "intent": {
+            "type": "string",
+            "description": "Search / conversion intent note"
+          },
+          "locales": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "required": ["primaryKeyword"],
+              "additionalProperties": false,
+              "properties": {
+                "primaryKeyword": { "type": "string" },
+                "secondaryKeywords": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "titleDraft": { "type": "string" },
+                "metaDraft": { "type": "string" },
+                "notes": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

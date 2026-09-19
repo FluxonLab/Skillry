@@ -1,9 +1,19 @@
 ---
 name: rag-vector-search-review
-description: Use when you need to review retrieval, embeddings, chunking, vector search, ranking, and grounding strategy.
+description: "RAG and retrieval: chunking, embeddings, vector and hybrid search, ranking, grounding."
 ---
 
 # RAG Vector Search Review
+
+## Merged skills (routing)
+
+Skillry 3.0.0 merged these former skills into `rag-vector-search-review`. Retrieval reviews use the procedure below. To build or tune a component, read only the matching reference.
+
+| Former skill | Use for | Reference |
+|---|---|---|
+| `rag-implementation` | Build RAG: components, LangGraph pipeline, chunking, vector stores, retrieval optimization, RAG metrics | [references/rag-implementation.md](references/rag-implementation.md) |
+| `embedding-strategies` | Choose and tune embedding models; chunking; domain pipelines; embedding quality checks | [references/embedding-strategies.md](references/embedding-strategies.md) |
+| `hybrid-search-implementation` | Hybrid vector + keyword search: RRF fusion, PostgreSQL, Elasticsearch, hybrid RAG pipeline | [references/hybrid-search-implementation.md](references/hybrid-search-implementation.md) |
 
 ## Purpose
 
@@ -24,7 +34,7 @@ Audit a Retrieval-Augmented Generation pipeline end-to-end: chunking strategy, e
 - The problem is prompt structure, not retrieval — chunks are retrieved correctly but the model ignores them (use `prompt-systems-review`).
 - The problem is evaluation methodology rather than retrieval mechanics (use `llm-evaluation-review`).
 - The system does not use retrieval at all — pure generation or a fine-tuned model.
-- The only question is which vector database to use for a greenfield project — this is an architecture decision, not a review.
+- The only question is which vector database to use for a greenfield project — this is an architecture decision, not a review (build options: [references/rag-implementation.md](references/rag-implementation.md)).
 
 ## Procedure
 

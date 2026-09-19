@@ -1,6 +1,6 @@
 {
   "name": "skillry-backend-and-api",
-  "description": "API/interface design, backend review, auth/session, integration boundaries, error handling, and Python project review.",
+  "description": "API/interface design and OpenAPI, backend review with integration boundaries, auth/session and authorization, error handling and observability, and Python/FastAPI project review.",
   "version": "0.1.0",
   "author": {
     "name": "FluxonLab",

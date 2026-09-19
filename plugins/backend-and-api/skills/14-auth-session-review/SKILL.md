@@ -1,6 +1,6 @@
 ---
 name: auth-session-review
-description: Use when you need to review authentication, sessions, cookies, tokens, origins, and permission assumptions in a web application before a release, security audit, or compliance review.
+description: "Auth: sessions, cookies, tokens, origins; authorization, roles, row-level access, tenancy, denied paths."
 ---
 
 # Auth Session Review
@@ -8,6 +8,14 @@ description: Use when you need to review authentication, sessions, cookies, toke
 ## Purpose
 
 Review the authentication and session management layer of a web application for the concrete vulnerabilities that most commonly appear in production codebases: weak cookie flags, JWT misconfiguration, missing CSRF protection, password hashing with outdated algorithms, session fixation, broken token rotation, and auth-secret leakage in logs. Produce a prioritized list of findings with severity ratings and specific remediation steps — not a generic checklist, but evidence-based findings with file and line references where available.
+
+## Merged skills
+
+Skillry 3.0.0 merged these former skills into this one. The procedure below stays the default; when the task matches a row, open only that reference.
+
+| Former skill | Reference | Use for |
+|---|---|---|
+| `authz-permission-review` | [references/authz-permission-review.md](references/authz-permission-review.md) | authorization: RBAC/ABAC model, row-level and tenant isolation, IDOR, privilege escalation, default-deny, denied-path responses and tests |
 
 ## When to use
 
@@ -22,7 +30,7 @@ Review the authentication and session management layer of a web application for 
 
 - The service has no user authentication — it is an internal microservice using mTLS or API key only. Review that separately under a network boundary or API gateway review.
 - You are implementing OAuth2 from scratch without a library — recommend using a proven library (Passport.js, NextAuth.js, Auth.js, Auth0, Supabase Auth) and then review the integration, not the raw implementation.
-- The review scope is authorization (what a logged-in user can do after authentication is confirmed), not authentication (verifying who they are).
+- The review scope is authorization only (what a logged-in user can do after authentication is confirmed) — skip this procedure and follow `references/authz-permission-review.md`.
 
 ## Procedure
 

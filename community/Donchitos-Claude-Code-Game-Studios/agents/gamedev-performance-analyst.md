@@ -4,7 +4,7 @@ description: "[Game studio] The Performance Analyst profiles game performance, i
 tools: Read, Glob, Grep, Write, Edit, Bash
 model: sonnet
 skills:
-  - gamedev-perf-profile
+  - game-architecture-review
   - gamedev-soak-test
 memory: project
 ---

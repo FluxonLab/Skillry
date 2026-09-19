@@ -9,7 +9,7 @@ skills:
   - architecture-review
   - release-readiness-check
   - agent-workflow-design
-  - skill-to-agent-router
+  - skill-librarian
 color: blue
 ---
 
@@ -37,7 +37,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: implementation-plan, architecture-review, release-readiness-check, agent-workflow-design, skill-to-agent-router.
+- Primary skills: implementation-plan, architecture-review, release-readiness-check, agent-workflow-design, skill-librarian.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

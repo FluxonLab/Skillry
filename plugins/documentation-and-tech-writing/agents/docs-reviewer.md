@@ -5,9 +5,7 @@ tools: Read, Grep, Glob, Bash
 model: sonnet
 permissionMode: default
 skills:
-  - docs-quality-review
-  - api-reference-docs
-  - tutorial-and-how-to-writing
+  - technical-writing-review
 color: blue
 ---
 

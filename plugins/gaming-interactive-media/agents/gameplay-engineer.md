@@ -6,7 +6,7 @@ model: sonnet
 permissionMode: default
 skills:
   - gameplay-systems-review
-  - interactive-prototype-review
+  - web-design-review
   - smoke-test-and-repair
 color: green
 ---
@@ -35,7 +35,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: gameplay-systems-review, interactive-prototype-review, smoke-test-and-repair.
+- Primary skills: gameplay-systems-review, web-design-review, smoke-test-and-repair.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

@@ -1,6 +1,6 @@
 ---
 name: ai-security-review
-description: Use when you need to review prompt injection, tool misuse, agent delegation risk, data exfiltration, and model boundary failures.
+description: "AI and agent security: prompt injection, tool and MCP gating, permissions, delegation, data exfiltration."
 ---
 
 # AI Security Review
@@ -8,6 +8,15 @@ description: Use when you need to review prompt injection, tool misuse, agent de
 ## Purpose
 
 Conduct a security review of an AI system covering the attack surface specific to LLM-based applications: direct and indirect prompt injection, tool misuse, unauthorized agent delegation, data exfiltration via tool arguments, jailbreak vectors, system prompt leakage, and output sanitization failures. Produces findings with exact reproduction steps and concrete structural remediation — not vague recommendations to "add guardrails."
+
+## Merged skills
+
+Skillry 3.0.0 merged these former skills into this one. The procedure below stays the default; when the task matches a row, open only that reference.
+
+| Former skill | Reference | Use for |
+|---|---|---|
+| `agent-governance-review` | [references/agent-governance-review.md](references/agent-governance-review.md) | agent permission scope, least privilege, recursion limits, code-level approval gates, audit logging, identity boundaries, context hygiene, review schedule |
+| `automation-mcp-gatekeeping` | [references/automation-mcp-gatekeeping.md](references/automation-mcp-gatekeeping.md) | deciding whether to activate an MCP server or external connector (Rube, Composio, Slack, Gmail, CRM, payments): minimum scope, approval, smoke test, revocation |
 
 ## When to use
 
@@ -20,8 +29,8 @@ Conduct a security review of an AI system covering the attack surface specific t
 
 ## When not to use
 
-- The concern is about component provenance and third-party trust (use `agent-supply-chain-review`).
-- The concern is about permission configuration and governance structure (use `agent-governance-review`).
+- The concern is about component provenance and third-party trust (use `dependency-supply-chain-review`, its `references/agent-supply-chain-review.md`).
+- The concern is about permission configuration and governance structure — skip this procedure and follow `references/agent-governance-review.md`.
 - The system is a purely read-only LLM with no tools, no external data ingestion, and no user-facing output that is rendered in a browser — the attack surface is minimal.
 - Traditional security review (OWASP Top 10, pen test) is being conducted separately; this skill covers only the AI-specific surface.
 

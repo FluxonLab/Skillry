@@ -1,9 +1,21 @@
 ---
 name: data-pipeline-review
-description: Use when you need to review or design an ETL/ELT data pipeline for idempotency, incremental loads, orchestration (Airflow/Dagster/cron), backfill safety, partitioning, and failure recovery.
+description: "Data and ML pipelines: ETL/ELT, data quality, lineage, training reproducibility, model serving, notebooks."
 ---
 
 # Data Pipeline Review
+
+## Absorbed skills
+
+Skillry 3.0.0 merged the skills below into this one. The procedure in this file stays the default. When a task, agent or document names one of these old skills, open only its reference.
+
+| Old skill | Reference | Covers |
+|---|---|---|
+| `data-quality-validation` | `references/data-quality-validation.md` | Schema, null/duplicate/range assertions, Great Expectations or pandera, data contracts, freshness, failure routing |
+| `dataset-versioning-and-lineage` | `references/dataset-versioning-and-lineage.md` | DVC or lakeFS versioning, dataset cards, lineage, PII handling, reproducible dataset references |
+| `ml-training-pipeline-review` | `references/ml-training-pipeline-review.md` | Training reproducibility, data splits, leakage, checkpointing, experiment tracking (MLflow/W&B) |
+| `model-serving-and-inference` | `references/model-serving-and-inference.md` | Batch vs online serving, latency/throughput, model versioning, rollback, drift and skew monitoring |
+| `notebook-hygiene` | `references/notebook-hygiene.md` | Jupyter hygiene: execution order, hidden state, parameterization, nbconvert/papermill, output bloat, secrets |
 
 ## Purpose
 
@@ -20,8 +32,8 @@ Review or design a batch or streaming data pipeline so that it is idempotent, re
 ## When not to use
 
 - The change is a one-off ad-hoc query with no scheduling or persistence — review the query, not a pipeline.
-- The work is pure data-quality assertion logic — use the data-quality-validation skill.
-- The change only touches dataset versioning or lineage metadata — use the dataset-versioning-and-lineage skill.
+- The work is pure data-quality assertion logic — use `references/data-quality-validation.md`.
+- The change only touches dataset versioning or lineage metadata — use `references/dataset-versioning-and-lineage.md`.
 
 ## Procedure
 

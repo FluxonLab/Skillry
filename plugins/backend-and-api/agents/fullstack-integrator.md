@@ -6,8 +6,8 @@ model: sonnet
 permissionMode: default
 skills:
   - api-and-interface-design
-  - integration-boundary-review
-  - ui-consistency-review
+  - backend-implementation-review
+  - web-design-review
   - smoke-test-and-repair
   - ecommerce-integration-review
   - analytics-tracking-review
@@ -38,7 +38,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: api-and-interface-design, integration-boundary-review, ui-consistency-review, smoke-test-and-repair, ecommerce-integration-review, analytics-tracking-review.
+- Primary skills: api-and-interface-design, backend-implementation-review, web-design-review, smoke-test-and-repair, ecommerce-integration-review, analytics-tracking-review.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

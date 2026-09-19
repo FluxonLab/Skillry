@@ -90,7 +90,9 @@ high-risk work.
 
 ## Library structure
 
-- plugins/<department>/ contains first-party skills and agents grouped for discovery.
+- plugins/<department>/ contains first-party skills and agents grouped for discovery. Since 3.0.0
+  each skill is a hub: its SKILL.md routes to references/, which can include attributed third-party
+  material merged with a provenance header and its upstream license.
 - community/<source>/ contains attributed third-party material with its upstream license.
 - registry/ records distributable inventory and provenance.
 - tools/ contains repository maintenance and portable installation tooling.

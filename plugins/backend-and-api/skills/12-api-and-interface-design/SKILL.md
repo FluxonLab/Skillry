@@ -1,6 +1,6 @@
 ---
 name: api-and-interface-design
-description: Use when designing stable APIs, module boundaries, type contracts, public interfaces, REST or GraphQL endpoints, or frontend/backend contracts.
+description: "Design APIs and interfaces: REST/GraphQL principles, OpenAPI 3.1 specs, contracts, spec-to-code generation."
 ---
 
 # API and Interface Design
@@ -8,6 +8,16 @@ description: Use when designing stable APIs, module boundaries, type contracts, 
 ## Overview
 
 Design stable, well-documented interfaces that are hard to misuse. Good interfaces make the right thing easy and the wrong thing hard. This applies to REST APIs, GraphQL schemas, module boundaries, component props, and any surface where one piece of code talks to another.
+
+## Merged skills
+
+Skillry 3.0.0 merged the skills below into this one. A request that names a former skill routes here; open only the reference that matches the task. Paths are relative to this skill's directory.
+
+| Former skill | Reference | Covers |
+|---|---|---|
+| `api-design-principles` | [references/api-design-principles.md](references/api-design-principles.md) | REST and GraphQL design principles: resources, methods, status codes, pagination, versioning, error format, GraphQL schema and DataLoader |
+| `openapi-spec-generation` | [references/openapi-spec-generation.md](references/openapi-spec-generation.md) | OpenAPI 3.1 specs: design-first templates, code-first generation, validation and linting |
+| `openapi-to-application-code` | [references/openapi-to-application-code.md](references/openapi-to-application-code.md) | Generate a complete application scaffold from an OpenAPI specification |
 
 ## When to Use
 

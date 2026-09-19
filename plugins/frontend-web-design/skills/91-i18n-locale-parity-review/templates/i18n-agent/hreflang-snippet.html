@@ -1,0 +1,17 @@
+<!--
+  Example head tags for an indexable page.
+  Only emit this block when robots allow indexing.
+  Use absolute HTTPS URLs and BCP47 codes from the locale registry.
+-->
+<link rel="canonical" href="https://example.com/fr/pricing" />
+<meta property="og:url" content="https://example.com/fr/pricing" />
+<meta property="og:locale" content="fr_CA" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta property="og:locale:alternate" content="es_ES" />
+
+<link rel="alternate" hreflang="en" href="https://example.com/en/pricing" />
+<link rel="alternate" hreflang="fr-CA" href="https://example.com/fr/pricing" />
+<link rel="alternate" hreflang="es" href="https://example.com/es/pricing" />
+<link rel="alternate" hreflang="x-default" href="https://example.com/en/pricing" />
+
+<!-- On noindex pages: omit all rel=alternate hreflang and og:locale:alternate -->

@@ -1,12 +1,21 @@
 ---
 name: error-handling-observability
-description: Use when you need to review error handling, logging, metrics, tracing, and user-safe diagnostics.
+description: "Errors and observability: error patterns, logs, metrics, traces, OpenTelemetry, dashboards, safe diagnostics."
 ---
 
 # Error Handling & Observability
 
 ## Purpose
 Review the observability posture of a backend service: whether errors are caught and propagated correctly, whether logs carry enough context to diagnose a production failure with no debugger attached, whether metrics exist to detect anomalies before users report them, whether distributed traces connect a request across service boundaries, and whether internal error details ever leak to end users. The deliverable is a severity-rated findings list with concrete fixes — the goal is a service that is observable from day one, not after the first un-diagnosable incident.
+
+## Merged skills
+
+Skillry 3.0.0 merged the skills below into this one. A request that names a former skill routes here; open only the reference that matches the task. Paths are relative to this skill's directory.
+
+| Former skill | Reference | Covers |
+|---|---|---|
+| `error-handling-patterns` | [references/error-handling-patterns.md](references/error-handling-patterns.md) | Error handling across languages: exceptions vs Result types, error hierarchies, propagation, retries, circuit breakers, graceful degradation |
+| `observability-otel-review` | [references/observability-otel-review.md](references/observability-otel-review.md) | OpenTelemetry review: SDK setup, context propagation, collector pipelines, sampling, metric cardinality, RED/USE dashboards, alert rules |
 
 ## When to use
 - A production incident could not be diagnosed because logs were missing, truncated, or contextless — and you want to prevent a repeat.

@@ -7,8 +7,6 @@ permissionMode: default
 skills:
   - frontend-performance-budget
   - backend-latency-profiling
-  - caching-strategy
-  - memory-and-resource-profiling
 color: green
 ---
 
@@ -37,7 +35,7 @@ Tool boundary:
 - Profiling captures (flame graphs, heap dumps) must be bounded in duration and taken in staging or a low-traffic window; stop and report instead of editing when production data, secrets, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: frontend-performance-budget, backend-latency-profiling, caching-strategy, memory-and-resource-profiling.
+- Primary skills: frontend-performance-budget, backend-latency-profiling.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full dormant skill archive.
 

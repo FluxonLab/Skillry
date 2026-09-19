@@ -4,7 +4,7 @@ description: "[Game studio] The Sound Designer creates detailed specifications f
 tools: Read, Glob, Grep, Write, Edit
 model: haiku
 skills:
-  - gamedev-team-audio
+  - gameplay-systems-review
   - gamedev-asset-spec
 disallowedTools: Bash
 ---

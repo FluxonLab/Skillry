@@ -1,9 +1,17 @@
 ---
 name: next-app-router-rsc-review
-description: Use when you need to review a Next.js App Router codebase for React Server Component correctness, "use client"/"use server" boundary violations, server secret leakage into the client bundle, Server Action input validation, fetch cache strategy, and metadata/streaming patterns.
+description: "Next.js App Router: server/client component boundaries, caching, streaming, parallel routes, data fetching."
 ---
 
 # Next.js App Router & RSC Review
+
+## Routing (absorbed skills)
+
+Skillry 3.0.0 folded the skills below into this one. When a request names one of them or matches its topic, open the listed reference and follow it; the rest of this file stays the default procedure.
+
+| Old skill name | Reference | Use it for |
+|---|---|---|
+| `nextjs-app-router-patterns` | [references/nextjs-app-router-patterns.md](references/nextjs-app-router-patterns.md) | building with the App Router: Server Components, streaming and Suspense, parallel and intercepting routes, Server Actions, data fetching and caching patterns |
 
 ## Purpose
 

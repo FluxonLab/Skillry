@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/locale-registry.schema.json",
+  "title": "LocaleRegistry",
+  "type": "object",
+  "required": ["version", "defaultLocale", "locales"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Registry schema/document version"
+    },
+    "siteOrigin": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical site origin, e.g. https://example.com"
+    },
+    "defaultLocale": {
+      "type": "string",
+      "description": "id of the default locale (x-default target)"
+    },
+    "trailingSlash": {
+      "type": "string",
+      "enum": ["always", "never", "as-is"],
+      "default": "as-is"
+    },
+    "urlStrategy": {
+      "type": "string",
+      "enum": [
+        "prefix-all",
+        "prefix-except-default",
+        "subdomain",
+        "tld",
+        "other"
+      ]
+    },
+    "locales": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "bcp47", "urlPrefix", "dir", "label", "enabled"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 2,
+            "pattern": "^[A-Za-z0-9_-]+$"
+          },
+          "bcp47": {
+            "type": "string",
+            "description": "BCP47 language tag for html[lang] and hreflang",
+            "pattern": "^[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})*$"
+          },
+          "urlPrefix": {
+            "type": "string",
+            "description": "Path segment; may differ from bcp47 casing/form",
+            "pattern": "^[A-Za-z0-9_-]*$"
+          },
+          "dir": {
+            "type": "string",
+            "enum": ["ltr", "rtl"]
+          },
+          "ogLocale": {
+            "type": "string",
+            "description": "Open Graph locale, e.g. en_US or fr_CA"
+          },
+          "label": {
+            "type": "string",
+            "description": "Native endonym for switchers"
+          },
+          "marketPriority": {
+            "type": "string",
+            "enum": ["primary", "secondary", "maintain"]
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "hreflangCase": {
+            "type": "string",
+            "enum": ["bcp47", "lowercase"],
+            "default": "bcp47",
+            "description": "Preferred hreflang casing; bcp47 keeps region uppercase (fr-CA)"
+          }
+        }
+      }
+    },
+    "fallbackPolicy": {
+      "type": "string",
+      "enum": ["omit", "fallback-noindex", "soft-redirect-default"],
+      "description": "When a translation is missing"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

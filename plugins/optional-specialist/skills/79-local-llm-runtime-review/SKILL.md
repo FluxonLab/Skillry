@@ -1,6 +1,6 @@
 ---
 name: local-llm-runtime-review
-description: Use when you need to review local LLM runtimes, model routing, resource limits, privacy boundaries, and offline behavior.
+description: "Local LLM runtimes: model routing, resource limits, privacy boundaries, offline behavior."
 ---
 
 # Local LLM Runtime Review

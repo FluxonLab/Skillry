@@ -1,0 +1,72 @@
+{
+  "id": "production-verify",
+  "title": "Production verification after localization",
+  "version": "1.0.0",
+  "items": [
+    {
+      "id": "pv.canonical",
+      "level": "must",
+      "text": "Live money pages: self-canonical correct per locale"
+    },
+    {
+      "id": "pv.og_url",
+      "level": "must",
+      "text": "Live og:url equals canonical"
+    },
+    {
+      "id": "pv.lang",
+      "level": "must",
+      "text": "Live html[lang] and dir correct"
+    },
+    {
+      "id": "pv.hreflang",
+      "level": "must",
+      "text": "Live reciprocal hreflang + x-default on indexable pages"
+    },
+    {
+      "id": "pv.noindex_silent",
+      "level": "must",
+      "text": "Live noindex pages emit no hreflang / og:locale:alternate"
+    },
+    {
+      "id": "pv.metas",
+      "level": "must",
+      "text": "Live titles/descriptions localized and unique"
+    },
+    {
+      "id": "pv.sitemap",
+      "level": "must",
+      "text": "Public sitemap entrypoint returns 200; samples include non-default locales"
+    },
+    {
+      "id": "pv.robots_agree",
+      "level": "must",
+      "text": "robots.txt Sitemap: matches the public entrypoint"
+    },
+    {
+      "id": "pv.switcher",
+      "level": "must",
+      "text": "Language switcher links return 200 to valid twins"
+    },
+    {
+      "id": "pv.jsonld",
+      "level": "should",
+      "text": "JSON-LD inLanguage and localized URLs look correct in view-source"
+    },
+    {
+      "id": "pv.analytics",
+      "level": "must",
+      "text": "Analytics page_locale populated on a test hit per locale"
+    },
+    {
+      "id": "pv.gsc",
+      "level": "should",
+      "text": "GSC URL inspection on new locale money pages; watch not-indexed / soft-404"
+    },
+    {
+      "id": "pv.measurement_doc",
+      "level": "should",
+      "text": "seo-measurement.md updated with locale prefixes and CTR loops"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 ---
 name: project-agent-bootstrap
-description: Use when starting medium or large project work, standardizing project-local agent guidance, or creating minimal AGENTS.md, .codex/project.toml, project skills, or project agent overrides from the global skill and agent pool.
+description: "Set up project agent context: minimal AGENTS/rules files, session context, recovery when output quality degrades."
 ---
 
 # Project Agent Bootstrap
@@ -14,6 +14,14 @@ variable rules, safety constraints, and which global skills and agents are relev
 map, agents default to global assumptions that may be wrong for the project, wasting context and
 introducing errors. The scaffold stays small by referencing global skills and agents by name
 rather than embedding their content.
+
+## Absorbed skills (routing)
+
+Skillry 3.0.0 folded the skills below into `project-agent-bootstrap`. Each keeps its full guidance as a reference file; open only the one the task needs. The old names are routing keys, not separate skills.
+
+| Old skill | Reference | Open it for |
+|---|---|---|
+| `context-engineering` | [references/context-engineering.md](references/context-engineering.md) | session and task context setup: rules files, context hierarchy, recovery when agent output degrades |
 
 ## When to use
 - The user asks to standardize a project for Codex agents, skills, or subagents.

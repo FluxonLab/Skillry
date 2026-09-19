@@ -6,9 +6,6 @@ model: sonnet
 permissionMode: default
 skills:
   - data-pipeline-review
-  - data-quality-validation
-  - dataset-versioning-and-lineage
-  - notebook-hygiene
 color: green
 ---
 
@@ -36,7 +33,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: data-pipeline-review, data-quality-validation, dataset-versioning-and-lineage, notebook-hygiene.
+- Primary skills: data-pipeline-review.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full dormant skill archive.
 

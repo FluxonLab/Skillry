@@ -5,10 +5,8 @@ tools: Read, Grep, Glob, Bash, Edit, Write
 model: sonnet
 permissionMode: default
 skills:
-  - ui-consistency-review
-  - responsive-layout-review
+  - web-design-review
   - smoke-test-and-repair
-  - visual-polish-pass
   - chrome-extension-review
   - nfc-linktree-menu-builder-review
 color: green
@@ -38,7 +36,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: ui-consistency-review, responsive-layout-review, smoke-test-and-repair, visual-polish-pass, chrome-extension-review, nfc-linktree-menu-builder-review.
+- Primary skills: web-design-review, smoke-test-and-repair, chrome-extension-review, nfc-linktree-menu-builder-review.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

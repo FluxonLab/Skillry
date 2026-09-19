@@ -1,12 +1,23 @@
 ---
 name: monorepo-turborepo-review
-description: Use when you need to review monorepo, Turborepo, workspace package, cache, build graph, and dependency boundaries.
+description: "Monorepos: pnpm workspaces, Turborepo caching, Nx, Bazel, build graph, package boundaries."
 ---
 
 # Monorepo & Turborepo Review
 
 ## Purpose
 Review the structure, pipeline configuration, caching strategy, task dependency graph, shared package design, versioning, and build correctness of monorepos managed with Turborepo (and associated tools: pnpm/npm/yarn workspaces, Changesets, tsconfig path aliases).
+
+## Merged skills
+
+Skillry 3.0.0 merged these former skills into this one. The procedure below stays the default; when the task matches a row, open only that reference.
+
+| Former skill | Reference | Use for |
+|---|---|---|
+| `monorepo-management` (third-party, wshobson/agents) | [references/monorepo-management.md](references/monorepo-management.md) | setting up or migrating a monorepo: Turborepo, Nx and pnpm workspace setup, shared TS/ESLint configs, code-sharing patterns, CI |
+| `turborepo-caching` (third-party, wshobson/agents) | [references/turborepo-caching.md](references/turborepo-caching.md) | `turbo.json` pipelines, local and remote (Vercel or self-hosted) caching, `--filter` scoping, cache-miss debugging |
+| `nx-workspace-patterns` (third-party, wshobson/agents) | [references/nx-workspace-patterns.md](references/nx-workspace-patterns.md) | Nx workspaces: `nx.json`, project config, module boundary rules, generators, affected CI, remote cache |
+| `bazel-build-optimization` (third-party, wshobson/agents) | [references/bazel-build-optimization.md](references/bazel-build-optimization.md) | Bazel: `WORKSPACE`/`.bazelrc`, BUILD rules, custom rules, query, remote cache and execution, profiling |
 
 ## When to use
 - Reviewing a `turbo.json` pipeline configuration and its `dependsOn`, `inputs`, `outputs` definitions.
@@ -18,7 +29,7 @@ Review the structure, pipeline configuration, caching strategy, task dependency 
 
 ## When not to use
 - Single-package repository — no workspace or build graph concerns apply.
-- Nx-based monorepo — similar concepts but different config schema; note divergences.
+- Nx-based monorepo — the Turborepo procedure below does not apply; follow `references/nx-workspace-patterns.md` (Bazel: `references/bazel-build-optimization.md`).
 - Docker/container build review unless specifically about how Docker interacts with the Turborepo build output.
 
 ## Procedure

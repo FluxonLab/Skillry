@@ -1,9 +1,18 @@
 ---
 name: cost-control-token-review
-description: Use when you need to review token, runtime, model, API, hosting, and subagent fanout cost controls.
+description: "Cost control: LLM token and API spend, model choice, subagent fanout, cloud and hosting waste."
 ---
 
 # Cost Control Token Review
+
+## Absorbed skills
+
+Skillry 3.0.0 merged the skills below into this one. The procedure in this file stays the default. When a task, agent or document names one of these old skills, open only its reference.
+
+| Old skill | Reference | Covers |
+|---|---|---|
+| `llm-api-cost-optimization` | `references/llm-api-cost-optimization.md` | LLM/API spend engineering: per-call token logs, prompt caching, model tiering, batching, context trimming, cost dashboard |
+| `cloud-spend-review` | `references/cloud-spend-review.md` | Cloud waste: rightsizing, idle and orphaned resources, storage tiering, egress, reserved/spot/committed discounts, tagging, anomaly alerts |
 
 ## Purpose
 
@@ -23,7 +32,7 @@ Audit an AI system's token consumption, model selection, caching strategy, batch
 
 - The cost is a one-time research or prototyping expense, not a recurring production cost.
 - The problem is output quality or reliability — cost optimizations that degrade quality are not optimizations.
-- The hosting cost question is about GPU compute infrastructure, not API token costs.
+- The hosting cost question is about GPU compute infrastructure, not API token costs — use `references/cloud-spend-review.md`.
 - Total monthly API cost is below the threshold where optimization work would pay back in reasonable time (e.g., less than $100/month).
 
 ## Procedure

@@ -9,7 +9,7 @@ skills:
   - uat-acceptance-review
   - business-model-review
   - nfc-linktree-menu-builder-review
-  - wordpress-woocommerce-review
+  - ecommerce-integration-review
 color: blue
 ---
 
@@ -37,7 +37,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: product-requirements-review, uat-acceptance-review, business-model-review, nfc-linktree-menu-builder-review, wordpress-woocommerce-review.
+- Primary skills: product-requirements-review, uat-acceptance-review, business-model-review, nfc-linktree-menu-builder-review, ecommerce-integration-review.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

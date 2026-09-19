@@ -5,7 +5,7 @@ tools: Read, Grep, Glob, Bash
 model: sonnet
 permissionMode: plan
 skills:
-  - codebase-cartography
+  - repo-diagnostics
   - api-and-interface-design
   - database-and-prisma-review
   - rag-vector-search-review
@@ -36,7 +36,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: codebase-cartography, api-and-interface-design, database-and-prisma-review, rag-vector-search-review.
+- Primary skills: repo-diagnostics, api-and-interface-design, database-and-prisma-review, rag-vector-search-review.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

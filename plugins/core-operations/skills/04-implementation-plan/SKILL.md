@@ -1,12 +1,28 @@
 ---
 name: implementation-plan
-description: Use when you need to turn goals into file-level plans with risks, migration steps, test plan, rollback path, and acceptance criteria.
+description: "Specs and plans: spec-first briefs, file-level plans, feature breakdown, incremental slices, plan updates, estimates."
 ---
 
 # Implementation Plan
 
 ## Purpose
 Turn a goal into a file-level execution plan that another engineer or agent can run without follow-up questions. The plan names every file that changes, sequences the work so the tree stays green after each step, isolates risky operations (schema migrations, renames, dependency bumps) onto their own reversible steps, and binds every acceptance criterion to a concrete verification command. The output is a contract, not a sketch: ambiguity left in the plan becomes rework or a broken build during execution.
+
+## Absorbed skills (routing)
+
+Skillry 3.0.0 folded the skills below into `implementation-plan`. Each keeps its full guidance as a reference file; open only the one the task needs. The old names are routing keys, not separate skills.
+
+| Old skill | Reference | Open it for |
+|---|---|---|
+| `md-spec-generator` | [references/md-spec-generator.md](references/md-spec-generator.md) | markdown implementation specs, repair reports, and handoff packs |
+| `spec-driven-development` | [references/spec-driven-development.md](references/spec-driven-development.md) | writing a spec before coding when requirements are unclear or no spec exists |
+| `update-implementation-plan` | [references/update-implementation-plan.md](references/update-implementation-plan.md) | updating an existing implementation plan file with new or changed requirements |
+| `breakdown-feature-implementation` | [references/breakdown-feature-implementation.md](references/breakdown-feature-implementation.md) | a detailed feature implementation plan (Epoch monorepo template) |
+| `incremental-implementation` | [references/incremental-implementation.md](references/incremental-implementation.md) | delivering a multi-file change in small, verified slices |
+| `track-management` | [references/track-management.md](references/track-management.md) | Conductor tracks: spec.md/plan.md work units, track lifecycle, tracks registry |
+| `gamedev-estimate` | [references/gamedev-estimate.md](references/gamedev-estimate.md) | task effort estimates with complexity, dependencies, velocity, risk, and confidence |
+| `gamedev-retrospective` | [references/gamedev-retrospective.md](references/gamedev-retrospective.md) | sprint or milestone retrospectives from completed work, velocity, and blockers |
+| `pm-spec-writing` | [references/pm-spec-writing.md](references/pm-spec-writing.md) | turning a vague idea into a dev brief, PRD, user stories, acceptance criteria; prioritization frameworks |
 
 ## When to use
 - A feature or fix spans multiple files or layers and needs ordered, verifiable steps before anyone writes code.

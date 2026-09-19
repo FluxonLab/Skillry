@@ -5,10 +5,7 @@ tools: Read, Grep, Glob, Bash, Edit, Write
 model: sonnet
 permissionMode: default
 skills:
-  - readme-and-docs-structure
-  - api-reference-docs
-  - tutorial-and-how-to-writing
-  - changelog-and-release-notes
+  - technical-writing-review
 color: green
 ---
 

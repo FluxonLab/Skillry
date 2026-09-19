@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/audit-report.schema.json",
+  "title": "AuditReport",
+  "type": "object",
+  "required": ["version", "generatedAt", "summary", "findings"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "string" },
+    "generatedAt": { "type": "string" },
+    "siteOrigin": { "type": "string" },
+    "framework": { "type": "string" },
+    "registryPath": { "type": "string" },
+    "defaultsAssumed": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["errors", "warnings", "info"],
+      "additionalProperties": false,
+      "properties": {
+        "errors": { "type": "integer", "minimum": 0 },
+        "warnings": { "type": "integer", "minimum": 0 },
+        "info": { "type": "integer", "minimum": 0 },
+        "pagesScanned": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "severity", "section", "message"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "severity": {
+            "type": "string",
+            "enum": ["error", "warning", "info"]
+          },
+          "section": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 14
+          },
+          "message": { "type": "string" },
+          "path": { "type": "string" },
+          "evidence": { "type": "string" },
+          "checklistItem": { "type": "string" }
+        }
+      }
+    },
+    "nextPhase": {
+      "type": "string",
+      "enum": ["plan", "technical-seo", "translate", "verify", "done"]
+    }
+  }
+}

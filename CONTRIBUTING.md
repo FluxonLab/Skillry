@@ -47,6 +47,10 @@ Only **permissively licensed** content (MIT, ISC, BSD, Apache-2.0) may be redist
 
 A PR that adds content under `community/` must:
 - Place files under `community/<source-slug>/` and include that source's original `LICENSE`.
+  Content merged into an existing skill hub instead goes to that hub's `references/<former-name>.md`
+  (other files under `references/<former-name>/`) with a provenance header, the upstream `LICENSE`
+  beside it, and a `registry/community-source-lock.json` entry for each byte-identical file. Never
+  name merged content `SKILL.md`: Codex discovers nested `SKILL.md` files as separate skills.
 - Add the source to `NOTICE` and `THIRD-PARTY-NOTICES.md` with correct copyright + upstream URL.
 - Include a one-line note on what was reviewed (see [SECURITY.md](SECURITY.md)).
 - **Not** include content under proprietary or non-redistributable terms (e.g. service

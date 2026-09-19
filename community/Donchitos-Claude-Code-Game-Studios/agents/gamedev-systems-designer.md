@@ -4,8 +4,7 @@ description: "[Game studio] The Systems Designer creates detailed mechanical des
 tools: Read, Glob, Grep, Write, Edit
 model: sonnet
 skills:
-  - gamedev-map-systems
-  - gamedev-balance-check
+  - gameplay-systems-review
   - gamedev-design-system
 disallowedTools: Bash
 memory: project

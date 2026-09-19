@@ -2,282 +2,282 @@
   "entries": [
     {
       "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
-      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "evidence": "introducing-commit component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/python-pypi-package-builder/references/pyproject-toml.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/python-pypi-package-builder/references/pyproject-toml.md",
       "source_sha256": "9cd3c728765dcfd34d45ff523930791a40be332042683f2438f90402aea41479",
       "targets": [
-        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/pyproject-toml.md"
+        "plugins/backend-and-api/skills/94-python-project-review/references/python-pypi-package-builder/references/pyproject-toml.md"
       ]
     },
     {
       "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
-      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "evidence": "introducing-commit component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/python-pypi-package-builder/references/library-patterns.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/python-pypi-package-builder/references/library-patterns.md",
       "source_sha256": "bf10eb06c0bea2df3da29ba349ce3abf4095edb364802b2ae9b22767b3ad8b14",
       "targets": [
-        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/library-patterns.md"
+        "plugins/backend-and-api/skills/94-python-project-review/references/python-pypi-package-builder/references/library-patterns.md"
       ]
     },
     {
       "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
-      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "evidence": "introducing-commit component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/python-pypi-package-builder/references/testing-quality.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/python-pypi-package-builder/references/testing-quality.md",
       "source_sha256": "21cc6a734e66ffcab2e18723ebe76aefaad871f5d2bee5b3eae4e36156d2e3c8",
       "targets": [
-        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/testing-quality.md"
+        "plugins/backend-and-api/skills/94-python-project-review/references/python-pypi-package-builder/references/testing-quality.md"
       ]
     },
     {
       "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
-      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "evidence": "introducing-commit component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/python-pypi-package-builder/references/ci-publishing.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/python-pypi-package-builder/references/ci-publishing.md",
       "source_sha256": "f5a1ccd246a5feabc03f0e42468e28119228c87a1a60c343f1d07abcb9cce8d3",
       "targets": [
-        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/ci-publishing.md"
+        "plugins/backend-and-api/skills/94-python-project-review/references/python-pypi-package-builder/references/ci-publishing.md"
       ]
     },
     {
       "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
-      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "evidence": "introducing-commit component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/python-pypi-package-builder/references/community-docs.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/python-pypi-package-builder/references/community-docs.md",
       "source_sha256": "e1d442d1ee120e614522100d2ef3feb016ea1ae4c29a20d6a4c656681fdd91ce",
       "targets": [
-        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/community-docs.md"
+        "plugins/backend-and-api/skills/94-python-project-review/references/python-pypi-package-builder/references/community-docs.md"
       ]
     },
     {
       "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
-      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "evidence": "introducing-commit component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/python-pypi-package-builder/references/architecture-patterns.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/python-pypi-package-builder/references/architecture-patterns.md",
       "source_sha256": "238dc70ebf8c2470ba7a3595905bb10e42825fa5ebd19910ca4c0275121c0b50",
       "targets": [
-        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/architecture-patterns.md"
+        "plugins/backend-and-api/skills/94-python-project-review/references/python-pypi-package-builder/references/architecture-patterns.md"
       ]
     },
     {
       "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
-      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "evidence": "introducing-commit component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/python-pypi-package-builder/references/versioning-strategy.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/python-pypi-package-builder/references/versioning-strategy.md",
       "source_sha256": "cfb0d997b8cadc265beece2d727e5f31e07065729e65d38b1af1e5ce7a60abfa",
       "targets": [
-        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/versioning-strategy.md"
+        "plugins/backend-and-api/skills/94-python-project-review/references/python-pypi-package-builder/references/versioning-strategy.md"
       ]
     },
     {
       "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
-      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "evidence": "introducing-commit component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/python-pypi-package-builder/references/release-governance.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/python-pypi-package-builder/references/release-governance.md",
       "source_sha256": "75951fd7c1bcc7d31646e79ece1b1a14bddeca4e9d4b8224712e223f017483d3",
       "targets": [
-        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/release-governance.md"
+        "plugins/backend-and-api/skills/94-python-project-review/references/python-pypi-package-builder/references/release-governance.md"
       ]
     },
     {
       "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
-      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "evidence": "introducing-commit component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/python-pypi-package-builder/references/tooling-ruff.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/python-pypi-package-builder/references/tooling-ruff.md",
       "source_sha256": "b678426c3ab94615e56d362900daa60f846aacc3d1e561ed6b8fcaed01869fb1",
       "targets": [
-        "community/github-awesome-copilot/skills/python-pypi-package-builder/references/tooling-ruff.md"
+        "plugins/backend-and-api/skills/94-python-project-review/references/python-pypi-package-builder/references/tooling-ruff.md"
       ]
     },
     {
       "commit": "49fd3f3faf6529f8bc8a5927386c5058a2e3264e",
-      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "evidence": "introducing-commit component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/python-pypi-package-builder/scripts/scaffold.py",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/python-pypi-package-builder/scripts/scaffold.py",
       "source_sha256": "84ef1978a8d6928a3581e66f3fd7e304c094e51289ae7e87b2fa70e38841219e",
       "targets": [
-        "community/github-awesome-copilot/skills/python-pypi-package-builder/scripts/scaffold.py"
+        "plugins/backend-and-api/skills/94-python-project-review/scripts/python-pypi-package-builder/scaffold.py"
       ]
     },
     {
       "commit": "74208f679bad31abcc5542572c1fc85434751683",
-      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded",
+      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/quality-playbook/references/defensive_patterns.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/quality-playbook/references/defensive_patterns.md",
       "source_sha256": "9e740465c3ef569cc40b72f16936c86aae16f5f7b563b782706e8ba7321e1d25",
       "targets": [
-        "community/github-awesome-copilot/skills/quality-playbook/references/defensive_patterns.md"
+        "community/addyosmani-agent-skills/skills/test-driven-development/references/quality-playbook/references/defensive_patterns.md"
       ]
     },
     {
       "commit": "74208f679bad31abcc5542572c1fc85434751683",
-      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded",
+      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/quality-playbook/references/schema_mapping.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/quality-playbook/references/schema_mapping.md",
       "source_sha256": "7ddfc88d257987d5ba5da211f69075c41f6495bbf0f5d9a7b04d140e78e8e462",
       "targets": [
-        "community/github-awesome-copilot/skills/quality-playbook/references/schema_mapping.md"
+        "community/addyosmani-agent-skills/skills/test-driven-development/references/quality-playbook/references/schema_mapping.md"
       ]
     },
     {
       "commit": "74208f679bad31abcc5542572c1fc85434751683",
-      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded",
+      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/quality-playbook/references/constitution.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/quality-playbook/references/constitution.md",
       "source_sha256": "d22b88cc5cac154b2dcfba686ba02977cfe54ceabd4f2cf6f9aa535055a2bffe",
       "targets": [
-        "community/github-awesome-copilot/skills/quality-playbook/references/constitution.md"
+        "community/addyosmani-agent-skills/skills/test-driven-development/references/quality-playbook/references/constitution.md"
       ]
     },
     {
       "commit": "74208f679bad31abcc5542572c1fc85434751683",
-      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded",
+      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/quality-playbook/references/functional_tests.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/quality-playbook/references/functional_tests.md",
       "source_sha256": "f41ba88381b80c91b6757455b3cb12a6029402b628206119a6fa0ccd709683d0",
       "targets": [
-        "community/github-awesome-copilot/skills/quality-playbook/references/functional_tests.md"
+        "community/addyosmani-agent-skills/skills/test-driven-development/references/quality-playbook/references/functional_tests.md"
       ]
     },
     {
       "commit": "74208f679bad31abcc5542572c1fc85434751683",
-      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded",
+      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/quality-playbook/references/review_protocols.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/quality-playbook/references/review_protocols.md",
       "source_sha256": "b1b5dad4cde9f050a1f3859f2e6f4c2e0bc1c7301175096844906d2ab818c481",
       "targets": [
-        "community/github-awesome-copilot/skills/quality-playbook/references/review_protocols.md"
+        "community/addyosmani-agent-skills/skills/test-driven-development/references/quality-playbook/references/review_protocols.md"
       ]
     },
     {
       "commit": "74208f679bad31abcc5542572c1fc85434751683",
-      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded",
+      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/quality-playbook/references/spec_audit.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/quality-playbook/references/spec_audit.md",
       "source_sha256": "3efb9b49b10d6d27410808a310b3c8a3ad37f60dd85f705b55c4206ce13ee6d0",
       "targets": [
-        "community/github-awesome-copilot/skills/quality-playbook/references/spec_audit.md"
+        "community/addyosmani-agent-skills/skills/test-driven-development/references/quality-playbook/references/spec_audit.md"
       ]
     },
     {
       "commit": "74208f679bad31abcc5542572c1fc85434751683",
-      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded",
+      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/quality-playbook/references/verification.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/quality-playbook/references/verification.md",
       "source_sha256": "d812fe76dbbbdcf4373e919eaa480a501553eb94c391c934cac0e3251771c840",
       "targets": [
-        "community/github-awesome-copilot/skills/quality-playbook/references/verification.md"
+        "community/addyosmani-agent-skills/skills/test-driven-development/references/quality-playbook/references/verification.md"
       ]
     },
     {
       "commit": "74208f679bad31abcc5542572c1fc85434751683",
-      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded",
+      "evidence": "quality-playbook version 1.2.0 component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/quality-playbook/LICENSE.txt",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/quality-playbook/LICENSE.txt",
       "source_sha256": "6b1ecb01f5669085bf814f1779a3c32e4d9de133f38a3851815012f4df5f4be6",
       "targets": [
-        "community/github-awesome-copilot/skills/quality-playbook/LICENSE.txt"
+        "community/addyosmani-agent-skills/skills/test-driven-development/references/quality-playbook/LICENSE.txt"
       ]
     },
     {
       "commit": "7f7b1b9b46ac7fa0b8774ed6e3e0fa3e1f089a79",
-      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "evidence": "introducing-commit component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/react18-batching-patterns/references/batching-categories.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/react18-batching-patterns/references/batching-categories.md",
       "source_sha256": "bc3b35cffc4ef226ac2bec5755eb1784fc7367b743ae152dda01d745ffc58b36",
       "targets": [
-        "community/github-awesome-copilot/skills/react18-batching-patterns/references/batching-categories.md"
+        "community/addyosmani-agent-skills/skills/frontend-ui-engineering/references/react18-batching-patterns/references/batching-categories.md"
       ]
     },
     {
       "commit": "7f7b1b9b46ac7fa0b8774ed6e3e0fa3e1f089a79",
-      "evidence": "introducing-commit component match; original import SHA was not recorded",
+      "evidence": "introducing-commit component match; original import SHA was not recorded; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/github-awesome-copilot/skills/react18-batching-patterns/references/flushSync-guide.md",
       "repository": "https://github.com/github/awesome-copilot",
       "source_path": "skills/react18-batching-patterns/references/flushSync-guide.md",
       "source_sha256": "20730a5da79c68fe5d7d678fa569c24e3b05ce57d4b96394889591e379a447d0",
       "targets": [
-        "community/github-awesome-copilot/skills/react18-batching-patterns/references/flushSync-guide.md"
+        "community/addyosmani-agent-skills/skills/frontend-ui-engineering/references/react18-batching-patterns/references/flushSync-guide.md"
       ]
     },
     {
       "commit": "38e19c20d2b154510b0e624a2e3e186b19b5c527",
-      "evidence": "official upstream verification point; not a proven historical import pin",
+      "evidence": "official upstream verification point; not a proven historical import pin; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/wshobson-agents/skills/javascript-testing-patterns/references/advanced-testing-patterns.md",
       "repository": "https://github.com/wshobson/agents",
       "source_path": "plugins/javascript-typescript/skills/javascript-testing-patterns/references/advanced-testing-patterns.md",
       "source_sha256": "c7aece88f868bb54b57cc7ea2ca87d3df0868ab32f974c22af247bb047ea353f",
       "targets": [
-        "community/wshobson-agents/skills/javascript-testing-patterns/references/advanced-testing-patterns.md"
+        "community/addyosmani-agent-skills/skills/test-driven-development/references/javascript-testing-patterns/references/advanced-testing-patterns.md"
       ]
     },
     {
       "commit": "38e19c20d2b154510b0e624a2e3e186b19b5c527",
-      "evidence": "official upstream verification point; not a proven historical import pin",
+      "evidence": "official upstream verification point; not a proven historical import pin; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/wshobson-agents/skills/modern-javascript-patterns/references/advanced-patterns.md",
       "repository": "https://github.com/wshobson/agents",
       "source_path": "plugins/javascript-typescript/skills/modern-javascript-patterns/references/advanced-patterns.md",
       "source_sha256": "bd44770188cfa14d453b1c3026289cfaf7beff78f0eedbe47a9c6b9f24dfe3af",
       "targets": [
-        "community/wshobson-agents/skills/modern-javascript-patterns/references/advanced-patterns.md"
+        "community/addyosmani-agent-skills/skills/frontend-ui-engineering/references/modern-javascript-patterns/references/advanced-patterns.md"
       ]
     },
     {
       "commit": "38e19c20d2b154510b0e624a2e3e186b19b5c527",
-      "evidence": "official upstream verification point; not a proven historical import pin",
+      "evidence": "official upstream verification point; not a proven historical import pin; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/wshobson-agents/skills/openapi-spec-generation/references/code-first-and-tooling.md",
       "repository": "https://github.com/wshobson/agents",
       "source_path": "plugins/documentation-generation/skills/openapi-spec-generation/references/code-first-and-tooling.md",
       "source_sha256": "533398d65b933040d13e642414e6b9846adbe7d5c95947223beffdb3ebe1590f",
       "targets": [
-        "community/wshobson-agents/skills/openapi-spec-generation/references/code-first-and-tooling.md"
+        "plugins/backend-and-api/skills/12-api-and-interface-design/references/openapi-spec-generation/references/code-first-and-tooling.md"
       ]
     },
     {
       "commit": "38e19c20d2b154510b0e624a2e3e186b19b5c527",
-      "evidence": "official upstream verification point; not a proven historical import pin",
+      "evidence": "official upstream verification point; not a proven historical import pin; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/wshobson-agents/skills/python-packaging/references/advanced-patterns.md",
       "repository": "https://github.com/wshobson/agents",
       "source_path": "plugins/python-development/skills/python-packaging/references/advanced-patterns.md",
       "source_sha256": "ab47dec3bf71c066e5d262eb6159b966ea95067ac23b27d8607d36d89f0e00ca",
       "targets": [
-        "community/wshobson-agents/skills/python-packaging/references/advanced-patterns.md"
+        "plugins/backend-and-api/skills/94-python-project-review/references/python-packaging/references/advanced-patterns.md"
       ]
     },
     {
       "commit": "38e19c20d2b154510b0e624a2e3e186b19b5c527",
-      "evidence": "official upstream verification point; not a proven historical import pin",
+      "evidence": "official upstream verification point; not a proven historical import pin; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/wshobson-agents/skills/python-performance-optimization/references/advanced-patterns.md",
       "repository": "https://github.com/wshobson/agents",
       "source_path": "plugins/python-development/skills/python-performance-optimization/references/advanced-patterns.md",
       "source_sha256": "dc1bca8a377572ba1583316b8288af0e5ca2d2be864dc33889b2d3b1ee5c2abf",
       "targets": [
-        "community/wshobson-agents/skills/python-performance-optimization/references/advanced-patterns.md"
+        "plugins/performance-and-cost/skills/322-backend-latency-profiling/references/python-performance-optimization/references/advanced-patterns.md"
       ]
     },
     {
       "commit": "38e19c20d2b154510b0e624a2e3e186b19b5c527",
-      "evidence": "official upstream verification point; not a proven historical import pin",
+      "evidence": "official upstream verification point; not a proven historical import pin; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/wshobson-agents/skills/python-testing-patterns/references/advanced-patterns.md",
       "repository": "https://github.com/wshobson/agents",
       "source_path": "plugins/python-development/skills/python-testing-patterns/references/advanced-patterns.md",
       "source_sha256": "f560ee8b3cffc0fe971e78269bed21dc74f541c2056eae58d34259d9e537176a",
       "targets": [
-        "community/wshobson-agents/skills/python-testing-patterns/references/advanced-patterns.md"
+        "community/addyosmani-agent-skills/skills/test-driven-development/references/python-testing-patterns/references/advanced-patterns.md"
       ]
     },
     {
       "commit": "38e19c20d2b154510b0e624a2e3e186b19b5c527",
-      "evidence": "official upstream verification point; not a proven historical import pin",
+      "evidence": "official upstream verification point; not a proven historical import pin; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/wshobson-agents/skills/tailwind-design-system/references/advanced-patterns.md",
       "repository": "https://github.com/wshobson/agents",
       "source_path": "plugins/frontend-mobile-development/skills/tailwind-design-system/references/advanced-patterns.md",
       "source_sha256": "40a4a9fa931f4bc95213870ea1fe7c32ce50aacf3531af07954b660c4f51e1a2",
       "targets": [
-        "community/wshobson-agents/skills/tailwind-design-system/references/advanced-patterns.md"
+        "community/addyosmani-agent-skills/skills/frontend-ui-engineering/references/tailwind-design-system/references/advanced-patterns.md"
       ]
     },
     {
       "commit": "38e19c20d2b154510b0e624a2e3e186b19b5c527",
-      "evidence": "official upstream verification point; not a proven historical import pin",
+      "evidence": "official upstream verification point; not a proven historical import pin; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/wshobson-agents/skills/uv-package-manager/references/advanced-patterns.md",
       "repository": "https://github.com/wshobson/agents",
       "source_path": "plugins/python-development/skills/uv-package-manager/references/advanced-patterns.md",
       "source_sha256": "5750de438fa2456c37640f6efcb87c423fe2919510da4e67e564b2af7972c0bc",
       "targets": [
-        "community/wshobson-agents/skills/uv-package-manager/references/advanced-patterns.md"
+        "plugins/backend-and-api/skills/94-python-project-review/references/uv-package-manager/references/advanced-patterns.md"
       ]
     },
     {
@@ -292,12 +292,12 @@
     },
     {
       "commit": "6ce029897d2b794940325fc7148774a6ec51111c",
-      "evidence": "latest official commit before embedded 2026-05-31 import date; not a proven historical import pin",
+      "evidence": "latest official commit before embedded 2026-05-31 import date; not a proven historical import pin; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/addyosmani-agent-skills/skills/performance-optimization/references/performance-checklist.md",
       "repository": "https://github.com/addyosmani/agent-skills",
       "source_path": "references/performance-checklist.md",
       "source_sha256": "628539583b7f515f84d0b8e4f4210ccdc0449afd31901149a078209f0769e654",
       "targets": [
-        "community/addyosmani-agent-skills/skills/performance-optimization/references/performance-checklist.md"
+        "plugins/performance-and-cost/skills/321-frontend-performance-budget/references/performance-optimization/references/performance-checklist.md"
       ]
     },
     {
@@ -312,33 +312,2201 @@
     },
     {
       "commit": "984023ddac0d5e27624f2baacde6105e45de375f",
-      "evidence": "official immutable existence commit for transformed components; not a proven historical import pin",
+      "evidence": "official immutable existence commit for transformed components; not a proven historical import pin; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/Donchitos-Claude-Code-Game-Studios/skills/186-gamedev-brainstorm/templates/game-concept.md",
       "repository": "https://github.com/Donchitos/Claude-Code-Game-Studios",
       "source_path": ".claude/docs/templates/game-concept.md",
       "source_sha256": "fa94f05c71decac7183be449c87767acd99db822f05701121f45f5a5e2251156",
       "targets": [
-        "community/Donchitos-Claude-Code-Game-Studios/skills/186-gamedev-brainstorm/templates/game-concept.md"
+        "plugins/gaming-interactive-media/skills/30-gameplay-systems-review/templates/gamedev-brainstorm/game-concept.md"
       ]
     },
     {
       "commit": "984023ddac0d5e27624f2baacde6105e45de375f",
-      "evidence": "official immutable existence commit for transformed components; not a proven historical import pin",
+      "evidence": "official immutable existence commit for transformed components; not a proven historical import pin; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/Donchitos-Claude-Code-Game-Studios/skills/207-gamedev-map-systems/templates/systems-index.md",
       "repository": "https://github.com/Donchitos/Claude-Code-Game-Studios",
       "source_path": ".claude/docs/templates/systems-index.md",
       "source_sha256": "3c474f75f71d12c3175b7be58013f58f615f316ba8fa8533ebb94197c85634c1",
       "targets": [
-        "community/Donchitos-Claude-Code-Game-Studios/skills/207-gamedev-map-systems/templates/systems-index.md"
+        "plugins/gaming-interactive-media/skills/30-gameplay-systems-review/templates/gamedev-map-systems/systems-index.md"
       ]
     },
     {
       "commit": "984023ddac0d5e27624f2baacde6105e45de375f",
-      "evidence": "official immutable existence commit for transformed components; not a proven historical import pin",
+      "evidence": "official immutable existence commit for transformed components; not a proven historical import pin; Skillry 3.0.0 consolidation moved the target(s) unchanged from community/Donchitos-Claude-Code-Game-Studios/skills/186-gamedev-brainstorm/references/director-gates.md, community/Donchitos-Claude-Code-Game-Studios/skills/207-gamedev-map-systems/references/director-gates.md",
       "repository": "https://github.com/Donchitos/Claude-Code-Game-Studios",
       "source_path": ".claude/docs/director-gates.md",
       "source_sha256": "980605102b90a296c014c4ab00d80dbf0da252d9756d398e065f21e440f02ba0",
       "targets": [
-        "community/Donchitos-Claude-Code-Game-Studios/skills/186-gamedev-brainstorm/references/director-gates.md",
-        "community/Donchitos-Claude-Code-Game-Studios/skills/207-gamedev-map-systems/references/director-gates.md"
+        "plugins/gaming-interactive-media/skills/30-gameplay-systems-review/references/gamedev-brainstorm/references/director-gates.md"
+      ]
+    },
+    {
+      "commit": "2384fdd9429696021d143006a722c7cf1aa76d43",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/AgriciDaniel/claude-seo",
+      "source_path": "skills/seo-technical/references/agent-friendly-pages.md",
+      "source_sha256": "d070798a8593255f06ff7a5242e96a904070eb9f73cad585eaa7b4996a34ca06",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/references/seo-technical/references/agent-friendly-pages.md"
+      ]
+    },
+    {
+      "commit": "259179391ce105010fc7f140eaec379adc53f951",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/AgriciDaniel/claude-seo",
+      "source_path": "skills/seo-sxo/references/page-type-taxonomy.md",
+      "source_sha256": "169b59da16089b26f9e248ae866d6f6bb1215fb4b5afd44e4774a5df8a6c2438",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/references/claude-seo-seo-sxo/references/page-type-taxonomy.md"
+      ]
+    },
+    {
+      "commit": "259179391ce105010fc7f140eaec379adc53f951",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/AgriciDaniel/claude-seo",
+      "source_path": "skills/seo-sxo/references/wireframe-templates.md",
+      "source_sha256": "38b1e36c75a4db8b727784df15821a31d3bb360ca6542f6ccc210e476ed68cc8",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/references/claude-seo-seo-sxo/references/wireframe-templates.md"
+      ]
+    },
+    {
+      "commit": "92795530b4cc92c6bf7a2435b82c15b003e71181",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/AgriciDaniel/claude-seo",
+      "source_path": "skills/seo-cluster/references/execution-workflow.md",
+      "source_sha256": "7e5e067689a2ebe82d0a949a4b9b9c6568fc283e31a6b6e928fbb7677438f0db",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/references/seo-cluster/references/execution-workflow.md"
+      ]
+    },
+    {
+      "commit": "92795530b4cc92c6bf7a2435b82c15b003e71181",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/AgriciDaniel/claude-seo",
+      "source_path": "skills/seo-cluster/references/hub-spoke-architecture.md",
+      "source_sha256": "5553d9fd80145362073fde96c0c615df4ed9a000bf6f928a71641ec52e85c39b",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/references/seo-cluster/references/hub-spoke-architecture.md"
+      ]
+    },
+    {
+      "commit": "92795530b4cc92c6bf7a2435b82c15b003e71181",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/AgriciDaniel/claude-seo",
+      "source_path": "skills/seo-cluster/references/serp-overlap-methodology.md",
+      "source_sha256": "a0c02dcd394a0cfe4636c02ce03da4ff58dc68b6f55ee0b3b9e36e10f20f7662",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/references/seo-cluster/references/serp-overlap-methodology.md"
+      ]
+    },
+    {
+      "commit": "92795530b4cc92c6bf7a2435b82c15b003e71181",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/AgriciDaniel/claude-seo",
+      "source_path": "skills/seo-cluster/templates/cluster-map.html",
+      "source_sha256": "73d50e0bcab7855b4c50b182b46ad2f38965aa2fc854bc41de5acdd611a6d8c9",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/templates/seo-cluster/cluster-map.html"
+      ]
+    },
+    {
+      "commit": "92795530b4cc92c6bf7a2435b82c15b003e71181",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/AgriciDaniel/claude-seo",
+      "source_path": "skills/seo-plan/assets/agency.md",
+      "source_sha256": "63f159b62a81c91b0570a67eba779c7c9961f0222b15accb8dc4115455d60016",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/assets/seo-plan/agency.md"
+      ]
+    },
+    {
+      "commit": "92795530b4cc92c6bf7a2435b82c15b003e71181",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/AgriciDaniel/claude-seo",
+      "source_path": "skills/seo-plan/assets/ecommerce.md",
+      "source_sha256": "f25619c871f85542cd1d656598607023b63805ed0f7f030b50d1b09f98563f16",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/assets/seo-plan/ecommerce.md"
+      ]
+    },
+    {
+      "commit": "92795530b4cc92c6bf7a2435b82c15b003e71181",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/AgriciDaniel/claude-seo",
+      "source_path": "skills/seo-plan/assets/generic.md",
+      "source_sha256": "f6ae9d03d98361ce032d6bf1af60f6d5e124aa46babeb34e24028fb32c7a45f9",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/assets/seo-plan/generic.md"
+      ]
+    },
+    {
+      "commit": "92795530b4cc92c6bf7a2435b82c15b003e71181",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/AgriciDaniel/claude-seo",
+      "source_path": "skills/seo-plan/assets/local-service.md",
+      "source_sha256": "d279b604bd511b353ae13c3bc95ae68254a548aad49779098f613ecff6eabbe6",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/assets/seo-plan/local-service.md"
+      ]
+    },
+    {
+      "commit": "92795530b4cc92c6bf7a2435b82c15b003e71181",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/AgriciDaniel/claude-seo",
+      "source_path": "skills/seo-plan/assets/publisher.md",
+      "source_sha256": "52d3ebbe0db1ad7ff2ed41b088cf85e052aaa1078c9608476493752916883a44",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/assets/seo-plan/publisher.md"
+      ]
+    },
+    {
+      "commit": "92795530b4cc92c6bf7a2435b82c15b003e71181",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/AgriciDaniel/claude-seo",
+      "source_path": "skills/seo-plan/assets/saas.md",
+      "source_sha256": "cec7c2e52f65c6e13460793758ae9ae169d861c7507f735f3dd5cb0975a51b1b",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/assets/seo-plan/saas.md"
+      ]
+    },
+    {
+      "commit": "92795530b4cc92c6bf7a2435b82c15b003e71181",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/AgriciDaniel/claude-seo",
+      "source_path": "skills/seo-sxo/references/persona-scoring.md",
+      "source_sha256": "487955f23af4a089b65b3f89a2df68782e7b8af0c8f14a6b21a6cc3360ee8b34",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/references/claude-seo-seo-sxo/references/persona-scoring.md"
+      ]
+    },
+    {
+      "commit": "92795530b4cc92c6bf7a2435b82c15b003e71181",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/AgriciDaniel/claude-seo",
+      "source_path": "skills/seo-sxo/references/user-story-framework.md",
+      "source_sha256": "329ecef0cf1194c3f012f314419bef784c8ef2d08a9f0d2fe0616b5f46c68ae8",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/references/claude-seo-seo-sxo/references/user-story-framework.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "checklists/pre-flight.json",
+      "source_sha256": "1c7040dfb58ccec039956807c38cc9ac3d6e1eb23e145f2204d7287453c28dc8",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/checklists/pre-flight.json"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "checklists/production-verify.json",
+      "source_sha256": "2331a1e5dd2d32c703fa7d23500b7a3493ea1aa3d1130309291941a2d2fd8e09",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/checklists/production-verify.json"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "checklists/technical-seo.json",
+      "source_sha256": "4c19c8bd694e1c1aefe05285287cb0e1ed6c2ee7c246715209d4cd4c754d1623",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/checklists/technical-seo.json"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "checklists/translation-quality.json",
+      "source_sha256": "1230301a4aa1716db6b82ab68237f12da61f052cbff289ace6d9729243c1d42c",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/checklists/translation-quality.json"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "docs/.nojekyll",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/docs/.nojekyll"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "docs/framework-adapters.md",
+      "source_sha256": "0fbaaae835bcfc949ea594c2e0518e61a831def77be9ea725ed29af51c1c69b6",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/docs/framework-adapters.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "docs/glossary.md",
+      "source_sha256": "7b9f18b234dc093d2fd7b60ddb8a80f69f86a2ede32f8eb00d195ee7daee2530",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/docs/glossary.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "docs/index.html",
+      "source_sha256": "9ed748661be753934c5366b77caa8c8554649229573ede3a3a4e311a6c592adc",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/docs/index.html"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "docs/install-claude-code.md",
+      "source_sha256": "943a6dee3f631493a508dc884054144b1e461cab1a9ef213e3458cd7687b9a82",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/docs/install-claude-code.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "docs/install-cursor.md",
+      "source_sha256": "5e983494dfea02bd6989bf07afba262bbef6d6dead59281ed982a05d24184174",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/docs/install-cursor.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "docs/install-generic.md",
+      "source_sha256": "0afd2249b6020307236288606fa2c8f83e9e34b853581c6262ec42ac644ac4ca",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/docs/install-generic.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "docs/locale-architecture.md",
+      "source_sha256": "36ed7458fa3241ab2b259a37b8786af400689745fe1bab0b5c21e68d07353467",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/docs/locale-architecture.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "docs/multilingual-seo-checklist.md",
+      "source_sha256": "0e734811fa4f749b803844bb33bf0eab3c50c71be5570bc6a260cd7eb5ad5342",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/docs/multilingual-seo-checklist.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "docs/overview.md",
+      "source_sha256": "ff7ee8df2f2e770372e7314afab9e385dbb38c3ab31ed44d2edd1480f404a6ce",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/docs/overview.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "docs/translation-playbook.md",
+      "source_sha256": "c55149114ae3cf3dc6fcd34ae793f83f4f3c27ae23bc04844cfef3c7567605dc",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/docs/translation-playbook.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "docs/verification-and-ci.md",
+      "source_sha256": "ddfbf87d6c58be8e8697915d1f506cffe874c169e05233bfe0d383cf6add4a96",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/docs/verification-and-ci.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "examples/astro-minimal/README.md",
+      "source_sha256": "f77d4ce0169a054f6722474c47f66867ba4fbacfa3f183883f8df34d27eda1c5",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/examples/i18n-agent/astro-minimal/README.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "examples/astro-minimal/src/i18n/locale-registry.json",
+      "source_sha256": "336092a930442f3588715618cd34508566309c78b94c97e4d4b00559fa13ee64",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/examples/i18n-agent/astro-minimal/src/i18n/locale-registry.json"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "examples/nextjs-app-router-notes.md",
+      "source_sha256": "33afcdd32b09599dd2539b00bc37bbe3df04e9a246d15a30bc257157b1bf1528",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/examples/i18n-agent/nextjs-app-router-notes.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "examples/sample-audit-report.md",
+      "source_sha256": "d55111a97db616d7c37b1ffaafb9e23f1c143c3d0485375c0eafa100295edfca",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/examples/i18n-agent/sample-audit-report.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "prompts/audit.md",
+      "source_sha256": "386e705b7ec67fd1663fda61537d76ac4af42fad39fc312842d6e44983851633",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/prompts/audit.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "prompts/implement-technical-seo.md",
+      "source_sha256": "52ac80333f70ce1d4d4f92af5d60ecd9da9ed746bed48f21941110793fb9ee1f",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/prompts/implement-technical-seo.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "prompts/plan-locales.md",
+      "source_sha256": "32f4483f8d23cbfbc4143d9ac278bb116a299a090ee0fea8ba9981f549048f71",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/prompts/plan-locales.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "prompts/translate-site.md",
+      "source_sha256": "9118cc8de9e3c7649d732b7ed4a1020dd0068112a69483c916d26ff3aa49b9b3",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/prompts/translate-site.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "prompts/verify-production.md",
+      "source_sha256": "c27ebb52699973817d2c5f9e1a5d2fcba0ea50a957185a7520b80420313c3153",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/prompts/verify-production.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "schemas/audit-report.schema.json",
+      "source_sha256": "ccb800f78aad511a97910d3247cf1b79532248457be2f3ce8537aee8ac896974",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/schemas/audit-report.schema.json"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "schemas/keyword-map.schema.json",
+      "source_sha256": "ac75e744d024a9b8e49c46e2dd262963ba04d46cd5c111a09aabee7d6e853279",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/schemas/keyword-map.schema.json"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "schemas/locale-registry.schema.json",
+      "source_sha256": "e544ddc6b01e71c095d6a7aad9c51c2001247d731bd2f00b21109a72241da1a0",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/schemas/locale-registry.schema.json"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "schemas/translation-memory.schema.json",
+      "source_sha256": "1c8881c339a3ec7362b60d6cd83f55840126b31fb72827b5015878d5b06ec75d",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/schemas/translation-memory.schema.json"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "scripts/check_i18n_seo.py",
+      "source_sha256": "0b37c264e23c2dd14878e400173e9405046471f222fdbfa2702a722ad25808e7",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/scripts/i18n-agent/check_i18n_seo.py"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "scripts/extract_translatables.py",
+      "source_sha256": "bc1c1b172d7309492f439b368a6898898b13687cc37e44a7e17e3ea8890ba8f7",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/scripts/i18n-agent/extract_translatables.py"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "scripts/requirements.txt",
+      "source_sha256": "5c42c6d83615990d40ad7dc53ae5a62c7800f4f8771a3a6ee8391a7b4859572d",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/scripts/i18n-agent/requirements.txt"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "scripts/validate_hreflang.py",
+      "source_sha256": "3089795315ed0fef2cbe9c82d24a1ae78b7785430f8f0cfd7676de8261b55d71",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/scripts/i18n-agent/validate_hreflang.py"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "scripts/validate_locale_registry.py",
+      "source_sha256": "ea4faec807daa526f078f0d1fe6643ebd8098efb3b28891f018364d7f734c066",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/scripts/i18n-agent/validate_locale_registry.py"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "site/.nojekyll",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/site/.nojekyll"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "site/index.html",
+      "source_sha256": "9ed748661be753934c5366b77caa8c8554649229573ede3a3a4e311a6c592adc",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/site/index.html"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "skill.json",
+      "source_sha256": "0a3c7a6be5f7a97066fc9cdbb4132782697a384d5da9f190b93cc216f2a5b217",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/skill.json"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "templates/github-actions-seo-check.yml",
+      "source_sha256": "e680ac01e79c0c6558df446664bef3670cbaba6f643a319ab3aa63e802a79f23",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/templates/i18n-agent/github-actions-seo-check.yml"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "templates/hreflang-snippet.html",
+      "source_sha256": "a4274b3c228791d3cb32dee9e916fdba4d181675aca7e732ca421b3f9e0c5d79",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/templates/i18n-agent/hreflang-snippet.html"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "templates/keyword-map.example.json",
+      "source_sha256": "b2052b2b42d6964021648376544b7e1742d2ba359a6f67a2f2666cdbc6c20d29",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/templates/i18n-agent/keyword-map.example.json"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "templates/keyword-map.example.md",
+      "source_sha256": "8a1411e588dbb70ae7594c711601263c4409a4d54b2e9cb2f2bbd5da9c8c7bb5",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/templates/i18n-agent/keyword-map.example.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "templates/locale-registry.example.json",
+      "source_sha256": "4e9db0e57addfc33e8fc944b0cebdb19d5a4d66ee80309915f198559e25cae89",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/templates/i18n-agent/locale-registry.example.json"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "templates/seo-measurement.example.md",
+      "source_sha256": "6d98f49d4f092d5e527a9f3fc9b6f85f2a890ef4e7913f6251861532a24c2d5e",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/templates/i18n-agent/seo-measurement.example.md"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "tests/fixtures/html/fail/bad-lang/fr/pricing.html",
+      "source_sha256": "1c3233dc94dddb89f765b8e7e552152b517e4d06d9c5885b89f214848c7c724e",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/tests/fixtures/html/fail/bad-lang/fr/pricing.html"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "tests/fixtures/html/fail/hreflang-on-noindex/en/draft.html",
+      "source_sha256": "71dee2f99fd2200242db9a4ce4ae382aee4a5d27cb75584885430fe8b8ced806",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/tests/fixtures/html/fail/hreflang-on-noindex/en/draft.html"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "tests/fixtures/html/fail/missing-hreflang/en/pricing.html",
+      "source_sha256": "2dd58a2d868cd8664d5bb77a469deb2443b2e6a72f5b9b4d772163543e689dbd",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/tests/fixtures/html/fail/missing-hreflang/en/pricing.html"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "tests/fixtures/html/fail/og-mismatch/en/pricing.html",
+      "source_sha256": "240d0d54b29e087f792369a2ecee2b8e5ab6e34d63e1b493c61444a971252c18",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/tests/fixtures/html/fail/og-mismatch/en/pricing.html"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "tests/fixtures/html/fail/wrong-bcp47/fr/pricing.html",
+      "source_sha256": "63485324b8ac3d218843bffb6d4854544713b64ee6e7bdd2ba4420da659ac6f8",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/tests/fixtures/html/fail/wrong-bcp47/fr/pricing.html"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "tests/fixtures/html/pass/en/pricing.html",
+      "source_sha256": "608f826731771d11da4942f302b1519c899c25df998ef0d48c3f42287e2c28f3",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/tests/fixtures/html/pass/en/pricing.html"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "tests/fixtures/html/pass/es/pricing.html",
+      "source_sha256": "7e55df1c492e1979abbb6492e58976b48c8c828dbebfd54b94d3c325ca497b00",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/tests/fixtures/html/pass/es/pricing.html"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "tests/fixtures/html/pass/fr/pricing.html",
+      "source_sha256": "ec38a302d1fb472d8ae6e1686b2cb82829934b87022981fd6f5ec1d288810343",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/tests/fixtures/html/pass/fr/pricing.html"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "tests/fixtures/sitemaps/sitemap-missing-fr.xml",
+      "source_sha256": "4be2e07d784d1828d8ce20c236c0ba798f9c7700610608dde2ad45a46fac6e61",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/tests/fixtures/sitemaps/sitemap-missing-fr.xml"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "tests/fixtures/sitemaps/sitemap-pass.xml",
+      "source_sha256": "63b20d261a5687f331c503df4129b0aaf1cd8e7330facac257050caa02950231",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/tests/fixtures/sitemaps/sitemap-pass.xml"
+      ]
+    },
+    {
+      "commit": "d4376fda0c5472c8b1ce1249011312183b0f0138",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/adamgrgs/i18n-agent",
+      "source_path": "tests/test_check_i18n_seo.py",
+      "source_sha256": "106d8b2cc6360f4cb846b3844db9621697dc4603d85ffc8970bd5b7175ff11a1",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/i18n-agent/tests/test_check_i18n_seo.py"
+      ]
+    },
+    {
+      "commit": "afa8da942115f2961fdbfa80807ea0b232ff6c00",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/addyosmani/web-quality-skills",
+      "source_path": "skills/accessibility/references/A11Y-PATTERNS.md",
+      "source_sha256": "f10e238dd4dd3c4f51134c2056bc02d3dd4f8fb6ccc9145c2c1ba7aab4d58140",
+      "targets": [
+        "plugins/frontend-web-design/skills/20-accessibility-audit/references/accessibility/references/A11Y-PATTERNS.md"
+      ]
+    },
+    {
+      "commit": "afa8da942115f2961fdbfa80807ea0b232ff6c00",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/addyosmani/web-quality-skills",
+      "source_path": "skills/accessibility/references/WCAG.md",
+      "source_sha256": "16683e025e3833d931c9d880645d98a448827f97e10189b6c8f12c832e7a2361",
+      "targets": [
+        "plugins/frontend-web-design/skills/20-accessibility-audit/references/accessibility/references/WCAG.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "LICENSE",
+      "source_sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591",
+      "targets": [
+        "plugins/product-docs-and-research/skills/66-market-research-synthesis/references/customer-research/LICENSE",
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/pricing/LICENSE"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/analytics/evals/evals.json",
+      "source_sha256": "56932e864114d69a61b6b55e639d207329c0a8b7df8b61a0e1188b249cbef1e8",
+      "targets": [
+        "plugins/optional-specialist/skills/84-analytics-tracking-review/references/analytics/evals/evals.json"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/analytics/references/event-library.md",
+      "source_sha256": "efc7bdb0a7b3efdea9e67ff0d1bc894dcf89ec9b9b8f3414f123d12bee109412",
+      "targets": [
+        "plugins/optional-specialist/skills/84-analytics-tracking-review/references/analytics/references/event-library.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/analytics/references/ga4-implementation.md",
+      "source_sha256": "f33fd6db0cbdb1bdc183af5f52bedd956d14680e54bca2e2c3917de29698636e",
+      "targets": [
+        "plugins/optional-specialist/skills/84-analytics-tracking-review/references/analytics/references/ga4-implementation.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/analytics/references/gtm-implementation.md",
+      "source_sha256": "112da33832439d2ae0b2729e5031fc927df444cd1ae8eb20542d45c1b5690f52",
+      "targets": [
+        "plugins/optional-specialist/skills/84-analytics-tracking-review/references/analytics/references/gtm-implementation.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/copywriting/evals/evals.json",
+      "source_sha256": "f062a21fea6ec6eff7157caf051142fa376fbfe6284c7d1d185371de6acedb9b",
+      "targets": [
+        "plugins/frontend-web-design/skills/22-landing-page-conversion-review/references/copywriting/evals/evals.json"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/copywriting/references/copy-frameworks.md",
+      "source_sha256": "d98818886525908bf17dd6412d0b72731b313d6eef3e1ab6b365828a3a342779",
+      "targets": [
+        "plugins/frontend-web-design/skills/22-landing-page-conversion-review/references/copywriting/references/copy-frameworks.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/copywriting/references/natural-transitions.md",
+      "source_sha256": "4ff23f8943af2f65b072f26f1c53ce55f19cc26d7be211c11cae8e34b43e859f",
+      "targets": [
+        "plugins/frontend-web-design/skills/22-landing-page-conversion-review/references/copywriting/references/natural-transitions.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/cro/evals/evals.json",
+      "source_sha256": "62f3003602836e2b49d797ca582e7703629a6b07b131eb77b51b2bb39fe65775",
+      "targets": [
+        "plugins/frontend-web-design/skills/22-landing-page-conversion-review/references/cro/evals/evals.json"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/cro/references/experiments.md",
+      "source_sha256": "bbcc356c0af36cfaa4556bf9e929deac30c65cafb37f909d7c51d4777fe254ca",
+      "targets": [
+        "plugins/frontend-web-design/skills/22-landing-page-conversion-review/references/cro/references/experiments.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/cro/references/form.md",
+      "source_sha256": "e3115b0fdfb3968915b8e3acdc32a6e5f1d2c6a335ebbed25bee9b601ec573d7",
+      "targets": [
+        "plugins/frontend-web-design/skills/22-landing-page-conversion-review/references/cro/references/form.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/customer-research/evals/evals.json",
+      "source_sha256": "fc8a15d12e582b55fa52ad27925594ab796ebd6a8ea13fed13722f97e4c51f01",
+      "targets": [
+        "plugins/product-docs-and-research/skills/66-market-research-synthesis/references/customer-research/evals/evals.json"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/customer-research/references/interviews-and-surveys.md",
+      "source_sha256": "56adecdc40af1242464937100349fc1a161627394909551720494bc5ee537076",
+      "targets": [
+        "plugins/product-docs-and-research/skills/66-market-research-synthesis/references/customer-research/references/interviews-and-surveys.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/customer-research/references/source-guides.md",
+      "source_sha256": "56682ea98d781060396fd4009739d071671b3489a0d4c81f0a0ef3078cb5c9ee",
+      "targets": [
+        "plugins/product-docs-and-research/skills/66-market-research-synthesis/references/customer-research/references/source-guides.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/onboarding/evals/evals.json",
+      "source_sha256": "6086b1c34a6f171800bf32bf569ff08d7385c3c36637ce9f1a4cc2527bb36b47",
+      "targets": [
+        "plugins/frontend-web-design/skills/22-landing-page-conversion-review/references/onboarding/evals/evals.json"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/onboarding/references/activation-models.md",
+      "source_sha256": "a13e82d8e3ebf810a0f0fb51fe91bbe349d8175baee5a97a85934fa20f63a8f7",
+      "targets": [
+        "plugins/frontend-web-design/skills/22-landing-page-conversion-review/references/onboarding/references/activation-models.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/onboarding/references/experiments.md",
+      "source_sha256": "b4caad0b50ca9483a6a79846d0b24a7bab62850b45a3f2232d73f78629468932",
+      "targets": [
+        "plugins/frontend-web-design/skills/22-landing-page-conversion-review/references/onboarding/references/experiments.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/onboarding/references/minimum-path-to-value.md",
+      "source_sha256": "c2b7c71b8436a1456888a26b9c8892c33cd9e1b1bf758f6fd7282c00f87dcdc3",
+      "targets": [
+        "plugins/frontend-web-design/skills/22-landing-page-conversion-review/references/onboarding/references/minimum-path-to-value.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/pricing/evals/evals.json",
+      "source_sha256": "b0c88f299db5223ca2a9f27a9f61800bc63ee21fd845a53f5c92bb5695d0995f",
+      "targets": [
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/pricing/evals/evals.json"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/pricing/references/pricing-models.md",
+      "source_sha256": "2cdb900b74f56a796c0331725e73eff4ecd84f8021b42efbb0a5b4903d1d9b16",
+      "targets": [
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/pricing/references/pricing-models.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/pricing/references/pricing-page-teardown.md",
+      "source_sha256": "850b018a6b224bc9bd4149edb3f1cbae41991ba6ef1d9efb616dba9328790c4b",
+      "targets": [
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/pricing/references/pricing-page-teardown.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/pricing/references/research-methods.md",
+      "source_sha256": "b6aab09860dbab2f11d69cc9c179cc7f6e1a100ede28e5c49b59070a2caaeb15",
+      "targets": [
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/pricing/references/research-methods.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/pricing/references/tier-structure.md",
+      "source_sha256": "b59910d37cceb74484f28b065963daa60f5c4fb1ffc36a0584d0f3cad11f3e30",
+      "targets": [
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/pricing/references/tier-structure.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/programmatic-seo/evals/evals.json",
+      "source_sha256": "e76b704edfc50210224aa82131dc4e917d6daa3a1467b9f7fe54b2d42af2a264",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/references/programmatic-seo/evals/evals.json"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/programmatic-seo/references/playbooks.md",
+      "source_sha256": "b2b3fd7c58c686f0670b94cf7192ff79436ccf0d602650b33a83a9d01102f11d",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/references/programmatic-seo/references/playbooks.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/signup/evals/evals.json",
+      "source_sha256": "ce012fff8e559b5f622826826e7b137c650c96f8193a7e10add60f75c2417edd",
+      "targets": [
+        "plugins/frontend-web-design/skills/22-landing-page-conversion-review/references/signup/evals/evals.json"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/site-architecture/evals/evals.json",
+      "source_sha256": "64b76ab82488fd168919fad1b038b7117392ff9748a835104ddde95aac4a5cee",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/references/site-architecture/evals/evals.json"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/site-architecture/references/mermaid-templates.md",
+      "source_sha256": "362190c7d3f419d5f445170f1fb17beecc163937d2068922893b7a69eeb25f0f",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/references/site-architecture/references/mermaid-templates.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/site-architecture/references/navigation-patterns.md",
+      "source_sha256": "2efa772709b753e33d5018c007147ca30aaa95a04b04dc0df6227ea5a053078b",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/references/site-architecture/references/navigation-patterns.md"
+      ]
+    },
+    {
+      "commit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "source_path": "skills/site-architecture/references/site-type-templates.md",
+      "source_sha256": "3c3cd7ce5e31c502dc071baf82bb58cb30f5edf4a2fd8ca052fbc8f3777db140",
+      "targets": [
+        "plugins/optional-specialist/skills/85-seo-content-ops-review/references/site-architecture/references/site-type-templates.md"
+      ]
+    },
+    {
+      "commit": "50113da16fec53b66b80d75e80a89296de4fa5a5",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/fastapi/fastapi",
+      "source_path": "fastapi/.agents/skills/fastapi/references/dependencies.md",
+      "source_sha256": "8b6b71a03fa14680905a81f53f1883b90c2ab7ac65eefa77c2664c2d038de469",
+      "targets": [
+        "plugins/backend-and-api/skills/94-python-project-review/references/fastapi/references/dependencies.md"
+      ]
+    },
+    {
+      "commit": "50113da16fec53b66b80d75e80a89296de4fa5a5",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/fastapi/fastapi",
+      "source_path": "fastapi/.agents/skills/fastapi/references/other-tools.md",
+      "source_sha256": "a2c91995890274681ecd2f6621fa96e64226086b4eb203d46b8e9277cd47f8fd",
+      "targets": [
+        "plugins/backend-and-api/skills/94-python-project-review/references/fastapi/references/other-tools.md"
+      ]
+    },
+    {
+      "commit": "50113da16fec53b66b80d75e80a89296de4fa5a5",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/fastapi/fastapi",
+      "source_path": "fastapi/.agents/skills/fastapi/references/path-operations.md",
+      "source_sha256": "ed8d2a21123bcf63dd1e9aa61cc8e4e33a878cbbf1d09498a556a420302995ca",
+      "targets": [
+        "plugins/backend-and-api/skills/94-python-project-review/references/fastapi/references/path-operations.md"
+      ]
+    },
+    {
+      "commit": "50113da16fec53b66b80d75e80a89296de4fa5a5",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/fastapi/fastapi",
+      "source_path": "fastapi/.agents/skills/fastapi/references/pydantic.md",
+      "source_sha256": "840ab962739861aed2ea77805dc46979c9a96abd8fc0043f197b3bd5d638e84b",
+      "targets": [
+        "plugins/backend-and-api/skills/94-python-project-review/references/fastapi/references/pydantic.md"
+      ]
+    },
+    {
+      "commit": "50113da16fec53b66b80d75e80a89296de4fa5a5",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/fastapi/fastapi",
+      "source_path": "fastapi/.agents/skills/fastapi/references/responses.md",
+      "source_sha256": "7c921508bbd093697301ca9612038976cfb5b65bdc2dc42a0c02e2809d3652a7",
+      "targets": [
+        "plugins/backend-and-api/skills/94-python-project-review/references/fastapi/references/responses.md"
+      ]
+    },
+    {
+      "commit": "50113da16fec53b66b80d75e80a89296de4fa5a5",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/fastapi/fastapi",
+      "source_path": "fastapi/.agents/skills/fastapi/references/streaming.md",
+      "source_sha256": "6c76882a7c1b4e477b4d45509bfbb16a9527025106e2b76f00b57d9280f9ca92",
+      "targets": [
+        "plugins/backend-and-api/skills/94-python-project-review/references/fastapi/references/streaming.md"
+      ]
+    },
+    {
+      "commit": "4f4796f0bf30e105700f97ed8408c12b6aa95e06",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "LICENSE",
+      "source_sha256": "e32449d23085399adc1222f7a17408b730550258e51627c153cb108ca9955823",
+      "targets": [
+        "plugins/devops-and-release/skills/58-ci-cd-pipeline-review/references/github-actions-hardening/LICENSE"
+      ]
+    },
+    {
+      "commit": "4f4796f0bf30e105700f97ed8408c12b6aa95e06",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/github-actions-hardening/references/injection.md",
+      "source_sha256": "ebd6ef8d39ba6f1cd3dc13051e6ed4163d1d2ba36518cf0f7393836a211e58ff",
+      "targets": [
+        "plugins/devops-and-release/skills/58-ci-cd-pipeline-review/references/github-actions-hardening/references/injection.md"
+      ]
+    },
+    {
+      "commit": "4f4796f0bf30e105700f97ed8408c12b6aa95e06",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/github-actions-hardening/references/permissions-and-tokens.md",
+      "source_sha256": "7272d00b20cf99c6fcbf34346f76730907c00701aef44bb9cfb7ab3eecac336b",
+      "targets": [
+        "plugins/devops-and-release/skills/58-ci-cd-pipeline-review/references/github-actions-hardening/references/permissions-and-tokens.md"
+      ]
+    },
+    {
+      "commit": "4f4796f0bf30e105700f97ed8408c12b6aa95e06",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/github-actions-hardening/references/report-format.md",
+      "source_sha256": "3ecd2442e173bc001f858747873349be7c6c77050470b87ae516647908b1e86e",
+      "targets": [
+        "plugins/devops-and-release/skills/58-ci-cd-pipeline-review/references/github-actions-hardening/references/report-format.md"
+      ]
+    },
+    {
+      "commit": "4f4796f0bf30e105700f97ed8408c12b6aa95e06",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/github-actions-hardening/references/supply-chain.md",
+      "source_sha256": "f66f613dbd732ce87c1e76b88208efde8feae3ffe5a3ab405cde4ce3df66f605",
+      "targets": [
+        "plugins/devops-and-release/skills/58-ci-cd-pipeline-review/references/github-actions-hardening/references/supply-chain.md"
+      ]
+    },
+    {
+      "commit": "4f4796f0bf30e105700f97ed8408c12b6aa95e06",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/github/awesome-copilot",
+      "source_path": "skills/github-actions-hardening/references/triggers-and-privilege.md",
+      "source_sha256": "465f3f76517e9f5374a73e30f46cb47e1fe62ce9fd81f782808a3abbb2df2756",
+      "targets": [
+        "plugins/devops-and-release/skills/58-ci-cd-pipeline-review/references/github-actions-hardening/references/triggers-and-privilege.md"
+      ]
+    },
+    {
+      "commit": "b0a74bb4231709951e12867e00b0842ad9a27c96",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/maplibre/maplibre-agent-skills",
+      "source_path": "LICENSE.md",
+      "source_sha256": "649a3c27cf602801aae231ce0fabedc04f037b0ab30671c037f6b3d4f86af4ad",
+      "targets": [
+        "plugins/optional-specialist/skills/82-map-routing-geo-review/references/maplibre-cartography/LICENSE",
+        "plugins/optional-specialist/skills/82-map-routing-geo-review/references/maplibre-tile-sources/LICENSE"
+      ]
+    },
+    {
+      "commit": "b0a74bb4231709951e12867e00b0842ad9a27c96",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/maplibre/maplibre-agent-skills",
+      "source_path": "NOTICE",
+      "source_sha256": "5e359a54fcd543f86be404849d0aae657495cd06581243db5398fcb24b85bcef",
+      "targets": [
+        "plugins/optional-specialist/skills/82-map-routing-geo-review/references/maplibre-cartography/NOTICE",
+        "plugins/optional-specialist/skills/82-map-routing-geo-review/references/maplibre-tile-sources/NOTICE"
+      ]
+    },
+    {
+      "commit": "8607e3b077817f89bf4a9b623246219734ac3be0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/phuryn/pm-skills",
+      "source_path": "LICENSE",
+      "source_sha256": "a2c922f9b81b4f40347ddfa79c38eda0f1278b5a6d108bd4099b4da254c774ee",
+      "targets": [
+        "plugins/product-docs-and-research/skills/65-product-requirements-review/references/outcome-roadmap/LICENSE",
+        "plugins/product-docs-and-research/skills/65-product-requirements-review/references/pre-mortem/LICENSE",
+        "plugins/product-docs-and-research/skills/65-product-requirements-review/references/prioritize-features/LICENSE",
+        "plugins/product-docs-and-research/skills/65-product-requirements-review/references/strategy-red-team/LICENSE",
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/north-star-metric/LICENSE",
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/product-strategy/LICENSE",
+        "plugins/security/skills/47-security-and-secrets-review/references/intended-vs-implemented/LICENSE"
+      ]
+    },
+    {
+      "commit": "1cef1a9eae10017389863d51e289e0ae41e17fcb",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/product-on-purpose/pm-skills",
+      "source_path": "LICENSE",
+      "source_sha256": "e5fe46f4634972731b752114e9992023e95e89e37c11713fdbee92dbc5141e85",
+      "targets": [
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/foundation-lean-canvas/LICENSE"
+      ]
+    },
+    {
+      "commit": "1cef1a9eae10017389863d51e289e0ae41e17fcb",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/product-on-purpose/pm-skills",
+      "source_path": "skills/foundation-lean-canvas/HISTORY.md",
+      "source_sha256": "75e5f72ece73446cbf8e6593a574a5bb70900eb8f475060f0de7bd923bcd7786",
+      "targets": [
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/foundation-lean-canvas/HISTORY.md"
+      ]
+    },
+    {
+      "commit": "1cef1a9eae10017389863d51e289e0ae41e17fcb",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/product-on-purpose/pm-skills",
+      "source_path": "skills/foundation-lean-canvas/evals/trigger-fixtures.json",
+      "source_sha256": "a54fbc81c85c7cf3dab3edf8e848f4ef3ecf6c1c2107a89c0bd46666662abc48",
+      "targets": [
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/foundation-lean-canvas/evals/trigger-fixtures.json"
+      ]
+    },
+    {
+      "commit": "1cef1a9eae10017389863d51e289e0ae41e17fcb",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/product-on-purpose/pm-skills",
+      "source_path": "skills/foundation-lean-canvas/references/EXAMPLE.md",
+      "source_sha256": "7445b58cc4f3089b552672a20745a3dd4795ded5d7acc81d1782eca3d958350c",
+      "targets": [
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/foundation-lean-canvas/references/EXAMPLE.md"
+      ]
+    },
+    {
+      "commit": "1cef1a9eae10017389863d51e289e0ae41e17fcb",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/product-on-purpose/pm-skills",
+      "source_path": "skills/foundation-lean-canvas/references/TEMPLATE.md",
+      "source_sha256": "d5ad55e9d660e01503b5523850895d41997d29a6dcab1d83a0d5093fbc5552dc",
+      "targets": [
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/foundation-lean-canvas/references/TEMPLATE.md"
+      ]
+    },
+    {
+      "commit": "1cef1a9eae10017389863d51e289e0ae41e17fcb",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/product-on-purpose/pm-skills",
+      "source_path": "skills/foundation-lean-canvas/references/html-template.html",
+      "source_sha256": "cbaa116a156c4610be03dd6bdf574d8764894b472c4b3425cdfde5b4cca1d399",
+      "targets": [
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/foundation-lean-canvas/references/html-template.html"
+      ]
+    },
+    {
+      "commit": "3d4510a94a76ead80122c691b5c480f92f3fbe40",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/rampstackco/claude-skills",
+      "source_path": "LICENSE",
+      "source_sha256": "7957f4b291988f21be7cb75637d2efb6edd0369a95d3814cac7ef931f7f10b7c",
+      "targets": [
+        "plugins/core-operations/skills/04-implementation-plan/references/pm-spec-writing/LICENSE"
+      ]
+    },
+    {
+      "commit": "3d4510a94a76ead80122c691b5c480f92f3fbe40",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/rampstackco/claude-skills",
+      "source_path": "skills/pm-spec-writing/references/dev-brief-template.md",
+      "source_sha256": "4c253a2a71243d65407de0098323fbc542ba72f03c572ed41df8c5189d2e9f31",
+      "targets": [
+        "plugins/core-operations/skills/04-implementation-plan/references/pm-spec-writing/references/dev-brief-template.md"
+      ]
+    },
+    {
+      "commit": "3d4510a94a76ead80122c691b5c480f92f3fbe40",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/rampstackco/claude-skills",
+      "source_path": "skills/pm-spec-writing/references/feature-spec-template.md",
+      "source_sha256": "f9b19f192d9e65b6882e97aaf23f4b1862a46a39d2e9f8b86eb6562aec55fe13",
+      "targets": [
+        "plugins/core-operations/skills/04-implementation-plan/references/pm-spec-writing/references/feature-spec-template.md"
+      ]
+    },
+    {
+      "commit": "3d4510a94a76ead80122c691b5c480f92f3fbe40",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/rampstackco/claude-skills",
+      "source_path": "skills/pm-spec-writing/references/prioritization-frameworks.md",
+      "source_sha256": "b8b7696ecc60f95d56ce2c91cf67d32b4aed6e9432db90eba319935431cd7e8a",
+      "targets": [
+        "plugins/core-operations/skills/04-implementation-plan/references/pm-spec-writing/references/prioritization-frameworks.md"
+      ]
+    },
+    {
+      "commit": "a84871d065f398fed55e1633f66b66f731eb4e2b",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/redis/agent-skills",
+      "source_path": "LICENSE",
+      "source_sha256": "77f38ee68488a9cdb7261e89e8cb2f22e074bb6d802727e5f3a685b9478a4da2",
+      "targets": [
+        "plugins/security/skills/47-security-and-secrets-review/references/redis-security/LICENSE"
+      ]
+    },
+    {
+      "commit": "a84871d065f398fed55e1633f66b66f731eb4e2b",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/redis/agent-skills",
+      "source_path": "skills/redis-security/references/acls.md",
+      "source_sha256": "103a0d4e3b613207752a5d445faf5e80b3931fb43db211c5036ce85fc676f368",
+      "targets": [
+        "plugins/security/skills/47-security-and-secrets-review/references/redis-security/references/acls.md"
+      ]
+    },
+    {
+      "commit": "a84871d065f398fed55e1633f66b66f731eb4e2b",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/redis/agent-skills",
+      "source_path": "skills/redis-security/references/auth.md",
+      "source_sha256": "dd898306a8db35ef9120d972ffe6986f5383cca8204f3dbccfe96507c04f1988",
+      "targets": [
+        "plugins/security/skills/47-security-and-secrets-review/references/redis-security/references/auth.md"
+      ]
+    },
+    {
+      "commit": "a84871d065f398fed55e1633f66b66f731eb4e2b",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/redis/agent-skills",
+      "source_path": "skills/redis-security/references/network.md",
+      "source_sha256": "016ce475108c4c5e91b0481b087c9883e137c198a3e6b917246eb2abb565c701",
+      "targets": [
+        "plugins/security/skills/47-security-and-secrets-review/references/redis-security/references/network.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "LICENSE",
+      "source_sha256": "9b745cd92c3dfb415f5adefb81ff71674dd6a764cba8aa3ab14a920d1ab272ec",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/LICENSE"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "ci/SKILL.md",
+      "source_sha256": "e5fed8f9837a00b3bf533b6b5ce38fe3df28de447ed88f170c2f74fff2d42a7e",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/ci/README.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "ci/ci-github-actions.md",
+      "source_sha256": "a9af4d41ebf807c5efde00865ff7056c5f387dd69d607275456f20f8aa4b7b6c",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/ci/ci-github-actions.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "ci/ci-gitlab.md",
+      "source_sha256": "2919f482487231177e793c6c3dbcb3dbffbbd81c50d8ea2e5feedd278a5ca045",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/ci/ci-gitlab.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "ci/ci-other.md",
+      "source_sha256": "325f7a4af904b2f232eff17996b2cb524809b94ea0e7a27a5b580999009ef167",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/ci/ci-other.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "ci/docker-and-containers.md",
+      "source_sha256": "aa262bebfa7d71fa7fdd993c208e1bf7687cf9fce4d6b07d14b2d84c2cdf6aeb",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/ci/docker-and-containers.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "ci/global-setup-teardown.md",
+      "source_sha256": "98f8900a187b0ec9cf7ad2ee5ae92cb865a0fad8ce6a8af8a8762d103e0cc271",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/ci/global-setup-teardown.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "ci/parallel-and-sharding.md",
+      "source_sha256": "7fc6b88879f8d35ac4eabe947ebe6143c3af4687ce8c9171113a233352898dc3",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/ci/parallel-and-sharding.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "ci/projects-and-dependencies.md",
+      "source_sha256": "0037a53233aa06078d531630983657136c6372353e4bc03bcad2e7852fc19548",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/ci/projects-and-dependencies.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "ci/reporting-and-artifacts.md",
+      "source_sha256": "3081503c8f907a3bea24d7e66d7e545b9ff0b7f9e7198c47f7e4b52aa1bb091d",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/ci/reporting-and-artifacts.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "ci/test-coverage.md",
+      "source_sha256": "33394220319277b8b2a47a5fb148276ef0fcf98e37aafc29ff1640203ce0d4f3",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/ci/test-coverage.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/SKILL.md",
+      "source_sha256": "60fa9174aeb10740a34ec21df89f1cef9acacced9a4e8fca6a593bc8016d5f69",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/README.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/accessibility.md",
+      "source_sha256": "5636899870516df1b63c13421e50c5e182a03d74a656791ef42467e026776cf4",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/accessibility.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/angular.md",
+      "source_sha256": "3a60526012ce5e37b45ddfab7a098ea04279f8787a07e5c3ffe1fb458cd31bef",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/angular.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/api-testing.md",
+      "source_sha256": "a225d4ad5f6a7f728b76c68a8bff8b6d4bfb2996fee250151e3bd4c7f06508b8",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/api-testing.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/assertions-and-waiting.md",
+      "source_sha256": "5df20f206af34afe567ee9aa9016d42272a45f65adf34e77085227a6c465a81c",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/assertions-and-waiting.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/auth-flows.md",
+      "source_sha256": "873db172eded4d3563487be1e401a94e72e0816d26d8130203e29b79924c029a",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/auth-flows.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/authentication.md",
+      "source_sha256": "3ac21e8af2c8675bd440ee0d97c03d1b6c3ff95608330a5e266d19aaedc9e9b4",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/authentication.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/browser-apis.md",
+      "source_sha256": "8fdbcb6706c306c59f046c9304d3f6beddd2abe12475ddf4c201d53bd31df5c5",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/browser-apis.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/browser-extensions.md",
+      "source_sha256": "f937acbae6a8d7c37a35b5a7812571f658ecc015d41411c0b347be3d7fce8045",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/browser-extensions.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/canvas-and-webgl.md",
+      "source_sha256": "c02a292ce0e0d27ed9f2d4388fd4753537ca67bc3082eec6e1a6d7daf18033b2",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/canvas-and-webgl.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/clock-and-time-mocking.md",
+      "source_sha256": "bf93baa816e63f9122ffdb54cd4fe887592b6252373c9380aba87ddd645c0683",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/clock-and-time-mocking.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/common-pitfalls.md",
+      "source_sha256": "e7e482fb3848007864df50f4e8e506e0f1b717d2e85f0519cbaba66aecf636a1",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/common-pitfalls.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/component-testing.md",
+      "source_sha256": "64bb1cbbc35776760c3910b69f19a30c9ac85c457d26a6e21fb21fab3ead1b30",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/component-testing.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/configuration.md",
+      "source_sha256": "a2ac6b8b69a8b8049620db4affb28f58284e495887a5ea9356739c23dd61c0b3",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/configuration.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/crud-testing.md",
+      "source_sha256": "6d3f70f4af3f17caf6c7e07e95210a544dec25a08a8a2f750c0ca9dd48d54e1b",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/crud-testing.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/debugging.md",
+      "source_sha256": "cb50aff959c463eed0a3d9f646df2a132795c70185fc36a890b0c6f7b76d72a7",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/debugging.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/drag-and-drop.md",
+      "source_sha256": "39706309fc12b061121920d56fdf65ea95bb086153aef64d2ef8801b11ac2adc",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/drag-and-drop.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/electron-testing.md",
+      "source_sha256": "39098c51fd7f780e39b57dcd69c2101e204e7fd9dd6eeacf520cd40cbba72f73",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/electron-testing.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/error-and-edge-cases.md",
+      "source_sha256": "08a20ab127967ecc0f34ac3b9ff7dbc2a0442d4d1e3ea790eb22f0fc34d6d4ff",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/error-and-edge-cases.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/error-index.md",
+      "source_sha256": "c825efe892e810039b4a2e583dd49257e87c5f588b195414eb698424b7505833",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/error-index.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/file-operations.md",
+      "source_sha256": "fca9aa1b361b95eca0cd204805a997fef692f34650048234b8250e8da07a9760",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/file-operations.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/file-upload-download.md",
+      "source_sha256": "2cb1f8d2918a48e98ec39746f888076f4e39b0eefad9eb42f0c65b53f33b6e05",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/file-upload-download.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/fixtures-and-hooks.md",
+      "source_sha256": "6b587295f67559dea5b4590edb17cc5f2e6201be983160ac75faa004c819a5b8",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/fixtures-and-hooks.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/flaky-tests.md",
+      "source_sha256": "8a961ae91fcec74829c207373d4f5a194d4b95d4b59732eb9db6825ed036b665",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/flaky-tests.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/forms-and-validation.md",
+      "source_sha256": "d889a06e388ec5577ee0fa42fa70c869640dff0273510956c37342fb449ef430",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/forms-and-validation.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/i18n-and-localization.md",
+      "source_sha256": "b308d8e6530cbf8d6b3adef2454c5324a17ac77f6b19189b79ab9fdc44ef1f74",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/i18n-and-localization.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/iframes-and-shadow-dom.md",
+      "source_sha256": "1e369ee9bdc42e57938b985bec8ef1a7d78e0a87c62d108f64e42cc9c1752b99",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/iframes-and-shadow-dom.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/locator-strategy.md",
+      "source_sha256": "c6f8d7f318e961bc8c5aea03e0e51cb687fe819f938efcb09940496b589b1143",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/locator-strategy.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/locators.md",
+      "source_sha256": "c821161899cb982689c9ebef975a3cd25f835ae8099382544befc9ef7e3805bc",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/locators.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/mobile-and-responsive.md",
+      "source_sha256": "5838d4ac8819e8db206d39b16442fc54152b1ab70a28642dfc9779dff659c8fd",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/mobile-and-responsive.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/multi-context-and-popups.md",
+      "source_sha256": "03435df567726c17553b1a48c84338096cd18b55dc5963e1e132647ad3060aec",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/multi-context-and-popups.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/multi-user-and-collaboration.md",
+      "source_sha256": "da2a1903faf7142ef4430cbe70cd4870b63f6d1fa1b1c5722b27e52aa9b3fa3a",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/multi-user-and-collaboration.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/network-mocking.md",
+      "source_sha256": "65103d94dc97d45c4be00e7935bc8beab2bff94856609a638f36ace09f382bea",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/network-mocking.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/nextjs.md",
+      "source_sha256": "b65c147f0281871b4467a78a2cfe9db04f967afe7a34b06a1c148a20080c8ee9",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/nextjs.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/performance-testing.md",
+      "source_sha256": "48876ffdd84b07c834f4ea5497e322e1aaa2232808c699c086d1c821a47e9ccb",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/performance-testing.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/react.md",
+      "source_sha256": "15587ad60e364fbae54b7b730394d16163dc5423adbef1c8e3dd3b98e634a14d",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/react.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/search-and-filter.md",
+      "source_sha256": "ef43ab3ee77a0a7d198253623b7efdc07a5abaaf5aa627c3a172eaf1bfa98ebd",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/search-and-filter.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/security-testing.md",
+      "source_sha256": "eccd23ac9f0e1426f39c141dfe4b045a759223f17cf9c6574c5231ef0176bee3",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/security-testing.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/service-workers-and-pwa.md",
+      "source_sha256": "c92e2d1046f2bd1eaffe86a8ee464f2c8b2fb62cf599447263da28b198356ad7",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/service-workers-and-pwa.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/test-architecture.md",
+      "source_sha256": "a36b1e09a1ef572f276adb3d9e1cae0a53233220bc45a6d830e2f4dd47c6d1f4",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/test-architecture.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/test-data-management.md",
+      "source_sha256": "2d1b9e2ec3d0e40741e0b26a57d67f71ecd68b05231b6e4d21661b5c93057576",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/test-data-management.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/test-organization.md",
+      "source_sha256": "6efbe0fad1dc156e80348bc0fadd70d1071aee9513da6e183808b5a6e5131d44",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/test-organization.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/third-party-integrations.md",
+      "source_sha256": "de1134fdcad478b8273f1e6c808a721d1505daeaf73e49911b62d8a71aaf2907",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/third-party-integrations.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/trace-analysis.md",
+      "source_sha256": "7ac462fb83b48f3e7fe1b9e3a02b779c49eedded0157f3116d3bda1808247a4d",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/trace-analysis.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/visual-regression.md",
+      "source_sha256": "c63c8032bfe1197faaa5da7cf861a68dab0365e2ea3f0b0d3f5bff355e2e1a21",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/visual-regression.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/vue.md",
+      "source_sha256": "6f08d58b4cde88454ecca7a83b4fe5bab0a6fa38ab8111f7533f6fb9211032e8",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/vue.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/websockets-and-realtime.md",
+      "source_sha256": "2f76ac9a5b92e941fe7bdcf14de86cdb60302b7411adb26e2cc964248fe1450b",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/websockets-and-realtime.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "core/when-to-mock.md",
+      "source_sha256": "3a18b1bac8045da43cc3aeb4b4898f8a634399b2262372b079b54c2646168a90",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/core/when-to-mock.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "migration/SKILL.md",
+      "source_sha256": "88ec8964a8601cf0980c776e7bd71629948d7df1e3ac02632a265fbd9015c49e",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/migration/README.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "migration/from-cypress.md",
+      "source_sha256": "be719636e0b2ba9768968cd0529f7fe955d227efc92d4f2ae05f137caf1aa7df",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/migration/from-cypress.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "migration/from-selenium.md",
+      "source_sha256": "02f05c1b7479bf5d61f04541d3cdd5f1a77b9a9b24746fea9d274021118510cb",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/migration/from-selenium.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "playwright-cli/SKILL.md",
+      "source_sha256": "6cee5e8f18edff7a2ad16d34d7b43a2e2ff5e58946f791473b040ed0b2eba01e",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/playwright-cli/README.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "playwright-cli/advanced-workflows.md",
+      "source_sha256": "b8cc19886e8ba990ebd418e3217bf8eefb3f3d651b73e606eadb95d21f4ac9a8",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/playwright-cli/advanced-workflows.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "playwright-cli/core-commands.md",
+      "source_sha256": "05731721cdf1217d7880a3279a24eab4c8c5353347cc616924241af733c43053",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/playwright-cli/core-commands.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "playwright-cli/device-emulation.md",
+      "source_sha256": "d5954f27b00f9fc195d7e61a4c39790a174c4a10257082f98f8b635929138903",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/playwright-cli/device-emulation.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "playwright-cli/request-mocking.md",
+      "source_sha256": "a6d6eddce3ac7472cd85b127e258b8200edf19a2753af2181cca4074b10a88e0",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/playwright-cli/request-mocking.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "playwright-cli/running-custom-code.md",
+      "source_sha256": "4dc1bfa6ed5143a58d7bfce6380b7ae1cbb790fddfe2f2ef9d8932ef0ee09339",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/playwright-cli/running-custom-code.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "playwright-cli/screenshots-and-media.md",
+      "source_sha256": "88c8a7bbcd26befb5d8c7a3f217b794bfa374ccb8d306c01fd7cf1fbc553d5d7",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/playwright-cli/screenshots-and-media.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "playwright-cli/session-management.md",
+      "source_sha256": "f8310fab5299cce460cd41142b421082f9056efcbc9309e01ca5ea91555b857a",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/playwright-cli/session-management.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "playwright-cli/storage-and-auth.md",
+      "source_sha256": "c68d628c63b80efe7d900170e86868303fb59b4e5f2f5e08e435b38e982d9981",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/playwright-cli/storage-and-auth.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "playwright-cli/test-generation.md",
+      "source_sha256": "60811c8d885041d9a7b3e44a8aec158916d540857831ec9cb379f22392a4a714",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/playwright-cli/test-generation.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "playwright-cli/tracing-and-debugging.md",
+      "source_sha256": "86e6943e6082393265dbcd249c2beaf70a128600f1028934bb5ccd6041018b1b",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/playwright-cli/tracing-and-debugging.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "pom/SKILL.md",
+      "source_sha256": "e1147d948841e920674a2ec496290bc30af73101ceb5dc80282dd74019decb69",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/pom/README.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "pom/page-object-model.md",
+      "source_sha256": "b0a38a0ad8d58fd8f62a1e64b035ec6f9dc7fae58602764d7c9aea10a2188626",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/pom/page-object-model.md"
+      ]
+    },
+    {
+      "commit": "d3be9ca4d7303e2aee3eba4842963abf573117b0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/testdino-hq/playwright-skill",
+      "source_path": "pom/pom-vs-fixtures-vs-helpers.md",
+      "source_sha256": "c286028ded866a59511d3c898cbe2141d4b38183fc9afa8136d16230e9b251e1",
+      "targets": [
+        "plugins/testing-and-qa/skills/53-playwright-e2e-audit/references/playwright-skill/pom/pom-vs-fixtures-vs-helpers.md"
+      ]
+    },
+    {
+      "commit": "c172996495bed0fcd26896a9416b2093fd7073f0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/wondelai/skills",
+      "source_path": "LICENSE",
+      "source_sha256": "87c3c90f9e673a76b8ca81049b8fe30996b910a7a80140c3ed57a2ee922d2579",
+      "targets": [
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/cold-start-problem/LICENSE"
+      ]
+    },
+    {
+      "commit": "c172996495bed0fcd26896a9416b2093fd7073f0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/wondelai/skills",
+      "source_path": "cold-start-problem/references/atomic-networks.md",
+      "source_sha256": "6535f41157ec7497ca6a2cf4eae92c58d2bcf9803fdf5cfde3145ee19f6d5140",
+      "targets": [
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/cold-start-problem/references/atomic-networks.md"
+      ]
+    },
+    {
+      "commit": "c172996495bed0fcd26896a9416b2093fd7073f0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/wondelai/skills",
+      "source_path": "cold-start-problem/references/case-studies.md",
+      "source_sha256": "8c8a487f5a5e7e67c1f175b6aefce13315a71f9a86e3001a48bc3f0150f763ee",
+      "targets": [
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/cold-start-problem/references/case-studies.md"
+      ]
+    },
+    {
+      "commit": "c172996495bed0fcd26896a9416b2093fd7073f0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/wondelai/skills",
+      "source_path": "cold-start-problem/references/hard-side.md",
+      "source_sha256": "ad3d47f3f8dad06537f10f37d57e331dd18ce62a94028a69db25ad2fe83bf269",
+      "targets": [
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/cold-start-problem/references/hard-side.md"
+      ]
+    },
+    {
+      "commit": "c172996495bed0fcd26896a9416b2093fd7073f0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/wondelai/skills",
+      "source_path": "cold-start-problem/references/scale-ceiling-moat.md",
+      "source_sha256": "123e499b7f27a836aefbefd79e171097698f35c339fba56ffb44b2d0b3b7b188",
+      "targets": [
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/cold-start-problem/references/scale-ceiling-moat.md"
+      ]
+    },
+    {
+      "commit": "c172996495bed0fcd26896a9416b2093fd7073f0",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/wondelai/skills",
+      "source_path": "cold-start-problem/references/tipping-playbooks.md",
+      "source_sha256": "df5106b668e89d92067086e40614be3af2bb5056d837ec1ddf94210d5131ac45",
+      "targets": [
+        "plugins/product-docs-and-research/skills/67-business-model-review/references/cold-start-problem/references/tipping-playbooks.md"
+      ]
+    },
+    {
+      "commit": "8b7a1e54b901bb7afcaebddd06705f1b00ffac42",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/xueyang-dev/localize-anything",
+      "source_path": "skills/localize-anything/references/adapters.md",
+      "source_sha256": "0b8ff87b847c486a54da46fc40f1f9933ab07c7d6cfa458e46359f24a27965f2",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/localize-anything/references/adapters.md"
+      ]
+    },
+    {
+      "commit": "8b7a1e54b901bb7afcaebddd06705f1b00ffac42",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/xueyang-dev/localize-anything",
+      "source_path": "skills/localize-anything/references/memory-and-context.md",
+      "source_sha256": "44f69f6b97f28cc48c0a6799314435d737cfb11f701c662123866ab9a9a5bc64",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/localize-anything/references/memory-and-context.md"
+      ]
+    },
+    {
+      "commit": "8b7a1e54b901bb7afcaebddd06705f1b00ffac42",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/xueyang-dev/localize-anything",
+      "source_path": "skills/localize-anything/references/qa-and-delivery.md",
+      "source_sha256": "e49b99cf0a29fefa03d37c0a49de8e7685dfae83029d2f0f6c43ba4960d14c27",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/localize-anything/references/qa-and-delivery.md"
+      ]
+    },
+    {
+      "commit": "8b7a1e54b901bb7afcaebddd06705f1b00ffac42",
+      "evidence": "Skillry 3.0.0 import: target bytes equal the upstream blob at the pinned commit (verified 2026-09-19 via raw.githubusercontent.com); upstream license verified permissive before import",
+      "repository": "https://github.com/xueyang-dev/localize-anything",
+      "source_path": "skills/localize-anything/references/workflow.md",
+      "source_sha256": "d638fe67f159f4d49d49f93f9a9f3d95278ca0d729ac8101cee08f9a7539eec4",
+      "targets": [
+        "plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/localize-anything/references/workflow.md"
       ]
     }
   ],

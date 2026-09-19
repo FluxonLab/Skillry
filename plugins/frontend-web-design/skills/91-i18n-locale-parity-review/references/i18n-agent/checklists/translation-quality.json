@@ -1,0 +1,77 @@
+{
+  "id": "translation-quality",
+  "title": "Translation / localization quality",
+  "version": "1.0.0",
+  "items": [
+    {
+      "id": "tq.glossary",
+      "level": "must",
+      "text": "Glossary applied (preferred terms + banned calques + do-not-translate)"
+    },
+    {
+      "id": "tq.style",
+      "level": "must",
+      "text": "Locale style guide followed (formality T/V, punctuation, units, currency)"
+    },
+    {
+      "id": "tq.approach",
+      "level": "must",
+      "text": "Correct approach used: transcreate marketing, precise legal, adapt SEO"
+    },
+    {
+      "id": "tq.no_invent",
+      "level": "must",
+      "text": "No invented testimonials, certifications, or statistics"
+    },
+    {
+      "id": "tq.brand_stable",
+      "level": "must",
+      "text": "Brand/product names stable unless glossary allows localized form"
+    },
+    {
+      "id": "tq.seo_adapt",
+      "level": "must",
+      "text": "Keywords adapted to local query language; one primary keyword per URL"
+    },
+    {
+      "id": "tq.no_calque",
+      "level": "must",
+      "text": "No machine-English calques or literal idioms"
+    },
+    {
+      "id": "tq.placeholders",
+      "level": "must",
+      "text": "ICU / placeholders intact and correctly ordered"
+    },
+    {
+      "id": "tq.parity",
+      "level": "must",
+      "text": "Information parity with source (or documented intentional omission)"
+    },
+    {
+      "id": "tq.links",
+      "level": "must",
+      "text": "Internal links localized; no cross-locale leaks"
+    },
+    {
+      "id": "tq.rtl",
+      "level": "must",
+      "text": "RTL locales: dir, logical CSS advice, mirrored affordances, fonts"
+    },
+    {
+      "id": "tq.truncation",
+      "level": "should",
+      "text": "UI strings fit layout; CTAs match local conversion language"
+    },
+    {
+      "id": "tq.native_review",
+      "level": "must",
+      "text": "Legal/high-risk claims marked needs_native_review when agent is not a specialist"
+    },
+    {
+      "id": "tq.index_gate",
+      "level": "must",
+      "text": "Below-bar pages are noindex or omitted from hreflang until ready"
+    }
+  ]
+}

@@ -5,7 +5,7 @@ tools: Read, Glob, Grep, Write, Edit, WebSearch
 model: sonnet
 skills:
   - gamedev-ux-design
-  - gamedev-ux-review
+  - gameplay-systems-review
 disallowedTools: Bash
 memory: project
 ---

@@ -6,8 +6,7 @@ model: sonnet
 permissionMode: default
 skills:
   - smoke-test-and-repair
-  - build-and-typecheck-review
-  - regression-scope-analysis
+  - diff-review
 color: green
 ---
 
@@ -35,7 +34,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: smoke-test-and-repair, build-and-typecheck-review, regression-scope-analysis.
+- Primary skills: smoke-test-and-repair, diff-review.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

@@ -1,9 +1,21 @@
 ---
 name: uat-acceptance-review
-description: Use when you need to translate product goals into acceptance checks, demo paths, and user validation criteria for a feature ready for stakeholder sign-off.
+description: "Acceptance and functional test design: UAT checks, test cases, test data packs, requirement-to-test traceability."
 ---
 
 # UAT Acceptance Review
+
+## Routing (absorbed skills)
+
+Skillry 3.0.0 folded the skills below into this one. When a request names one of them or matches its topic, open the listed reference and follow it; the rest of this file stays the default procedure.
+
+| Old skill name | Reference | Use it for |
+|---|---|---|
+| `designing-functional-tests` | [references/designing-functional-tests.md](references/designing-functional-tests.md) | risk-based functional test plans, manual test cases, regression slices, automation handoff |
+| `requirements-test-coverage-mapper` | [references/requirements-test-coverage-mapper.md](references/requirements-test-coverage-mapper.md) | requirements traceability matrix (RTM), coverage gaps, risk-based test prioritization, CI gating |
+| `designing-test-data` | [references/designing-test-data.md](references/designing-test-data.md) | boundary-heavy, role- and state-aware test data packs and automation fixtures |
+| `gamedev-team-qa` | [references/gamedev-team-qa.md](references/gamedev-team-qa.md) | game sprint/feature QA cycle: qa-lead and qa-tester orchestration, smoke gate, manual QA, sign-off report |
+| `test-scenarios` | [references/test-scenarios.md](references/test-scenarios.md) | test scenarios from user stories: objective, starting conditions, role, steps, expected outcomes |
 
 ## Purpose
 

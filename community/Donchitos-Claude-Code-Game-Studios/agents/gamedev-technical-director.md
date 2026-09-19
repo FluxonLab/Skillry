@@ -6,7 +6,7 @@ model: opus
 skills:
   - gamedev-architecture-decision
   - gamedev-architecture-review
-  - gamedev-tech-debt
+  - game-architecture-review
 memory: user
 ---
 

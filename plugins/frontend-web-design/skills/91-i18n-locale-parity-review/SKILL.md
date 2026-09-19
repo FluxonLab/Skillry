@@ -1,9 +1,19 @@
 ---
 name: i18n-locale-parity-review
-description: Use when you need to audit multi-language locale parity across TR/EN/DE locale files, detect missing translation keys, find hardcoded UI strings that bypass i18n, and validate next-intl App Router routing. This skill supports the "UI Language and Theme Parity" project behaviour rule.
+description: "Localization: locale parity, missing keys, i18n setup, hreflang and multilingual SEO, cultural adaptation."
 ---
 
 # i18n Locale Parity Review
+
+## Routing (absorbed skills)
+
+Skillry 3.0.0 folded the skills below into this one. When a request names one of them or matches its topic, open the listed reference and follow it; the rest of this file stays the default procedure.
+
+| Old skill name | Reference | Use it for |
+|---|---|---|
+| `i18n-agent` / `multilingual-i18n-seo` | [references/i18n-agent.md](references/i18n-agent.md) | multilingual SEO and i18n end to end: locale registry, BCP47 hreflang and x-default, sitemaps, schema inLanguage, translation playbook, CI check scripts |
+| `localize-anything` | [references/localize-anything.md](references/localize-anything.md) | project localization workflow: surface discovery, glossary and translation memory, structural checks, independent language review, release evidence |
+| `localization-guide` / `Localization Writer` | [references/localization-guide.md](references/localization-guide.md) | adapting copy for a target market: idioms, formality register, cultural references, dates, units, currency, reviewer notes |
 
 ## Purpose
 

@@ -5,10 +5,8 @@ tools: Read, Grep, Glob, Bash, Edit, Write
 model: sonnet
 permissionMode: default
 skills:
-  - terraform-iac-review
-  - docker-image-hardening
-  - kubernetes-manifest-review
-  - secrets-and-config-management
+  - cloud-service-architecture
+  - security-and-secrets-review
 color: blue
 ---
 
@@ -36,7 +34,7 @@ Tool boundary:
 - Stop and report instead of editing when production resources, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: terraform-iac-review, docker-image-hardening, kubernetes-manifest-review, secrets-and-config-management.
+- Primary skills: cloud-service-architecture, security-and-secrets-review.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full skill library.
 

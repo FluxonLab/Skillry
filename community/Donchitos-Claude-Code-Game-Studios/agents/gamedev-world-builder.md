@@ -4,7 +4,7 @@ description: "[Game studio] The World Builder designs detailed world lore: facti
 tools: Read, Glob, Grep, Write, Edit
 model: sonnet
 skills:
-  - gamedev-map-systems
+  - gameplay-systems-review
   - gamedev-content-audit
 disallowedTools: Bash
 memory: project

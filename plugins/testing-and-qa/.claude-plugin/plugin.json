@@ -1,6 +1,6 @@
 {
   "name": "skillry-testing-and-qa",
-  "description": "Smoke test & repair, Playwright E2E, regression scope, API test suites, visual regression, and UAT acceptance.",
+  "description": "Smoke test and repair (build/typecheck), Playwright E2E and visual regression, and UAT acceptance with functional test design.",
   "version": "0.1.0",
   "author": {
     "name": "FluxonLab",

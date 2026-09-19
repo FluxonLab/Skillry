@@ -5,9 +5,8 @@ tools: Read, Grep, Glob, Bash
 model: sonnet
 permissionMode: default
 skills:
-  - visual-regression-review
-  - responsive-layout-review
-  - visual-polish-pass
+  - playwright-e2e-audit
+  - web-design-review
 color: green
 ---
 
@@ -35,7 +34,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: visual-regression-review, responsive-layout-review, visual-polish-pass.
+- Primary skills: playwright-e2e-audit, web-design-review.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

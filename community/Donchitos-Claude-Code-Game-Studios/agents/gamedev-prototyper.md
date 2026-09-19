@@ -4,9 +4,8 @@ description: "[Game studio] Rapid prototyping specialist for pre-production. Bui
 tools: Read, Glob, Grep, Write, Edit, Bash
 model: sonnet
 skills:
-  - gamedev-prototype
+  - gameplay-systems-review
   - gamedev-quick-design
-  - gamedev-brainstorm
 isolation: worktree
 ---
 

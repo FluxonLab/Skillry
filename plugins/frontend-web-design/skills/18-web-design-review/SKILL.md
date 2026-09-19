@@ -1,9 +1,22 @@
 ---
 name: web-design-review
-description: Use when you need to review web design quality, hierarchy, layout, copy density, and product fit.
+description: "Review built UI: hierarchy, consistency, polish, responsive layout, dashboards, design-system drift, prototypes."
 ---
 
 # Web Design Review
+
+## Routing (absorbed skills)
+
+Skillry 3.0.0 folded the skills below into this one. When a request names one of them or matches its topic, open the listed reference and follow it; the rest of this file stays the default procedure.
+
+| Old skill name | Reference | Use it for |
+|---|---|---|
+| `ui-consistency-review` | [references/ui-consistency-review.md](references/ui-consistency-review.md) | token-anchored consistency punch list: spacing, color, type, interactive states, a11y basics, file:line fixes |
+| `visual-polish-pass` | [references/visual-polish-pass.md](references/visual-polish-pass.md) | pre-ship polish: alignment, spacing rhythm, state completeness, icons, radius, shadow elevation, motion timing |
+| `responsive-layout-review` | [references/responsive-layout-review.md](references/responsive-layout-review.md) | breakpoint audit at 360/768/1280px and landscape: overflow, touch targets, fluid type, media, 100dvh |
+| `dashboard-ux-review` | [references/dashboard-ux-review.md](references/dashboard-ux-review.md) | dashboards and admin tools: density, tables, filters, charts, loading/empty/error states, workflow clicks |
+| `design-system-review` | [references/design-system-review.md](references/design-system-review.md) | design-system health: token architecture, duplicate primitives, variant drift, theme parity, consolidation targets |
+| `interactive-prototype-review` | [references/interactive-prototype-review.md](references/interactive-prototype-review.md) | game, app or tool prototypes: core loop, feedback latency, stage fidelity, throwaway-vs-keep verdict |
 
 ## Purpose
 
@@ -20,8 +33,8 @@ Evaluate the visual design quality of a web page or web app: typographic hierarc
 ## When not to use
 
 - The request is exclusively about accessibility — use `accessibility-audit` for WCAG, contrast, and screen readers.
-- The request is exclusively about responsiveness across breakpoints — use `responsive-layout-review`.
-- The request is about token architecture and component reuse — use `design-system-review`.
+- The request is exclusively about responsiveness across breakpoints — follow [references/responsive-layout-review.md](references/responsive-layout-review.md) instead of the default procedure below.
+- The request is about token architecture and component reuse — follow [references/design-system-review.md](references/design-system-review.md) instead of the default procedure below.
 - The request is about conversion mechanics on a landing page — use `landing-page-conversion-review`.
 - The request is about brand identity, logo design, or marketing strategy — outside scope.
 - No visual artifact (URL, screenshot, or source with CSS) has been provided.

@@ -1,0 +1,72 @@
+{
+  "name": "multilingual-i18n-seo",
+  "version": "1.0.0",
+  "description": "Audit, plan, localize, and verify multilingual SEO / i18n for websites. Covers locale architecture, hreflang, sitemaps, schema, translation quality, and CI gates.",
+  "license": "MIT",
+  "entry": "SKILL.md",
+  "agents": "AGENTS.md",
+  "triggers": [
+    "multilingual SEO",
+    "i18n SEO",
+    "hreflang",
+    "locale architecture",
+    "localize website",
+    "translate site",
+    "translation playbook",
+    "multilingual sitemap",
+    "page_locale analytics",
+    "audit this repo for i18n",
+    "Plan fr-CA + es localization",
+    "Add CI checks for multilingual SEO"
+  ],
+  "tags": [
+    "i18n",
+    "l10n",
+    "seo",
+    "hreflang",
+    "localization",
+    "translation",
+    "sitemaps",
+    "bcp47",
+    "astro",
+    "nextjs",
+    "nuxt"
+  ],
+  "required_tools": [
+    "filesystem read/write",
+    "shell (python3.11+)"
+  ],
+  "optional_scripts": [
+    "scripts/check_i18n_seo.py",
+    "scripts/validate_locale_registry.py",
+    "scripts/validate_hreflang.py",
+    "scripts/extract_translatables.py"
+  ],
+  "python": {
+    "min_version": "3.11",
+    "requirements": "scripts/requirements.txt"
+  },
+  "supported_frameworks": [
+    "astro",
+    "next.js (app router)",
+    "nuxt / vue-i18n",
+    "remix",
+    "plain HTML / static"
+  ],
+  "docs": {
+    "overview": "docs/overview.md",
+    "seo_checklist": "docs/multilingual-seo-checklist.md",
+    "translation_playbook": "docs/translation-playbook.md",
+    "locale_architecture": "docs/locale-architecture.md",
+    "framework_adapters": "docs/framework-adapters.md",
+    "verification": "docs/verification-and-ci.md"
+  },
+  "schemas": [
+    "schemas/locale-registry.schema.json",
+    "schemas/keyword-map.schema.json",
+    "schemas/translation-memory.schema.json",
+    "schemas/audit-report.schema.json"
+  ],
+  "offline": true,
+  "paid_api_required": false
+}

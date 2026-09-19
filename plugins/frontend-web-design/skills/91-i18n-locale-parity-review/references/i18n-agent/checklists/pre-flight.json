@@ -1,0 +1,62 @@
+{
+  "id": "pre-flight",
+  "title": "Multilingual i18n SEO — pre-flight discovery",
+  "version": "1.0.0",
+  "items": [
+    {
+      "id": "pf.framework",
+      "level": "must",
+      "text": "Framework / static generator detected and recorded"
+    },
+    {
+      "id": "pf.routing",
+      "level": "must",
+      "text": "URL locale strategy identified (prefix all / default unprefixed / subdomain / TLD)"
+    },
+    {
+      "id": "pf.i18n_lib",
+      "level": "should",
+      "text": "Existing i18n library or message catalog locations inventoried"
+    },
+    {
+      "id": "pf.content_sources",
+      "level": "must",
+      "text": "Content sources mapped (MDX, CMS, JSON, in-file copy)"
+    },
+    {
+      "id": "pf.locales",
+      "level": "must",
+      "text": "Current locales + default locale listed (or explicitly none)"
+    },
+    {
+      "id": "pf.money_pages",
+      "level": "must",
+      "text": "Money pages vs utility vs noindex pages mapped"
+    },
+    {
+      "id": "pf.analytics",
+      "level": "should",
+      "text": "Analytics injection point found; page_locale presence checked"
+    },
+    {
+      "id": "pf.sitemap_robots",
+      "level": "must",
+      "text": "Sitemap entrypoint(s) and robots.txt located"
+    },
+    {
+      "id": "pf.schema",
+      "level": "should",
+      "text": "JSON-LD injection points located"
+    },
+    {
+      "id": "pf.locked_urls",
+      "level": "must",
+      "text": "Locked third-party booking/profile URLs identified (do not change)"
+    },
+    {
+      "id": "pf.registry",
+      "level": "should",
+      "text": "locale-registry.json exists or planned from template"
+    }
+  ]
+}

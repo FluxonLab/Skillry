@@ -1,6 +1,6 @@
 ---
 name: chrome-extension-review
-description: Use when you need to review Chrome extension manifests, content scripts, background workers, permissions, and store-readiness.
+description: "Review Chrome extensions: MV3 manifest, content scripts, service workers, permissions, store readiness."
 ---
 
 # Chrome Extension Review

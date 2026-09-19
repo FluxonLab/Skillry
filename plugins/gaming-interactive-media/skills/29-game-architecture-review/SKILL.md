@@ -1,9 +1,36 @@
 ---
 name: game-architecture-review
-description: Use when you need to review game architecture, loop structure, scenes, entities, assets, input, and state.
+description: "Game engineering: loop/ECS, code review, tech debt, frame budget, profiling; Godot, Unity, Unreal, Phaser, PixiJS."
 ---
 
 # Game Architecture Review
+
+## Absorbed skills
+
+Skillry 3.0.0 merged the skills below into this one. The procedure in this file stays the default. When a task, agent or document names one of these old skills, open only its reference.
+
+| Old skill | Reference | Covers | Source |
+|---|---|---|---|
+| `web-game-architecture` | `references/web-game-architecture.md` | Engine-agnostic web game architecture: fixed-timestep loop, ECS, state machines, asset loading, save/load | Skillry |
+| `gamedev-code-review` | `references/gamedev-code-review.md` | Game code review: coding standards, architecture patterns, SOLID, testability, performance | Claude Code Game Studios (MIT) |
+| `gamedev-tech-debt` | `references/gamedev-tech-debt.md` | Tech debt register: scan, categorize, prioritize, schedule repayment | Claude Code Game Studios (MIT) |
+| `godot-unity-unreal-triage` | `references/godot-unity-unreal-triage.md` | Godot, Unity, Unreal, shader, engine and asset pipeline triage | Skillry |
+| `phaser-game-development` | `references/phaser-game-development.md` | Phaser 3: scenes, physics, atlases, tilemaps, input, Vite + TypeScript setup | Skillry |
+| `pixijs-2d-rendering` | `references/pixijs-2d-rendering.md` | PixiJS 8: application setup, containers, ticker, atlases, particles, batching, WebGL/WebGPU | Skillry |
+| `game-performance-review` | `references/game-performance-review.md` | Frame budget, asset loading, rendering, memory, interaction performance | Skillry |
+| `web-game-performance` | `references/web-game-performance.md` | Browser 60 fps: rAF discipline, pooling, batching, GC spikes, Canvas vs WebGL, DevTools profiling | Skillry |
+| `gamedev-perf-profile` | `references/gamedev-perf-profile.md` | Structured profiling: bottlenecks against budgets, prioritized optimizations | Claude Code Game Studios (MIT) |
+| `gamedev-team-polish` | `references/gamedev-team-polish.md` | Polish team orchestration: performance, visual and audio polish, QA hardening for release | Claude Code Game Studios (MIT) |
+
+Third-party references keep a provenance header and their upstream license in `references/<old-skill>/LICENSE`.
+
+### Upstream slash commands
+
+The Claude Code Game Studios references keep their upstream slash-command names. In Skillry they resolve as follows:
+
+- In this skill: `/code-review` → `references/gamedev-code-review.md`, `/tech-debt` → `references/gamedev-tech-debt.md`, `/perf-profile` → `references/gamedev-perf-profile.md`, `/team-polish` → `references/gamedev-team-polish.md`.
+- In other skills: `/brainstorm`, `/map-systems`, `/design-review`, `/ux-review`, `/prototype` and the other design and team commands → `gameplay-systems-review`; `/release-checklist`, `/team-release`, `/hotfix` → `release-readiness-check`; `/estimate`, `/retrospective` → `implementation-plan`; `/team-qa` → `uat-acceptance-review`.
+- Other commands in these texts (for example `/gate-check`, `/architecture-decision`, `/scope-check`, `/sprint-plan`) belong to the upstream project and have no Skillry equivalent.
 
 ## Purpose
 Audit a game project's structural decisions: game-loop organization, the entity/component model, scene management, the asset pipeline, the save system, and the separation of update logic from render logic. Surface the architectural debt that produces bugs at scale — frame-rate-dependent gameplay, monolithic god-objects, broken save/load, asset-loading stalls, and tight coupling between gameplay and UI. Every finding carries a severity and a concrete refactor, ordered so the highest-leverage fix can land without destabilizing the rest.
@@ -15,9 +42,9 @@ Audit a game project's structural decisions: game-loop organization, the entity/
 - An engine migration is being considered and the current architecture must be documented first.
 
 ## When not to use
-- The task is a performance profiling session — use game-performance-review.
+- The task is a performance profiling session — use `references/game-performance-review.md` (browser games: `references/web-game-performance.md`; structured profiling: `references/gamedev-perf-profile.md`).
 - The question is about one specific gameplay mechanic — use gameplay-systems-review.
-- The engine integration is broken at the build/import level — use godot-unity-unreal-triage first.
+- The engine integration is broken at the build/import level — use `references/godot-unity-unreal-triage.md` first.
 
 ## Procedure
 1. **Identify engine, language, and project size.** Note engine (Godot 4, Unity 2022+, Unreal 5, custom), primary language (GDScript, C#, C++, Rust), and approximate scene/file count.

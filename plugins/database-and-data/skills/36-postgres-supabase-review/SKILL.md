@@ -1,9 +1,23 @@
 ---
 name: postgres-supabase-review
-description: Use when you need to review Postgres and Supabase schemas, policies, migrations, indexes, and local versus production boundaries.
+description: "Postgres/Supabase: table design, indexes, RLS, Edge Functions, query plans, N+1, pagination, SQL tuning."
 ---
 
 # Postgres & Supabase Review
+
+## Absorbed skills
+
+Skillry 3.0.0 merged the skills below into this one. The procedure in this file stays the default. When a task, agent or document names one of these old skills, open only its reference.
+
+| Old skill | Reference | Covers | Source |
+|---|---|---|---|
+| `postgresql-table-design` | `references/postgresql-table-design.md` | PostgreSQL schema design: data types, constraints, indexing, partitioning, JSONB, gotchas | wshobson/agents (MIT) |
+| `supabase-rls-edge-functions` | `references/supabase-rls-edge-functions.md` | Supabase RLS policies, auth.uid() patterns, service_role risk, Edge Functions (Deno), Realtime, Storage RLS, CLI deploy | Skillry |
+| `postgresql-optimization` | `references/postgresql-optimization.md` | PostgreSQL-specific features: JSONB, arrays, custom/range/geometric types, full-text search, window functions, extensions, tuning | github/awesome-copilot (MIT) |
+| `query-performance-review` | `references/query-performance-review.md` | Query plans, indexes, N+1 risks, pagination, data-access patterns | Skillry |
+| `sql-optimization-patterns` | `references/sql-optimization-patterns.md` | SQL tuning: EXPLAIN analysis, index strategies, N+1, pagination, aggregation, batching, materialized views, partitioning | wshobson/agents (MIT) |
+
+Third-party references keep a provenance header and their upstream license in `references/<old-skill>/LICENSE`.
 
 ## Purpose
 
@@ -105,7 +119,7 @@ git diff main -- supabase/migrations/ # should only show NEW files, never edits 
 Check that each migration file:
 - Has a transaction wrapper (`BEGIN`/`COMMIT`) or uses `supabase migrate` which wraps automatically.
 - Does not contain `DROP TABLE` or `DROP COLUMN` without a preceding backup/rename step.
-- Does not add `NOT NULL` to an existing column in one step (see skill 37 for the safe pattern).
+- Does not add `NOT NULL` to an existing column in one step (see `database-and-prisma-review`, `references/data-migration-safety.md`, for the safe pattern).
 
 ### 5. Review connection pooling configuration
 
@@ -162,7 +176,7 @@ Red flags: `Seq Scan` on large tables, `Rows Removed by Filter` much larger than
 - [ ] `service_role` client is never used client-side (browser/mobile)
 - [ ] Every FK column on the child side has an index
 - [ ] Migration files are append-only (no edits to historical files)
-- [ ] `NOT NULL` additions go through expand-contract (see skill 37)
+- [ ] `NOT NULL` additions go through expand-contract (see `database-and-prisma-review`, `references/data-migration-safety.md`)
 - [ ] pgBouncer mode matches the app's session feature usage
 - [ ] `auth.users` FK has `ON DELETE CASCADE` where appropriate
 - [ ] `anon` key is safe to expose; `service_role` key is in server env only

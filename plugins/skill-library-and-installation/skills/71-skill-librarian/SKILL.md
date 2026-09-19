@@ -1,9 +1,20 @@
 ---
 name: skill-librarian
-description: Use when you need to search, select, and recommend at most five relevant skills without activating the whole archive.
+description: "Skill library: pick relevant skills, dedupe, map skills to agents, audit installs and agent file placement."
 ---
 
 # Skill Librarian
+
+## Absorbed skills
+
+Skillry 3.0.0 merged the skills below into this one. The procedure in this file stays the default. When a task, agent or document names one of these old skills, open only its reference.
+
+| Old skill | Reference | Covers |
+|---|---|---|
+| `skill-deduplication` | `references/skill-deduplication.md` | Detect duplicate or overlapping skills, choose canonical versions, document deferred alternatives |
+| `skill-to-agent-router` | `references/skill-to-agent-router.md` | Map skills to agents and departments: optional bindings, exclusions, activation rules |
+| `global-installation-audit` | `references/global-installation-audit.md` | Audit global and project installation paths, backups, packages, reinstall readiness |
+| `path-hygiene-repair` | `references/path-hygiene-repair.md` | Detect misplaced agent system files, restore canonical placement, leave thin pointers |
 
 ## Purpose
 
@@ -21,8 +32,8 @@ Search the installed skill library and the agent roster to identify and recommen
 
 - The correct skill is already known — skip the librarian and invoke it directly.
 - The task requires creating a new skill — use `skill-creator` (anthropic-skills).
-- The task requires detecting duplicate or overlapping skills — use `72-skill-deduplication`.
-- The user wants to route a task to an agent, not a skill — use `73-skill-to-agent-router`.
+- The task requires detecting duplicate or overlapping skills — use `references/skill-deduplication.md`.
+- The user wants to route a task to an agent, not a skill — use `references/skill-to-agent-router.md`.
 
 ## Procedure
 

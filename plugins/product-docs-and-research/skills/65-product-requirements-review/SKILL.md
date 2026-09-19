@@ -1,9 +1,20 @@
 ---
 name: product-requirements-review
-description: Use when you need to review requirements, user stories, acceptance criteria, scope, and ambiguity.
+description: "Requirements: user stories, acceptance criteria, scope, prioritization, outcome roadmaps, pre-mortem risks."
 ---
 
 # Product Requirements Review
+
+## Merged skills (routing)
+
+Skillry 3.0.0 merged these former skills into `product-requirements-review`. Requirement reviews use the procedure below. For the planning tasks in the table, read only the matching reference. `pre-mortem` and `strategy-red-team` are the two risk passes: the pre-mortem assumes the launch failed and works backward; the red-team attacks the load-bearing assumptions now and names the cheapest test. Run both on launch plans.
+
+| Former skill | Use for | Reference |
+|---|---|---|
+| `prioritize-features` | Rank a feature backlog (Opportunity Score, ICE, RICE) and pick the top 5 | [references/prioritize-features.md](references/prioritize-features.md) |
+| `outcome-roadmap` | Rewrite an output (feature) roadmap as outcome statements | [references/outcome-roadmap.md](references/outcome-roadmap.md) |
+| `pre-mortem` | Pre-launch risk analysis: Tigers, Paper Tigers, Elephants; launch-blocking vs fast-follow vs track | [references/pre-mortem.md](references/pre-mortem.md) |
+| `strategy-red-team` | Red-team a PRD, roadmap or strategy: attack load-bearing assumptions, kill criteria, cheapest tests | [references/strategy-red-team.md](references/strategy-red-team.md) |
 
 ## Purpose
 
@@ -24,7 +35,7 @@ Systematically evaluate a product requirements document (PRD), epic, or user sto
 - The document is a marketing brief, not a product spec.
 - No document exists yet; ask the requester to draft a rough version first.
 - The scope is so narrow (single-line bug fix) that a full PRD review adds no value.
-- The request is for business model or pricing strategy — use `business-model-review` or `pricing-packaging-review`.
+- The request is for business model or pricing strategy — use `business-model-review` (pricing and packaging now live in its references).
 
 ## Procedure
 

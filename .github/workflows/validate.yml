@@ -62,5 +62,5 @@ jobs:
           export HOME="$(mktemp -d)"
           python3 tools/install.py --apply --targets claude codex copilot antigravity
           echo "Installed skills (claude): $(find "$HOME/.claude/skills" -name SKILL.md | wc -l)"
-          test "$(find "$HOME/.claude/skills" -name SKILL.md | wc -l)" -ge 100
+          test "$(find "$HOME/.claude/skills" -name SKILL.md | wc -l)" -ge 50
           test "$(ls "$HOME/.codex/agents/"*.toml | wc -l)" -ge 60

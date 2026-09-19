@@ -5,8 +5,7 @@ tools: Read, Grep, Glob, Bash
 model: sonnet
 permissionMode: default
 skills:
-  - llm-api-cost-optimization
-  - cloud-spend-review
+  - cost-control-token-review
 color: green
 ---
 
@@ -35,7 +34,7 @@ Tool boundary:
 - Stop and report instead of acting whenever a recommendation would change a resource; hand the action to an owner with approval.
 
 Skill usage policy:
-- Primary skills: llm-api-cost-optimization, cloud-spend-review.
+- Primary skills: cost-control-token-review.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full dormant skill archive.
 

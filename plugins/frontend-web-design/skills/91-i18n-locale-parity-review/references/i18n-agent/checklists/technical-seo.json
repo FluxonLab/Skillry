@@ -1,0 +1,115 @@
+{
+  "id": "technical-seo",
+  "title": "Multilingual technical SEO",
+  "version": "1.0.0",
+  "items": [
+    {
+      "id": "ts.registry",
+      "level": "must",
+      "section": 1,
+      "text": "Locale registry is single source of truth and schema-valid"
+    },
+    {
+      "id": "ts.default_routing",
+      "level": "must",
+      "section": 1,
+      "text": "Default locale routing consistent; helpers prevent hardcoded cross-locale leaks"
+    },
+    {
+      "id": "ts.slug_vs_bcp47",
+      "level": "must",
+      "section": 1,
+      "text": "URL slug/prefix distinct from hreflang BCP47 when they differ"
+    },
+    {
+      "id": "ts.canonical_host",
+      "level": "must",
+      "section": 1,
+      "text": "Host + trailing-slash canonicalization consistent"
+    },
+    {
+      "id": "ts.no_forced_redirect",
+      "level": "must",
+      "section": 1,
+      "text": "No geo-IP / Accept-Language force redirects by default"
+    },
+    {
+      "id": "ts.html_lang_dir",
+      "level": "must",
+      "section": 3,
+      "text": "html lang and dir match registry"
+    },
+    {
+      "id": "ts.switcher",
+      "level": "must",
+      "section": 3,
+      "text": "Crawlable language switcher with valid sibling targets"
+    },
+    {
+      "id": "ts.canonical",
+      "level": "must",
+      "section": 4,
+      "text": "Self-canonical per locale URL"
+    },
+    {
+      "id": "ts.og_url",
+      "level": "must",
+      "section": 4,
+      "text": "og:url equals canonical"
+    },
+    {
+      "id": "ts.localized_metas",
+      "level": "must",
+      "section": 4,
+      "text": "Unique localized title and description"
+    },
+    {
+      "id": "ts.hreflang_reciprocal",
+      "level": "must",
+      "section": 5,
+      "text": "Full reciprocal hreflang set with x-default on indexable pages"
+    },
+    {
+      "id": "ts.hreflang_bcp47",
+      "level": "must",
+      "section": 5,
+      "text": "hreflang values are absolute HTTPS BCP47 URLs"
+    },
+    {
+      "id": "ts.hreflang_noindex",
+      "level": "must",
+      "section": 5,
+      "text": "No hreflang (or og:locale:alternate) on noindex pages"
+    },
+    {
+      "id": "ts.sitemap_one",
+      "level": "must",
+      "section": 6,
+      "text": "One public sitemap entrypoint with xhtml alternates"
+    },
+    {
+      "id": "ts.sitemap_agree",
+      "level": "must",
+      "section": 6,
+      "text": "robots / agent docs / GSC agree on sitemap URL"
+    },
+    {
+      "id": "ts.jsonld",
+      "level": "must",
+      "section": 7,
+      "text": "JSON-LD inLanguage + localized page URLs; stable entity @ids"
+    },
+    {
+      "id": "ts.analytics",
+      "level": "must",
+      "section": 9,
+      "text": "page_locale (or equivalent) dimension present"
+    },
+    {
+      "id": "ts.ci",
+      "level": "must",
+      "section": 11,
+      "text": "CI runs check_i18n_seo.py and fails on errors"
+    }
+  ]
+}

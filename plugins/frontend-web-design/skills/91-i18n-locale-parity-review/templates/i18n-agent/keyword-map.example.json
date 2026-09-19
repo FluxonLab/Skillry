@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "sourceLocale": "en",
+  "entries": [
+    {
+      "path": "/pricing",
+      "intent": "commercial / money page",
+      "locales": {
+        "en": {
+          "primaryKeyword": "pricing plans",
+          "secondaryKeywords": ["plans", "billing"],
+          "titleDraft": "Pricing Plans | Acme",
+          "metaDraft": "Simple plans for teams of every size.",
+          "notes": "Brand suffix policy: | Acme"
+        },
+        "fr-CA": {
+          "primaryKeyword": "forfaits tarifaires",
+          "secondaryKeywords": ["tarifs", "abonnements"],
+          "titleDraft": "Forfaits tarifaires | Acme",
+          "metaDraft": "Des forfaits simples pour les équipes de toutes tailles.",
+          "notes": "Canadian French; do not calque 'pricing plans'"
+        },
+        "es": {
+          "primaryKeyword": "planes de precios",
+          "secondaryKeywords": ["tarifas"],
+          "titleDraft": "Planes de precios | Acme",
+          "metaDraft": "Planes sencillos para equipos de cualquier tamaño.",
+          "notes": "LATAM-neutral for secondary tier"
+        }
+      }
+    }
+  ]
+}

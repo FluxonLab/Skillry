@@ -1,12 +1,25 @@
 ---
 name: release-readiness-check
-description: Use when you need to decide whether a project is ready for demo, handoff, release, or deployment.
+description: "Release gates: demo/handoff/deploy readiness, env and DB preflight, canary and rollback, hotfix, game release."
 ---
 
 # Release Readiness Check
 
 ## Purpose
 Decide whether a project is ready for demo, handoff, internal release, or production deployment, and back the decision with evidence. The output is a Go / No-Go verdict supported by a gate table — not an opinion — so every blocker is concrete, reproducible from a clean checkout, and actionable before anything ships. The bar scales with the target: a demo tolerates more rough edges than a production deploy, but a failing or unrun gate is always a No-Go until resolved or explicitly waived by the owner.
+
+## Absorbed skills (routing)
+
+Skillry 3.0.0 folded the skills below into `release-readiness-check`. Each keeps its full guidance as a reference file; open only the one the task needs. The old names are routing keys, not separate skills.
+
+| Old skill | Reference | Open it for |
+|---|---|---|
+| `handoff-readiness-check` | [references/handoff-readiness-check.md](references/handoff-readiness-check.md) | handoff readiness: README, runbooks, local setup, bus factor, test and dependency health |
+| `deployment-preflight-review` | [references/deployment-preflight-review.md](references/deployment-preflight-review.md) | non-deploying preflight: env vars, build artifact, DB migration status, health check, rollback plan |
+| `deploy-topology-and-rollback` | [references/deploy-topology-and-rollback.md](references/deploy-topology-and-rollback.md) | blue-green, canary, and rolling deploys; health gates; automated rollback; zero-downtime cutover |
+| `gamedev-release-checklist` | [references/gamedev-release-checklist.md](references/gamedev-release-checklist.md) | game pre-release checklist: build verification, platform certification, store metadata, launch |
+| `gamedev-team-release` | [references/gamedev-team-release.md](references/gamedev-team-release.md) | orchestrating a game release across release manager, QA, DevOps, and producer roles |
+| `gamedev-hotfix` | [references/gamedev-hotfix.md](references/gamedev-hotfix.md) | emergency hotfix workflow with audit trail, approvals, and backporting |
 
 ## When to use
 - A release, demo, or handoff is scheduled and you must confirm build, tests, migrations, config, and docs are all green.

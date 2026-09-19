@@ -4,8 +4,7 @@ description: "[Game studio] The Audio Director owns the sonic identity of the ga
 tools: Read, Glob, Grep, Write, Edit, WebSearch
 model: sonnet
 skills:
-  - gamedev-team-audio
-  - gamedev-art-bible
+  - gameplay-systems-review
 disallowedTools: Bash
 memory: project
 ---

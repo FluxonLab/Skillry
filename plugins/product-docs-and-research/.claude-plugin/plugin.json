@@ -1,6 +1,6 @@
 {
   "name": "skillry-product-docs-and-research",
-  "description": "Spec/markdown generation, execution prompts, requirements, market research, business model, pricing, technical writing, and ADRs.",
+  "description": "Product requirements and prioritization, market and customer research, business model and pricing, and technical writing (READMEs, API docs, tutorials, runbooks, changelogs).",
   "version": "0.1.0",
   "author": {
     "name": "FluxonLab",

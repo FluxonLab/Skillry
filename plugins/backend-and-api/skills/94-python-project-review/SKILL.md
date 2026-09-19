@@ -1,6 +1,6 @@
 ---
 name: python-project-review
-description: Use when you need to review a Python project for environment management correctness, dependency pinning and CVEs, pytest/coverage structure, ruff linting, mypy type checking, and common security anti-patterns including subprocess shell injection, eval/exec, pickle deserialization, and SQL string concatenation.
+description: "Python: uv envs, packaging/PyPI, style, anti-patterns, asyncio, jobs, config, errors, resilience, FastAPI."
 ---
 
 # Python Project Review
@@ -8,6 +8,28 @@ description: Use when you need to review a Python project for environment manage
 ## Purpose
 
 Conduct a structured review of a Python project — covering virtual environment and dependency management (venv/uv/poetry), requirements pinning and lockfile hygiene, test structure (pytest fixtures, coverage targets), static analysis (ruff, mypy), common security anti-patterns, and packaging/entry-point correctness. Applies directly to Python-based projects such as ExampleApp and any adjacent Python tooling in the monorepo. Surface concrete findings from actual files, never from assumptions.
+
+## Merged skills
+
+Skillry 3.0.0 merged the skills below into this one. A request that names a former skill routes here; open only the reference that matches the task. Paths are relative to this skill's directory.
+
+| Former skill | Reference | Covers |
+|---|---|---|
+| `python-anti-patterns` | [references/python-anti-patterns.md](references/python-anti-patterns.md) | Anti-pattern checklist for Python code review: infrastructure, architecture, errors, resources, typing, tests |
+| `python-code-style` | [references/python-code-style.md](references/python-code-style.md) | Ruff and formatter configuration, naming, imports, docstrings, documentation standards |
+| `python-design-patterns` | [references/python-design-patterns.md](references/python-design-patterns.md) | KISS, separation of concerns, single responsibility, composition over inheritance, when to abstract |
+| `python-resource-management` | [references/python-resource-management.md](references/python-resource-management.md) | Context managers, cleanup, connection and file lifecycles, streaming with accumulated state |
+| `python-packaging` | [references/python-packaging.md](references/python-packaging.md) | pyproject.toml, src layout, CLI entry points, building and publishing to PyPI |
+| `python-pypi-package-builder` | [references/python-pypi-package-builder.md](references/python-pypi-package-builder.md) | End-to-end PyPI library: build backend choice, versioning, typing, CI, Trusted Publishing; scaffold script `scripts/python-pypi-package-builder/scaffold.py` |
+| `uv-package-manager` | [references/uv-package-manager.md](references/uv-package-manager.md) | uv projects, virtual environments, lockfiles, Python versions, Docker and CI workflows |
+| `async-python-patterns` | [references/async-python-patterns.md](references/async-python-patterns.md) | asyncio: tasks, gather, semaphores, timeouts, async context managers, event-loop pitfalls |
+| `python-background-jobs` | [references/python-background-jobs.md](references/python-background-jobs.md) | Task queues and workers (Celery and alternatives): retries, idempotency, job state, chains and chords |
+| `python-error-handling` | [references/python-error-handling.md](references/python-error-handling.md) | Input validation, exception hierarchies, partial-failure handling in batches |
+| `python-resilience` | [references/python-resilience.md](references/python-resilience.md) | Retries with exponential backoff, timeouts, fault-tolerant decorators |
+| `python-observability` | [references/python-observability.md](references/python-observability.md) | Structured logging, correlation IDs, metrics and OpenTelemetry tracing in Python |
+| `python-configuration` | [references/python-configuration.md](references/python-configuration.md) | pydantic-settings, environment variables, secrets, per-environment configuration |
+| `fastapi-templates` | [references/fastapi-templates.md](references/fastapi-templates.md) | FastAPI project scaffold: layered structure, repositories, services, auth, tests |
+| `fastapi` | [references/fastapi.md](references/fastapi.md) | Official FastAPI conventions: fastapi CLI, Annotated parameters and dependencies, return types, routers, streaming and SSE, serving frontends, related tooling |
 
 ## When to use
 

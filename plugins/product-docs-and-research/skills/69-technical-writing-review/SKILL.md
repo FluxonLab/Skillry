@@ -1,9 +1,23 @@
 ---
 name: technical-writing-review
-description: Use when you need to review technical writing for accuracy, structure, brevity, and execution orientation.
+description: "Write or review docs: README, docs site, tutorials, how-tos, API reference, runbooks, changelog, release notes."
 ---
 
 # Technical Writing Review
+
+## Merged skills (routing)
+
+Skillry 3.0.0 merged these former skills into `technical-writing-review`. Reviews use the procedure below. To write or restructure a document, pick the matching row and read only that reference.
+
+| Former skill | Use for | Reference |
+|---|---|---|
+| `docs-quality-review` | Audit existing docs: accuracy against code, runnable examples, link health, terminology | [references/docs-quality-review.md](references/docs-quality-review.md) |
+| `readme-and-docs-structure` | README sections, 5-minute quickstart, docs-site navigation, docs-as-code CI | [references/readme-and-docs-structure.md](references/readme-and-docs-structure.md) |
+| `tutorial-and-how-to-writing` | Diataxis tutorials and how-to guides with verified, runnable steps | [references/tutorial-and-how-to-writing.md](references/tutorial-and-how-to-writing.md) |
+| `api-reference-docs` | API reference from OpenAPI or code: coverage, examples, error tables, versioning | [references/api-reference-docs.md](references/api-reference-docs.md) |
+| `runbook-and-operational-docs` | Incident runbooks and on-call docs: triage, escalation, rollback, recovery checks | [references/runbook-and-operational-docs.md](references/runbook-and-operational-docs.md) |
+| `changelog-and-release-notes` | CHANGELOG (Keep a Changelog), conventional commits, semver bump, migration notes | [references/changelog-and-release-notes.md](references/changelog-and-release-notes.md) |
+| `release-notes-generator` | Release notes from a git range and PRs: known issues, migration and operator actions | [references/release-notes-generator.md](references/release-notes-generator.md) |
 
 ## Purpose
 
@@ -22,7 +36,7 @@ Review a technical document — API reference, tutorial, guide, runbook, README,
 
 - The document is a PRD or requirements doc — use `product-requirements-review`.
 - The document is a business proposal or pitch — that is copywriting review, not technical writing review.
-- The document has not been drafted yet — help write it, do not review nothing.
+- The document has not been drafted yet — do not review nothing; write it with the matching reference from the routing table above.
 - The review requested is purely stylistic (word choice aesthetics) with no technical content.
 
 ## Procedure

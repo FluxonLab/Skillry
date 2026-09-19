@@ -1,9 +1,17 @@
 ---
 name: accessibility-audit
-description: Use when you need to audit semantic HTML, keyboard navigation, focus, contrast, labels, and screen reader basics.
+description: "Audit accessibility to WCAG 2.2: semantic HTML, keyboard, focus, contrast, labels, screen readers."
 ---
 
 # Accessibility Audit
+
+## Routing (absorbed skills)
+
+Skillry 3.0.0 folded the upstream `accessibility` skill (addyosmani/web-quality-skills) into this one. When a request names it or needs code-level WCAG 2.2 patterns, open the reference; the rest of this file stays the default audit procedure.
+
+| Old skill name | Reference | Use it for |
+|---|---|---|
+| `accessibility` | [references/accessibility.md](references/accessibility.md) | WCAG 2.2 POUR walkthrough with copy-ready patterns (focus trap, skip link, form errors, ARIA tabs, live regions), testing checklist, screen-reader commands |
 
 ## Purpose
 Audit a page or component against WCAG 2.2 Level AA. Covers semantic HTML structure, keyboard

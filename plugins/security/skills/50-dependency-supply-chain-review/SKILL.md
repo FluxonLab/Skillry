@@ -1,6 +1,6 @@
 ---
 name: dependency-supply-chain-review
-description: Use when you need to review dependencies, scripts, lockfiles, package provenance, and install-time risks.
+description: "Supply chain: dependencies, lockfiles, install scripts, provenance of packages, agents, skills, plugins."
 ---
 
 # Dependency Supply Chain Review
@@ -10,6 +10,14 @@ description: Use when you need to review dependencies, scripts, lockfiles, packa
 Audit the project's package dependency graph for known CVEs, suspicious install-time scripts, lockfile integrity issues, typosquatting candidates, outdated packages with breaking changes, and transitive dependency risks. Every finding gets a severity, a concrete package reference, and a prioritized remediation step. The audit is read-only and non-destructive — no packages are installed, upgraded, or removed without explicit user approval.
 
 A dependency review that only runs `npm audit` and lists the output is not sufficient. The goal is to assess exploitability in context (a server-side RCE in a browser-only bundle is different from one in a server process), to check install-time code execution, to verify lockfile integrity, and to identify structural supply-chain risks such as namespace confusion or unreviewed postinstall scripts.
+
+## Merged skills
+
+Skillry 3.0.0 merged these former skills into this one. The procedure below stays the default; when the task matches a row, open only that reference.
+
+| Former skill | Reference | Use for |
+|---|---|---|
+| `agent-supply-chain-review` | [references/agent-supply-chain-review.md](references/agent-supply-chain-review.md) | third-party agents, skills, MCP servers, plugins, tool definitions, shared prompts, install scripts: provenance, injection scan, declared vs runtime tools, isolation, verdict |
 
 ## When to use
 

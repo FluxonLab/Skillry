@@ -5,10 +5,10 @@ tools: Read, Grep, Glob, Bash, Edit, Write
 model: sonnet
 permissionMode: default
 skills:
-  - md-spec-generator
+  - implementation-plan
   - technical-writing-review
-  - adr-generator
-  - codex-final-execution-prompt
+  - architecture-review
+  - prompt-systems-review
 color: green
 ---
 
@@ -36,7 +36,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: md-spec-generator, technical-writing-review, adr-generator, codex-final-execution-prompt.
+- Primary skills: implementation-plan, technical-writing-review, architecture-review, prompt-systems-review.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

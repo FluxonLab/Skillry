@@ -1,12 +1,20 @@
 ---
 name: backend-implementation-review
-description: Use when you need to review server-side implementation for correctness, maintainability, validation, and observability.
+description: "Review server-side code: correctness, validation, maintainability, third-party, webhook and queue boundaries."
 ---
 
 # Backend Implementation Review
 
 ## Purpose
 Perform a structured review of server-side code for the correctness problems that ordinary code review most often misses: missing input validation, broken transaction boundaries, race conditions in concurrent writes, non-idempotent mutation endpoints, insecure direct object references, and N+1 query patterns that become correctness problems under load. This goes beyond style — it hunts for code that fails silently or incorrectly under real-world data and concurrency, and rates each finding by severity with a concrete fix.
+
+## Merged skills
+
+Skillry 3.0.0 merged the skills below into this one. A request that names a former skill routes here; open only the reference that matches the task. Paths are relative to this skill's directory.
+
+| Former skill | Reference | Covers |
+|---|---|---|
+| `integration-boundary-review` | [references/integration-boundary-review.md](references/integration-boundary-review.md) | Third-party calls, webhooks and queues: timeouts, backoff retries, signature verification, idempotent consumers, circuit breakers, dead-letter queues, outbox |
 
 ## When to use
 - Reviewing a new API endpoint or mutation handler before it ships.

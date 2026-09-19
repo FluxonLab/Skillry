@@ -7,7 +7,7 @@ permissionMode: plan
 skills:
   - refactor-safety
   - architecture-review
-  - regression-scope-analysis
+  - diff-review
 color: blue
 ---
 
@@ -35,7 +35,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: refactor-safety, architecture-review, regression-scope-analysis.
+- Primary skills: refactor-safety, architecture-review, diff-review.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

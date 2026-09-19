@@ -1,6 +1,6 @@
 ---
 name: threejs-webgl-patterns
-description: Use when building 3D scenes in the browser with Three.js or React Three Fiber — covering Scene/Camera/Renderer setup, the render loop, GLTF loading, lighting, raycasting, and GPU-friendly instancing and frustum culling.
+description: "3D in the browser with Three.js or React Three Fiber: scenes, GLTF, lighting, raycasting, instancing."
 ---
 
 # Three.js & WebGL Patterns
@@ -21,7 +21,7 @@ Deliver production-ready Three.js patterns in TypeScript: Scene/Camera/Renderer 
 
 ## When not to use
 
-- The game is 2D sprite-based — use `phaser-game-development` or `pixijs-2d-rendering`.
+- The game is 2D sprite-based — use `game-architecture-review` (its `references/phaser-game-development.md` or `references/pixijs-2d-rendering.md`).
 - The project needs a full game engine with physics, audio, and input as first-class concerns — consider Phaser or Babylon.js instead.
 - The Three.js scene is trivially small and a CSS 3D transform would suffice.
 

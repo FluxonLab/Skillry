@@ -1,9 +1,22 @@
 ---
 name: business-model-review
-description: Use when you need to review business model, monetization, unit economics, pricing logic, and go-to-market risk.
+description: "Business model: monetization, unit economics, pricing and packaging, lean canvas, North Star, network effects."
 ---
 
 # Business Model Review
+
+## Merged skills (routing)
+
+Skillry 3.0.0 merged these former skills into `business-model-review`. Full business-model reviews use the procedure below. For the narrower tasks in the table, read only the matching reference.
+
+| Former skill | Use for | Reference |
+|---|---|---|
+| `pricing-packaging-review` | Review tiers, feature gates, trials, value metric, anchoring and upgrade paths | [references/pricing-packaging-review.md](references/pricing-packaging-review.md) |
+| `pricing` | Pricing strategy and research: value metric, tier design, Van Westendorp, price increases, pricing-page teardown | [references/pricing.md](references/pricing.md) |
+| `product-strategy` | Product Strategy Canvas (9 sections: vision to defensibility) | [references/product-strategy.md](references/product-strategy.md) |
+| `foundation-lean-canvas` | One-page lean canvas (9 blocks) with optional self-contained HTML rendering | [references/foundation-lean-canvas.md](references/foundation-lean-canvas.md) |
+| `north-star-metric` | North Star Metric plus 3-5 input metrics; business-game classification | [references/north-star-metric.md](references/north-star-metric.md) |
+| `cold-start-problem` | Network effects and marketplaces: atomic network, hard side, tipping point, ceiling, moat | [references/cold-start-problem.md](references/cold-start-problem.md) |
 
 ## Purpose
 
@@ -14,13 +27,13 @@ Evaluate the internal consistency, financial viability, and scalability of a bus
 - A founder or PM has drafted a business model canvas, pitch deck section, or financial model and wants a structured critique.
 - A new revenue stream (subscription, marketplace, usage-based) is being added and needs stress-testing before committing to build.
 - Unit economics are unclear or the LTV:CAC ratio has never been calculated.
-- A pricing change is being planned and you need to check model-level impact before using `pricing-packaging-review`.
+- A pricing change is being planned and you need to check model-level impact before the packaging pass in [references/pricing-packaging-review.md](references/pricing-packaging-review.md).
 - Investors or leadership have asked for a business model sanity check before a funding round or board presentation.
 - A model uses a hybrid revenue type and the interactions between streams have not been analysed.
 
 ## When not to use
 
-- The request is specifically about pricing tier design — use `pricing-packaging-review`.
+- The request is specifically about pricing tier design — skip this full model review and use [references/pricing-packaging-review.md](references/pricing-packaging-review.md) (review) or [references/pricing.md](references/pricing.md) (strategy and research).
 - The request is about competitive positioning without financial depth — use `market-research-synthesis`.
 - No financial or operational data is available and no assumptions are provided — request an assumptions sheet first; this skill cannot produce useful output from nothing.
 - The task is legal or tax analysis (revenue recognition standards, contract structure, transfer pricing) — out of scope.

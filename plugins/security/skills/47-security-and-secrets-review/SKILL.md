@@ -1,6 +1,6 @@
 ---
 name: security-and-secrets-review
-description: Use when you need to review secrets, environment variables, auth, CORS, token handling, logging redaction, and unsafe changes.
+description: "Security: secrets, env and config hardening, secret managers, CORS, log redaction, Redis, Electron apps."
 ---
 
 # Security And Secrets Review
@@ -8,6 +8,18 @@ description: Use when you need to review secrets, environment variables, auth, C
 ## Purpose
 
 Review secrets, environment variables, auth, CORS, token handling, logging redaction, and unsafe change surfaces. Every finding gets a severity (Critical to Low), a concrete fix, and — for any live exposed secret — a rotation flag, because a finding without a next action is not a finding. The review is evidence-driven: every claim points at a `file:line`, and no raw secret value ever appears in the output.
+
+## Merged skills
+
+Skillry 3.0.0 merged these former skills into this one. The procedure below stays the default; when the task matches a row, open only that reference.
+
+| Former skill | Reference | Use for |
+|---|---|---|
+| `env-config-hardening` | [references/env-config-hardening.md](references/env-config-hardening.md) | env var validation and fail-fast config, insecure defaults, `.env`/`.env.example` hygiene, `NODE_ENV` gates, log redaction, Docker `ARG`/CI secret injection, rotation readiness |
+| `secrets-and-config-management` | [references/secrets-and-config-management.md](references/secrets-and-config-management.md) | secret managers (Vault, AWS Secrets Manager/SSM, GCP, Azure Key Vault), runtime injection, rotation, secrets kept out of IaC and images, sealed/external Kubernetes secrets, config-vs-secret separation |
+| `electron-app-security-review` | [references/electron-app-security-review.md](references/electron-app-security-review.md) | Electron in-process security: `contextIsolation`/sandbox/`webSecurity`, `contextBridge` and preload exposure, `ipcMain` validation, renderer CSP, navigation limits, auto-update signatures |
+| `redis-security` (third-party, redis/agent-skills) | [references/redis-security.md](references/redis-security.md) | Redis hardening: `requirepass`/ACL users, TLS, least-privilege ACL categories, `bind`/`protected-mode`, firewall, disabling dangerous commands |
+| `intended-vs-implemented` (third-party, phuryn/pm-skills) | [references/intended-vs-implemented.md](references/intended-vs-implemented.md) | access-control and behaviour audits that compare documented intent (permissions, architecture docs) against the enforcing code |
 
 ## When to use
 
@@ -21,7 +33,7 @@ Review secrets, environment variables, auth, CORS, token handling, logging redac
 
 - The task is unrelated to security work (use the appropriate domain skill).
 - The work would require production deploys, destructive data actions, or live secret disclosure to proceed — stop and report instead.
-- A narrower skill already covers the need: `49-authz-permission-review` for permission logic, `50-dependency-supply-chain-review` for CVEs, `51-env-config-hardening` for config schema.
+- Another skill already covers the need: `auth-session-review` for permission logic (its `references/authz-permission-review.md`), `dependency-supply-chain-review` for CVEs. Config schema hardening is routed below (`references/env-config-hardening.md`), not excluded.
 
 ## Procedure
 

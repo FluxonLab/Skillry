@@ -1,12 +1,20 @@
 ---
 name: nfc-linktree-menu-builder-review
-description: Use when you need to review NFC card, linktree, menu builder, QR, profile page, and tap-to-open product flows.
+description: "NFC card, linktree, menu builder, QR and tap-to-open flows, plus print-ready artifacts and export."
 ---
 
 # NFC / Linktree / Menu Builder Review
 
 ## Purpose
 Review the architecture, user experience, security, and reliability of NFC-triggered digital experiences: link-in-bio / linktree pages, QR code generators, restaurant/event menu builders, digital business card (vCard) flows, short-link redirectors, and dynamic profile pages optimized for mobile-first tap-to-open interactions.
+
+## Merged skills
+
+Skillry 3.0.0 merged the skills below into this one. A request that names a former skill routes here; open only the reference that matches the task. Paths are relative to this skill's directory.
+
+| Former skill | Reference | Covers |
+|---|---|---|
+| `print-design-artifact-review` | [references/print-design-artifact-review.md](references/print-design-artifact-review.md) | Print-ready artifacts: CMYK and ink coverage, 300 DPI, bleed/trim/safe zone, font embedding, PDF/X export, QR print size, NFC antenna clearance, vendor handoff |
 
 ## When to use
 - Reviewing a product where an NFC chip or QR code redirects to a profile, menu, or link list.
@@ -18,7 +26,7 @@ Review the architecture, user experience, security, and reliability of NFC-trigg
 ## When not to use
 - General marketing landing page review with no NFC/QR/short-link component.
 - Backend API review with no mobile UX surface.
-- Print-side NFC card design review — use `83-print-design-artifact-review` for that.
+- Print-side NFC card artwork review (CMYK, bleed, PDF/X, antenna clearance) — load [references/print-design-artifact-review.md](references/print-design-artifact-review.md) instead of this procedure.
 
 ## Procedure
 

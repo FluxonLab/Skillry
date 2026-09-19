@@ -1,9 +1,20 @@
 ---
 name: landing-page-conversion-review
-description: Use when you need to review landing pages, first viewport signal, offer clarity, trust, and conversion friction.
+description: "Conversion: landing pages, offer clarity, trust, CRO, forms, signup and onboarding activation, page copy."
 ---
 
 # Landing Page Conversion Review
+
+## Routing (absorbed skills)
+
+Skillry 3.0.0 folded the skills below into this one. When a request names one of them or matches its topic, open the listed reference and follow it; the rest of this file stays the default procedure.
+
+| Old skill name | Reference | Use it for |
+|---|---|---|
+| `cro` | [references/cro.md](references/cro.md) | conversion rate optimization for marketing pages and lead-capture forms: diagnosis, experiment ideas, form CRO |
+| `signup` | [references/signup.md](references/signup.md) | signup, registration and trial-start flows: friction, field count, social sign-in, drop-off |
+| `onboarding` | [references/onboarding.md](references/onboarding.md) | post-signup activation: minimum path to value, activation models, checklists, empty states, experiments |
+| `copywriting` | [references/copywriting.md](references/copywriting.md) | marketing page copy: headlines, value proposition, CTAs, section structure, copy frameworks |
 
 ## Purpose
 
@@ -18,7 +29,7 @@ Evaluate a landing page for conversion effectiveness: clarity of the above-the-f
 
 ## When not to use
 
-- The page is an internal app or dashboard — use `dashboard-ux-review`.
+- The page is an internal app or dashboard — use `web-design-review` (its dashboard reference, formerly `dashboard-ux-review`).
 - The request is only about visual design quality unrelated to conversion — use `web-design-review`.
 - The request is about email campaigns or ad creative — this skill covers the landing page only.
 - The page has no conversion goal (a pure blog post or about page).

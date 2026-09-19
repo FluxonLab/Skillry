@@ -1,9 +1,20 @@
 ---
 name: map-routing-geo-review
-description: Use when you need to review maps, routing, geospatial data, markers, clustering, geocoding, and location privacy.
+description: "Maps: routing, geocoding, markers, clustering, location privacy, MapLibre styling and tile sources."
 ---
 
 # Map, Routing & Geospatial Review
+
+## Absorbed skills
+
+Skillry 3.0.0 merged the skills below into this one. The procedure in this file stays the default. When a task, agent or document names one of these old skills, open only its reference.
+
+| Old skill | Reference | Covers | Source |
+|---|---|---|---|
+| `maplibre-cartography` | `references/maplibre-cartography.md` | MapLibre GL JS cartography: label and halo colors, imagery legibility, hierarchy, glyphs, sprites, shields, layer order | maplibre/maplibre-agent-skills (MIT) |
+| `maplibre-tile-sources` | `references/maplibre-tile-sources.md` | MapLibre data sources: GeoJSON vs tiles, hosted services, PMTiles, self-hosted servers, tile schemas, glyphs, sprites | maplibre/maplibre-agent-skills (MIT) |
+
+Third-party references keep a provenance header and their upstream license in `references/<old-skill>/LICENSE`.
 
 ## Purpose
 Review map integration code for correctness, performance, API key security, and location privacy. Covers Leaflet, Mapbox GL JS, Google Maps Platform, OpenLayers; routing and directions APIs; geocoding and reverse geocoding; marker rendering and clustering; coordinate handling; tile caching; and user location data.

@@ -1,6 +1,6 @@
 ---
 name: playwright-e2e-audit
-description: Use when you need to run or create minimal Playwright checks for browser and local app flows.
+description: "Browser testing: Playwright/Cypress E2E, local webapp scripts, DevTools MCP debugging, visual regression baselines."
 ---
 
 # Playwright E2e Audit
@@ -8,6 +8,18 @@ description: Use when you need to run or create minimal Playwright checks for br
 ## Purpose
 
 Run or create minimal Playwright checks for browser and local app flows. The scope is intentionally narrow: cover the 1 to 3 highest-value user journeys with stable locators and web-first assertions that auto-wait — not an exhaustive regression suite. Existing flaky suites are audited and repaired (broken selectors, blind `waitForTimeout`) rather than rewritten wholesale.
+
+## Absorbed skills (routing)
+
+Skillry 3.0.0 folded the skills below into `playwright-e2e-audit`. Each keeps its full guidance as a reference file; open only the one the task needs. The old names are routing keys, not separate skills.
+
+| Old skill | Reference | Open it for |
+|---|---|---|
+| `e2e-testing-patterns` | [references/e2e-testing-patterns.md](references/e2e-testing-patterns.md) | E2E patterns for Playwright and Cypress: page objects, fixtures, waits, mocking, flaky tests, CI |
+| `webapp-testing` | [references/webapp-testing.md](references/webapp-testing.md) | driving a local web app with Playwright scripts: verify UI, screenshots, browser logs |
+| `browser-testing-with-devtools` | [references/browser-testing-with-devtools.md](references/browser-testing-with-devtools.md) | real-browser debugging through Chrome DevTools MCP: DOM, console, network, performance |
+| `visual-regression-review` | [references/visual-regression-review.md](references/visual-regression-review.md) | visual diff review: baselines, viewport coverage, flakiness, stale snapshots |
+| `playwright-skill` | [references/playwright-skill.md](references/playwright-skill.md) | deep Playwright guide library (index): locators, assertions, fixtures, auth, mocking, CI and sharding, POM, CLI, Cypress/Selenium migration |
 
 ## When to use
 
@@ -20,7 +32,7 @@ Run or create minimal Playwright checks for browser and local app flows. The sco
 
 - The task is unrelated to testing and QA work.
 - The work would require production deploys, destructive data actions, or secret disclosure.
-- A narrower skill already covers the need: `52-smoke-test-and-repair` for the install/build/test gate chain, `55-api-test-suite-review` for API-only contracts, `56-visual-regression-review` for pixel diffs.
+- A narrower skill already covers the need: `smoke-test-and-repair` for the install/build/test gate chain, `test-driven-development` (its `references/api-test-suite-review.md`) for API-only contracts. For pixel diffs follow [references/visual-regression-review.md](references/visual-regression-review.md).
 
 ## Procedure
 

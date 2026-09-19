@@ -1,9 +1,21 @@
 ---
 name: database-and-prisma-review
-description: Use when you need to inspect schema.prisma, migrations, seeds, generated clients, database safety, and persistence changes.
+description: "Database changes: Prisma schema, safe reversible and zero-downtime migrations, backups, seeds, fixtures."
 ---
 
 # Database And Prisma Review
+
+## Absorbed skills
+
+Skillry 3.0.0 merged the skills below into this one. The procedure in this file stays the default. When a task, agent or document names one of these old skills, open only its reference.
+
+| Old skill | Reference | Covers | Source |
+|---|---|---|---|
+| `data-migration-safety` | `references/data-migration-safety.md` | Non-destructive data migrations: backups, idempotency, rollback, local-only resets | Skillry |
+| `database-migration` | `references/database-migration.md` | Cross-ORM migrations: zero-downtime strategies, data transformation, rollback procedures | wshobson/agents (MIT) |
+| `seed-and-fixture-review` | `references/seed-and-fixture-review.md` | Seed scripts, fixtures and test data: idempotency and reset risk | Skillry |
+
+Third-party references keep a provenance header and their upstream license in `references/<old-skill>/LICENSE`.
 
 ## Purpose
 Inspect `schema.prisma`, migration history, seed scripts, the generated client, and the data-access code that depends on them, then issue a migration-safety verdict. Destructive changes — dropped columns, narrowed types, non-nullable columns added without a backfill, unbounded queries, and reset commands aimed at a shared database — are flagged as **blocking** before they reach staging or production. The review is local-only by default and produces concrete fixes plus the next safe command, never a destructive action.
@@ -19,7 +31,7 @@ Inspect `schema.prisma`, migration history, seed scripts, the generated client, 
 - The task is unrelated to database / persistence work.
 - The work requires production deploys, destructive data actions, or secret disclosure (this skill reviews; it never runs the destructive command).
 - The database is not Prisma-managed and a Prisma-specific lens does not apply — use the relevant SQL/ORM review instead.
-- A narrower skill (query-performance, migration-safety) already covers the exact concern.
+- The concern is query performance only — use `postgres-supabase-review` (`references/query-performance-review.md`). Migration safety, zero-downtime migrations and seeds are covered here through the references above.
 
 ## Procedure
 1. **Read `schema.prisma`.** Inventory models, fields, relations, and attributes: `@id`, `@unique`, `@@index`, `@@unique`, `@relation` with `onDelete`/`onUpdate`, enums, and `@default`. Note missing indexes on foreign keys and on frequently filtered columns.

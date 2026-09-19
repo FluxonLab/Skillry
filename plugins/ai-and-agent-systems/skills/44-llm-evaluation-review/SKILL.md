@@ -1,9 +1,17 @@
 ---
 name: llm-evaluation-review
-description: Use when you need to review LLM eval plans, rubrics, datasets, expected outputs, and regression checks.
+description: "LLM evals: rubrics, datasets, automated metrics, human review, regression checks."
 ---
 
 # LLM Evaluation Review
+
+## Merged skills (routing)
+
+Skillry 3.0.0 merged these former skills into `llm-evaluation-review`. Eval-plan reviews use the procedure below. To implement the evals, read the reference.
+
+| Former skill | Use for | Reference |
+|---|---|---|
+| `llm-evaluation` | Implement evals: BLEU/ROUGE/BERTScore, LLM-as-judge, human annotation, A/B tests, regression, benchmarks | [references/llm-evaluation.md](references/llm-evaluation.md) |
 
 ## Purpose
 

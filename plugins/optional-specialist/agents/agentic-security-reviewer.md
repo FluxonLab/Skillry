@@ -6,8 +6,6 @@ model: sonnet
 permissionMode: plan
 skills:
   - ai-security-review
-  - agent-governance-review
-  - automation-mcp-gatekeeping
 color: blue
 ---
 
@@ -35,7 +33,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: ai-security-review, agent-governance-review, automation-mcp-gatekeeping.
+- Primary skills: ai-security-review.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

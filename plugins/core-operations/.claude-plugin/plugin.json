@@ -1,6 +1,6 @@
 {
   "name": "skillry-core-operations",
-  "description": "Repo diagnostics, architecture review, implementation planning, refactor safety, release readiness, and project bootstrap.",
+  "description": "Repo diagnostics and codebase mapping, architecture review and ADRs, specs and implementation planning, refactor safety, diff and regression review, release readiness (deploy preflight, rollback, handoff), and project bootstrap.",
   "version": "0.1.0",
   "author": {
     "name": "FluxonLab",

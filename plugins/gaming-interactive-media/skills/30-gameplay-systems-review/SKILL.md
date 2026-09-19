@@ -1,9 +1,40 @@
 ---
 name: gameplay-systems-review
-description: Use when you need to review gameplay mechanics, rules, physics, input, balancing, and progression.
+description: "Game design: concept, GDD, systems, balance, levels, narrative, audio, live ops, HUD and menu UX, prototypes."
 ---
 
 # Gameplay Systems Review
+
+## Absorbed skills
+
+Skillry 3.0.0 merged the skills below into this one. The procedure in this file stays the default. When a task, agent or document names one of these old skills, open only its reference.
+
+| Old skill | Reference | Covers | Source |
+|---|---|---|---|
+| `gamedev-brainstorm` | `references/gamedev-brainstorm.md` | Game concept ideation to a concept document (template: `templates/gamedev-brainstorm/game-concept.md`) | Claude Code Game Studios (MIT) |
+| `gamedev-art-bible` | `references/gamedev-art-bible.md` | Section-by-section art bible: the visual identity spec that gates asset production | Claude Code Game Studios (MIT) |
+| `gamedev-map-systems` | `references/gamedev-map-systems.md` | Decompose a concept into systems, dependencies and design order; systems index (template: `templates/gamedev-map-systems/systems-index.md`) | Claude Code Game Studios (MIT) |
+| `gamedev-design-review` | `references/gamedev-design-review.md` | GDD review: completeness, internal consistency, implementability, design standards | Claude Code Game Studios (MIT) |
+| `gamedev-balance-check` | `references/gamedev-balance-check.md` | Balance data and formulas: outliers, broken progressions, degenerate strategies, economy imbalances | Claude Code Game Studios (MIT) |
+| `gamedev-prototype` | `references/gamedev-prototype.md` | Rapid throwaway prototype that validates a concept or mechanic, with a prototype report | Claude Code Game Studios (MIT) |
+| `gamedev-team-combat` | `references/gamedev-team-combat.md` | Combat feature team orchestration: design, implementation, validation | Claude Code Game Studios (MIT) |
+| `gamedev-team-level` | `references/gamedev-team-level.md` | Level and area creation team orchestration | Claude Code Game Studios (MIT) |
+| `gamedev-team-narrative` | `references/gamedev-team-narrative.md` | Narrative team orchestration: story content, lore, narrative-driven level design | Claude Code Game Studios (MIT) |
+| `gamedev-team-audio` | `references/gamedev-team-audio.md` | Audio team orchestration from audio direction to implementation | Claude Code Game Studios (MIT) |
+| `gamedev-team-live-ops` | `references/gamedev-team-live-ops.md` | Live-ops season or event planning: economy, analytics, community, narrative | Claude Code Game Studios (MIT) |
+| `game-ui-ux-review` | `references/game-ui-ux-review.md` | Game UI review: HUD, menus, feedback, onboarding, readability, control feel | Skillry |
+| `gamedev-ux-review` | `references/gamedev-ux-review.md` | UX spec, HUD or interaction-pattern validation: accessibility, GDD alignment, readiness verdict | Claude Code Game Studios (MIT) |
+| `gamedev-team-ui` | `references/gamedev-team-ui.md` | UI team orchestration: UX spec, visual design, implementation, review, polish | Claude Code Game Studios (MIT) |
+
+Third-party references keep a provenance header and their upstream license in `references/<old-skill>/LICENSE`.
+
+### Upstream slash commands
+
+The Claude Code Game Studios references keep their upstream slash-command names. In Skillry they resolve as follows:
+
+- In this skill: `/brainstorm` → `references/gamedev-brainstorm.md`, `/art-bible` → `references/gamedev-art-bible.md`, `/map-systems` → `references/gamedev-map-systems.md`, `/design-review` → `references/gamedev-design-review.md`, `/balance-check` → `references/gamedev-balance-check.md`, `/prototype` → `references/gamedev-prototype.md`, `/team-combat` → `references/gamedev-team-combat.md`, `/team-level` → `references/gamedev-team-level.md`, `/team-narrative` → `references/gamedev-team-narrative.md`, `/team-audio` → `references/gamedev-team-audio.md`, `/team-live-ops` → `references/gamedev-team-live-ops.md`, `/ux-review` → `references/gamedev-ux-review.md`, `/team-ui` → `references/gamedev-team-ui.md`.
+- In other skills: `/code-review`, `/tech-debt`, `/perf-profile`, `/team-polish` → `game-architecture-review`; `/release-checklist`, `/team-release`, `/hotfix` → `release-readiness-check`; `/estimate`, `/retrospective` → `implementation-plan`; `/team-qa` → `uat-acceptance-review`.
+- Other commands in these texts (for example `/gate-check`, `/design-system`, `/ux-design`, `/create-stories`, `/sprint-plan`) belong to the upstream project and have no Skillry equivalent; `/clear` is the client's own context command.
 
 ## Purpose
 Review the implementation and design of a game's core gameplay systems: mechanic rules, input handling, collision and physics interactions, finite state machines, balance parameters, progression curves, and determinism for networked or replay scenarios. Surface the bugs, balance outliers, and design fragility that compound over a project's life — stuck states, multi-hit damage in one frame, frame-rate-dependent feel, magic-number balance drift, and non-deterministic physics that desyncs multiplayer. Each finding names the affected mechanic, a severity, and a concrete fix.
@@ -16,8 +47,8 @@ Review the implementation and design of a game's core gameplay systems: mechanic
 - Input handling is being refactored (new input system, controller support, mobile touch).
 
 ## When not to use
-- The issue is purely visual (particles, shaders, animation blending) — use game-ui-ux-review or game-performance-review.
-- The issue is an engine build/import failure — use godot-unity-unreal-triage.
+- The issue is purely visual (particles, shaders, animation blending) — use `references/game-ui-ux-review.md`, or `game-architecture-review` (`references/game-performance-review.md`).
+- The issue is an engine build/import failure — use `game-architecture-review` (`references/godot-unity-unreal-triage.md`).
 - Architecture is the primary concern, not specific mechanic behavior — use game-architecture-review.
 
 ## Procedure

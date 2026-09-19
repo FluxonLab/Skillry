@@ -1,6 +1,6 @@
 {
   "name": "skillry-mobile-desktop",
-  "description": "Mobile app review, iOS HIG, Android Material, and desktop launcher review.",
+  "description": "Mobile app review with iOS HIG and Android Material references.",
   "version": "0.1.0",
   "author": {
     "name": "FluxonLab",

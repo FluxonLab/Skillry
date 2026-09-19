@@ -1,6 +1,6 @@
 ---
 name: backend-latency-profiling
-description: Use when you need to profile backend request latency — measuring p50/p95/p99 (not averages), capturing flame graphs, finding slow code paths with py-spy/0x/pprof, and diagnosing connection-pool exhaustion and async/event-loop bottlenecks.
+description: "Backend performance: p95/p99 latency, flame graphs, memory and FD leaks, Python profiling, caching strategy."
 ---
 
 # Backend Latency Profiling
@@ -8,6 +8,16 @@ description: Use when you need to profile backend request latency — measuring 
 ## Purpose
 
 Find and explain why backend requests are slow, using tail-latency percentiles and CPU/off-CPU profiling rather than guesswork. Averages lie; this skill anchors on p50/p95/p99 and on flame graphs that show where wall-clock and CPU time actually go. It covers sampling profilers (py-spy, 0x, pprof), connection-pool and thread-pool exhaustion, and async/event-loop blocking. The output is a profiled hot path with a measured before/after, not a vague "optimize the database" note.
+
+## Merged skills
+
+Skillry 3.0.0 merged the skills below into this one. A request that names a former skill routes here; open only the reference that matches the task. Paths are relative to this skill's directory.
+
+| Former skill | Reference | Covers |
+|---|---|---|
+| `memory-and-resource-profiling` | [references/memory-and-resource-profiling.md](references/memory-and-resource-profiling.md) | Memory leaks vs GC pressure, heap snapshot diffs, file-descriptor, socket and pool leaks, container OOM kills (exit 137) |
+| `python-performance-optimization` | [references/python-performance-optimization.md](references/python-performance-optimization.md) | Python profiling (cProfile, line_profiler, memory_profiler, py-spy) and optimization patterns |
+| `caching-strategy` | [references/caching-strategy.md](references/caching-strategy.md) | Cache layers (CDN, edge, application, database), keys, TTLs, stampede protection, invalidation, hit-rate measurement |
 
 ## When to use
 

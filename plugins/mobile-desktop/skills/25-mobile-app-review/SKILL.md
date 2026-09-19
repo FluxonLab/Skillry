@@ -1,9 +1,18 @@
 ---
 name: mobile-app-review
-description: Use when you need to review mobile app architecture, navigation, state, platform integration, and release surfaces.
+description: "Review mobile apps: architecture, navigation, state, release surface, iOS HIG and Android Material conventions."
 ---
 
 # Mobile App Review
+
+## Routing (absorbed skills)
+
+Skillry 3.0.0 folded the skills below into this one. When a request names one of them or matches its topic, open the listed reference and follow it; the rest of this file stays the default procedure.
+
+| Old skill name | Reference | Use it for |
+|---|---|---|
+| `ios-hig-review` | [references/ios-hig-review.md](references/ios-hig-review.md) | Apple HIG depth: navigation, Dynamic Type, dark mode, SF Symbols, haptics, sheets, privacy strings, accessibility |
+| `android-material-review` | [references/android-material-review.md](references/android-material-review.md) | Material 3 depth: edge-to-edge and predictive back, dynamic color, touch targets, TalkBack, adaptive icons, ANR risk |
 
 ## Purpose
 
@@ -20,7 +29,7 @@ Review a mobile application's architecture, navigation stack, state-management s
 
 - The question is purely backend with no mobile lifecycle or platform API involved.
 - The task is a pure pixel-level design critique with no code.
-- A narrower skill already covers the exact surface: `ios-hig-review` for Apple HIG depth, `android-material-review` for Material 3 depth.
+- The request needs platform-convention depth only — follow [references/ios-hig-review.md](references/ios-hig-review.md) for Apple HIG or [references/android-material-review.md](references/android-material-review.md) for Material 3 instead of the default procedure below.
 
 ## Procedure
 

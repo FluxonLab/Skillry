@@ -6,7 +6,6 @@ model: sonnet
 permissionMode: default
 skills:
   - database-and-prisma-review
-  - data-migration-safety
   - security-and-secrets-review
 color: green
 ---
@@ -35,7 +34,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: database-and-prisma-review, data-migration-safety, security-and-secrets-review.
+- Primary skills: database-and-prisma-review, security-and-secrets-review.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

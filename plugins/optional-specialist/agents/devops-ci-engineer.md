@@ -6,10 +6,10 @@ model: sonnet
 permissionMode: default
 skills:
   - ci-cd-pipeline-review
-  - build-and-typecheck-review
-  - deployment-preflight-review
+  - smoke-test-and-repair
+  - release-readiness-check
   - monorepo-turborepo-review
-  - observability-otel-review
+  - error-handling-observability
 color: green
 ---
 
@@ -37,7 +37,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: ci-cd-pipeline-review, build-and-typecheck-review, deployment-preflight-review, monorepo-turborepo-review, observability-otel-review.
+- Primary skills: ci-cd-pipeline-review, smoke-test-and-repair, release-readiness-check, monorepo-turborepo-review, error-handling-observability.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

@@ -1,11 +1,26 @@
 ---
 name: frontend-ui-engineering
-description: Builds production-quality UIs. Use when building or modifying user-facing interfaces. Use when creating components, implementing layouts, managing state, or when the output needs to look and feel production-quality rather than AI-generated.
+description: "Build production UI: component APIs, React state/batching, TS/JS patterns, Tailwind v4 tokens, shadcn/ui, motion."
 ---
 
 # Frontend UI Engineering
 
 > _Vendor skill (source: addyosmani-agent-skills). Imported 2026-05-31._
+
+## Routing (absorbed skills)
+
+Skillry 3.0.0 folded the skills below into this one. When a request names one of them or matches its topic, open the listed reference and follow it; the rest of this file stays the default procedure. The routing table and description are Skillry additions to the upstream skill.
+
+| Old skill name | Reference | Use it for |
+|---|---|---|
+| `web-component-design` | [references/web-component-design.md](references/web-component-design.md) | component API design and composition in React, Vue 3 and Svelte 5; CSS-in-JS choices |
+| `react-state-management` | [references/react-state-management.md](references/react-state-management.md) | Redux Toolkit, Zustand, Jotai, React Query; choosing between client and server state tools |
+| `react18-batching-patterns` | [references/react18-batching-patterns.md](references/react18-batching-patterns.md) | React 18 automatic-batching regressions in class components; when to use (or avoid) flushSync |
+| `premium-frontend-ui` | [references/premium-frontend-ui.md](references/premium-frontend-ui.md) | immersive premium UI: entry sequence, hero, scroll-driven motion, micro-interactions, typography, performance |
+| `tailwind-design-system` | [references/tailwind-design-system.md](references/tailwind-design-system.md) | Tailwind CSS v4 design systems: token hierarchy, CVA variants, compound and form components, v3-to-v4 migration |
+| `shadcn-ui-components` | [references/shadcn-ui-components.md](references/shadcn-ui-components.md) | adding, theming and reviewing shadcn/ui components; react-hook-form + Zod forms; Radix accessibility |
+| `typescript-advanced-types` | [references/typescript-advanced-types.md](references/typescript-advanced-types.md) | generics, conditional, mapped and template-literal types, utility types |
+| `modern-javascript-patterns` | [references/modern-javascript-patterns.md](references/modern-javascript-patterns.md) | ES6+ patterns: async/await, destructuring, modules, iterators and generators, functional patterns |
 
 ## Overview
 

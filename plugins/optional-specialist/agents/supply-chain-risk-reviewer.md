@@ -6,8 +6,7 @@ model: sonnet
 permissionMode: plan
 skills:
   - dependency-supply-chain-review
-  - agent-supply-chain-review
-  - global-installation-audit
+  - skill-librarian
 color: blue
 ---
 
@@ -35,7 +34,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: dependency-supply-chain-review, agent-supply-chain-review, global-installation-audit.
+- Primary skills: dependency-supply-chain-review, skill-librarian.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

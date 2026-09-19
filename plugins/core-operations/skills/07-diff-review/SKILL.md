@@ -1,6 +1,6 @@
 ---
 name: diff-review
-description: Use when reviewing a code change before committing — e.g. the user says "review my diff", "karpathy check", "am I overcomplicating this", "check complexity before I commit", or when finalizing AI-generated code. Audits the staged diff against four principles (surface assumptions, keep it simple, surgical changes, verifiable goal) and returns a keep-or-fix verdict.
+description: "Review a diff before commit or merge: assumptions, simplicity, surgical scope, regression surface, impacted tests."
 ---
 
 # Diff Review (four-principle pre-commit check)
@@ -15,6 +15,14 @@ verdict — not a style lecture.
 The four principles below distill widely shared guidance on coding with LLMs popularized by
 **Andrej Karpathy** (<https://karpathy.ai>); the four-point framing is a common community
 distillation, not a verbatim quote.
+
+## Absorbed skills (routing)
+
+Skillry 3.0.0 folded the skills below into `diff-review`. Each keeps its full guidance as a reference file; open only the one the task needs. The old names are routing keys, not separate skills.
+
+| Old skill | Reference | Open it for |
+|---|---|---|
+| `regression-scope-analysis` | [references/regression-scope-analysis.md](references/regression-scope-analysis.md) | regression surface, blast radius, impacted tests, and the minimum verification suite before merge |
 
 ## When to use
 

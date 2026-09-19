@@ -1,6 +1,6 @@
 {
   "name": "skillry-security",
-  "description": "Secrets, AI/prompt-injection, authz/permissions, dependency supply chain, env hardening, and Electron app security.",
+  "description": "Secrets and config hardening (env, Electron, Redis), AI and agent security (governance, MCP gatekeeping), and dependency and agent supply chain.",
   "version": "0.1.0",
   "author": {
     "name": "FluxonLab",

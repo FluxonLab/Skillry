@@ -31,8 +31,10 @@ Every contribution is reviewed against the rules in [CONTRIBUTING.md](CONTRIBUTI
 - Subagents must declare a least-privilege `tools` allowlist; review/audit agents get no write tools.
 - Generated artifacts (`marketplace.json`, `AGENTS.md`/`GEMINI.md`/`copilot-instructions.md`) must be
   regenerated from source, never hand-edited.
-- Third-party content must be permissively licensed (MIT/ISC/BSD/Apache-2.0), kept under
-  `community/` with its original `LICENSE`, and recorded in `NOTICE` + `THIRD-PARTY-NOTICES.md`.
+- Third-party content must be permissively licensed (MIT/ISC/BSD/Apache-2.0), verified from the
+  upstream LICENSE file, kept under `community/` with its original `LICENSE` (or, when merged into a
+  skill hub, under that hub's `references/<former-name>*` with a provenance header and the upstream
+  `LICENSE` copied beside it), and recorded in `NOTICE` + `THIRD-PARTY-NOTICES.md`.
 
 ## Release policy
 

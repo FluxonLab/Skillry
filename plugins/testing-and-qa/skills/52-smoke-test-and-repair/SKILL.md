@@ -1,6 +1,6 @@
 ---
 name: smoke-test-and-repair
-description: Use when you need to run safe install, build, lint, typecheck, test, startup, route checks, repair failures, and verify.
+description: "Run and repair install, typecheck, lint, build, test, startup gates; audit tsconfig strictness and build config."
 ---
 
 # Smoke Test And Repair
@@ -8,6 +8,14 @@ description: Use when you need to run safe install, build, lint, typecheck, test
 ## Purpose
 
 Run safe install, build, lint, typecheck, test, startup, and route checks; repair failures; and verify the result. Each gate runs in dependency order. When a gate fails, the smallest root-cause fix is applied and re-verified before the chain continues — no skipping ahead past a red gate, and no masking a real bug with a suppression comment.
+
+## Absorbed skills (routing)
+
+Skillry 3.0.0 folded the skills below into `smoke-test-and-repair`. Each keeps its full guidance as a reference file; open only the one the task needs. The old names are routing keys, not separate skills.
+
+| Old skill | Reference | Open it for |
+|---|---|---|
+| `build-and-typecheck-review` | [references/build-and-typecheck-review.md](references/build-and-typecheck-review.md) | deep build and typecheck audit: tsconfig strictness, suppressions, bundling, source maps, path aliases |
 
 ## When to use
 
@@ -20,7 +28,7 @@ Run safe install, build, lint, typecheck, test, startup, and route checks; repai
 
 - The task is unrelated to testing and QA work.
 - The work would require production deploys, destructive data actions, or secret disclosure to proceed.
-- A narrower skill already covers the need: `53-playwright-e2e-audit` for browser flows, `59-build-and-typecheck-review` for deep build config audits.
+- A narrower skill already covers the need: `playwright-e2e-audit` for browser flows. For a deep build config audit (tsconfig strictness, suppressions, bundling, source maps) follow [references/build-and-typecheck-review.md](references/build-and-typecheck-review.md) instead of the gate chain below.
 
 ## Procedure
 

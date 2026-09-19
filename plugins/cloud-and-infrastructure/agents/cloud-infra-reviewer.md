@@ -5,11 +5,9 @@ tools: Read, Grep, Glob, Bash
 model: sonnet
 permissionMode: default
 skills:
-  - terraform-iac-review
-  - kubernetes-manifest-review
   - cloud-service-architecture
-  - secrets-and-config-management
-  - deploy-topology-and-rollback
+  - security-and-secrets-review
+  - release-readiness-check
 color: green
 ---
 
@@ -38,7 +36,7 @@ Tool boundary:
 - Stop and report instead of acting when a task would require a mutation, production access, or secret exposure.
 
 Skill usage policy:
-- Primary skills: terraform-iac-review, kubernetes-manifest-review, cloud-service-architecture, secrets-and-config-management, deploy-topology-and-rollback.
+- Primary skills: cloud-service-architecture, security-and-secrets-review, release-readiness-check.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full skill library.
 

@@ -1,6 +1,6 @@
 {
   "name": "skillry-devops-and-release",
-  "description": "CI/CD, build & typecheck, deployment preflight, release notes, and handoff readiness.",
+  "description": "CI/CD pipeline review and GitHub Actions hardening.",
   "version": "0.1.0",
   "author": {
     "name": "FluxonLab",

@@ -1,9 +1,17 @@
 ---
 name: market-research-synthesis
-description: Use when you need to synthesize market, competitor, audience, and positioning research with citations.
+description: "Market and customer research: competitors, audience, positioning, interviews, surveys, cited synthesis."
 ---
 
 # Market Research Synthesis
+
+## Merged skills (routing)
+
+Skillry 3.0.0 merged these former skills into `market-research-synthesis`. Synthesis of existing research uses the procedure below. To plan or run customer research first, read the reference.
+
+| Former skill | Use for | Reference |
+|---|---|---|
+| `customer-research` | Customer research: interviews, surveys, VOC, review and forum mining, personas, JTBD | [references/customer-research.md](references/customer-research.md) |
 
 ## Purpose
 
@@ -21,7 +29,7 @@ Combine raw research inputs — competitor pages, analyst reports, customer inte
 ## When not to use
 
 - Only one source is available — that is summarisation, not synthesis.
-- The task is primary research (running surveys, conducting interviews) — this skill processes existing research, it does not generate new data.
+- The task is primary research (running surveys, conducting interviews) — the synthesis procedure below processes existing research; plan and run primary research with [references/customer-research.md](references/customer-research.md), then synthesize here.
 - The request is a business model review — use `business-model-review` for unit economics and revenue logic.
 - The market is one you cannot verify with public data and no sources are provided — state the gap, do not fabricate.
 

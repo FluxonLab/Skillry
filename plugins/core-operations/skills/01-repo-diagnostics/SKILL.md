@@ -1,6 +1,6 @@
 ---
 name: repo-diagnostics
-description: Use when you need to inspect repositories, scripts, package managers, frameworks, entrypoints, configuration, databases, and reproducible failures before edits.
+description: "Inspect a repo before edits: package manager, scripts, entrypoints, env, DB markers, repro, module and data-flow map."
 ---
 
 # Repo Diagnostics
@@ -8,6 +8,14 @@ description: Use when you need to inspect repositories, scripts, package manager
 ## Purpose
 
 Inspect a repository before any edit: package manager, scripts, framework, runtime, entrypoints, configuration, env shape, database markers, and the reproducible failure. The goal is to ground every repair or feature plan in real evidence from the actual files rather than assumptions — and to confirm exactly how to run, build, and test the project before changing a line of it. The review is read-only first and never echoes secret values.
+
+## Absorbed skills (routing)
+
+Skillry 3.0.0 folded the skills below into `repo-diagnostics`. Each keeps its full guidance as a reference file; open only the one the task needs. The old names are routing keys, not separate skills.
+
+| Old skill | Reference | Open it for |
+|---|---|---|
+| `codebase-cartography` | [references/codebase-cartography.md](references/codebase-cartography.md) | structural map: module layout, entry points, runtime boundaries, one end-to-end data-flow trace, ownership zones, high-fan-in and high-risk files |
 
 ## When to use
 
@@ -20,7 +28,7 @@ Inspect a repository before any edit: package manager, scripts, framework, runti
 
 - The task is unrelated to core operations work.
 - The work would require production deploys, destructive data actions, or secret disclosure.
-- You need a deep module and data-flow map rather than a health baseline — use `codebase-cartography`.
+- You need a deep module and data-flow map rather than a health baseline — follow [references/codebase-cartography.md](references/codebase-cartography.md) instead of the procedure below.
 - A narrower skill or existing project instruction already covers the need.
 
 ## Procedure

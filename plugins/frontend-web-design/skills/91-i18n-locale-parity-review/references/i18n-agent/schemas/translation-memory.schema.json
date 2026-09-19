@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/translation-memory.schema.json",
+  "title": "TranslationMemory",
+  "type": "object",
+  "required": ["version", "sourceLocale", "segments"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "string" },
+    "sourceLocale": { "type": "string" },
+    "segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "source", "targets"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": [
+              "ui",
+              "marketing",
+              "seo_title",
+              "seo_description",
+              "alt",
+              "schema",
+              "legal",
+              "code_adjacent",
+              "other"
+            ]
+          },
+          "source": { "type": "string" },
+          "provenance": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "file": { "type": "string" },
+              "key": { "type": "string" },
+              "section": { "type": "string" },
+              "charLimit": { "type": "integer", "minimum": 1 }
+            }
+          },
+          "targets": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "required": ["text", "status"],
+              "additionalProperties": false,
+              "properties": {
+                "text": { "type": "string" },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "draft",
+                    "approved",
+                    "needs_native_review",
+                    "rejected"
+                  ]
+                },
+                "reviewer": { "type": "string" },
+                "updatedAt": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

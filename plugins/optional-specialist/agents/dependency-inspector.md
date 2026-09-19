@@ -6,7 +6,7 @@ model: sonnet
 permissionMode: plan
 skills:
   - dependency-supply-chain-review
-  - build-and-typecheck-review
+  - smoke-test-and-repair
   - repo-diagnostics
 color: blue
 ---
@@ -35,7 +35,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: dependency-supply-chain-review, build-and-typecheck-review, repo-diagnostics.
+- Primary skills: dependency-supply-chain-review, smoke-test-and-repair, repo-diagnostics.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

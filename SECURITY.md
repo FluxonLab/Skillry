@@ -7,7 +7,8 @@ permissions. We take the supply-chain surface seriously.
 
 - **Least privilege.** Subagents declare an explicit `tools` allowlist. Review/audit agents
   ship with no file-write tools.
-- **Trusted sources only.** Redistributed `community/` content is limited to permissively
+- **Trusted sources only.** Redistributed third-party content (under `community/` or merged into
+  skill-hub references) is limited to permissively
   licensed sources that have been reviewed. Anything that runs shell commands, performs
   destructive git actions, deploys, or requires external service credentials is flagged in
   its skill body and is **not** auto-enabled.

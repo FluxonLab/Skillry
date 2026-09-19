@@ -1,6 +1,6 @@
 {
   "name": "skillry-frontend-web-design",
-  "description": "UI consistency, web/design-system review, accessibility, dashboards, landing pages, responsive layout, i18n parity, Next.js RSC, and shadcn/ui.",
+  "description": "Web design review (UI consistency, polish, responsive layout, dashboards, design systems), accessibility, landing-page conversion, i18n parity, and Next.js RSC.",
   "version": "0.1.0",
   "author": {
     "name": "FluxonLab",

@@ -4,7 +4,7 @@ description: "[Game studio] The live-ops designer owns post-launch content strat
 tools: Read, Glob, Grep, Write, Edit, Task
 model: sonnet
 skills:
-  - gamedev-team-live-ops
+  - gameplay-systems-review
   - gamedev-patch-notes
 disallowedTools: Bash
 ---

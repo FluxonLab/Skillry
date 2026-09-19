@@ -6,9 +6,8 @@ model: sonnet
 permissionMode: plan
 skills:
   - architecture-review
-  - codebase-cartography
+  - repo-diagnostics
   - implementation-plan
-  - adr-generator
 color: blue
 ---
 
@@ -36,7 +35,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: architecture-review, codebase-cartography, implementation-plan, adr-generator.
+- Primary skills: architecture-review, repo-diagnostics, implementation-plan.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

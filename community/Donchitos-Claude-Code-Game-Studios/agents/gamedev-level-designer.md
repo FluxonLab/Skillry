@@ -4,8 +4,7 @@ description: "[Game studio] The Level Designer creates spatial designs, encounte
 tools: Read, Glob, Grep, Write, Edit
 model: sonnet
 skills:
-  - gamedev-design-review
-  - gamedev-map-systems
+  - gameplay-systems-review
 disallowedTools: Bash
 memory: project
 ---

@@ -6,8 +6,7 @@ model: sonnet
 permissionMode: default
 skills:
   - prompt-systems-review
-  - codex-final-execution-prompt
-  - md-spec-generator
+  - implementation-plan
   - llm-evaluation-review
 color: green
 ---
@@ -36,7 +35,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: prompt-systems-review, codex-final-execution-prompt, md-spec-generator, llm-evaluation-review.
+- Primary skills: prompt-systems-review, implementation-plan, llm-evaluation-review.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

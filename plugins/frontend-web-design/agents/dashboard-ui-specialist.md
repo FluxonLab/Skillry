@@ -5,9 +5,7 @@ tools: Read, Grep, Glob, Bash, Edit, Write
 model: sonnet
 permissionMode: default
 skills:
-  - dashboard-ux-review
-  - ui-consistency-review
-  - responsive-layout-review
+  - web-design-review
   - analytics-tracking-review
   - map-routing-geo-review
 color: green
@@ -37,7 +35,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: dashboard-ux-review, ui-consistency-review, responsive-layout-review, analytics-tracking-review, map-routing-geo-review.
+- Primary skills: web-design-review, analytics-tracking-review, map-routing-geo-review.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

@@ -1,8 +1,10 @@
 # Installing Skillry
 
-Skillry ships **125 original, permission-bounded skills + 73 subagents** across 18
-departments, plus an attributed `community/` set (98 skills + 49 agents from 6 MIT/ISC
-sources). Install into one or more platforms.
+Skillry 3.0.0 ships **54 permission-bounded skill hubs + 73 subagents** across 18 departments,
+plus an attributed `community/` set (3 skill hubs + 49 agents). Hubs route to merged references,
+so the 223 skills of 2.x remain reachable under 57 names; see the 3.0.0 entry in
+[`CHANGELOG.md`](../CHANGELOG.md) for where each former skill now lives. Install into one or
+more platforms.
 
 ## Option A — Claude Code native marketplace (recommended for Claude)
 

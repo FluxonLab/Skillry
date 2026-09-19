@@ -1,12 +1,22 @@
 ---
 name: runtime-diagnostics
-description: Use when you need to diagnose startup, process, port, dependency, environment, and runtime health failures.
+description: "Diagnose runtime failures: startup, ports, env, health and readiness gates, log bundles, systematic debugging."
 ---
 
 # Runtime Diagnostics
 
 ## Purpose
 Provide a systematic, non-destructive procedure for diagnosing why a local or dev-environment application fails to start, crashes immediately, or behaves incorrectly at runtime. It covers port conflicts, missing or wrong environment variables, runtime/dependency version mismatches, wrong working directory, broken native modules, and process-level resource limits — the failure classes behind most "it works on my machine" reports. The output is, per step, the command run, the finding, the action taken, and the verification that the issue is resolved.
+
+## Merged skills
+
+Skillry 3.0.0 merged these former skills into this one. The procedure below stays the default; when the task matches a row, open only that reference.
+
+| Former skill | Reference | Use for |
+|---|---|---|
+| `startup-health-readiness` | [references/startup-health-readiness.md](references/startup-health-readiness.md) | `/live`, `/ready`, `/health` endpoints, dependency wait loops, migration locking, graceful shutdown, Kubernetes and Compose probe timings |
+| `log-and-diagnostics-bundle` | [references/log-and-diagnostics-bundle.md](references/log-and-diagnostics-bundle.md) | a shareable, secret-redacted diagnostics bundle: versions, env key shape, log window, repro steps, dependency and resource state |
+| `debugging-strategies` (third-party, wshobson/agents) | [references/debugging-strategies.md](references/debugging-strategies.md) | systematic debugging method: reproduce, hypothesize, bisect, differential and trace debugging, JS/Python/Go debuggers, leaks, flaky and production bugs |
 
 ## When to use
 - `npm run dev` / `python manage.py runserver` / `go run .` exits non-zero and the cause is not obvious.
@@ -18,7 +28,7 @@ Provide a systematic, non-destructive procedure for diagnosing why a local or de
 ## When not to use
 - The error is a compile/type error — that is a build problem; fix the build, not the runtime.
 - The app is in production and you need live incident triage — use the observability stack, not local diagnostics.
-- The failure is a logic bug inside a healthy, running process — use a debugger or targeted logging.
+- The failure is a logic bug inside a healthy, running process — use a debugger or targeted logging (method: `references/debugging-strategies.md`).
 
 ## Procedure
 1. **Capture the exact startup error, untruncated.** The first non-warning line is almost always the root cause. Run the start command and tee full stderr: `npm run dev 2>&1 | tee /tmp/startup.log`.

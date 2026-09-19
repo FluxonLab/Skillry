@@ -1,9 +1,20 @@
 ---
 name: agent-workflow-design
-description: Use when you need to design agent roles, handoffs, tool boundaries, workflow routing, and coordination rules.
+description: "Design agent systems: roles, handoffs, tool boundaries, routing; LangGraph, Copilot SDK, MCP server scaffolds."
 ---
 
 # Agent Workflow Design
+
+## Merged skills (routing)
+
+Skillry 3.0.0 merged these former skills into `agent-workflow-design`. Workflow design uses the procedure below. For framework-specific build work, read only the matching reference; they are dated third-party snapshots, so check current SDK docs before generating code.
+
+| Former skill | Use for | Reference |
+|---|---|---|
+| `langchain-architecture` | LangChain 1.x and LangGraph: agents, state, memory, tools, streaming, LangSmith | [references/langchain-architecture.md](references/langchain-architecture.md) |
+| `copilot-sdk` | GitHub Copilot SDK apps: sessions, custom tools, streaming, MCP servers, custom agents | [references/copilot-sdk.md](references/copilot-sdk.md) |
+| `typescript-mcp-server-generator` | Scaffold a complete MCP server project in TypeScript | [references/typescript-mcp-server-generator.md](references/typescript-mcp-server-generator.md) |
+| `python-mcp-server-generator` | Scaffold a complete MCP server project in Python | [references/python-mcp-server-generator.md](references/python-mcp-server-generator.md) |
 
 ## Purpose
 
@@ -22,8 +33,8 @@ Design multi-agent workflows with explicit role boundaries, handoff contracts, t
 ## When not to use
 
 - The task is a single-agent prompt with no delegation — no workflow design needed.
-- You only need to review security/permissions of an existing workflow (use `41-agent-governance-review`).
-- The question is purely about prompt quality, not coordination (use `42-prompt-systems-review`).
+- You only need to review security/permissions of an existing workflow (use `ai-security-review`, which absorbed `agent-governance-review`).
+- The question is purely about prompt quality, not coordination (use `prompt-systems-review`).
 - The system is already built and working; skip design and go straight to the specific fix.
 
 ## Procedure

@@ -5,12 +5,12 @@ tools: Read, Grep, Glob, Bash, Edit, Write
 model: sonnet
 permissionMode: default
 skills:
-  - query-performance-review
-  - game-performance-review
+  - postgres-supabase-review
+  - game-architecture-review
   - runtime-diagnostics
-  - build-and-typecheck-review
+  - smoke-test-and-repair
   - cost-control-token-review
-  - observability-otel-review
+  - error-handling-observability
 color: green
 ---
 
@@ -38,7 +38,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: query-performance-review, game-performance-review, runtime-diagnostics, build-and-typecheck-review, cost-control-token-review, observability-otel-review.
+- Primary skills: postgres-supabase-review, game-architecture-review, runtime-diagnostics, smoke-test-and-repair, cost-control-token-review, error-handling-observability.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

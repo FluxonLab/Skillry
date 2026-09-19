@@ -457,9 +457,9 @@ def load_source_lock(gate: Gate) -> list[dict[str, Any]]:
             pure = relative_posix(gate, target, target_label)
             gate.require(
                 len(pure.parts) >= 5
-                and pure.parts[0] == "community"
+                and pure.parts[0] in ("community", "plugins")
                 and pure.parts[2] == "skills",
-                f"{target_label} must identify a community skill sidecar",
+                f"{target_label} must identify a packaged skill sidecar",
             )
             gate.require(
                 target not in seen_targets,
@@ -647,10 +647,10 @@ def parse_skill_frontmatter_name(
 def load_skill_identities(
     gate: Gate,
     skills: list[dict[str, Any]],
-) -> tuple[set[str], dict[tuple[str, str], str]]:
+) -> tuple[set[str], dict[tuple[str, str, str], str]]:
     canonical_names: set[str] = set()
     name_sources: dict[str, str] = {}
-    community_names: dict[tuple[str, str], str] = {}
+    packaged_names: dict[tuple[str, str, str], str] = {}
 
     for index, item in enumerate(skills):
         if item["origin"] == "original":
@@ -661,7 +661,7 @@ def load_skill_identities(
                 item["folder"],
                 "SKILL.md",
             )
-            source_key: Optional[tuple[str, str]] = None
+            source_key = ("plugins", item["department"], item["folder"])
         else:
             source_parts = (
                 "community",
@@ -670,7 +670,7 @@ def load_skill_identities(
                 item["folder"],
                 "SKILL.md",
             )
-            source_key = (item["source"], item["folder"])
+            source_key = ("community", item["source"], item["folder"])
 
         label = f"skill registry entry {index} source SKILL.md"
         skill_file = safe_node(
@@ -690,34 +690,33 @@ def load_skill_identities(
         canonical_names.add(name)
         name_sources[name] = skill_file.relative_to(REPO).as_posix()
 
-        if source_key is not None:
-            gate.require(
-                source_key not in community_names,
-                f"community skill source key is duplicated: {source_key}",
-            )
-            community_names[source_key] = name
+        gate.require(
+            source_key not in packaged_names,
+            f"skill source key is duplicated: {source_key}",
+        )
+        packaged_names[source_key] = name
 
     gate.require(
         len(canonical_names) == len(skills),
         "canonical skill identity count does not match skill registry",
     )
-    return canonical_names, community_names
+    return canonical_names, packaged_names
 
 
 def prepare_sidecars(
     gate: Gate,
     sidecars: list[dict[str, Any]],
-    community_names: dict[tuple[str, str], str],
+    packaged_names: dict[tuple[str, str, str], str],
 ) -> None:
     for sidecar in sidecars:
         parts = sidecar["parts"]
-        key = (parts[1], parts[3])
+        key = (parts[0], parts[1], parts[3])
         gate.require(
-            key in community_names,
+            key in packaged_names,
             f"source-lock target is not backed by a canonical skill identity: "
             f"{sidecar['target']}",
         )
-        sidecar["installed_skill"] = community_names[key]
+        sidecar["installed_skill"] = packaged_names[key]
         sidecar["installed_relative"] = parts[4:]
 
 
@@ -1175,11 +1174,11 @@ def main() -> int:
             "agent-lock.json",
             "agents",
         )
-        expected_skills, community_names = load_skill_identities(
+        expected_skills, packaged_names = load_skill_identities(
             gate,
             skills,
         )
-        prepare_sidecars(gate, sidecars, community_names)
+        prepare_sidecars(gate, sidecars, packaged_names)
 
         metrics["skills"] = len(expected_skills)
         metrics["agents"] = len(agents)

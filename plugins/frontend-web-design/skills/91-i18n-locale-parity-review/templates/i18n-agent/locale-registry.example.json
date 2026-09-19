@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0",
+  "siteOrigin": "https://example.com",
+  "defaultLocale": "en",
+  "trailingSlash": "never",
+  "urlStrategy": "prefix-all",
+  "fallbackPolicy": "omit",
+  "notes": "Example registry. urlPrefix may differ from bcp47 (fr vs fr-CA).",
+  "locales": [
+    {
+      "id": "en",
+      "bcp47": "en",
+      "urlPrefix": "en",
+      "dir": "ltr",
+      "ogLocale": "en_US",
+      "label": "English",
+      "marketPriority": "primary",
+      "enabled": true,
+      "hreflangCase": "bcp47"
+    },
+    {
+      "id": "fr-CA",
+      "bcp47": "fr-CA",
+      "urlPrefix": "fr",
+      "dir": "ltr",
+      "ogLocale": "fr_CA",
+      "label": "Français (Canada)",
+      "marketPriority": "primary",
+      "enabled": true,
+      "hreflangCase": "bcp47"
+    },
+    {
+      "id": "es",
+      "bcp47": "es",
+      "urlPrefix": "es",
+      "dir": "ltr",
+      "ogLocale": "es_ES",
+      "label": "Español",
+      "marketPriority": "secondary",
+      "enabled": true,
+      "hreflangCase": "bcp47"
+    },
+    {
+      "id": "ar",
+      "bcp47": "ar",
+      "urlPrefix": "ar",
+      "dir": "rtl",
+      "ogLocale": "ar_AR",
+      "label": "العربية",
+      "marketPriority": "maintain",
+      "enabled": false,
+      "hreflangCase": "bcp47"
+    }
+  ]
+}

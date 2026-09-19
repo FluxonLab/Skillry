@@ -1,9 +1,18 @@
 ---
 name: frontend-performance-budget
-description: Use when you need to set and enforce frontend performance budgets — Core Web Vitals beyond the basics (LCP, INP, CLS attribution), JavaScript and asset size budgets, lazy loading, hydration cost, and Lighthouse CI gates in a pipeline.
+description: "Web performance: Core Web Vitals (LCP, INP, CLS), budgets, bundle size, Lighthouse CI, measure then fix."
 ---
 
 # Frontend Performance Budget
+
+## Routing (absorbed skills)
+
+Skillry 3.0.0 folded the skills below into this one. When a request names one of them or matches its topic, open the listed reference and follow it; the rest of this file stays the default procedure.
+
+| Old skill name | Reference | Use it for |
+|---|---|---|
+| `core-web-vitals` | [references/core-web-vitals.md](references/core-web-vitals.md) | diagnosing and fixing LCP, INP and CLS with thresholds, causes and code-level fixes |
+| `performance-optimization` | [references/performance-optimization.md](references/performance-optimization.md) | measure-first optimization workflow across frontend and backend, with a performance checklist and anti-pattern list |
 
 ## Purpose
 

@@ -1,6 +1,6 @@
 {
   "name": "skillry-ai-and-agent-systems",
-  "description": "Agent workflow design, governance, prompt systems, RAG/vector search, LLM evaluation, and MCP gatekeeping.",
+  "description": "Agent workflow design (LangChain, MCP servers, Copilot SDK), prompt systems and execution prompts, RAG/vector search, and LLM evaluation.",
   "version": "0.1.0",
   "author": {
     "name": "FluxonLab",

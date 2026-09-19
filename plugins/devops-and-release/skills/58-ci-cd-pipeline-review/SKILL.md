@@ -1,6 +1,6 @@
 ---
 name: ci-cd-pipeline-review
-description: Use when you need to review CI jobs, workflow triggers, caches, matrixes, artifacts, and safe release gates.
+description: "CI/CD: workflow triggers, caches, matrices, artifacts, release gates, GitHub Actions hardening."
 ---
 
 # CI/CD Pipeline Review
@@ -8,6 +8,14 @@ description: Use when you need to review CI jobs, workflow triggers, caches, mat
 ## Purpose
 
 Audit GitHub Actions workflows, GitLab CI pipelines, CircleCI configs, or equivalent: trigger correctness, secret handling, job dependency ordering, cache hygiene, matrix configuration, artifact retention, fail-fast behavior, and deployment gate safety. Identify security misconfigurations, unnecessary permissions, and reliability anti-patterns — each with a `file:line` and a concrete fix. The review is read-only: it never triggers a run, approves a deploy, or prints a secret value.
+
+## Merged skills
+
+Skillry 3.0.0 merged these former skills into this one. The procedure below stays the default; when the task matches a row, open only that reference.
+
+| Former skill | Reference | Use for |
+|---|---|---|
+| `github-actions-hardening` (third-party, github/awesome-copilot) | [references/github-actions-hardening.md](references/github-actions-hardening.md) | GitHub Actions threat model: `${{ }}` script injection, `pull_request_target`/`workflow_run`/`issue_comment` privilege, SHA pinning, `permissions:`, `GITHUB_ENV` injection, OIDC, self-hosted runners |
 
 ## When to use
 

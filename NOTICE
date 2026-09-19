@@ -4,11 +4,15 @@ Copyright (c) 2026 FluxonLab
 This product includes original work licensed under the MIT License (see LICENSE)
 and redistributed third-party content that retains its own upstream licenses.
 
-Third-party content lives under the community/ directory and is redistributed in
-compliance with each source's license. Full attribution and the complete original
-license text for every source are in THIRD-PARTY-NOTICES.md.
+Third-party content is redistributed in compliance with each source's license.
+Standalone third-party skills and agents live under community/<source>/. Since 3.0.0,
+third-party skills merged into a Skillry skill hub live inside that hub as
+references/<former-name>.md and references/<former-name>/ (plus
+scripts|templates|assets|examples/<former-name>/ when present), each with a provenance
+header and the upstream LICENSE copied beside the content. Full attribution and the
+complete original license text for every source are in THIRD-PARTY-NOTICES.md.
 
-Redistributed sources (all permissive — MIT):
+Redistributed sources (all permissive — MIT unless noted):
 
   - github/awesome-copilot               (c) GitHub, Inc.
   - wshobson/agents                      (c) 2024 Seth Hobson
@@ -17,8 +21,26 @@ Redistributed sources (all permissive — MIT):
   - addyosmani/web-quality-skills        (c) 2026 Addy Osmani
   - jaktestowac/awesome-copilot-for-testers  (c) GitHub, Inc. (fork of github/awesome-copilot; original MIT copyright retained)
 
+Imported in 3.0.0 (merged into skill hubs):
+
+  - AgriciDaniel/claude-seo              (c) 2026 agricidaniel
+  - TheSmokeDev/geo-skills               (c) 2026 SmokeDev
+  - zubair-trabzada/geo-seo-claude       (c) 2026 Zubair Trabzada
+  - coreyhaines31/marketingskills        (c) 2025 Corey Haines
+  - phuryn/pm-skills                     (c) 2026 Pawel Huryn
+  - product-on-purpose/pm-skills         Copyright 2026 Jonathan Prisant (Apache-2.0)
+  - wondelai/skills                      (c) 2025 Wondel.ai sp. z o.o.
+  - rampstackco/claude-skills            (c) 2026 RampStack Co.
+  - testdino-hq/playwright-skill         (c) 2026 TestDino
+  - adamgrgs/i18n-agent                  (c) 2026 Multilingual i18n SEO Skill Contributors
+  - xueyang-dev/localize-anything        (c) 2026 Localize Anything contributors
+  - SkillMedev/skills                    (c) 2026 Alexander Ouellet
+  - fastapi/fastapi                      (c) 2018 Sebastián Ramírez
+  - redis/agent-skills                   (c) 2026 Redis, Inc.
+  - maplibre/maplibre-agent-skills       (c) 2026 MapLibre contributors (see its NOTICE)
+
 Each source's directory under community/<source>/ also contains a copy of that
-source's original LICENSE file.
+source's original LICENSE file, and merged content carries a copy beside it.
 
 NOT REDISTRIBUTED: Content under the OpenAI Services Agreement (openai/skills) is
 NOT included here because its terms do not permit redistribution. Skills sourced

@@ -4,7 +4,7 @@ description: "[Game studio] The Economy Designer specializes in resource economi
 tools: Read, Glob, Grep, Write, Edit
 model: sonnet
 skills:
-  - gamedev-balance-check
+  - gameplay-systems-review
 disallowedTools: Bash
 memory: project
 ---

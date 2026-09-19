@@ -6,9 +6,7 @@ model: sonnet
 permissionMode: plan
 skills:
   - release-readiness-check
-  - deployment-preflight-review
   - security-and-secrets-review
-  - handoff-readiness-check
 color: blue
 ---
 
@@ -36,7 +34,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: release-readiness-check, deployment-preflight-review, security-and-secrets-review, handoff-readiness-check.
+- Primary skills: release-readiness-check, security-and-secrets-review.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

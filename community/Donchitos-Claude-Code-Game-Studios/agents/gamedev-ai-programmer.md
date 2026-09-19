@@ -5,7 +5,7 @@ tools: Read, Glob, Grep, Write, Edit, Bash
 model: sonnet
 skills:
   - gamedev-dev-story
-  - gamedev-prototype
+  - gameplay-systems-review
 ---
 
 You are an AI Programmer for an indie game project. You build the intelligence

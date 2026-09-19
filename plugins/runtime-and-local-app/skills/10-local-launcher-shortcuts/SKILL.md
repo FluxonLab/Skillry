@@ -1,12 +1,21 @@
 ---
 name: local-launcher-shortcuts
-description: Use when you need to design local launchers, shortcuts, browser opening, logs, and shutdown behavior across macOS, Windows, and Linux.
+description: "Local app launchers: shortcuts, browser-first local UI, desktop wrappers, logs, ports, clean shutdown."
 ---
 
 # Local Launcher Shortcuts
 
 ## Purpose
 Design local launchers and shortcuts that give a non-technical user a double-click experience: start the app, wait for readiness, open the browser, and stop cleanly — with no orphaned ports or stale processes — across macOS, Windows, and Linux. The launcher must use relative-to-itself paths (never a hardcoded home directory), gate the browser-open on a health signal, write timestamped logs to a stable path, and trap signals so shutdown frees the port every time.
+
+## Merged skills
+
+Skillry 3.0.0 merged these former skills into this one. The procedure below stays the default; when the task matches a row, open only that reference.
+
+| Former skill | Reference | Use for |
+|---|---|---|
+| `desktop-launcher-review` | [references/desktop-launcher-review.md](references/desktop-launcher-review.md) | packaged desktop app launchers (Electron, Electron-Vite, Tauri): packaged vs dev target, build freshness, fail-closed, script safety, atomic update and rollback |
+| `browser-first-local-app` | [references/browser-first-local-app.md](references/browser-first-local-app.md) | choosing a localhost service plus browser UI over a native shell; server, port, health endpoint, localhost binding, CORS, native-shell decision matrix |
 
 ## When to use
 - A local app needs a platform-appropriate launch shortcut (`.command`, `.bat`/`.ps1`, `.desktop`) so non-developers can start it without a terminal.

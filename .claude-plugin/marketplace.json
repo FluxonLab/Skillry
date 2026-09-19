@@ -10,22 +10,22 @@
     {
       "name": "skillry-ai-and-agent-systems",
       "source": "./plugins/ai-and-agent-systems",
-      "description": "Agent workflow design, governance, prompt systems, RAG/vector search, LLM evaluation, and MCP gatekeeping."
+      "description": "Agent workflow design (LangChain, MCP servers, Copilot SDK), prompt systems and execution prompts, RAG/vector search, and LLM evaluation."
     },
     {
       "name": "skillry-backend-and-api",
       "source": "./plugins/backend-and-api",
-      "description": "API/interface design, backend review, auth/session, integration boundaries, error handling, and Python project review."
+      "description": "API/interface design and OpenAPI, backend review with integration boundaries, auth/session and authorization, error handling and observability, and Python/FastAPI project review."
     },
     {
       "name": "skillry-cloud-and-infrastructure",
       "source": "./plugins/cloud-and-infrastructure",
-      "description": "Cloud and infrastructure: Infrastructure-as-Code (Terraform), containers (Docker/Compose), Kubernetes, cloud provider services, networking/secrets, and deploy topology \u2014 distinct from CI/CD pipeline review."
+      "description": "Cloud and infrastructure: service architecture, Infrastructure-as-Code (Terraform), containers (Docker, multi-stage builds), and Kubernetes manifests \u2014 distinct from CI/CD pipeline review."
     },
     {
       "name": "skillry-core-operations",
       "source": "./plugins/core-operations",
-      "description": "Repo diagnostics, architecture review, implementation planning, refactor safety, release readiness, and project bootstrap."
+      "description": "Repo diagnostics and codebase mapping, architecture review and ADRs, specs and implementation planning, refactor safety, diff and regression review, release readiness (deploy preflight, rollback, handoff), and project bootstrap."
     },
     {
       "name": "skillry-data-ml-ai-engineering",
@@ -40,17 +40,17 @@
     {
       "name": "skillry-devops-and-release",
       "source": "./plugins/devops-and-release",
-      "description": "CI/CD, build & typecheck, deployment preflight, release notes, and handoff readiness."
+      "description": "CI/CD pipeline review and GitHub Actions hardening."
     },
     {
       "name": "skillry-documentation-and-tech-writing",
       "source": "./plugins/documentation-and-tech-writing",
-      "description": "Technical documentation: README/architecture docs, API reference, changelogs, tutorials, runbooks, doc-site structure, and docx/pdf/markdown authoring quality."
+      "description": "Technical documentation agents (docs reviewer, technical writer). Their skill, technical-writing-review, ships in the product-docs-and-research plugin."
     },
     {
       "name": "skillry-frontend-web-design",
       "source": "./plugins/frontend-web-design",
-      "description": "UI consistency, web/design-system review, accessibility, dashboards, landing pages, responsive layout, i18n parity, Next.js RSC, and shadcn/ui."
+      "description": "Web design review (UI consistency, polish, responsive layout, dashboards, design systems), accessibility, landing-page conversion, i18n parity, and Next.js RSC."
     },
     {
       "name": "skillry-gaming-interactive-media",
@@ -60,22 +60,22 @@
     {
       "name": "skillry-mobile-desktop",
       "source": "./plugins/mobile-desktop",
-      "description": "Mobile app review, iOS HIG, Android Material, and desktop launcher review."
+      "description": "Mobile app review with iOS HIG and Android Material references."
     },
     {
       "name": "skillry-optional-specialist",
       "source": "./plugins/optional-specialist",
-      "description": "Domain specialists: WordPress/WooCommerce, e-commerce, NFC/linktree, local LLM runtime, Chrome extensions, maps/geo, print design, analytics, SEO, cost control, observability, and monorepo."
+      "description": "Domain specialists: e-commerce and WordPress/WooCommerce, NFC/linktree and print design, local LLM runtime, Chrome extensions, maps/geo, analytics, SEO/GEO, cost control, and monorepo."
     },
     {
       "name": "skillry-performance-and-cost",
       "source": "./plugins/performance-and-cost",
-      "description": "Performance and cost engineering: profiling, frontend/runtime/query performance budgets, caching, bundle size, plus LLM/API token and cloud cost control."
+      "description": "Performance engineering: frontend performance budgets and Core Web Vitals, backend latency, memory and resource profiling, caching, and Python performance."
     },
     {
       "name": "skillry-product-docs-and-research",
       "source": "./plugins/product-docs-and-research",
-      "description": "Spec/markdown generation, execution prompts, requirements, market research, business model, pricing, technical writing, and ADRs."
+      "description": "Product requirements and prioritization, market and customer research, business model and pricing, and technical writing (READMEs, API docs, tutorials, runbooks, changelogs)."
     },
     {
       "name": "skillry-runtime-and-local-app",
@@ -85,7 +85,7 @@
     {
       "name": "skillry-security",
       "source": "./plugins/security",
-      "description": "Secrets, AI/prompt-injection, authz/permissions, dependency supply chain, env hardening, and Electron app security."
+      "description": "Secrets and config hardening (env, Electron, Redis), AI and agent security (governance, MCP gatekeeping), and dependency and agent supply chain."
     },
     {
       "name": "skillry-skill-library-and-installation",
@@ -95,7 +95,7 @@
     {
       "name": "skillry-testing-and-qa",
       "source": "./plugins/testing-and-qa",
-      "description": "Smoke test & repair, Playwright E2E, regression scope, API test suites, visual regression, and UAT acceptance."
+      "description": "Smoke test and repair (build/typecheck), Playwright E2E and visual regression, and UAT acceptance with functional test design."
     }
   ]
 }

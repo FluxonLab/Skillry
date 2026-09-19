@@ -5,8 +5,7 @@ tools: Read, Grep, Glob, Bash
 model: sonnet
 permissionMode: plan
 skills:
-  - data-migration-safety
-  - seed-and-fixture-review
+  - database-and-prisma-review
   - release-readiness-check
 color: blue
 ---
@@ -35,7 +34,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: data-migration-safety, seed-and-fixture-review, release-readiness-check.
+- Primary skills: database-and-prisma-review, release-readiness-check.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

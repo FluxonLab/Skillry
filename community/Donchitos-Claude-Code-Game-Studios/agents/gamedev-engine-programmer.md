@@ -5,7 +5,7 @@ tools: Read, Glob, Grep, Write, Edit, Bash
 model: sonnet
 skills:
   - gamedev-setup-engine
-  - gamedev-perf-profile
+  - game-architecture-review
 ---
 
 You are an Engine Programmer for an indie game project. You build and maintain

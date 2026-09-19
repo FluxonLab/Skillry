@@ -1,12 +1,20 @@
 ---
 name: ecommerce-integration-review
-description: Use when you need to review ecommerce catalogs, checkout, payments, inventory, orders, taxes, and integration boundaries.
+description: "Ecommerce: catalog, checkout, payments, inventory, orders, taxes; WordPress/WooCommerce plugins and themes."
 ---
 
 # Ecommerce Integration Review
 
 ## Purpose
 Review the correctness, security, and resilience of ecommerce integration code: product catalog sync, cart and checkout logic, payment provider integration (Stripe, PayPal, Adyen), webhook handling, inventory sync, tax/shipping calculation, and order lifecycle management.
+
+## Merged skills
+
+Skillry 3.0.0 merged the skills below into this one. A request that names a former skill routes here; open only the reference that matches the task. Paths are relative to this skill's directory.
+
+| Former skill | Reference | Covers |
+|---|---|---|
+| `wordpress-woocommerce-review` | [references/wordpress-woocommerce-review.md](references/wordpress-woocommerce-review.md) | WordPress and WooCommerce plugins and themes: nonces, capabilities, sanitize/escape, $wpdb->prepare, WooCommerce hooks, payment gateways |
 
 ## When to use
 - Reviewing Stripe, PayPal, Adyen, or similar payment gateway integration code.

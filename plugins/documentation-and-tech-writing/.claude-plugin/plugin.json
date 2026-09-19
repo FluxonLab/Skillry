@@ -1,6 +1,6 @@
 {
   "name": "skillry-documentation-and-tech-writing",
-  "description": "Technical documentation: README/architecture docs, API reference, changelogs, tutorials, runbooks, doc-site structure, and docx/pdf/markdown authoring quality.",
+  "description": "Technical documentation agents (docs reviewer, technical writer). Their skill, technical-writing-review, ships in the product-docs-and-research plugin.",
   "version": "0.1.0",
   "author": {
     "name": "FluxonLab",

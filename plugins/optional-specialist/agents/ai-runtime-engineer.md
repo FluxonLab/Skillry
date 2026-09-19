@@ -10,7 +10,7 @@ skills:
   - error-handling-observability
   - security-and-secrets-review
   - local-llm-runtime-review
-  - ai-studio-prototype-review
+  - prompt-systems-review
   - cost-control-token-review
 color: green
 ---
@@ -39,7 +39,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: agent-workflow-design, llm-evaluation-review, error-handling-observability, security-and-secrets-review, local-llm-runtime-review, ai-studio-prototype-review, cost-control-token-review.
+- Primary skills: agent-workflow-design, llm-evaluation-review, error-handling-observability, security-and-secrets-review, local-llm-runtime-review, prompt-systems-review, cost-control-token-review.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

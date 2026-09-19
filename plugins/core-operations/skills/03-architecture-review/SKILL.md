@@ -1,6 +1,6 @@
 ---
 name: architecture-review
-description: Use when you need to evaluate architecture, coupling, duplication, integration fit, and whether to keep, adapt, or replace existing structures.
+description: "Review architecture: coupling, duplication, integration fit, keep/adapt/replace; record decisions as ADRs."
 ---
 
 # Architecture Review
@@ -8,6 +8,14 @@ description: Use when you need to evaluate architecture, coupling, duplication, 
 ## Purpose
 
 Evaluate architecture, coupling, duplication, integration fit, and whether to keep, adapt, or replace existing structures. Every Keep, Adapt, or Replace decision must be justified with file-level evidence — churn, blast radius, coupling — not intuition. The default bias is toward the smallest change that fits the existing structure; a rewrite is recommended only when the explicit rule below is met, and never by standing up a parallel app or repo.
+
+## Absorbed skills (routing)
+
+Skillry 3.0.0 folded the skills below into `architecture-review`. Each keeps its full guidance as a reference file; open only the one the task needs. The old names are routing keys, not separate skills.
+
+| Old skill | Reference | Open it for |
+|---|---|---|
+| `adr-generator` | [references/adr-generator.md](references/adr-generator.md) | writing an Architecture Decision Record: context, decision, alternatives, consequences, status |
 
 ## When to use
 
@@ -20,7 +28,7 @@ Evaluate architecture, coupling, duplication, integration fit, and whether to ke
 
 - The task is unrelated to core operations work.
 - The work would require production deploys, destructive data actions, or secret disclosure.
-- You first need a structural map or a runnability baseline — use `codebase-cartography` or `repo-diagnostics`, then return here.
+- You first need a structural map or a runnability baseline — use `repo-diagnostics` (its `references/codebase-cartography.md` covers the structural map), then return here.
 - A narrower skill or existing project instruction already covers the need.
 
 ## Procedure

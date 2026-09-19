@@ -5,9 +5,9 @@ tools: Read, Grep, Glob, Bash, Edit, Write
 model: sonnet
 permissionMode: default
 skills:
-  - game-performance-review
+  - game-architecture-review
   - runtime-diagnostics
-  - visual-regression-review
+  - playwright-e2e-audit
 color: green
 ---
 
@@ -35,7 +35,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: game-performance-review, runtime-diagnostics, visual-regression-review.
+- Primary skills: game-architecture-review, runtime-diagnostics, playwright-e2e-audit.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

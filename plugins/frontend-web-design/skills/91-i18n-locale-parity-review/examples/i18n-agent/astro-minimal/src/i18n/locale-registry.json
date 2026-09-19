@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "siteOrigin": "https://example.com",
+  "defaultLocale": "en",
+  "trailingSlash": "never",
+  "urlStrategy": "prefix-all",
+  "fallbackPolicy": "omit",
+  "locales": [
+    {
+      "id": "en",
+      "bcp47": "en",
+      "urlPrefix": "en",
+      "dir": "ltr",
+      "ogLocale": "en_US",
+      "label": "English",
+      "marketPriority": "primary",
+      "enabled": true,
+      "hreflangCase": "bcp47"
+    },
+    {
+      "id": "fr-CA",
+      "bcp47": "fr-CA",
+      "urlPrefix": "fr",
+      "dir": "ltr",
+      "ogLocale": "fr_CA",
+      "label": "Français (Canada)",
+      "marketPriority": "primary",
+      "enabled": true,
+      "hreflangCase": "bcp47"
+    }
+  ]
+}

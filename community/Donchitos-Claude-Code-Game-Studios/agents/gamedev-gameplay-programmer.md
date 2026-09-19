@@ -5,8 +5,8 @@ tools: Read, Glob, Grep, Write, Edit, Bash
 model: sonnet
 skills:
   - gamedev-dev-story
-  - gamedev-prototype
-  - gamedev-code-review
+  - gameplay-systems-review
+  - game-architecture-review
 ---
 
 You are a Gameplay Programmer for an indie game project. You translate game

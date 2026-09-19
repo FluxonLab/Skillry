@@ -1,12 +1,20 @@
 ---
 name: analytics-tracking-review
-description: Use when you need to review analytics events, tracking plans, privacy, attribution, dashboards, and conversion instrumentation.
+description: "Analytics: tracking plans, event naming, GA4/GTM setup, conversions, attribution, privacy and consent."
 ---
 
 # Analytics & Tracking Review
 
 ## Purpose
 Review analytics instrumentation for correctness, completeness, privacy compliance, and data quality. Covers event taxonomy design, dataLayer implementation, GA4 / Plausible / Amplitude / Mixpanel event schemas, tracking plan adherence, PII handling, GDPR/CCPA consent gating, duplicate event prevention, and debug/validation practices.
+
+## Merged skills
+
+Skillry 3.0.0 merged the skills below into this one. A request that names a former skill routes here; open only the reference that matches the task. Paths are relative to this skill's directory.
+
+| Former skill | Reference | Covers |
+|---|---|---|
+| `analytics` | [references/analytics.md](references/analytics.md) | Set up or audit tracking: tracking-plan template, object_action naming, essential events, UTM strategy, GA4 and GTM implementation guides, event library |
 
 ## When to use
 - Reviewing code that fires analytics events (`gtag`, `dataLayer.push`, `analytics.track`, `plausible`).

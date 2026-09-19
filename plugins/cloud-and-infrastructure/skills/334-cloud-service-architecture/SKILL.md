@@ -1,6 +1,6 @@
 ---
 name: cloud-service-architecture
-description: Use when you need to choose or review cloud architecture decisions — managed vs self-hosted services, multi-AZ high availability, scaling strategy, VPC/subnet/network design, least-privilege service roles, and cost-aware tradeoffs.
+description: "Cloud and infra: service choices, Terraform/OpenTofu, Kubernetes/Helm, hardened multi-stage Dockerfiles."
 ---
 
 # Cloud Service Architecture
@@ -8,6 +8,17 @@ description: Use when you need to choose or review cloud architecture decisions 
 ## Purpose
 
 Guide and review cloud architecture decisions across providers — choosing managed services over self-hosted where it lowers operational risk, designing for multi-AZ availability, sizing and autoscaling, laying out VPC/subnet/routing/egress, attaching least-privilege roles to each service, and keeping the design cost-aware. The goal is an architecture that meets the stated availability and scale targets at a justified cost, with explicit tradeoffs documented so a human owner can approve it before anything is provisioned. Ground every recommendation in the project's actual requirements and existing IaC, not generic best-practice lists.
+
+## Merged skills
+
+Skillry 3.0.0 merged these former skills into this one. The procedure below stays the default; when the task matches a row, open only that reference.
+
+| Former skill | Reference | Use for |
+|---|---|---|
+| `terraform-iac-review` | [references/terraform-iac-review.md](references/terraform-iac-review.md) | Terraform/OpenTofu: remote state and locking, version pinning, plan triage and drift, secrets and sensitive vars, IAM wildcards, open ingress |
+| `kubernetes-manifest-review` | [references/kubernetes-manifest-review.md](references/kubernetes-manifest-review.md) | Kubernetes manifests, Kustomize, Helm: requests/limits, probes, security context, RBAC, NetworkPolicy, HPA/PDB, secrets, image pinning |
+| `docker-image-hardening` | [references/docker-image-hardening.md](references/docker-image-hardening.md) | Dockerfile review: multi-stage split, minimal/distroless base, digest pins, non-root user, secrets in layers, `.dockerignore`, cache order, CVE scan, SBOM |
+| `multi-stage-dockerfile` (third-party, github/awesome-copilot) | [references/multi-stage-dockerfile.md](references/multi-stage-dockerfile.md) | authoring a new multi-stage Dockerfile for any language (stage layout, base images, layer order, non-root runtime) |
 
 ## When to use
 
@@ -20,9 +31,9 @@ Guide and review cloud architecture decisions across providers — choosing mana
 
 ## When not to use
 
-- The change is a single Terraform resource tweak — use the Terraform IaC review skill.
+- The change is a single Terraform resource tweak — skip the architecture procedure and follow `references/terraform-iac-review.md`.
 - The decision is purely application-level (framework, library) with no infrastructure impact.
-- A formal Architecture Decision Record is the deliverable — use the ADR generator and feed it this analysis.
+- A formal Architecture Decision Record is the deliverable — use `architecture-review` (its ADR reference, formerly `adr-generator`) and feed it this analysis.
 
 ## Procedure
 

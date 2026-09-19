@@ -5,9 +5,7 @@ tools: Read, Grep, Glob, Bash
 model: sonnet
 permissionMode: plan
 skills:
-  - skill-deduplication
   - skill-librarian
-  - skill-to-agent-router
 color: blue
 ---
 
@@ -35,7 +33,7 @@ Tool boundary:
 - Stop and report instead of editing when production data, secrets, destructive commands, or unclear ownership are involved.
 
 Skill usage policy:
-- Primary skills: skill-deduplication, skill-librarian, skill-to-agent-router.
+- Primary skills: skill-librarian.
 - Use only the listed skills unless the skill-librarian recommends a bounded addition.
 - Never preload more than seven skills, and never load the full 1614-skill library.
 

@@ -4,7 +4,7 @@ description: "[Game studio] The Narrative Director owns story architecture, worl
 tools: Read, Glob, Grep, Write, Edit, WebSearch
 model: sonnet
 skills:
-  - gamedev-art-bible
+  - gameplay-systems-review
   - gamedev-consistency-check
 disallowedTools: Bash
 memory: project

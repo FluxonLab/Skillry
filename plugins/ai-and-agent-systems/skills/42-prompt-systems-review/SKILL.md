@@ -1,9 +1,20 @@
 ---
 name: prompt-systems-review
-description: Use when you need to review prompts, instructions, evaluation criteria, hallucination risk, and execution clarity.
+description: "Prompts: write and review, safety and bias, hallucination risk, final execution prompts, AI studio prototypes."
 ---
 
 # Prompt Systems Review
+
+## Merged skills (routing)
+
+Skillry 3.0.0 merged these former skills into `prompt-systems-review`. Prompt-system reviews use the procedure below. For the tasks in the table, read only the matching reference.
+
+| Former skill | Use for | Reference |
+|---|---|---|
+| `prompt-engineering-patterns` | Write prompts: few-shot, chain-of-thought, templates, system prompts, structured output | [references/prompt-engineering-patterns.md](references/prompt-engineering-patterns.md) |
+| `ai-prompt-engineering-safety-review` | Safety, bias, injection and effectiveness review of a single prompt, with an improved rewrite | [references/ai-prompt-engineering-safety-review.md](references/ai-prompt-engineering-safety-review.md) |
+| `codex-final-execution-prompt` | Strict final execution prompts for coding agents (Codex, Claude, Copilot) | [references/codex-final-execution-prompt.md](references/codex-final-execution-prompt.md) |
+| `ai-studio-prototype-review` | AI studio and playground prototypes: reproducibility, key exposure, rate limits, path to production | [references/ai-studio-prototype-review.md](references/ai-studio-prototype-review.md) |
 
 ## Purpose
 
@@ -21,9 +32,9 @@ Review system prompts, few-shot examples, output schemas, instruction sets, and 
 
 ## When not to use
 
-- The question is whether the model's answer is factually correct (use `44-llm-evaluation-review`).
-- The problem is tool permissions or agent recursion, not prompt structure (use `41-agent-governance-review`).
-- You are writing a new prompt from scratch with no existing text to review — this skill reviews, not drafts.
+- The question is whether the model's answer is factually correct (use `llm-evaluation-review`).
+- The problem is tool permissions or agent recursion, not prompt structure (use `ai-security-review`, which absorbed `agent-governance-review`).
+- You are writing a new prompt from scratch with no existing text to review — the review procedure below does not apply; draft with [references/prompt-engineering-patterns.md](references/prompt-engineering-patterns.md) or, for a coding-agent execution prompt, [references/codex-final-execution-prompt.md](references/codex-final-execution-prompt.md), then review the draft here.
 - The prompt is a one-off manual query, not a system prompt used at scale.
 
 ## Procedure

@@ -1,9 +1,35 @@
 ---
 name: seo-content-ops-review
-description: Use when you need to review SEO, content operations, metadata, structured data, editorial workflows, and crawlability.
+description: "SEO: technical and on-page audits, metadata, schema, sitemaps, E-E-A-T, content ops, clusters, AI search/GEO."
 ---
 
 # SEO & Content Ops Review
+
+## Routing (absorbed skills)
+
+Skillry 3.0.0 folded the skills below into this one. When a request names one of them or matches its topic, open the listed reference and follow it; the rest of this file stays the default procedure.
+
+| Old skill name | Reference | Use it for |
+|---|---|---|
+| `seo` | [references/seo.md](references/seo.md) | search fundamentals checklist: crawlability, meta, structured data, mobile, page experience |
+| `claude-seo-seo-images` / `seo-images` | [references/claude-seo-seo-images.md](references/claude-seo-seo-images.md) | image SEO: alt text, formats and sizes, responsive and lazy loading, CLS, IPTC/XMP metadata |
+| `claude-seo-seo-sxo` / `seo-sxo` | [references/claude-seo-seo-sxo.md](references/claude-seo-seo-sxo.md) | search experience: SERP-backwards page-type mismatch, intent user stories, persona scoring, wireframes |
+| `seo-backlinks` | [references/seo-backlinks.md](references/seo-backlinks.md) | backlink profile: referring domains, anchor distribution, toxic links, competitor gap, disavow |
+| `seo-cluster` | [references/seo-cluster.md](references/seo-cluster.md) | SERP-overlap topic clustering, hub-and-spoke architecture, internal link matrix, cluster map |
+| `seo-competitor-pages` | [references/seo-competitor-pages.md](references/seo-competitor-pages.md) | 'X vs Y' and 'alternatives to X' pages: layouts, feature matrices, schema, conversion |
+| `seo-content` | [references/seo-content.md](references/seo-content.md) | content quality and E-E-A-T, readability, thin content, AI citation readiness |
+| `seo-page` | [references/seo-page.md](references/seo-page.md) | deep single-URL analysis: on-page elements, content, meta, schema, images, performance |
+| `seo-plan` | [references/seo-plan.md](references/seo-plan.md) | SEO strategy and roadmap with industry templates (SaaS, ecommerce, local, publisher, agency) |
+| `seo-technical` | [references/seo-technical.md](references/seo-technical.md) | technical audit: crawlability, indexability, security, URLs, mobile, CWV, JS rendering, IndexNow, agent-friendly pages |
+| `geo-schema` | [references/geo-schema.md](references/geo-schema.md) | schema.org JSON-LD audit and generation for rich results and entity clarity |
+| `geo-citability` | [references/geo-citability.md](references/geo-citability.md) | AI citability score (0-100) with passage-level rewrite suggestions |
+| `geo-crawlers` | [references/geo-crawlers.md](references/geo-crawlers.md) | AI crawler access map from robots.txt, meta tags and HTTP headers |
+| `geo-ai-index-access` | [references/geo-ai-index-access.md](references/geo-ai-index-access.md) | AI-search prerequisites: Bing indexation, CDN and robots AI-crawler access, snippet limits, server rendering |
+| `geo-fanout` | [references/geo-fanout.md](references/geo-fanout.md) | query fan-out and topic-cluster coverage for AI search; titles and slugs matched to sub-queries |
+| `programmatic-seo` | [references/programmatic-seo.md](references/programmatic-seo.md) | template-driven pages at scale: playbooks, data sources, thin-content guardrails |
+| `site-architecture` | [references/site-architecture.md](references/site-architecture.md) | page hierarchy, navigation, URL structure, breadcrumbs, internal linking, Mermaid sitemaps |
+
+Optional paid or credentialed data sources (DataForSEO MCP, Moz, Bing Webmaster Tools) that several references can use are indexed in [references/seo-optional-integrations.md](references/seo-optional-integrations.md); every procedure has a free fallback.
 
 ## Purpose
 Review the technical SEO implementation and content operations setup of a site or page: meta tags, structured data (JSON-LD / schema.org), canonical tags, Open Graph, sitemap, robots.txt, Core Web Vitals, crawlability, internal linking, and editorial workflow tooling.
