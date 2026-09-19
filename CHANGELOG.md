@@ -29,9 +29,9 @@ All notable changes to Skillry are documented here. The format is based on
   `web-game-engineer` and 13 Donchitos community agents that bound absorbed skills. No agent lists
   more than seven skills.
 - Install scope moved with content: community skills merged into `plugins/` hubs now install by
-  default, while the Skillry originals `api-test-suite-review` and `shadcn-ui-components` now live in
-  the community hubs `test-driven-development` and `frontend-ui-engineering` and install only with
-  `--community` (`e2e-flow-designer` binds `test-driven-development`).
+  default, while the Skillry original `shadcn-ui-components` now lives in the community hub
+  `frontend-ui-engineering` and installs only with `--community`. `api-test-suite-review` lives in the
+  default hub `playwright-e2e-audit`, and `e2e-flow-designer` binds only default-install skills.
 - The `documentation-and-tech-writing` plugin now ships agents only; its skills merged into
   `technical-writing-review` (`product-docs-and-research`).
 
@@ -77,7 +77,7 @@ Paths are relative to the hub directory.
 | `api-design-principles` | `api-and-interface-design` | `plugins/backend-and-api/skills/12-api-and-interface-design` | `references/api-design-principles.md` | community/wshobson-agents |
 | `api-playwright-test-developer` | `test-driven-development` | `community/addyosmani-agent-skills/skills/test-driven-development` | `references/api-playwright-test-developer.md` | community/jaktestowac-awesome-copilot-for-testers |
 | `api-reference-docs` | `technical-writing-review` | `plugins/product-docs-and-research/skills/69-technical-writing-review` | `references/api-reference-docs.md` | Skillry original |
-| `api-test-suite-review` | `test-driven-development` | `community/addyosmani-agent-skills/skills/test-driven-development` | `references/api-test-suite-review.md` | Skillry original |
+| `api-test-suite-review` | `playwright-e2e-audit` | `plugins/testing-and-qa/skills/53-playwright-e2e-audit` | `references/api-test-suite-review.md` | Skillry original |
 | `async-python-patterns` | `python-project-review` | `plugins/backend-and-api/skills/94-python-project-review` | `references/async-python-patterns.md` | community/wshobson-agents |
 | `authz-permission-review` | `auth-session-review` | `plugins/backend-and-api/skills/14-auth-session-review` | `references/authz-permission-review.md` | Skillry original |
 | `automation-mcp-gatekeeping` | `ai-security-review` | `plugins/security/skills/48-ai-security-review` | `references/automation-mcp-gatekeeping.md` | Skillry original |
