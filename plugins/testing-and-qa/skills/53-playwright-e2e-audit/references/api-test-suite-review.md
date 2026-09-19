@@ -1,6 +1,6 @@
 # API Test Suite Review
 
-> **Provenance.** Absorbed into `test-driven-development` in Skillry 3.0.0. Formerly the standalone skill `api-test-suite-review` (`plugins/testing-and-qa/skills/55-api-test-suite-review/SKILL.md`). Origin: Skillry original, MIT (repository `LICENSE`).
+> **Provenance.** Absorbed into `playwright-e2e-audit` in Skillry 3.0.0 (kept in the default, non-community install). Formerly the standalone skill `api-test-suite-review` (`plugins/testing-and-qa/skills/55-api-test-suite-review/SKILL.md`). Origin: Skillry original, MIT (repository `LICENSE`).
 >
 > **Changes:** frontmatter converted to this header.
 >

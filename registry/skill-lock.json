@@ -531,10 +531,10 @@
       "folder": "53-playwright-e2e-audit",
       "department": "testing-and-qa",
       "origin": "original",
-      "lines": 164,
-      "files": 85,
+      "lines": 165,
+      "files": 86,
       "checksum_scope": "component-tree-v1",
-      "checksum": "8482a780b2aa0649fc695df363a923679910bf5ed3b24f8dacc7de14203c63c8"
+      "checksum": "77c1b68bf1c6b1a2f18023baa4cdd4b3fcf8a3207bc066da93f44a46c4b9384c"
     },
     {
       "id": "uat-acceptance-review",
@@ -562,9 +562,9 @@
       "source": "addyosmani-agent-skills",
       "origin": "community",
       "lines": 396,
-      "files": 27,
+      "files": 26,
       "checksum_scope": "component-tree-v1",
-      "checksum": "cc7187ef059a2b7d9a4d0b018a6f4220ed26d69fcb6ae54a7c60464e078f9701"
+      "checksum": "14387616880c61380ee48f72fdbfb844d1a363dcfce2cd737c40fb55a8ad490f"
     },
     {
       "id": "git-advanced-workflows",

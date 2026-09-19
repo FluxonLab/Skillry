@@ -20,6 +20,7 @@ Skillry 3.0.0 folded the skills below into `playwright-e2e-audit`. Each keeps it
 | `browser-testing-with-devtools` | [references/browser-testing-with-devtools.md](references/browser-testing-with-devtools.md) | real-browser debugging through Chrome DevTools MCP: DOM, console, network, performance |
 | `visual-regression-review` | [references/visual-regression-review.md](references/visual-regression-review.md) | visual diff review: baselines, viewport coverage, flakiness, stale snapshots |
 | `playwright-skill` | [references/playwright-skill.md](references/playwright-skill.md) | deep Playwright guide library (index): locators, assertions, fixtures, auth, mocking, CI and sharding, POM, CLI, Cypress/Selenium migration |
+| `api-test-suite-review` | [references/api-test-suite-review.md](references/api-test-suite-review.md) | reviewing an existing API test suite: route coverage, error paths, auth tests, fixture isolation, mocking |
 
 ## When to use
 
@@ -32,7 +33,7 @@ Skillry 3.0.0 folded the skills below into `playwright-e2e-audit`. Each keeps it
 
 - The task is unrelated to testing and QA work.
 - The work would require production deploys, destructive data actions, or secret disclosure.
-- A narrower skill already covers the need: `smoke-test-and-repair` for the install/build/test gate chain, `test-driven-development` (its `references/api-test-suite-review.md`) for API-only contracts. For pixel diffs follow [references/visual-regression-review.md](references/visual-regression-review.md).
+- A narrower skill already covers the need: `smoke-test-and-repair` for the install/build/test gate chain, [references/api-test-suite-review.md](references/api-test-suite-review.md) for API-only contracts. For pixel diffs follow [references/visual-regression-review.md](references/visual-regression-review.md).
 
 ## Procedure
 

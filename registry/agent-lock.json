@@ -453,7 +453,7 @@
       "permission": "write",
       "permission_basis": "declared-tools-v1",
       "tools": "Read, Grep, Glob, Bash, Edit, Write",
-      "checksum": "3dcbcf06374b818e5eac81d414698e294cdece2bd1e9b0d7fa805c7d10e7929a",
+      "checksum": "be91acbfa52c29926b99a018713f56ef4d1fc46ffee75ff8cec5c1b924c6aa28",
       "department": "optional-specialist"
     },
     {

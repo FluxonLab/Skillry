@@ -23,7 +23,7 @@ Skillry 3.0.0 folded the skills below into `test-driven-development`. Each keeps
 | `temporal-python-testing` | [references/temporal-python-testing.md](references/temporal-python-testing.md) | Temporal workflow tests: time skipping, activity mocking, replay tests |
 | `quality-playbook` | [references/quality-playbook.md](references/quality-playbook.md) | a full quality system: QUALITY.md constitution, spec-traced functional tests, review and integration protocols, spec audit |
 | `workflow-patterns` | [references/workflow-patterns.md](references/workflow-patterns.md) | Conductor TDD workflow: task phases, checkpoints, commits, verification protocol |
-| `api-test-suite-review` | [references/api-test-suite-review.md](references/api-test-suite-review.md) | reviewing an existing API test suite: route coverage, error paths, auth tests, fixture isolation, mocking |
+| `api-test-suite-review` | moved to `playwright-e2e-audit` (references/api-test-suite-review.md) | reviewing an existing API test suite: route coverage, error paths, auth tests, fixture isolation, mocking |
 | `api-playwright-test-developer` | [references/api-playwright-test-developer.md](references/api-playwright-test-developer.md) | writing and reviewing API tests with Playwright Test: contracts, data-driven assertions, API+UI hybrids |
 
 ## When to Use
