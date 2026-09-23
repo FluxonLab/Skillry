@@ -1,8 +1,11 @@
-# Optional Jev advice
+# Optional Jev operations and advice
 
-Skillry's optional Jev helper gives the current agent bounded advice. It does not
-execute recommendations, install tools, select another account, change the model,
-or authorize completion. The existing portable installer remains skills/agents only.
+Skillry's optional Jev helper performs typed semantic data work and provides
+bounded discovery advice. The [operations interface](JEV-OPERATIONS.md) returns
+selected sources, extracted values, grouped records, scores, claim checks and
+typed action selections for existing code to consume. It does not itself execute
+actions, install tools, select another account, change the model or authorize
+completion. The existing portable installer remains skills/agents only.
 
 ## Daily use
 
@@ -172,7 +175,9 @@ for the actual task/language distribution before a quality claim is made.
 Cache and dedup include task, request, session, workspace, identity, tenant,
 permissions, model, catalog, installed inventory and config versions. Files are
 rehashed before selection. State is local, lock-protected, permission 0600; cached
-results contain IDs/flags, not raw prompts. Telemetry contains metadata only.
+advice results contain IDs/flags, not raw prompts. Operation results can retain
+the explicitly supplied public/synthetic source text and extracted values in
+this local cache. Telemetry contains metadata only.
 
 Provider billing/quota controls spending by default (`monthly_budget_eur: null`).
 There are no monetary reservations or pricing-expiry shutdowns in this mode.
@@ -187,7 +192,7 @@ setup or a second spending limit:
 skillry-jev configure --enable --provider-billing --public-advice --apply
 ```
 
-This setting applies to `advise`; it does not enable automatic transfer of raw
+This setting applies to explicit `advise` and `operate` requests; it does not enable automatic transfer of raw
 native prompt events. Existing explicit project rules take precedence. Private
 source and transcripts stay out of requests. The installed Jev skill explains
 how to send a short task summary and selected records.
@@ -254,3 +259,10 @@ results stay private; review the provider's [MCA](https://typesafe.ai/legal/mca)
 before publishing comparative performance claims. Training exclusion is not zero
 retention; [provider legal information](https://docs.typesafe.ai/legal) distinguishes
 enterprise ZDR from standard access.
+# Operational data work
+
+Jev now has an `operate` entry point in addition to the original advisory modes.
+See [operations](JEV-OPERATIONS.md) for source ranking, literal extraction,
+collection classification, claim checking, dimensional scoring and typed action
+selection. Results are consumed by code/authorized handlers; the original
+`advise`/hook contracts remain backwards compatible.

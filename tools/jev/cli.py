@@ -1,4 +1,4 @@
-"""Explicit requests and native, advisory-only prompt adapters."""
+"""Explicit semantic operations and backwards-compatible advisory prompt adapters."""
 from __future__ import annotations
 
 import argparse
@@ -10,7 +10,7 @@ import time
 import uuid
 
 from .catalog import SKILL_ROOTS, digest, safe_file
-from .core import MODES, Invalid, atomic_json, decide, locked_state, outcome
+from .core import MODES, REQUEST_MODES, Invalid, atomic_json, decide, locked_state, outcome
 
 
 def load_config(root):
@@ -136,8 +136,8 @@ def synthetic_request(client, workspace, mode, allowed_ids):
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="Skillry Jev: bounded advice, existing agent retains control")
-    parser.add_argument("command", choices=("assess", "advise", "hook", "status", "synthetic", "configure"))
+    parser = argparse.ArgumentParser(description="Skillry Jev: typed data operations and bounded advice")
+    parser.add_argument("command", choices=("operate", "assess", "advise", "hook", "status", "synthetic", "configure"))
     parser.add_argument("--client", choices=tuple(SKILL_ROOTS), default="codex")
     parser.add_argument("--mode", choices=sorted(MODES), default="skill")
     parser.add_argument("--config-root", type=pathlib.Path, default=pathlib.Path.home() / ".skillry/jev")
@@ -147,7 +147,7 @@ def main(argv=None):
     switch.add_argument("--disable", action="store_true")
     parser.add_argument("--project", type=pathlib.Path)
     parser.add_argument("--data-class", choices=("synthetic", "public"))
-    parser.add_argument("--modes", nargs="+", choices=sorted(MODES))
+    parser.add_argument("--modes", nargs="+", choices=sorted(REQUEST_MODES))
     parser.add_argument("--hook-skills", nargs="*")
     parser.add_argument("--provider-billing", action="store_true", help="Remove local spending and pricing-expiry gates")
     parser.add_argument("--public-advice", action="store_true", help="Allow curated public/synthetic advise requests across workspaces; does not enable raw prompt hooks")
@@ -208,7 +208,11 @@ def main(argv=None):
             if len(data) > 65536:
                 raise Invalid("input_too_large")
             raw = json.loads(data)
-        if args.command == "advise":
+        if args.command == "operate":
+            if not isinstance(raw, dict):
+                raise Invalid("invalid_request")
+            raw = {**raw, "mode": "compute"}
+        if args.command in {"advise", "operate"}:
             raw = explicit_request(raw, args.client, config)
         if args.command == "hook":
             raw = hook_request(raw, args.client, config, inventory)
@@ -218,7 +222,7 @@ def main(argv=None):
         if not isinstance(raw, dict):
             raise Invalid("invalid_request")
         result = decide(raw, config, catalog, inventory, pathlib.Path.home(), state_root,
-                        explicit_advice=args.command == "advise")
+                        explicit_advice=args.command in {"advise", "operate"})
         # Process receipt is distinct from API evidence, including disabled/missing-key paths.
         with locked_state(state_root, time.monotonic() + 1) as (ledger, ledger_path):
             receipts = ledger.setdefault("process_receipts", [])

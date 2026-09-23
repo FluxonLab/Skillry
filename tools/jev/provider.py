@@ -12,7 +12,7 @@ def main():
     logging.disable(logging.CRITICAL)
     try:
         request = json.loads(sys.stdin.buffer.read(131073))
-        from typesafe_sdk import TypeSafeClient, Choice, Noul, RetryPolicy
+        from typesafe_sdk import TypeSafeClient, Choice, Noul, Score, RetryPolicy
         from typesafe_sdk import __version__
         if __version__ != "0.7.0":
             raise RuntimeError("sdk_version")
@@ -26,8 +26,9 @@ def main():
         if not key:
             print(json.dumps({"error": "missing_key"}))
             return
-        questions = {k: (Choice(instructions=q["instructions"], criteria=q["criteria"])
-                         if q["type"] == "choice" else Noul(instructions=q["instructions"]))
+        constructors = {"choice": Choice, "noul": Noul, "score": Score}
+        questions = {k: constructors[q["type"]](**{field: q[field] for field in
+                         ("instructions", "criteria") if field in q})
                      for k, q in request["questions"].items()}
         with TypeSafeClient(api_key=key, model="jev-1.13.0", retry=RetryPolicy(max_retries=0)) as client:
             response = client.system_one(request["state"], questions, model="jev-1.13.0",

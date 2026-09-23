@@ -65,10 +65,26 @@ def json_bytes(value):
 def skill_text(wrapper, client):
     return f"""---
 name: jev
-description: Use Skillry Jev for optional bounded advice on skills, roles, available tools, references, workflow, errors, evidence, library overlap, effort, or text media briefs. Existing permissions and the current agent retain control.
+description: Use Jev to rank sources, extract source values, classify records, score dimensions, verify claims and select typed actions; retain skill/tool advice for discovery.
 ---
 
-# Jev advice
+# Jev operations and discovery
+
+For useful semantic data work, invoke `{shlex.quote(str(wrapper))} operate --client {client}`
+with a JSON object on stdin. Read [operations](references/operations.md) for the
+six input/result contracts. `rank` returns the selected source records; `extract`
+returns literal source values; `classify` produces grouped records; `verify`
+produces claim checks and a review queue; `score` returns independent dimensions;
+`route` produces a validated handler and closed-set arguments. These are data
+results for code to consume, not an instruction to redo the same work in the lead.
+Use existing authorized handlers/worker runners to apply a selected action.
+The helper never executes arbitrary model text or grants access.
+Jev is not a prose/code/image generator; give generative work to an appropriate
+existing worker, with selected sources and a concise handoff. Keep uncertainty
+and contradictory evidence visible. Validate actual artifacts, not every
+semantic judgment a second time. Do not promise token savings without measurement.
+
+For skill/tool discovery, the backwards-compatible `advise` path follows.
 
 Use Jev when a focused selection, ranking or classification can avoid reading many
 irrelevant skills/records or repeating lengthy reasoning. Skip trivial exact lookups.
@@ -100,7 +116,7 @@ only current host-supported, already authorized choices may be included.
 For reference/evidence/library supply selected public `records: [{{"id":"record-id","text":"excerpt","source":"source identity"}}]`.
 Use `explicit_id` when the user already selected an available skill/role; this stays local.
 
-Output is advice only. Read a suggested installed skill before using it. `unavailable`,
+`advise` output is advice only. Read a suggested installed skill before using it. `unavailable`,
 `invalid` and `abstained` retain the normal skill-librarian flow. In consolidated
 Skillry releases, role routing is its skill-to-agent-router reference, not a
 separately installed skill.
@@ -134,6 +150,7 @@ def plan(home, clients, python, provider_python, budget, keychain_account, catal
         if path.is_file() and path.suffix in {".py", ".txt", ".in"}:
             files["tools/jev/" + path.name] = path.read_bytes()
     files["public-catalog.json"] = json_bytes(catalog)
+    files["operations.md"] = (ROOT / "docs/JEV-OPERATIONS.md").read_bytes()
     metadata_skills = {"skill-librarian", "skill-to-agent-router"}
     for entry in catalog["entries"]:
         if entry["kind"] == "skill" and entry["id"] in metadata_skills:
@@ -209,6 +226,8 @@ def plan(home, clients, python, provider_python, budget, keychain_account, catal
         # An existing installation does not own a newly added client's files.
         new_client = previous is None or client not in previous.get("clients", [])
         add_change(changes, path, skill_text(wrapper, client).encode(), home, must_be_new=new_client)
+        add_change(changes, path.parent / "references/operations.md", files["operations.md"],
+                   home, must_be_new=new_client)
     # Claude native hooks are supported; merge just our handler, preserving the chain.
     if "claude" in clients:
         path = home / ".claude/settings.json"
