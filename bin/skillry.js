@@ -23,7 +23,8 @@ function localVersion() {
 const HELP = `Skillry v${localVersion()} — installable, permission-bounded, multi-platform agent skills & subagents
 
 Usage:
-  skillry install [--apply] [--targets <p..>] [--community] [--instructions <dir>]   Install into AI platforms
+  skillry install [--apply] [--targets <p..>] [--community]     Install skills and agents
+  skillry jev <status|assess|hook|synthetic|install> [args]      Optional bounded Jev advice
   skillry validate                                            Lint structure, frontmatter, permissions
   skillry sync <discover|import|normalize> [args]             Import/normalize an upstream skill repo
   skillry lock [--apply]                                      Rebuild SHA-256 lockfiles
@@ -31,13 +32,13 @@ Usage:
   skillry update                                              Check for a newer release and show how to update
   skillry help                                                Show this help
 
-Platforms (for --targets): claude  codex  copilot  antigravity
+Platforms (for --targets): claude  codex  cursor  copilot  antigravity
 Dry-run is the default; nothing is written without --apply.
 
 Examples:
   npx github:FluxonLab/Skillry install                          # preview, all platforms
   npx github:FluxonLab/Skillry install --apply --targets claude
-  skillry install --apply --targets claude codex --instructions ~/my-project
+  skillry install --apply --targets claude codex
 
 Claude Code users can also use the native plugin marketplace:
   /plugin marketplace add FluxonLab/Skillry
@@ -93,6 +94,7 @@ switch (cmd) {
   case 'validate': runPython('validate.py', rest); break;
   case 'sync':     runPython('skill-sync.py', rest); break;
   case 'lock':     runPython('build-lock.py', rest); break;
+  case 'jev':      runPython('jev.py', rest); break;
   case 'version':
   case '--version':
   case '-v':

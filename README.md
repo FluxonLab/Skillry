@@ -4,7 +4,7 @@
 
 # Skillry
 
-**Reusable, permission-bounded skills and agents for Claude Code, OpenAI Codex, Gemini, and GitHub Copilot.**
+**Reusable, permission-bounded skills and agents for Claude Code, OpenAI Codex, Cursor, Gemini, and GitHub Copilot.**
 
 One maintained library, adapted to each supported runtime without taking ownership of a project's
 instruction files.
@@ -62,6 +62,7 @@ The portable installer installs only platform skills and agent definitions.
 |---|---|---|
 | Claude Code | Skills and Claude-compatible agents | CLAUDE.md |
 | OpenAI Codex | Skills and Codex-compatible agent profiles | AGENTS.md |
+| Cursor | Native skills and agents with inherited model and explicit read-only intent | AGENTS.md and .cursor/rules |
 | Gemini | Skills and Gemini-compatible agents | GEMINI.md and AGENTS.md |
 | GitHub Copilot | Skills and Copilot-compatible custom agents | .github/copilot-instructions.md and AGENTS.md |
 
@@ -71,6 +72,14 @@ project policy and must be authored and maintained by that project.
 
 The repository's own CLAUDE.md and AGENTS.md govern contributions to Skillry. They are not portable
 templates and are not installer payloads.
+
+### Optional Jev advice
+
+[Jev](docs/JEV.md) offers bounded selection, ranking and classification in ten
+modes. It supports explicit advice for Codex, Claude, Cursor and both Antigravity
+surfaces using the actual client's inventory. The lead still owns execution and
+acceptance. Installation and external data-sharing configuration are separate,
+explicit actions; availability alone does not demonstrate token savings.
 
 ## How work is organized
 

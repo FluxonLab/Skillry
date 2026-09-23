@@ -6,6 +6,20 @@ All notable changes to Skillry are documented here. The format is based on
 
 ## [Unreleased]
 
+### Added
+
+- Optional Jev advisory helper: ten bounded modes, verified client inventories,
+  explicit public-data policy, local duplicate suppression and no execution authority.
+- Native Cursor skill and agent installation, including Cursor-specific agent
+  metadata and hash verification for Jev selection.
+
+### Fixed
+
+- Repository adapter generation no longer overwrites canonical AGENTS.md or
+  reactivates historical Factory policy. CI checks freshness without writes.
+- Portable installation remains skills/agents only; five-target release checks
+  include Cursor without copying project instruction files.
+
 ## [3.0.0] - 2026-09-19
 
 ### Breaking

@@ -25,7 +25,7 @@ Marketplace installs are reproducible: pin a plugin to a commit SHA in
 ```bash
 # Runs directly from GitHub — no global install, no npm account needed:
 npx github:FluxonLab/Skillry install                              # dry-run, all platforms
-npx github:FluxonLab/Skillry install --apply --targets claude     # codex | copilot | antigravity
+npx github:FluxonLab/Skillry install --apply --targets claude     # codex | cursor | copilot | antigravity
 npx github:FluxonLab/Skillry install --apply --targets claude --community
 
 # Or install the CLI globally (published on npm):
@@ -35,17 +35,19 @@ skillry validate
 skillry update      # check for a newer release and see how to update
 ```
 
-> Published at [npmjs.com/package/skillry](https://www.npmjs.com/package/skillry). The
-> `github:FluxonLab/Skillry` form also works (e.g. for a specific commit).
+> The [npm package](https://www.npmjs.com/package/skillry) can lag this repository.
+> Check `npm view skillry version` before relying on newer features. Use the
+> `github:FluxonLab/Skillry` form (optionally pinned to a reviewed commit) for the
+> repository version; a Git commit does not publish a new npm release.
 
-## Option C — Portable installer (Claude, Codex, Copilot, Gemini/Antigravity)
+## Option C — Portable installer (Claude, Codex, Cursor, Copilot, Gemini/Antigravity)
 
 ```bash
 git clone https://github.com/FluxonLab/Skillry
 cd Skillry
 
 # Preview (writes nothing):
-python3 tools/install.py --targets claude codex copilot antigravity
+python3 tools/install.py --targets claude codex cursor copilot antigravity
 
 # Install original skills + agents:
 python3 tools/install.py --apply --targets claude
@@ -60,38 +62,34 @@ Install locations per platform:
 |---|---|---|
 | Claude Code | `~/.claude/skills/<name>/SKILL.md` | `~/.claude/agents/<name>.md` |
 | OpenAI Codex | `~/.codex/skills/<name>/SKILL.md` | `~/.codex/agents/<name>.toml` |
+| Cursor | `~/.cursor/skills/<name>/SKILL.md` | `~/.cursor/agents/<name>.md` |
 | GitHub Copilot | `~/.copilot/skills/<name>/SKILL.md` | `~/.copilot/agents/<name>.agent.md` |
 | Google Antigravity | `~/.gemini/antigravity/skills/<name>/SKILL.md` | `~/.gemini/antigravity/agents/<name>.md` |
 
-The installer **backs up** any existing file to `*.bak-skillry` before overwriting,
-and converts each agent to the platform's native format (e.g. Codex `.toml`).
+The installer verifies source checksums and managed destination hashes before updating.
+It refuses unmanaged collisions and user-modified files, and converts agents into each
+platform format (for example Codex `.toml`). Preserve existing manifests when updating.
 
-## Behavior files (CLAUDE.md / AGENTS.md / GEMINI.md / copilot-instructions)
+Cursor agents use native `name`, `description`, `model: inherit` and `readonly`
+frontmatter. Source roles with `permissionMode: plan` stay read-only, including
+reviewers that use shell inspection; Claude-only permission fields and model aliases
+are not copied. Source body instructions remain intact. Native Cursor files take
+precedence over compatibility copies discovered from other clients. Existing files
+without a Cursor manifest remain collisions, not permission to overwrite them.
+See Cursor's [skill discovery](https://cursor.com/docs/skills) and
+[subagent format](https://cursor.com/docs/subagents).
 
-Skillry also ships a project behavior file for every platform, all generated from the canonical
-[`CLAUDE.md`](../CLAUDE.md). Add `--instructions <dir>` to drop the right one(s) into your project
-in the same command that installs the skills.
+## Project instruction files
 
-**Non-destructive merge.** If the target file already exists, your instructions are kept and
-Skillry's manual is **appended** under a `SKILLRY:MANUAL` block, with a one-time **first-run
-reconcile notice**: on the next session the agent announces the merge, asks how to resolve any
-duplicate/conflicting rules, applies your choice, then deletes the notice. A `*.bak-skillry` backup
-is written first; re-installs replace the prior block instead of appending a second copy.
+Project instructions remain project-owned. The portable installer installs skills and
+agents only; it does not copy, merge or generate AGENTS.md, CLAUDE.md, GEMINI.md or
+Copilot instruction files. The former `--instructions` option is unsupported.
 
-```bash
-# skills/agents + the behavior file each target reads, written into ~/my-project:
-python3 tools/install.py --apply --targets claude codex --instructions ~/my-project
-```
+## Optional Jev advice
 
-| Target | File written into your project |
-|---|---|
-| `claude` | `CLAUDE.md` |
-| `codex` | `AGENTS.md` |
-| `copilot` | `.github/copilot-instructions.md` |
-| `antigravity` | `GEMINI.md` + `AGENTS.md` |
-
-Maintainers: edit `CLAUDE.md`, then regenerate the rest with
-`python3 tools/build-agent-instructions.py --apply` (CI fails if they drift).
+The optional Jev helper uses the existing library and does not activate with a normal
+portable installation. See [Jev daily use and integration](JEV.md) for explicit setup,
+data policy, budgets, client boundaries and rollback. It never grants tool permissions.
 
 ## Verify
 

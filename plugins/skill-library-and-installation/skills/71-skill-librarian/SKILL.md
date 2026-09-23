@@ -166,3 +166,14 @@ Return the result block above: the parsed task with domain/action, a ranked list
 ## Completion criteria
 
 Done means the task was parsed, the index was scanned by frontmatter only, at most 5 candidates were ranked and tagged primary/secondary with rationale, exclusions were justified, and the dormant archive was confirmed not bulk-loaded.
+
+## Optional Jev advice
+
+When the installed `jev` helper is enabled for the project's public/synthetic data,
+use its `skill` mode with exact currently available skill IDs. It verifies source and
+installed checksums separately, considers metadata only, and returns at most five
+advisory IDs. An explicit user selection stays local. Missing keys, unavailable or
+modified skills, no match, invalid responses and budget/deadline failures return to
+the normal procedure above. Read only a selected SKILL.md after checking applicability.
+Use `library` mode only for candidate overlap analysis; never automatically merge or
+delete skills. See the installed `jev` skill for the bounded request contract.

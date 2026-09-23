@@ -5,11 +5,15 @@ attribution** over raw volume. A few small, high-quality skills beat many shallo
 
 ## Ground rules
 
-1. **One source of truth.** Author skills/agents once under `plugins/<department>/`. Generated
-   artifacts are never hand-edited: `.claude-plugin/marketplace.json` comes from
-   `tools/build-marketplace.py`, and the behavior files `AGENTS.md` / `GEMINI.md` /
-   `.github/copilot-instructions.md` come from `CLAUDE.md` via `tools/build-agent-instructions.py`.
-   Edit the source, then regenerate (CI fails if a generated file drifts).
+1. **One source of truth.** Author skills/agents once under `plugins/<department>/`.
+   `AGENTS.md` and `CLAUDE.md` are equivalent repository contributor entry points; maintain
+   their shared rules together. Neither is generated or portable installer payload.
+   Generated artifacts are never hand-edited: `.claude-plugin/marketplace.json` comes from
+   `tools/build-marketplace.py`; the thin `GEMINI.md` and `.github/copilot-instructions.md`
+   adapters come from `tools/build-agent-instructions.py` and point to the root rules.
+   Edit the generator, run it with `--apply`, and use `--check` to verify freshness without
+   writes. It never rewrites `AGENTS.md` or `CLAUDE.md`. The historical `.factory/governance/`
+   candidate records are retained as evidence, not injected into active adapters.
 2. **Least privilege.** Every subagent must declare an explicit `tools` allowlist. Review/audit
    agents must not include `Edit` or `Write`.
 3. **Real content, not templates.** A skill must have concrete procedures, commands, checks,

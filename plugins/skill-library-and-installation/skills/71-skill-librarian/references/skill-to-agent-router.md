@@ -33,7 +33,7 @@ Given a task description or skill name, determine which agent (or agents) in the
 ## Procedure
 
 1. **Parse the task.** Extract domain, action, audience (human-facing vs. system), urgency, and stated constraints ("do not touch production", "must use approved vendor").
-2. **Scan the agent roster.** Read only the `name:`, `description:`, and `skills:` frontmatter from each AGENT.md (see Commands).
+2. **Scan the agent roster.** Read only the `name:`, `description:`, and `skills:` frontmatter from each installed agent file (see Commands).
 3. **Match task to agent by domain** using the table below.
 4. **Assign binding types.** *Primary*: best-fit executor; the skill is a required binding. *Optional*: can handle the task with this skill loaded on demand. *Excluded*: must not handle this task (wrong domain, conflict of interest, missing tool access).
 5. **Check for multi-agent tasks.** If the task needs outputs from more than one domain, propose a handoff chain — sequential (A produces, B consumes) or parallel (both run, orchestrator merges).
@@ -57,7 +57,7 @@ Domain-to-agent map:
 ## Concrete checks
 
 - [ ] Task domain, action, and constraints parsed before scanning.
-- [ ] Agent roster scanned by frontmatter only (not full AGENT.md bodies).
+- [ ] Agent roster scanned by frontmatter only (not full agent bodies).
 - [ ] Primary agent designated with an explicit skill binding.
 - [ ] Optional and excluded agents listed with reasons.
 - [ ] Multi-agent handoff chain proposed if the task spans domains, with direction stated.
@@ -69,14 +69,14 @@ Domain-to-agent map:
 
 ```bash
 # Roster scan: name, description, and skill bindings per agent
-grep -rn "^name:\|^description:\|^skills:" ~/.claude/agents/*/AGENT.md | head -200
+grep -rn "^name:\|^description:\|^skills:" ~/.claude/agents/*.md | head -200
 
 # Which agents already bind a given skill?
-grep -rln "security-and-secrets-review" ~/.claude/agents/*/AGENT.md
+grep -rln "security-and-secrets-review" ~/.claude/agents/*.md
 
 # Detect agents with NO skills binding (routing gap candidates)
-for d in ~/.claude/agents/*/; do
-  grep -q "^skills:" "$d/AGENT.md" 2>/dev/null || echo "no skills bound: $(basename "$d")"
+for file in ~/.claude/agents/*.md; do
+  rg -q "^skills:" "$file" || printf "no skills bound: %s\n" "$file"
 done
 ```
 
@@ -156,3 +156,13 @@ Return the routing decision block above: parsed task with domain/action, the pri
 ## Completion criteria
 
 Done means the task was parsed, the roster was scanned by frontmatter only, a primary agent and skill binding were designated with rationale, optional/excluded agents and any handoff chain were listed, activation conditions were stated, and destructive routes carry an approval gate.
+
+## Optional Jev advice
+
+When the installed `jev` helper is enabled for the project's public/synthetic data,
+use its `agent` mode with the current host's actual allowed agent IDs. Codex invocation
+names use underscores while source file IDs use hyphens; use the verified inventory
+mapping. Explicitly selected roles stay fixed. Jev never spawns an agent, changes the
+client/session/model, or permits a second writer. On abstention or error continue the
+normal routing procedure above. See the installed `jev` skill for the bounded request
+contract. No new tool or archived capability is activated by a recommendation.

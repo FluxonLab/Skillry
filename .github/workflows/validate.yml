@@ -34,20 +34,19 @@ jobs:
             exit 1
           fi
 
-      - name: Rebuild agent instruction files and check they are committed
+      - name: Check repository-only instruction adapters (no writes)
         run: |
-          python3 tools/build-agent-instructions.py --apply
-          if ! git diff --quiet -- AGENTS.md GEMINI.md .github/copilot-instructions.md; then
-            echo "::error::Agent instruction files are out of date. Run: python3 tools/build-agent-instructions.py --apply"
-            git --no-pager diff -- AGENTS.md GEMINI.md .github/copilot-instructions.md
-            exit 1
-          fi
+          python3 tools/build-agent-instructions.py --check
+          python3 tests/test_agent_instruction_family.py
 
-      - name: Validate generated-family assistant identity and policy delivery
-        run: python3 tests/test_agent_instruction_family.py
+      - name: Validate optional Jev contracts and portable instruction boundary
+        run: python3 -m unittest discover -s tests -p 'test_jev*.py'
+
+      - name: Validate native Cursor installation contracts
+        run: python3 tests/test_cursor_install.py
 
       - name: Dry-run installer for all platforms (no writes)
-        run: python3 tools/install.py --targets claude codex copilot antigravity --instructions /tmp/skillry-instr-check
+        run: python3 tools/install.py --targets claude codex copilot antigravity cursor
 
   install-smoke:
     name: Install into a throwaway HOME and re-validate
@@ -59,8 +58,10 @@ jobs:
           python-version: "3.12"
       - name: Install into isolated HOME (does not touch the runner's real config)
         run: |
-          export HOME="$(mktemp -d)"
-          python3 tools/install.py --apply --targets claude codex copilot antigravity
-          echo "Installed skills (claude): $(find "$HOME/.claude/skills" -name SKILL.md | wc -l)"
-          test "$(find "$HOME/.claude/skills" -name SKILL.md | wc -l)" -ge 50
-          test "$(ls "$HOME/.codex/agents/"*.toml | wc -l)" -ge 60
+          skillry_smoke_home="$(mktemp -d)"
+          env HOME="$skillry_smoke_home" python3 tools/install.py --apply --targets claude codex copilot antigravity cursor
+          echo "Installed skills (claude): $(find "$skillry_smoke_home/.claude/skills" -name SKILL.md | wc -l)"
+          test "$(find "$skillry_smoke_home/.claude/skills" -name SKILL.md | wc -l)" -ge 50
+          test "$(ls "$skillry_smoke_home/.codex/agents/"*.toml | wc -l)" -ge 60
+          test "$(find "$skillry_smoke_home/.cursor/skills" -name SKILL.md | wc -l)" -ge 50
+          test "$(ls "$skillry_smoke_home/.cursor/agents/"*.md | wc -l)" -ge 60

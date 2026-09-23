@@ -511,10 +511,10 @@
       "folder": "71-skill-librarian",
       "department": "skill-library-and-installation",
       "origin": "original",
-      "lines": 168,
+      "lines": 179,
       "files": 5,
       "checksum_scope": "component-tree-v1",
-      "checksum": "81aa49748b2750bfdbbb3e5b0cc0976b582f08ab4b18e6482218ccfefef58281"
+      "checksum": "17ac3fa959409d35fef21cc5cc7b0765b7efb247cb7eb1a3cc0ffaad53b03acf"
     },
     {
       "id": "smoke-test-and-repair",

@@ -39,6 +39,15 @@ PACKAGE_FILES = (
     "tools/build-lock.py",
     "tools/build-marketplace.py",
     "tools/install.py",
+    "tools/jev.py",
+    "tools/jev/__init__.py",
+    "tools/jev/catalog.py",
+    "tools/jev/cli.py",
+    "tools/jev/core.py",
+    "tools/jev/install.py",
+    "tools/jev/provider.py",
+    "tools/jev/requirements.txt",
+    "tools/jev/requirements.in",
     "tools/release-gate.py",
     "tools/skill-sync.py",
     "tools/validate.py",
@@ -1014,7 +1023,7 @@ def run_disposable_installs(
                 f"installer target {target} has an invalid agent extension",
             )
             gate.require(
-                agent_fmt in {"md", "toml"},
+                agent_fmt in {"md", "toml", "cursor"},
                 f"installer target {target} has an unsupported agent format",
             )
             contracts.append(

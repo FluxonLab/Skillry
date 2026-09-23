@@ -38,6 +38,12 @@ TARGETS = {
         "agent_ext": ".toml",
         "agent_fmt": "toml",
     },
+    "cursor": {
+        "skills": HOME / ".cursor/skills",
+        "agents": HOME / ".cursor/agents",
+        "agent_ext": ".md",
+        "agent_fmt": "cursor",
+    },
     "copilot": {
         "skills": HOME / ".copilot/skills",
         "agents": HOME / ".copilot/agents",
@@ -346,6 +352,25 @@ def md_to_toml_agent(text: str) -> str:
     )
 
 
+def md_to_cursor_agent(text: str) -> str:
+    """Translate role intent to Cursor's native schema, not Claude-only fields."""
+    name = fm_field(text, "name")
+    if not SKILL_NAME.fullmatch(name):
+        raise SafetyError(f"invalid Cursor agent name: {name!r}")
+    description = re.sub(r"\s+", " ", fm_field(text, "description"))
+    body = re.sub(r"^---\n.*?\n---\n", "", text, count=1, flags=re.S).strip()
+    readonly = fm_field(text, "permissionMode") == "plan" or has_read_only_tools(text)
+    return (
+        "---\n"
+        f"name: {name}\n"
+        f"description: {json.dumps(description, ensure_ascii=False)}\n"
+        "model: inherit\n"
+        f"readonly: {'true' if readonly else 'false'}\n"
+        "---\n\n"
+        f"{body}\n"
+    )
+
+
 def manifest_location(target: str) -> pathlib.Path:
     root = _lexical(MANIFEST_ROOT)
     _relative(root, HOME)
@@ -526,12 +551,13 @@ def build_target_plan(
     for agent_file in agents:
         source = safe_source_file(agent_file, REPO)
         source_bytes = source.read_bytes()
-        if cfg["agent_fmt"] == "toml":
+        if cfg["agent_fmt"] in {"toml", "cursor"}:
             try:
                 text = source_bytes.decode("utf-8")
             except UnicodeDecodeError as exc:
                 raise SafetyError(f"agent is not valid UTF-8: {source}") from exc
-            content = md_to_toml_agent(text).encode("utf-8")
+            convert = md_to_cursor_agent if cfg["agent_fmt"] == "cursor" else md_to_toml_agent
+            content = convert(text).encode("utf-8")
         else:
             content = source_bytes
         add_destination(
