@@ -721,6 +721,8 @@ def _prepare_score(
         for rec in records:
             rid = rec["id"]
             qid = f"score:{rid}:{did}"
+            if qid in questions:
+                raise ValueError("record and dimension IDs produce a duplicate question")
             questions[qid] = {
                 "type": "score",
                 "record_id": rid,
@@ -818,6 +820,8 @@ def _prepare_route(
                     opt_map[oid] = odesc
                 arg_defs[aname] = {"description": adesc, "options": opt_map}
                 q_arg = f"route:arg:{hid}:{aname}"
+                if q_arg in questions:
+                    raise ValueError("handler and argument IDs produce a duplicate question")
                 questions[q_arg] = {
                     "type": "choice",
                     "handler_id": hid,

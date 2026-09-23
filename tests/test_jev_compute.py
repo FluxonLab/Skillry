@@ -48,6 +48,20 @@ def wire_response(questions):
 
 
 class ComputeTests(unittest.TestCase):
+    def test_compound_ids_cannot_silently_overwrite_questions(self):
+        dimension = {'instructions': 'Evaluate detail', 'levels': ['Missing', 'Present']}
+        argument = {'description': 'Output format', 'options': {'json': 'JSON'}}
+        cases = [
+            {'operation': 'score', 'dimensions': {'c': dimension, 'b:c': dimension}},
+            {'operation': 'route', 'handlers': {
+                'a:b': {'description': 'First', 'args': {'c': argument}},
+                'a': {'description': 'Second', 'args': {'b:c': argument}}}}
+        ]
+        for case in cases:
+            with self.subTest(operation=case['operation']), self.assertRaises(ValueError):
+                prepare({'task': 'Process records', 'records': [
+                    {'id': 'a:b', 'text': 'First'}, {'id': 'a', 'text': 'Second'}]} | case)
+
     def test_all_operations_use_real_wire_shape_and_consume_data(self):
         with tempfile.TemporaryDirectory() as directory:
             root = pathlib.Path(directory).resolve()
