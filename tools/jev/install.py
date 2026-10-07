@@ -62,6 +62,22 @@ def json_bytes(value):
     return (json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n").encode()
 
 
+def valid_derived_inventory(path, home):
+    """Accept only a coherent generated overlay as a reconciliation preimage."""
+    try:
+        content = json.loads(check_path(path, home).read_text())
+        keys = {"schema_version", "catalog_version", "version", "records", "excluded", "private_entries"}
+        return (isinstance(content, dict) and set(content) == keys and
+                content["schema_version"] == 1 and
+                isinstance(content["catalog_version"], str) and bool(content["catalog_version"]) and
+                isinstance(content["records"], list) and
+                isinstance(content["excluded"], list) and
+                isinstance(content["private_entries"], list) and
+                content["version"] == digest(content["records"]))
+    except (OSError, ValueError, TypeError, KeyError):
+        return False
+
+
 def skill_text(wrapper, client):
     return f"""---
 name: jev
@@ -132,7 +148,9 @@ It may return a real missing-key/data-policy fallback; that is not live API proo
 
 
 def plan(home, clients, python, provider_python, budget, keychain_account,
-         catalog_input=None, *, storage_only=False):
+         catalog_input=None, *, storage_only=False, reconcile_derived_inventory=False):
+    if reconcile_derived_inventory and not storage_only:
+        raise Invalid("reconcile_derived_inventory_requires_storage_only")
     home = pathlib.Path(home).resolve()
     root = home / ".skillry/jev"
     catalog = json.loads(pathlib.Path(catalog_input).read_text()) if catalog_input else build_public()
@@ -177,6 +195,7 @@ def plan(home, clients, python, provider_python, budget, keychain_account,
         # Preserve existing agent installations; a storage caller has no skill
         # directory, hook or agent inventory of its own.
         clients = list(json.loads(config_path.read_text()).get("clients", [])) if previous else []
+    reconciled_paths = []
     if previous:
         if previous.get("status") != "applied":
             raise Invalid("unfinished_installation")
@@ -186,6 +205,10 @@ def plan(home, clients, python, provider_python, budget, keychain_account,
             if p in {root / "config.json", home / ".claude/settings.json", home / ".codex/hooks.json"}:
                 continue  # mutable owner config and shared hook chains are merged below
             if not p.exists() or digest(p.read_bytes()) != change["after_sha256"]:
+                if (p == root / "inventory.json" and reconcile_derived_inventory and
+                        valid_derived_inventory(p, home)):
+                    reconciled_paths.append(str(p))
+                    continue
                 raise Invalid("managed_drift: " + str(p))
     add_change(changes, wrapper, wrapper_content, home, 0o700, must_be_new=previous is None)
     if config_path.exists():
@@ -260,6 +283,7 @@ def plan(home, clients, python, provider_python, budget, keychain_account,
         add_change(changes, path, json_bytes(settings), home)
     return {"schema_version": 1, "status": "planned", "runtime_version": version,
             "clients": clients, "storage_only": storage_only,
+            "reconciled_paths": reconciled_paths,
             "changes": changes, "root": str(root), "previous": previous}
 
 
@@ -335,6 +359,8 @@ def main():
     parser.add_argument("--clients", nargs="+", choices=list(SKILL_ROOTS), default=["codex", "claude"])
     parser.add_argument("--storage-only", action="store_true",
                         help="Set up an operation-only storage caller without agent skill or hook installation")
+    parser.add_argument("--reconcile-derived-inventory", action="store_true",
+                        help="With --storage-only, refresh a valid drifted generated inventory overlay")
     parser.add_argument("--python", default=sys.executable)
     parser.add_argument("--provider-python", required=False)
     parser.add_argument("--catalog", type=pathlib.Path, help="Verified public catalog for an existing remote runtime without a source checkout")
@@ -357,10 +383,12 @@ def main():
         receipt = plan(home, args.clients, args.python,
                        args.provider_python or home / ".local/share/skillry/jev/venv/bin/python",
                        args.monthly_budget_eur, args.keychain_account, args.catalog,
-                       storage_only=args.storage_only)
+                       storage_only=args.storage_only,
+                       reconcile_derived_inventory=args.reconcile_derived_inventory)
         if args.apply:
             apply(receipt, home)
         print(json.dumps({"status": receipt["status"], "runtime_version": receipt["runtime_version"],
+                          "reconciled_paths": receipt["reconciled_paths"],
                           "files": [x["path"] for x in receipt["changes"]]}, indent=2))
     except (Invalid, ValueError, OSError, KeyError) as exc:
         print(json.dumps({"status": "refused", "reason": str(exc)}))

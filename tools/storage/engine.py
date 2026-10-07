@@ -1307,10 +1307,11 @@ def apps_op(store, config, action):
 def disk_status(config, local_only=False):
     disks = []
     locations = [("local", str(pathlib.Path.home()))]
+    remote_keys = {(remote["ssh_alias"], os.path.normpath(remote["root"])) for remote in config["remote_hosts"]}
     for ident, archive in (("archive", config["archive"]), ("second_archive", config["second_archive"])):
         if archive.get("kind") == "local":
             locations.append((ident, archive["root"]))
-        elif archive.get("kind") == "ssh":
+        elif archive.get("kind") == "ssh" and (archive["ssh_alias"], os.path.normpath(archive["root"])) not in remote_keys:
             disks.append({"id": ident, "name": ident, "location": archive["root"], "total_bytes": None,
                           "free_bytes": None, "available": False, "last_checked": now()})
     for ident, path in locations:
@@ -1321,7 +1322,12 @@ def disk_status(config, local_only=False):
         except OSError:
             disks.append({"id": ident, "name": ident, "location": path, "total_bytes": None,
                           "free_bytes": None, "available": False, "last_checked": now()})
+    seen_remote = set()
     for remote in config["remote_hosts"]:
+        key = (remote["ssh_alias"], os.path.normpath(remote["root"]))
+        if key in seen_remote:
+            continue
+        seen_remote.add(key)
         item = {"id": remote["id"], "name": remote["name"], "location": remote["root"],
                 "total_bytes": None, "free_bytes": None, "available": False, "last_checked": now()}
         if not local_only:

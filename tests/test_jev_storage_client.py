@@ -1,5 +1,6 @@
 """Offline checks for the operation-only Storage identity and helper setup."""
 import contextlib
+import base64
 import io
 import json
 from pathlib import Path
@@ -13,10 +14,77 @@ sys.path.insert(0, str(ROOT / "tools"))
 from jev.catalog import OPERATION_CALLERS, SKILL_ROOTS, digest
 from jev.cli import explicit_request, hook_request, main as cli_main
 from jev.core import Invalid, MODEL, decide, validate_request
-from jev.install import plan
+from jev.install import apply, plan
 
 
 class StorageJevTests(unittest.TestCase):
+    def derived_fixture(self, home):
+        root = home / ".skillry/jev"
+        root.mkdir(parents=True)
+        (root / "config.json").write_text(json.dumps({"schema_version": 1, "enabled": True,
+            "clients": ["codex"], "secret": {"kind": "keychain", "service": "existing.service",
+            "account": "owner"}, "projects": {}}))
+        old = {"schema_version": 1, "catalog_version": "old", "records": [],
+               "excluded": [], "private_entries": []}
+        old["version"] = digest(old["records"])
+        current = {**old, "records": [{"id": "new-installed-skill"}]}
+        current["version"] = digest(current["records"])
+        path = root / "inventory.json"
+        path.write_text(json.dumps(current))
+        previous = {"status": "applied", "clients": ["codex"], "changes": [
+            {"path": str(path), "after_sha256": digest(json.dumps(old).encode())}]}
+        (root / "installation.json").write_text(json.dumps(previous))
+        catalog = {"schema_version": 1, "entries": []}
+        catalog["version"] = digest(catalog["entries"])
+        return path, current, catalog
+
+    def test_derived_inventory_reconciliation_is_explicit_and_records_actual_preimage(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory).resolve()
+            inventory_path, current, catalog = self.derived_fixture(home)
+            args = (home, ["codex"], sys.executable, home / "provider-python", None, "owner")
+            with patch("jev.install.build_public", return_value=catalog):
+                with self.assertRaisesRegex(Invalid, "managed_drift.*inventory.json"):
+                    plan(*args, storage_only=True)
+                with self.assertRaisesRegex(Invalid, "requires_storage_only"):
+                    plan(*args, reconcile_derived_inventory=True)
+                receipt = plan(*args, storage_only=True, reconcile_derived_inventory=True)
+            self.assertEqual(receipt["reconciled_paths"], [str(inventory_path)])
+            change = next(row for row in receipt["changes"] if row["path"] == str(inventory_path))
+            self.assertEqual(base64.b64decode(change["before"]), json.dumps(current).encode())
+            apply(receipt, home)
+            refreshed = json.loads(inventory_path.read_text())
+            self.assertEqual(refreshed["version"], digest(refreshed["records"]))
+            self.assertEqual(refreshed["catalog_version"], catalog["version"])
+            self.assertEqual(refreshed["records"], [])
+
+    def test_reconciliation_refuses_unrelated_managed_wrapper_drift(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory).resolve()
+            _, _, catalog = self.derived_fixture(home)
+            wrapper = home / ".local/bin/skillry-jev"
+            wrapper.parent.mkdir(parents=True)
+            wrapper.write_bytes(b"locally changed wrapper")
+            receipt_path = home / ".skillry/jev/installation.json"
+            previous = json.loads(receipt_path.read_text())
+            previous["changes"].append({"path": str(wrapper), "after_sha256": digest(b"old wrapper")})
+            receipt_path.write_text(json.dumps(previous))
+            with patch("jev.install.build_public", return_value=catalog):
+                with self.assertRaisesRegex(Invalid, "managed_drift.*skillry-jev"):
+                    plan(home, ["codex"], sys.executable, home / "provider-python", None,
+                         "owner", storage_only=True, reconcile_derived_inventory=True)
+
+    def test_reconciliation_rejects_invalid_inventory_projection(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory).resolve()
+            inventory_path, current, catalog = self.derived_fixture(home)
+            current["version"] = "wrong"
+            inventory_path.write_text(json.dumps(current))
+            with patch("jev.install.build_public", return_value=catalog):
+                with self.assertRaisesRegex(Invalid, "managed_drift.*inventory.json"):
+                    plan(home, ["codex"], sys.executable, home / "provider-python", None,
+                         "owner", storage_only=True, reconcile_derived_inventory=True)
+
     def test_storage_compute_uses_typed_data_only(self):
         with tempfile.TemporaryDirectory() as directory:
             home = Path(directory).resolve()

@@ -9,6 +9,7 @@ import sqlite3
 import subprocess
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest import mock
 
@@ -166,6 +167,24 @@ class StorageEngineTest(unittest.TestCase):
         engine.workspace_op(self.store, self.config, "close", type("Args", (), {"id": ident, "accepted": True})())
         with mock.patch.object(engine, "cleanup_candidates", side_effect=AssertionError("heavy scan")):
             self.assertIsNone(engine.status(self.store, self.config, local_only=True)["summary"]["ready_cleanup_bytes"])
+
+    def test_matching_ssh_archive_uses_one_named_available_remote_disk(self):
+        remote_root = "/Volumes/Fixture-SSD/Archive/Inbox"
+        archive = {"kind": "ssh", "root": remote_root, "ssh_alias": "fixture-m1",
+                   "receiver_command": "/fixture/skillry-storage"}
+        remote = {"id": "m1-ssd", "name": "M1 SSD", "root": remote_root,
+                  "ssh_alias": "fixture-m1", "receiver_command": "/fixture/skillry-storage"}
+        config = {**self.config, "archive": archive,
+                  "remote_hosts": [remote, {**remote, "id": "duplicate", "name": "Duplicate"}]}
+        response = subprocess.CompletedProcess([], 0, stdout=json.dumps({"ok": True, "total_bytes": 1000, "free_bytes": 750}).encode())
+        with mock.patch.object(engine.subprocess, "run", return_value=response) as probe, \
+             mock.patch.object(engine.shutil, "disk_usage", return_value=SimpleNamespace(total=2000, free=1000)):
+            disks = engine.disk_status(config)
+        self.assertEqual(probe.call_count, 1)
+        self.assertEqual([disk["id"] for disk in disks], ["local", "m1-ssd"])
+        self.assertEqual(disks[1]["name"], "M1 SSD")
+        self.assertTrue(disks[1]["available"])
+        self.assertEqual(disks[1]["free_bytes"], 750)
 
     def test_pause_and_identity_change_keep_source(self):
         source = self.intake / "report.txt"
