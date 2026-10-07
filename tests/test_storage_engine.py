@@ -18,6 +18,17 @@ from storage import engine, transfer
 
 
 class StorageEngineTest(unittest.TestCase):
+    def test_lsof_partial_result_still_protects_active_paths(self):
+        with mock.patch.object(shutil, "which", return_value="/usr/sbin/lsof"), \
+             mock.patch.object(subprocess, "run", return_value=SimpleNamespace(returncode=1, stdout=b"57052\n")):
+            self.assertTrue(engine.path_open("/example/file"))
+            self.assertTrue(engine.tree_open("/example/app"))
+
+    def test_missing_lsof_does_not_authorize_removal(self):
+        with mock.patch.object(shutil, "which", return_value=None):
+            self.assertTrue(engine.path_open("/example/file"))
+            self.assertTrue(engine.tree_open("/example/app"))
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)

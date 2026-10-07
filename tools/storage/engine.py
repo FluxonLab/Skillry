@@ -335,21 +335,23 @@ def pid_running(pid):
 
 def path_open(path):
     if not shutil.which("lsof"):
-        return False
+        return True
     try:
         result = subprocess.run(["lsof", "-t", path], capture_output=True, timeout=8, check=False)
-        return result.returncode == 0 and bool(result.stdout.strip())
+        # macOS lsof can return 1 for an incomplete scan while still reporting
+        # matching PIDs. Those matches must protect the file from retirement.
+        return bool(result.stdout.strip()) or result.returncode not in (0, 1)
     except (OSError, subprocess.TimeoutExpired):
         return True
 
 
 def tree_open(path):
     if not shutil.which("lsof"):
-        return False
+        return True
     try:
         command = ["lsof", "-t", "+D", path] if os.path.isdir(path) else ["lsof", "-t", path]
         result = subprocess.run(command, capture_output=True, timeout=10, check=False)
-        return result.returncode == 0 and bool(result.stdout.strip())
+        return bool(result.stdout.strip()) or result.returncode not in (0, 1)
     except (OSError, subprocess.TimeoutExpired):
         return True
 
