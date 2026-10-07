@@ -81,6 +81,21 @@ surfaces using the actual client's inventory. The lead still owns execution and
 acceptance. Installation and external data-sharing configuration are separate,
 explicit actions; availability alone does not demonstrate token savings.
 
+### Optional storage lifecycle
+
+The `storage-artifact-lifecycle` skill and [local engine](docs/storage-engine.md)
+separate reproducible output from source, active state and durable archives.
+Run `skillry storage --help` for explicit workspace, cleanup, intake and receipt
+commands. Generic profiles start without automatic cleanup or archive authority.
+Installing the skill does not install a background cleaner or change a project's
+instruction files.
+
+The separately built [macOS menu companion](apps/storage-companion/README.md)
+uses the same engine for status, pause/resume and owner-selected scopes. Jev is
+optional; its [operation-only storage caller](docs/storage-jev.md) does not borrow
+an agent client's identity or upload private file contents. Machine-specific
+paths, destinations and service policy belong to the owner's profile.
+
 ## How work is organized
 
 Skillry favors a small orchestration model:

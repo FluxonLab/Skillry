@@ -131,7 +131,8 @@ It may return a real missing-key/data-policy fallback; that is not live API proo
 """
 
 
-def plan(home, clients, python, provider_python, budget, keychain_account, catalog_input=None):
+def plan(home, clients, python, provider_python, budget, keychain_account,
+         catalog_input=None, *, storage_only=False):
     home = pathlib.Path(home).resolve()
     root = home / ".skillry/jev"
     catalog = json.loads(pathlib.Path(catalog_input).read_text()) if catalog_input else build_public()
@@ -167,10 +168,15 @@ def plan(home, clients, python, provider_python, budget, keychain_account, catal
     wrapper = home / ".local/bin/skillry-jev"
     wrapper_content = ("#!/bin/sh\nexec " + shlex.quote(str(python)) + " " +
                        shlex.quote(str(release / "tools/jev.py")) + ' "$@"\n').encode()
+    config_path = root / "config.json"
     owned = root / "installation.json"
     previous = json.loads(owned.read_text()) if owned.exists() else None
     if previous and previous.get("status") == "rolled_back":
         previous = None
+    if storage_only:
+        # Preserve existing agent installations; a storage caller has no skill
+        # directory, hook or agent inventory of its own.
+        clients = list(json.loads(config_path.read_text()).get("clients", [])) if previous else []
     if previous:
         if previous.get("status") != "applied":
             raise Invalid("unfinished_installation")
@@ -182,14 +188,15 @@ def plan(home, clients, python, provider_python, budget, keychain_account, catal
             if not p.exists() or digest(p.read_bytes()) != change["after_sha256"]:
                 raise Invalid("managed_drift: " + str(p))
     add_change(changes, wrapper, wrapper_content, home, 0o700, must_be_new=previous is None)
-    config_path = root / "config.json"
     if config_path.exists():
         config = json.loads(config_path.read_text())
         if not previous:
             raise Invalid("unmanaged_config")
         config.update(runtime_version=version, catalog_path=str(release / "public-catalog.json"), clients=clients)
+        if storage_only:
+            config["operation_clients"] = sorted(set(config.get("operation_clients", [])) | {"storage"})
     else:
-        config = {"schema_version": 1, "enabled": False, "runtime_version": version,
+        config = {"schema_version": 1, "enabled": bool(storage_only), "runtime_version": version,
                   "catalog_path": str(release / "public-catalog.json"), "provider_python": str(provider_python),
                   "clients": clients, "projects": {}, "monthly_budget_eur": budget,
                   # Deliberately over-reserved, not represented as the FX rate or actual cost.
@@ -198,9 +205,12 @@ def plan(home, clients, python, provider_python, budget, keychain_account, catal
                   "deadline_seconds": 8, "call_timeout_seconds": 3,
                   "choice_confidence_floor": 0.4, "fit_floor": 0.65,
                   "secret": {"kind": "keychain", "service": "skillry.typesafe", "account": keychain_account}}
+        if storage_only:
+            config["operation_clients"] = ["storage"]
     add_change(changes, config_path, json_bytes(config), home)
     # Update only these existing managed entrypoints; refuse local modifications.
-    for client in set(clients) & {"codex", "claude", "cursor"}:
+    adapter_clients = set(clients) if not storage_only else set()
+    for client in adapter_clients & {"codex", "claude", "cursor"}:
         manifest_path = home / ".skillry/manifests" / (client + ".json")
         if not manifest_path.exists():
             continue
@@ -221,7 +231,7 @@ def plan(home, clients, python, provider_python, budget, keychain_account, catal
     inventory = installed_inventory(catalog, home, clients)
     # Populate the overlay from the actual post-apply bytes, below, not from predicted availability.
     add_change(changes, root / "inventory.json", json_bytes(inventory), home)
-    for client in clients:
+    for client in sorted(adapter_clients):
         path = home / SKILL_ROOTS[client] / "jev/SKILL.md"
         # An existing installation does not own a newly added client's files.
         new_client = previous is None or client not in previous.get("clients", [])
@@ -229,7 +239,7 @@ def plan(home, clients, python, provider_python, budget, keychain_account, catal
         add_change(changes, path.parent / "references/operations.md", files["operations.md"],
                    home, must_be_new=new_client)
     # Claude native hooks are supported; merge just our handler, preserving the chain.
-    if "claude" in clients:
+    if "claude" in clients and not storage_only:
         path = home / ".claude/settings.json"
         settings = json.loads(path.read_text()) if path.exists() else {}
         rule = {"hooks": [{"type": "command", "command": shlex.quote(str(wrapper)) + " hook --client claude",
@@ -239,7 +249,7 @@ def plan(home, clients, python, provider_python, budget, keychain_account, catal
             existing.append(rule)
         add_change(changes, path, json_bytes(settings), home)
     # Codex loads the definition but requires native hash trust; never bypass that gate.
-    if "codex" in clients:
+    if "codex" in clients and not storage_only:
         path = home / ".codex/hooks.json"
         settings = json.loads(path.read_text()) if path.exists() else {}
         rule = {"hooks": [{"type": "command", "command": shlex.quote(str(wrapper)) + " hook --client codex",
@@ -249,7 +259,8 @@ def plan(home, clients, python, provider_python, budget, keychain_account, catal
             existing.append(rule)
         add_change(changes, path, json_bytes(settings), home)
     return {"schema_version": 1, "status": "planned", "runtime_version": version,
-            "clients": clients, "changes": changes, "root": str(root), "previous": previous}
+            "clients": clients, "storage_only": storage_only,
+            "changes": changes, "root": str(root), "previous": previous}
 
 
 def apply(receipt, home):
@@ -322,6 +333,8 @@ def main():
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--rollback", action="store_true")
     parser.add_argument("--clients", nargs="+", choices=list(SKILL_ROOTS), default=["codex", "claude"])
+    parser.add_argument("--storage-only", action="store_true",
+                        help="Set up an operation-only storage caller without agent skill or hook installation")
     parser.add_argument("--python", default=sys.executable)
     parser.add_argument("--provider-python", required=False)
     parser.add_argument("--catalog", type=pathlib.Path, help="Verified public catalog for an existing remote runtime without a source checkout")
@@ -343,7 +356,8 @@ def main():
             return
         receipt = plan(home, args.clients, args.python,
                        args.provider_python or home / ".local/share/skillry/jev/venv/bin/python",
-                       args.monthly_budget_eur, args.keychain_account, args.catalog)
+                       args.monthly_budget_eur, args.keychain_account, args.catalog,
+                       storage_only=args.storage_only)
         if args.apply:
             apply(receipt, home)
         print(json.dumps({"status": receipt["status"], "runtime_version": receipt["runtime_version"],

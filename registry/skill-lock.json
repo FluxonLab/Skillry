@@ -1,9 +1,9 @@
 {
   "version": "0.2.0",
   "counts": {
-    "original": 54,
+    "original": 55,
     "community": 3,
-    "total": 57
+    "total": 58
   },
   "skills": [
     {
@@ -175,6 +175,16 @@
       "files": 3,
       "checksum_scope": "component-tree-v1",
       "checksum": "bb2d6f8b6284797dfb0829d91ab662f9ec982db5d0aa4c8ecdc9e95a238aee9a"
+    },
+    {
+      "id": "storage-artifact-lifecycle",
+      "folder": "90-storage-artifact-lifecycle",
+      "department": "core-operations",
+      "origin": "original",
+      "lines": 147,
+      "files": 1,
+      "checksum_scope": "component-tree-v1",
+      "checksum": "aa1d25fd9128dd349812ac71db12352bf48735faaf5f9398c2e3d01084be975a"
     },
     {
       "id": "data-pipeline-review",

@@ -25,6 +25,7 @@ const HELP = `Skillry v${localVersion()} — installable, permission-bounded, mu
 Usage:
   skillry install [--apply] [--targets <p..>] [--community]     Install skills and agents
   skillry jev <status|assess|hook|synthetic|install> [args]      Optional bounded Jev advice
+  skillry storage [--config PATH] <command> [args]            Optional local storage lifecycle engine
   skillry validate                                            Lint structure, frontmatter, permissions
   skillry sync <discover|import|normalize> [args]             Import/normalize an upstream skill repo
   skillry lock [--apply]                                      Rebuild SHA-256 lockfiles
@@ -33,7 +34,8 @@ Usage:
   skillry help                                                Show this help
 
 Platforms (for --targets): claude  codex  cursor  copilot  antigravity
-Dry-run is the default; nothing is written without --apply.
+Skill installation previews by default; --apply is required to install.
+Storage actions use explicit commands and the owner's configured lifecycle scope.
 
 Examples:
   npx github:FluxonLab/Skillry install                          # preview, all platforms
@@ -95,6 +97,7 @@ switch (cmd) {
   case 'sync':     runPython('skill-sync.py', rest); break;
   case 'lock':     runPython('build-lock.py', rest); break;
   case 'jev':      runPython('jev.py', rest); break;
+  case 'storage':  runPython('storage.py', rest); break;
   case 'version':
   case '--version':
   case '-v':

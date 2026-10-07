@@ -15,6 +15,9 @@ SKILL_ROOTS = {
     "antigravity": ".gemini/config/skills",
     "antigravity-cli": ".gemini/antigravity-cli/skills",
 }
+# A menu or local service may consume typed operations without owning an agent
+# skill directory. Keep these identities separate from installation targets.
+OPERATION_CALLERS = frozenset(SKILL_ROOTS) | {"storage"}
 AGENT_ROOTS = {"codex": ".codex/agents", "claude": ".claude/agents", "cursor": ".cursor/agents"}
 ID = re.compile(r"^[a-z0-9][a-z0-9_-]{0,99}$")
 

@@ -48,6 +48,8 @@ PACKAGE_FILES = (
     "tools/jev/provider.py",
     "tools/jev/requirements.txt",
     "tools/jev/requirements.in",
+    "tools/storage.py",
+    "tools/storage/",
     "tools/release-gate.py",
     "tools/skill-sync.py",
     "tools/validate.py",

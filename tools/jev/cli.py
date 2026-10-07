@@ -9,7 +9,7 @@ import sys
 import time
 import uuid
 
-from .catalog import SKILL_ROOTS, digest, safe_file
+from .catalog import OPERATION_CALLERS, digest, safe_file
 from .core import MODES, REQUEST_MODES, Invalid, atomic_json, decide, locked_state, outcome
 
 
@@ -138,7 +138,7 @@ def synthetic_request(client, workspace, mode, allowed_ids):
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Skillry Jev: typed data operations and bounded advice")
     parser.add_argument("command", choices=("operate", "assess", "advise", "hook", "status", "synthetic", "configure"))
-    parser.add_argument("--client", choices=tuple(SKILL_ROOTS), default="codex")
+    parser.add_argument("--client", choices=tuple(sorted(OPERATION_CALLERS)), default="codex")
     parser.add_argument("--mode", choices=sorted(MODES), default="skill")
     parser.add_argument("--config-root", type=pathlib.Path, default=pathlib.Path.home() / ".skillry/jev")
     parser.add_argument("--apply", action="store_true")
@@ -153,7 +153,12 @@ def main(argv=None):
     parser.add_argument("--public-advice", action="store_true", help="Allow curated public/synthetic advise requests across workspaces; does not enable raw prompt hooks")
     args = parser.parse_args(argv)
     try:
+        if args.client == "storage" and args.command not in {"operate", "status"}:
+            raise Invalid("storage_command_not_allowed")
         config, catalog, inventory = load_config(args.config_root)
+        if (args.client == "storage" and
+                "storage" not in config.get("operation_clients", [])):
+            raise Invalid("storage_not_configured")
         state_root = args.config_root / "state"
         if args.command == "configure":
             # Owner-facing policy changes are explicit, separate from request data.
@@ -194,11 +199,15 @@ def main(argv=None):
             print(json.dumps({"enabled": config["enabled"], "source_version": config["runtime_version"],
                               "model": "jev-1.13.0", "sdk_version": "0.7.0",
                               "clients": config["clients"], "installed_records": len(inventory["records"]),
+                              "operation_clients": config.get("operation_clients", []),
                               "excluded_records": len(inventory["excluded"]),
                               "monthly_budget_eur": config["monthly_budget_eur"],
                               "public_advice": config.get("public_advice", False),
                               "billing_control": "provider" if config["monthly_budget_eur"] is None else "local_allocation",
-                              "secret_provider": config["secret"]["kind"], "api_verification": "see per-request evidence"}))
+                              "secret_provider": config["secret"]["kind"],
+                              "service": config["secret"].get("service") if config["secret"]["kind"] == "keychain" else None,
+                              "account": config["secret"].get("account") if config["secret"]["kind"] == "keychain" else None,
+                              "api_verification": "see per-request evidence"}))
             return
         if args.command == "synthetic":
             ids = [x.get("invocation_id", x["id"]) for x in inventory["records"] if x["client"] == args.client and x["kind"] == args.mode]

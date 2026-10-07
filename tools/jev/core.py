@@ -15,7 +15,7 @@ import unicodedata
 from contextlib import contextmanager
 from collections import Counter
 
-from .catalog import ID, SKILL_ROOTS, digest, eligible
+from .catalog import ID, OPERATION_CALLERS, digest, eligible
 
 MODEL = "jev-1.13.0"
 VERSION = "skillry-jev-v1"
@@ -147,8 +147,10 @@ def validate_request(raw):
     # These scopes stay local; they are never included in the API state.
     result = {k: text_field(raw.get(k), 2048 if k == "workspace" else 200)
               for k in ("client", "session_id", "request_id", "workspace", "identity", "tenant", "permission_version")}
-    if result["client"] not in SKILL_ROOTS:
+    if result["client"] not in OPERATION_CALLERS:
         raise Invalid("invalid_client")
+    if result["client"] == "storage" and raw["mode"] != "compute":
+        raise Invalid("storage_compute_only")
     if not pathlib.Path(result["workspace"]).is_absolute():
         raise Invalid("workspace_must_be_absolute")
     result["workspace"] = str(pathlib.Path(result["workspace"]).resolve())
@@ -357,7 +359,11 @@ def decide(raw, config, catalog, inventory, home, state_root, transport=provider
             return {**fallback, "reason": "sensitive_data"}
         if not config.get("enabled"):
             return fallback
-        default_permission = ({"data_classes": ["public", "synthetic"], "modes": REQUEST_MODES}
+        storage_permission = (request["client"] == "storage" and
+                              "storage" in config.get("operation_clients", []))
+        default_permission = ({"data_classes": ["public", "synthetic"], "modes": ["compute"]}
+                              if storage_permission else
+                              {"data_classes": ["public", "synthetic"], "modes": REQUEST_MODES}
                               if explicit_advice and config.get("public_advice") else {})
         permission = config.get("projects", {}).get(request["workspace"], default_permission)
         if request["data_class"] not in permission.get("data_classes", []) or mode not in permission.get("modes", []):
