@@ -3,6 +3,7 @@ import io
 import fcntl
 import json
 import os
+import plistlib
 from pathlib import Path
 import shutil
 import sqlite3
@@ -18,6 +19,26 @@ from storage import engine, transfer
 
 
 class StorageEngineTest(unittest.TestCase):
+    def test_app_retirement_rechecks_target_and_preserves_newly_active_bundle(self):
+        apps = self.root / "Applications"
+        apps.mkdir()
+        current, retired = [apps / name for name in ("Current.app", "Old.app")]
+        for bundle in (current, retired):
+            (bundle / "Contents").mkdir(parents=True)
+            (bundle / "Contents/Info.plist").write_bytes(plistlib.dumps({"CFBundleIdentifier": "example.app"}))
+        self.config.update(application_roots=[str(apps)], applications={"example.app": {"canonical": str(current)}}, retired_app_paths=[str(retired)])
+        calls = []
+        def probe(path):
+            calls.append(path)
+            return path == str(retired) and calls.count(path) > 1
+        with mock.patch.object(engine, "tree_open", side_effect=probe):
+            result = engine.apps_op(self.store, self.config, "apply")
+        self.assertEqual(result["applied"], [])
+        self.assertTrue(current.exists())
+        self.assertTrue(retired.exists())
+        self.assertEqual(calls.count(str(current)), 1)
+        self.assertEqual(calls.count(str(retired)), 2)
+
     def test_lsof_partial_result_still_protects_active_paths(self):
         with mock.patch.object(shutil, "which", return_value="/usr/sbin/lsof"), \
              mock.patch.object(subprocess, "run", return_value=SimpleNamespace(returncode=1, stdout=b"57052\n")):

@@ -1179,13 +1179,15 @@ def jev_classify(config, store, data_class, payload):
     return {"status": "computed", "result": result, "usage": usage, "api_calls": api_calls}
 
 
-def application_inventory(config, probe_active=True):
+def application_inventory(config, probe_active=True, only_paths=None):
     apps = []
     canonical = config["applications"]
     for root in config["application_roots"]:
         if not os.path.isdir(root) or os.path.islink(root):
             continue
         for entry in os.scandir(root):
+            if only_paths is not None and entry.path not in only_paths:
+                continue
             if entry.is_symlink() or not entry.name.endswith(".app") or not entry.is_dir(follow_symlinks=False):
                 continue
             info_path = os.path.join(entry.path, "Contents", "Info.plist")
@@ -1216,8 +1218,8 @@ def package_identity(path):
     return identity
 
 
-def apps_op(store, config, action):
-    apps = application_inventory(config)
+def apps_op(store, config, action, only_paths=None):
+    apps = application_inventory(config, only_paths=only_paths)
     if action == "inventory":
         return {"applications": apps}
     plans = []
@@ -1257,7 +1259,7 @@ def apps_op(store, config, action):
             # Retirement is whole-bundle only. The selected rollback is already
             # protected by its canonical role; nonselected retired builds are
             # removed only when explicitly listed in retired_app_paths.
-            fresh = next((x for x in apps_op(store, config, "preview")["plans"] if x["path"] == plan["path"]), None)
+            fresh = next((x for x in apps_op(store, config, "preview", {plan["path"]})["plans"] if x["path"] == plan["path"]), None)
             if fresh and fresh["eligible"]:
                 if store.get("paused", False):
                     break
