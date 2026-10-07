@@ -77,6 +77,7 @@ private enum StorageEngine {
 final class StorageModel: ObservableObject {
     static let shared = StorageModel()
     @Published private(set) var status: [String: Any] = [:]
+    @Published private(set) var loadedConfigPath: String?
     @Published private(set) var loading = false
     @Published private(set) var busy = false
     @Published private(set) var message: String?
@@ -97,7 +98,6 @@ final class StorageModel: ObservableObject {
         timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
             Task { @MainActor in await self?.tick() }
         }
-        if CommandLine.arguments.contains("--enable-login") { enableLoginFromLaunch() }
         Task { await refresh() }
     }
 
@@ -113,14 +113,22 @@ final class StorageModel: ObservableObject {
     var tools: [[String: Any]] { status["tools"] as? [[String: Any]] ?? [] }
     var recent: [[String: Any]] { status["recent"] as? [[String: Any]] ?? [] }
 
+    private func acceptStatus(_ response: [String: Any], for path: String) {
+        guard configPath == path else { return }
+        status = response
+        loadedConfigPath = path
+        lastUpdated = Date()
+        errorMessage = nil
+    }
+
     func refresh() async {
         if busy { return }
         loading = true
         defer { loading = false }
         do {
-            status = try await StorageEngine.call(configPath: configPath, arguments: ["status"])
-            lastUpdated = Date()
-            errorMessage = nil
+            let path = configPath
+            let response = try await StorageEngine.call(configPath: path, arguments: ["status"])
+            acceptStatus(response, for: path)
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -131,10 +139,10 @@ final class StorageModel: ObservableObject {
         ticking = true
         defer { ticking = false }
         do {
-            _ = try await StorageEngine.call(configPath: configPath, arguments: ["tick"])
-            status = try await StorageEngine.call(configPath: configPath, arguments: ["status"])
-            lastUpdated = Date()
-            errorMessage = nil
+            let path = configPath
+            _ = try await StorageEngine.call(configPath: path, arguments: ["tick"])
+            let response = try await StorageEngine.call(configPath: path, arguments: ["status"])
+            acceptStatus(response, for: path)
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -147,16 +155,16 @@ final class StorageModel: ObservableObject {
         errorMessage = nil
         defer { busy = false }
         do {
-            _ = try await StorageEngine.call(configPath: configPath, arguments: arguments, input: input)
-            let newStatus = try await StorageEngine.call(configPath: configPath, arguments: ["status"])
+            let path = configPath
+            _ = try await StorageEngine.call(configPath: path, arguments: arguments, input: input)
+            let newStatus = try await StorageEngine.call(configPath: path, arguments: ["status"])
             if arguments.first == "pause", newStatus["paused"] as? Bool != true {
                 throw EngineFailure(message: "Motor durdurma onayı vermedi.")
             }
             if arguments.first == "resume", newStatus["paused"] as? Bool != false {
                 throw EngineFailure(message: "Motor devam onayı vermedi.")
             }
-            status = newStatus
-            lastUpdated = Date()
+            acceptStatus(newStatus, for: path)
             message = success
         } catch {
             errorMessage = error.localizedDescription
@@ -198,6 +206,7 @@ final class StorageModel: ObservableObject {
     func switchConfig(to path: String) async {
         configPath = path
         status = [:]
+        loadedConfigPath = nil
         lastUpdated = nil
         await refresh()
     }
@@ -233,8 +242,9 @@ final class StorageModel: ObservableObject {
                                              input: ["jev": ["secret_kind": "keychain", "service": service, "account": account]])
             message = "Jev anahtarı Keychain'e kaydedildi ve motor bağlantısı ayarlandı."
             errorMessage = nil
-            status = try await StorageEngine.call(configPath: configPath, arguments: ["status"])
-            lastUpdated = Date()
+            let path = configPath
+            let response = try await StorageEngine.call(configPath: path, arguments: ["status"])
+            acceptStatus(response, for: path)
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -243,32 +253,31 @@ final class StorageModel: ObservableObject {
     func setLaunchAtLogin(_ enabled: Bool) {
         refreshLoginStatus()
         do {
-            if loginStatus == .notFound {
-                throw EngineFailure(message: "macOS bu uygulamanın oturum açılış kaydını bulamadı. Yüklü uygulamayı açın.")
-            }
             if enabled {
-                if loginStatus == .notRegistered { try SMAppService.mainApp.register() }
+                if loginStatus == .notRegistered || loginStatus == .notFound {
+                    try SMAppService.mainApp.register()
+                }
             } else if loginStatus == .enabled || loginStatus == .requiresApproval {
                 try SMAppService.mainApp.unregister()
             }
             refreshLoginStatus()
+            if enabled && loginStatus == .notFound {
+                throw EngineFailure(message: "macOS kayıt denemesinden sonra uygulamayı hâlâ bulamadı.")
+            }
             message = loginStatus == .enabled ? "Oturum açılışında başlatma etkin." :
                 loginStatus == .requiresApproval ? "Oturum açılışında başlatma macOS onayını bekliyor." :
                 "Oturum açılışında başlatma kapalı."
             errorMessage = nil
         } catch {
             refreshLoginStatus()
-            errorMessage = "Oturum açılış ayarı değiştirilemedi: \(error.localizedDescription)"
+            let detail = error as NSError
+            errorMessage = "Oturum açılış ayarı değiştirilemedi: \(detail.localizedDescription) (\(detail.domain) \(detail.code))."
         }
     }
 
-    private func enableLoginFromLaunch() {
+    func enableLoginFromLaunch() {
         refreshLoginStatus()
-        if loginStatus == .notFound {
-            errorMessage = "macOS bu uygulamanın oturum açılış kaydını bulamadı. Yüklü uygulamayı açın."
-            return
-        }
-        guard loginStatus == .notRegistered else { return }
+        guard loginStatus == .notRegistered || loginStatus == .notFound else { return }
         setLaunchAtLogin(true)
     }
 

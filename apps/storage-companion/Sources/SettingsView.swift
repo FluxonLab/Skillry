@@ -25,6 +25,7 @@ struct SettingsView: View {
     @State private var selectedConfig = ""
     @State private var loginEnabled = false
     @State private var validationError: String?
+    @State private var hydratedForPath: String?
 
     var body: some View {
         Form {
@@ -34,7 +35,7 @@ struct SettingsView: View {
                         .textFieldStyle(.roundedBorder)
                     Button("Seç") { chooseConfig() }
                     Button("Aç") { Task { await model.switchConfig(to: expanded(selectedConfig)) } }
-                        .disabled(selectedConfig.isEmpty)
+                        .disabled(selectedConfig.isEmpty || model.busy)
                 }
                 if !discoveredConfigs.isEmpty {
                     Picker("Bulunan profiller", selection: $selectedConfig) {
@@ -100,7 +101,7 @@ struct SettingsView: View {
                     Button("Seç") { if let path = chooseApplication() { rollbackPath = path } }
                 }
                 Button("Uygulama rolünü kaydet") { saveCanonicalApplication() }
-                    .disabled(canonicalBundle.isEmpty || canonicalPath.isEmpty || model.busy)
+                    .disabled(canonicalBundle.isEmpty || canonicalPath.isEmpty || !canSaveProfile)
                 Text("Bu seçim tek başına paket silmez; aday paketler ayrıca işaretlenir ve önizlenir.")
                     .font(.caption).foregroundStyle(.secondary)
             }
@@ -111,7 +112,7 @@ struct SettingsView: View {
                     TextField("Yerel bekleme (saat)", text: $graceHours).frame(width: 100)
                     TextField("Dosya sakinleşme süresi (saniye)", text: $settleSeconds).frame(width: 120)
                 }
-                Button("Kuralları kaydet") { saveConfig() }.disabled(model.busy)
+                Button("Kuralları kaydet") { saveConfig() }.disabled(!canSaveProfile)
                 Toggle("Oturum açılışında başlat", isOn: $loginEnabled)
                     .onChange(of: loginEnabled) { newValue in
                         if newValue != model.launchAtLogin {
@@ -146,7 +147,7 @@ struct SettingsView: View {
                     let value = key
                     key = ""
                     Task { await model.saveJevKey(value) }
-                }.disabled(key.isEmpty || model.busy)
+                }.disabled(key.isEmpty || !canSaveProfile)
                 Text("Anahtar yapılandırma dosyasına, komut satırına veya günlüğe yazılmaz. Mevcut değer gösterilmez.")
                     .font(.caption).foregroundStyle(.secondary)
             }
@@ -168,8 +169,18 @@ struct SettingsView: View {
             if let message = model.message { Text(message).foregroundStyle(.green) }
         }
         .formStyle(.grouped)
-        .onAppear { loadFromModel() }
-        .onChange(of: model.configPath) { _ in loadFromModel() }
+        .onAppear {
+            selectedConfig = model.configPath
+            model.refreshLoginStatus()
+            loginEnabled = model.launchAtLogin
+            hydrateIfNeeded()
+        }
+        .onChange(of: model.configPath) { _ in
+            selectedConfig = model.configPath
+            hydratedForPath = nil
+            hydrateIfNeeded()
+        }
+        .onChange(of: model.loadedConfigPath) { _ in hydrateIfNeeded() }
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
             model.refreshLoginStatus()
             loginEnabled = model.launchAtLogin
@@ -194,6 +205,17 @@ struct SettingsView: View {
         return found.sorted()
     }
 
+    private var canSaveProfile: Bool {
+        hydratedForPath == model.configPath && model.loadedConfigPath == model.configPath && !model.busy
+    }
+
+    private func hydrateIfNeeded() {
+        guard hydratedForPath != model.configPath,
+              model.loadedConfigPath == model.configPath,
+              model.status["config"] is [String: Any] else { return }
+        loadFromModel()
+    }
+
     private func loadFromModel() {
         selectedConfig = model.configPath
         let config = model.config
@@ -214,6 +236,7 @@ struct SettingsView: View {
         graceHours = String(Int(grace / 3600))
         settleSeconds = String((config["settle_seconds"] as? NSNumber)?.intValue ?? 120)
         loginEnabled = model.launchAtLogin
+        hydratedForPath = model.configPath
     }
 
     private func saveConfig() {
@@ -244,7 +267,12 @@ struct SettingsView: View {
         var completePatch = patch
         completePatch["jev"] = ["enabled": jevEnabled,
                                 "helper_path": jevHelper.isEmpty ? NSNull() : expanded(jevHelper)] as [String: Any]
-        Task { await model.run(["config", "set"], input: completePatch, success: "Ayarlar kaydedildi.") }
+        Task {
+            await model.run(["config", "set"], input: completePatch, success: "Ayarlar kaydedildi.")
+            if model.message == "Ayarlar kaydedildi." && model.loadedConfigPath == model.configPath {
+                loadFromModel()
+            }
+        }
     }
 
     private func pathField(_ label: String, text: Binding<String>) -> some View {

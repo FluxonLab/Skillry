@@ -24,6 +24,7 @@ private enum Section: String, CaseIterable {
 
 struct StorageMenuView: View {
     @ObservedObject var model: StorageModel
+    var onSettingsRequested: (() -> Void)? = nil
     @State private var section: Section = .overview
     @State private var cleanupPlan: [String: Any]?
     @State private var appPlan: [String: Any]?
@@ -85,7 +86,10 @@ struct StorageMenuView: View {
                 Text("Son güncelleme: \(model.lastUpdated?.formatted(date: .omitted, time: .shortened) ?? "—")")
                     .font(.caption).foregroundStyle(.secondary)
                 Spacer()
-                Button("Ayarlar") { StorageControlWindow.shared.show() }
+                Button("Ayarlar") {
+                    if let onSettingsRequested { onSettingsRequested() }
+                    else { StorageControlWindow.shared.show(tab: .settings) }
+                }
                 Button(model.paused ? "Devam et" : "Duraklat") {
                     Task { await model.run([model.paused ? "resume" : "pause"], success: model.paused ? "Motor devam ediyor." : "Motor duraklatıldı.") }
                 }
