@@ -3,19 +3,14 @@ import SwiftUI
 
 @main
 struct SkillryStorageApp: App {
-    @StateObject private var model = StorageModel()
+    @NSApplicationDelegateAdaptor(StorageAppDelegate.self) private var appDelegate
+    @StateObject private var model = StorageModel.shared
 
     var body: some Scene {
         MenuBarExtra("Skillry Storage", systemImage: "externaldrive") {
             StorageMenuView(model: model)
         }
         .menuBarExtraStyle(.window)
-
-        Window("Skillry Storage Ayarları", id: "settings") {
-            SettingsView(model: model)
-                .frame(minWidth: 560, minHeight: 550)
-        }
-        .defaultSize(width: 620, height: 650)
     }
 }
 
@@ -29,7 +24,6 @@ private enum Section: String, CaseIterable {
 
 struct StorageMenuView: View {
     @ObservedObject var model: StorageModel
-    @Environment(\.openWindow) private var openWindow
     @State private var section: Section = .overview
     @State private var cleanupPlan: [String: Any]?
     @State private var appPlan: [String: Any]?
@@ -91,7 +85,7 @@ struct StorageMenuView: View {
                 Text("Son güncelleme: \(model.lastUpdated?.formatted(date: .omitted, time: .shortened) ?? "—")")
                     .font(.caption).foregroundStyle(.secondary)
                 Spacer()
-                Button("Ayarlar") { openWindow(id: "settings") }
+                Button("Ayarlar") { StorageControlWindow.shared.show() }
                 Button(model.paused ? "Devam et" : "Duraklat") {
                     Task { await model.run([model.paused ? "resume" : "pause"], success: model.paused ? "Motor devam ediyor." : "Motor duraklatıldı.") }
                 }
@@ -121,7 +115,8 @@ struct StorageMenuView: View {
     private var overview: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 16) {
-                metric("Temizlik adayı", Display.bytes(model.summary["ready_cleanup_bytes"]))
+                metric("Temizlik adayı", model.summary["ready_cleanup_bytes"] is NSNumber ?
+                       Display.bytes(model.summary["ready_cleanup_bytes"]) : "Önizleme gerekli")
                 metric("İnceleme", Display.bytes(model.summary["review_bytes"]))
                 metric("Ölçülen alan artışı", Display.bytes(model.summary["freed_bytes"]))
             }
@@ -175,7 +170,7 @@ struct StorageMenuView: View {
     private var cleanup: some View {
         VStack(alignment: .leading, spacing: 10) {
             heading("Yeniden üretilebilir çıktılar")
-            Text("Hazır aday: \(Display.bytes(model.summary["ready_cleanup_bytes"])) · İnceleme: \(Display.bytes(model.summary["review_bytes"]))")
+            Text("Hazır aday: \(model.summary["ready_cleanup_bytes"] is NSNumber ? Display.bytes(model.summary["ready_cleanup_bytes"]) : "Önizleme gerekli") · İnceleme: \(Display.bytes(model.summary["review_bytes"]))")
                 .font(.callout)
             HStack {
                 Button("Önizlemeyi hesapla") {
@@ -304,9 +299,9 @@ struct StorageMenuView: View {
     private var applications: some View {
         VStack(alignment: .leading, spacing: 10) {
             heading("Uygulama paketleri")
-            if model.applications.isEmpty { empty("Uygulama envanteri henüz yok.") }
-            ForEach(model.applications.indices, id: \.self) { index in
-                let item = model.applications[index]
+            if displayedApplications.isEmpty { empty("Uygulama envanteri henüz yok.") }
+            ForEach(displayedApplications.indices, id: \.self) { index in
+                let item = displayedApplications[index]
                 VStack(alignment: .leading, spacing: 3) {
                     HStack {
                         Text(Display.text(item, "name")).fontWeight(.medium)
@@ -316,6 +311,8 @@ struct StorageMenuView: View {
                     }
                     Text("\(Display.text(item, "version")) · \(Display.text(item, "path"))")
                         .font(.caption).foregroundStyle(.secondary).lineLimit(2)
+                    Text("Kullanım: \(appActivityLabel(item))")
+                        .font(.caption).foregroundStyle(.secondary)
                     if item["is_canonical"] as? Bool != true, item["rollback"] as? Bool != true {
                         let path = Display.text(item, "path", fallback: "")
                         Button(retiredPaths.contains(path) ? "Adaylıktan çıkar" : "Eski paket adayı yap") {
@@ -352,6 +349,15 @@ struct StorageMenuView: View {
 
     private var eligibleApps: [[String: Any]] {
         (appPlan?["plans"] as? [[String: Any]] ?? []).filter { $0["eligible"] as? Bool == true }
+    }
+
+    private var displayedApplications: [[String: Any]] {
+        appPlan?["applications"] as? [[String: Any]] ?? model.applications
+    }
+
+    private func appActivityLabel(_ item: [String: Any]) -> String {
+        guard let active = item["active"] as? Bool else { return "Bilinmiyor; envanter önizlemesi gerekir" }
+        return active ? "Açık" : "Kapalı"
     }
 
     private var retiredPaths: [String] { model.config["retired_app_paths"] as? [String] ?? [] }

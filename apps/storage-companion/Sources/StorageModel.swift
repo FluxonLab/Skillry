@@ -75,6 +75,7 @@ private enum StorageEngine {
 
 @MainActor
 final class StorageModel: ObservableObject {
+    static let shared = StorageModel()
     @Published private(set) var status: [String: Any] = [:]
     @Published private(set) var loading = false
     @Published private(set) var busy = false
