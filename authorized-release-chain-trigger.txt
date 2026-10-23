@@ -1,0 +1,1 @@
+Authorized by repository owner on 2026-08-21. This transient trigger is removed by the v1.2.1 tree.
