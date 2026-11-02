@@ -15,6 +15,8 @@ All notable changes to Skillry are documented here. The format is based on
 
 ### Fixed
 
+- Storage cleanup: a generated path that another cleanup removes between the check and the
+  removal, or while its size is counted, is skipped instead of stopping the whole run.
 - Repository adapter generation no longer overwrites canonical AGENTS.md or
   reactivates historical Factory policy. CI checks freshness without writes.
 - Portable installation remains skills/agents only; five-target release checks

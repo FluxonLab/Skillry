@@ -86,6 +86,27 @@ class StorageEngineTest(unittest.TestCase):
         engine.cleanup_op(self.store, self.config, True)
         self.assertFalse((path / "dist").exists())
 
+    def test_cleanup_goes_on_when_another_cleanup_took_a_path_first(self):
+        path = self.workspace_root / "job"
+        path.mkdir()
+        args = type("Args", (), {"path": str(path), "outputs": '["build", "dist"]', "generated_path": [], "name": "job",
+                                "owner": "fixture", "pid": None, "state": "open"})()
+        ident = engine.workspace_op(self.store, self.config, "register", args)["id"]
+        for output in ("build", "dist"):
+            (path / output).mkdir()
+            (path / output / "generated").write_text("compiled")
+        engine.workspace_op(self.store, self.config, "close", type("Args", (), {"id": ident, "accepted": True})())
+        checked = engine.cleanup_candidate
+        def racing(row, relative, config, measure=True):
+            result = checked(row, relative, config, measure)
+            if not measure and relative == "build":
+                shutil.rmtree(path / "build")
+            return result
+        with mock.patch.object(engine, "cleanup_candidate", side_effect=racing):
+            outcome = engine.cleanup_op(self.store, self.config, True)
+        self.assertEqual(outcome["removed"], [str(path / "dist")])
+        self.assertFalse((path / "dist").exists())
+
     def test_register_reopens_closed_workspace_before_cleanup(self):
         path, ident = self.workspace()
         (path / "node_modules").mkdir()

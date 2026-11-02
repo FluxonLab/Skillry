@@ -485,15 +485,35 @@ def cleanup_candidates(store, config):
 
 
 def tree_bytes(path):
-    if os.path.isfile(path):
-        return os.lstat(path).st_size
+    # Another cleanup (the disk guard runs one too) may take entries while they are counted.
+    try:
+        if os.path.isfile(path):
+            return os.lstat(path).st_size
+    except FileNotFoundError:
+        return 0
     total = 0
     for base, dirs, files in os.walk(path, followlinks=False):
         for name in dirs + files:
             if name in dirs and not os.path.islink(os.path.join(base, name)):
                 continue
-            total += os.stat(os.path.join(base, name), follow_symlinks=False).st_size
+            try:
+                total += os.stat(os.path.join(base, name), follow_symlinks=False).st_size
+            except FileNotFoundError:
+                continue
     return total
+
+
+def remove_generated(path):
+    """Remove one checked candidate. FileNotFoundError means it was already gone;
+    entries of a tree that vanish during the removal are not an error."""
+    def vanished(function, failed, error):
+        error = error[1] if isinstance(error, tuple) else error
+        if not isinstance(error, FileNotFoundError) or failed == path:
+            raise error
+    if os.path.isdir(path):
+        shutil.rmtree(path, **({"onexc": vanished} if sys.version_info >= (3, 12) else {"onerror": vanished}))
+    else:
+        os.unlink(path)
 
 
 def free_bytes(path):
@@ -534,10 +554,11 @@ def cleanup_op(store, config, apply):
             if store.get("paused", False):
                 break
             before = free_bytes(os.path.dirname(item["path"]))
-            if os.path.isdir(item["path"]):
-                shutil.rmtree(item["path"])
-            else:
-                os.unlink(item["path"])
+            try:
+                remove_generated(item["path"])
+            except FileNotFoundError:
+                # Taken by another cleanup between the check and the removal.
+                continue
             record_removed(store, item["bytes"], before, free_bytes(os.path.dirname(item["path"])))
             removed.append(item["path"])
             store.event("cleanup", "removed", "Generated output removed", item["path"])
