@@ -25,7 +25,7 @@
     {
       "name": "skillry-core-operations",
       "source": "./plugins/core-operations",
-      "description": "Repo diagnostics and codebase mapping, architecture review and ADRs, specs and implementation planning, refactor safety, diff and regression review, release readiness (deploy preflight, rollback, handoff), and project bootstrap."
+      "description": "Repo diagnostics, architecture review, planning, refactor safety, diff review, release readiness, project bootstrap, and optional storage artifact lifecycle guidance."
     },
     {
       "name": "skillry-data-ml-ai-engineering",
