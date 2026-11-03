@@ -40,6 +40,10 @@ During `tick`, ambiguous intake files enter persistent review before a bounded
 Jev batch is sent. The batch contains only fixed synthetic technical descriptors
 and synthetic IDs. Suggestions appear in queue `suggestion`; they do not
 authorize archiving or deletion. A provider gap leaves those files in review.
+An explicit owner `inbox classify` as ordinary or critical is final for that
+file: it is recorded against the file's device, inode, size and mtime, and Jev
+does not re-hold it. If the file changes, the record no longer matches and the
+file returns to review.
 
 Workspace cleanup requires an explicitly registered path inside an allowed
 root, declared relative generated outputs, accepted closure, no hold, no live

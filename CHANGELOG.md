@@ -17,6 +17,9 @@ All notable changes to Skillry are documented here. The format is based on
 
 - Storage cleanup: a generated path that another cleanup removes between the check and the
   removal, or while its size is counted, is skipped instead of stopping the whole run.
+- Storage inbox: an explicit owner `inbox classify --category ordinary|critical` for a file of
+  unrecognised type (for example `.tar` or `.zip`) is no longer put back in review when the job
+  settles. The decision is bound to the file's identity; a changed file returns to review.
 - Repository adapter generation no longer overwrites canonical AGENTS.md or
   reactivates historical Factory policy. CI checks freshness without writes.
 - Portable installation remains skills/agents only; five-target release checks

@@ -871,6 +871,8 @@ def inbox_op(store, config, action, args):
     if category in ("ordinary", "critical"):
         require_identity(row)
         eligible_intake_type(row["path"])
+    from .classification import record_owner_class
+    record_owner_class(store, row, category)
     job_update(store, row["id"], category=category, state="pending" if category in ("ordinary", "critical") else "review", error=None)
     store.event("inbox_classify", category, "Inbox class set", row["path"])
     return {"queue": public_jobs(store)}
@@ -1037,13 +1039,14 @@ def tick(store, config):
     try:
         intake_scan(store, config)
         if not store.get("paused", False):
-            from .classification import classify_pending, KNOWN_DURABLE
+            from .classification import classify_pending, owner_classified, KNOWN_DURABLE
             try:
                 classification = classify_pending(config, store, jev_classify, job_update)
                 hold_ids = set(classification.get("hold_ids", []))
             except Exception:
-                hold_ids = {row["id"] for row in store.db.execute("SELECT id,path FROM jobs WHERE category='ordinary'")
-                            if pathlib.Path(row["path"]).suffix.casefold() not in KNOWN_DURABLE}
+                hold_ids = {row["id"] for row in store.db.execute("SELECT * FROM jobs WHERE category='ordinary'")
+                            if pathlib.Path(row["path"]).suffix.casefold() not in KNOWN_DURABLE
+                            and not owner_classified(store, row)}
                 classification = {"provider_status": "unavailable", "hold_ids": sorted(hold_ids), "error": "classification_failed"}
         else:
             hold_ids = set()

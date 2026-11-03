@@ -8,7 +8,7 @@ import unittest
 from unittest.mock import Mock
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / 'tools'))
-from storage.classification import classify_pending
+from storage.classification import classify_pending, record_owner_class
 
 
 class Store:
@@ -116,6 +116,39 @@ class ClassificationTests(unittest.TestCase):
         self.assertEqual(result['provider_status'], 'unavailable')
         self.assertEqual(after, before)
         self.assertIsNone(self.store.get('storage_suggestion_' + ident))
+
+    def row(self, ident):
+        return self.store.db.execute('SELECT * FROM jobs WHERE id=?', (ident,)).fetchone()
+
+    def test_owner_classified_unknown_file_is_not_put_back_in_review(self):
+        ident = add_file(self.store, self.root, 'delivery.tar', category='ordinary', state='settling')
+        record_owner_class(self.store, self.row(ident), 'ordinary')
+        provider = Mock()
+        result = self.run_classify(provider)
+        self.assertNotIn(ident, result['hold_ids'])
+        self.assertEqual(tuple(self.store.db.execute('SELECT category,state FROM jobs').fetchone()),
+                         ('ordinary', 'settling'))
+        provider.assert_not_called()
+
+    def test_owner_class_is_bound_to_file_identity(self):
+        ident = add_file(self.store, self.root, 'delivery.tar', category='ordinary', state='settling')
+        record_owner_class(self.store, self.row(ident), 'ordinary')
+        path = self.root / 'delivery.tar'
+        path.write_bytes(b'replaced after the owner decided')
+        info = path.stat()
+        update(self.store, ident, size=info.st_size, mtime_ns=info.st_mtime_ns,
+               dev=info.st_dev, ino=info.st_ino)
+        result = self.run_classify(Mock(return_value={'status': 'unavailable', 'result': None}))
+        self.assertIn(ident, result['hold_ids'])
+        self.assertEqual(tuple(self.store.db.execute('SELECT category,state FROM jobs').fetchone()),
+                         ('review', 'review'))
+
+    def test_review_choice_clears_owner_class(self):
+        ident = add_file(self.store, self.root, 'delivery.tar', category='ordinary', state='settling')
+        record_owner_class(self.store, self.row(ident), 'ordinary')
+        record_owner_class(self.store, self.row(ident), 'review')
+        result = self.run_classify(Mock(return_value={'status': 'unavailable', 'result': None}))
+        self.assertIn(ident, result['hold_ids'])
 
     def test_paused_and_known_durable_do_not_call_provider(self):
         add_file(self.store, self.root, 'known.pdf', category='ordinary', state='settling')

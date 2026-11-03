@@ -1,6 +1,7 @@
 """Synthetic storage lifecycle evidence; no host archive or user files."""
 import io
 import fcntl
+import hashlib
 import json
 import os
 import plistlib
@@ -467,6 +468,31 @@ class StorageEngineTest(unittest.TestCase):
         self.assertNotIn("private source content", json.dumps(captured[0][1]))
         self.assertEqual(self.store.rows("jobs")[0]["state"], "review")
         self.assertTrue(source.exists())
+
+    def test_owner_classified_unknown_type_archives_after_settling(self):
+        # Regression: an owner classification of an unrecognised type (.tar) was put
+        # back in review once the job settled, so it could never reach the archive.
+        source = self.intake / "delivery.tar"
+        source.write_bytes(b"owner-approved package")
+        self.config["jev"] = {**self.config["jev"], "enabled": True}
+        self.config["settle_seconds"] = 3600
+        with mock.patch.object(engine, "jev_classify", return_value={"status": "unavailable", "result": None}):
+            engine.tick(self.store, self.config)
+            job = self.store.rows("jobs")[0]
+            self.assertEqual((job["category"], job["state"]), ("review", "review"))
+            engine.inbox_op(self.store, self.config, "classify",
+                            type("Args", (), {"id": job["id"], "category": "ordinary"})())
+            engine.tick(self.store, self.config)
+            self.assertEqual(self.store.rows("jobs")[0]["state"], "settling")
+            engine.tick(self.store, self.config)
+            job = self.store.rows("jobs")[0]
+            self.assertEqual((job["category"], job["state"]), ("ordinary", "settling"))
+            self.config["settle_seconds"] = 0
+            engine.tick(self.store, self.config)
+        job = self.store.rows("jobs")[0]
+        self.assertEqual(job["category"], "ordinary")
+        self.assertIsNotNone(job["receipt"])
+        self.assertEqual(json.loads(job["receipt"])["sha256"], hashlib.sha256(b"owner-approved package").hexdigest())
 
 
 if __name__ == "__main__":

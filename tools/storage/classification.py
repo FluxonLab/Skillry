@@ -51,6 +51,33 @@ def fingerprint(row, config):
     return hashlib.sha256(json.dumps(material, separators=(',', ':')).encode()).hexdigest()
 
 
+OWNER_KEY = 'storage_owner_class_'
+OWNER_CATEGORIES = ('ordinary', 'critical')
+IDENTITY = ('dev', 'ino', 'size', 'mtime_ns')
+
+
+def record_owner_class(store, row, category):
+    """Remember an explicit owner classification for this exact file.
+
+    The record is bound to the file identity the owner classified. A replaced or
+    edited file no longer matches it and falls back to the normal review hold.
+    Any other category clears the record.
+    """
+    if category in OWNER_CATEGORIES:
+        store.set(OWNER_KEY + row['id'], {'category': category, 'at': time.time(),
+                                          **{key: row[key] for key in IDENTITY}})
+    else:
+        store.set(OWNER_KEY + row['id'], None)
+
+
+def owner_classified(store, row):
+    """True when the owner classified this unchanged file into its current archive category."""
+    record = store.get(OWNER_KEY + row['id'])
+    return (isinstance(record, dict) and record.get('category') in OWNER_CATEGORIES and
+            record.get('category') == row['category'] and
+            all(record.get(key) == row[key] for key in IDENTITY))
+
+
 def local_kind(row, intake):
     """Return only a closed technical type; never return a source-derived string."""
     path = Path(row['path'])
@@ -90,6 +117,11 @@ def classify_pending(config, store, jev_call, job_update):
     for row in rows:
         kind = local_kind(row, config['intake_dir'])
         if not kind:
+            summary['skipped'] += 1
+            continue
+        # An explicit owner classification of this unchanged file is final;
+        # Jev only advises on files nobody has decided about yet.
+        if owner_classified(store, row):
             summary['skipped'] += 1
             continue
         # The engine's default ordinary class covers unknown extensions. Hold
