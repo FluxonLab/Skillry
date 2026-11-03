@@ -447,10 +447,32 @@ class StorageEngineTest(unittest.TestCase):
         engine.job_update(self.store, row["id"], state="evicting", digest=engine.digest_file(source),
                           claim_path=claim, claim_started_at=engine.now())
         os.rename(source, claim)
-        engine.intake_scan(self.store, self.config)
+        engine.reconcile_claims(self.store)
         self.assertEqual(source.read_bytes(), b"claim bytes")
         self.assertFalse(os.path.lexists(claim))
         self.assertEqual(self.store.rows("jobs")[0]["state"], "grace")
+
+    def test_status_and_inbox_list_leave_a_live_eviction_claim_alone(self):
+        # Regression (3 Nov): status and inbox list ran claim recovery outside tick.lock and moved
+        # a file back while a tick was evicting it, so the tick failed in the middle of eviction.
+        source = self.intake / "claim.txt"
+        source.write_bytes(b"claim bytes")
+        engine.intake_scan(self.store, self.config)
+        row = self.store.rows("jobs")[0]
+        claim = str(source) + ".skillry-evict-" + row["id"]
+        engine.job_update(self.store, row["id"], state="evicting", digest=engine.digest_file(source),
+                          claim_path=claim, claim_started_at=engine.now())
+        os.rename(source, claim)
+        engine.status(self.store, self.config, local_only=True)
+        engine.inbox_op(self.store, self.config, "list", type("Args", (), {"id": None})())
+        self.assertTrue(os.path.lexists(claim))
+        self.assertFalse(source.exists())
+        self.assertEqual(self.store.rows("jobs")[0]["state"], "evicting")
+        engine.tick(self.store, self.config)
+        self.assertFalse(os.path.lexists(claim))
+        job = self.store.rows("jobs")[0]
+        self.assertEqual(job["state"], "evicted")
+        self.assertIsNotNone(job["receipt"])
 
     def test_crash_after_claim_unlink_marks_evicted_without_claimed_gain(self):
         source = self.intake / "claim.txt"
@@ -462,7 +484,7 @@ class StorageEngineTest(unittest.TestCase):
                           claim_path=claim, claim_started_at=engine.now())
         os.rename(source, claim)
         os.unlink(claim)
-        engine.intake_scan(self.store, self.config)
+        engine.reconcile_claims(self.store)
         self.assertEqual(self.store.rows("jobs")[0]["state"], "evicted")
         self.assertIsNone(self.store.get("observed_gain_bytes"))
         self.assertEqual(self.store.get("logical_bytes_removed", 0), 0)

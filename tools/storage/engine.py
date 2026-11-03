@@ -718,7 +718,6 @@ def intake_scan(store, config):
     intake = config["intake_dir"]
     if not intake or not os.path.isdir(intake) or os.path.islink(intake):
         return
-    reconcile_claims(store)
     for entry in os.scandir(intake):
         if entry.is_symlink():
             continue
@@ -1141,6 +1140,9 @@ def tick(store, config):
     errors = []
     classification = None
     try:
+        # Claim recovery moves files, so it runs only here under tick.lock. Run from status or
+        # inbox it took a live eviction's claim for an interrupted one and moved the file back.
+        reconcile_claims(store)
         intake_scan(store, config)
         if not store.get("paused", False):
             from .classification import classify_pending, owner_classified, KNOWN_DURABLE

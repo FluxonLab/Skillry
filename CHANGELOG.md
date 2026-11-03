@@ -15,6 +15,9 @@ All notable changes to Skillry are documented here. The format is based on
 
 ### Fixed
 
+- Storage inbox: `status` and `inbox` commands no longer run eviction-claim recovery. Outside the
+  tick lock it took a live eviction's claim for an interrupted one and moved the file back, so the
+  tick failed in the middle of eviction. Recovery now runs only at the start of `tick`.
 - Storage cleanup no longer starves inbox transfers. Each output used to cost two `lsof` scans of
   every process (5-6 seconds on a loaded Mac), and one tick spent hours in cleanup while holding
   the tick lock. A pass now batches its open-process scans, rescans evidence older than 15

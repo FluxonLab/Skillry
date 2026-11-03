@@ -79,6 +79,8 @@ deterministic private claim name, and verifies that moved inode before unlink.
 On restart, a matching claim is restored for normal retry. Conflicting original
 and claim paths stay in `review_claim`. If unlink completed before the DB state
 commit, recovery marks the job evicted without claiming an unmeasured gain.
+Recovery runs only at the start of `tick`, under the tick lock; `status` and
+`inbox` commands never move a claim, so they cannot disturb a live eviction.
 `summary.logical_bytes_removed` counts removed source/output bytes.
 `summary.freed_bytes` is the sum of observed positive filesystem free-space
 changes after removals (null before the first measurement), and
