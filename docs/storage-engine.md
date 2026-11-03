@@ -52,6 +52,14 @@ no open process. Historical unregistered worktrees have no automatic path to
 deletion. `finish` records worker delivery/failure and clears the process PID;
 it does not close the workspace.
 
+A cleanup pass gathers open-process evidence in batches: one `lsof` scan of
+working directories and one batched `lsof` scan for each window of up to 200
+outputs, instead of two scans per output. Evidence older than 15 seconds is
+scanned again before a removal, and a failed scan keeps its whole batch.
+`cleanup apply` checks each output immediately before removing it. Inside
+`tick`, cleanup stops after 300 seconds and continues on the next tick, so
+inbox transfers never wait behind a long cleanup pass.
+
 The inbox accepts completed standalone files. Directories, app bundles,
 databases and partial downloads stay in review/waiting. Ordinary files use one
 verified archive and a receipt; critical files require a second independent

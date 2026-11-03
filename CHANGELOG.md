@@ -15,6 +15,11 @@ All notable changes to Skillry are documented here. The format is based on
 
 ### Fixed
 
+- Storage cleanup no longer starves inbox transfers. Each output used to cost two `lsof` scans of
+  every process (5-6 seconds on a loaded Mac), and one tick spent hours in cleanup while holding
+  the tick lock. A pass now batches its open-process scans, rescans evidence older than 15
+  seconds before a removal, and a tick's cleanup stops after 300 seconds and resumes on the next
+  tick.
 - Storage cleanup: a generated path that another cleanup removes between the check and the
   removal, or while its size is counted, is skipped instead of stopping the whole run.
 - Storage inbox: an explicit owner `inbox classify --category ordinary|critical` for a file of

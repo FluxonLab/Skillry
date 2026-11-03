@@ -98,8 +98,8 @@ class StorageEngineTest(unittest.TestCase):
             (path / output / "generated").write_text("compiled")
         engine.workspace_op(self.store, self.config, "close", type("Args", (), {"id": ident, "accepted": True})())
         checked = engine.cleanup_candidate
-        def racing(row, relative, config, measure=True):
-            result = checked(row, relative, config, measure)
+        def racing(row, relative, config, measure=True, evidence=None):
+            result = checked(row, relative, config, measure, evidence)
             if not measure and relative == "build":
                 shutil.rmtree(path / "build")
             return result
@@ -208,12 +208,94 @@ class StorageEngineTest(unittest.TestCase):
         (modules / ".bin" / "tool").symlink_to(external / "keep.js")
         (modules / ".pnpm" / "package").symlink_to(external, target_is_directory=True)
         engine.workspace_op(self.store, self.config, "close", type("Args", (), {"id": ident, "accepted": True})())
-        with mock.patch.object(engine, "workspace_process_active", return_value=False), mock.patch.object(engine, "path_open", return_value=False):
+        with mock.patch.object(engine, "process_cwds", return_value=[]), mock.patch.object(engine, "lsof_holders", return_value=False):
             preview = engine.cleanup_op(self.store, self.config, False)
             self.assertTrue(preview["candidates"][0]["eligible"])
             engine.cleanup_op(self.store, self.config, True)
         self.assertFalse(modules.exists())
         self.assertEqual((external / "keep.js").read_text(), "preserve")
+
+    def closed_outputs(self, count):
+        outputs = []
+        for index in range(count):
+            path = self.workspace_root / f"job{index}"
+            path.mkdir()
+            args = type("Args", (), {"path": str(path), "outputs": '["dist"]', "generated_path": [], "name": path.name,
+                                    "owner": "fixture", "pid": None, "state": "open"})()
+            ident = engine.workspace_op(self.store, self.config, "register", args)["id"]
+            (path / "dist").mkdir()
+            (path / "dist" / "generated").write_text("compiled")
+            engine.workspace_op(self.store, self.config, "close", type("Args", (), {"id": ident, "accepted": True})())
+            outputs.append(path / "dist")
+        return outputs
+
+    def fake_lsof(self, held=(), fail=False):
+        """Answer lsof like a machine where no process works in the fixtures; other commands run for real."""
+        calls, real_run = [], subprocess.run
+        def run(argv, **kwargs):
+            if argv[0] != "lsof":
+                return real_run(argv, **kwargs)
+            calls.append(argv)
+            if argv[1] == "-Fn":
+                return SimpleNamespace(returncode=0, stdout=b"p1\nfcwd\nn/\n")
+            if fail:
+                raise subprocess.TimeoutExpired(argv, 8)
+            hit = any(str(path) in argv[2:] for path in held)
+            return SimpleNamespace(returncode=0 if hit else 1, stdout=b"4242\n" if hit else b"")
+        return calls, mock.patch.object(subprocess, "run", side_effect=run)
+
+    def test_cleanup_pass_scans_processes_once_instead_of_twice_per_output(self):
+        outputs = self.closed_outputs(5)
+        calls, lsof = self.fake_lsof()
+        with mock.patch.object(shutil, "which", return_value="/usr/sbin/lsof"), lsof:
+            outcome = engine.cleanup_op(self.store, self.config, True)
+        self.assertEqual(sorted(outcome["removed"]), sorted(map(str, outputs)))
+        self.assertEqual([argv[:2] for argv in calls], [["lsof", "-Fn"], ["lsof", "-t"]])
+        self.assertEqual(sorted(calls[1][2:]), sorted(map(str, outputs)))
+
+    def test_batched_scan_protects_only_the_output_a_process_holds(self):
+        outputs = self.closed_outputs(4)
+        calls, lsof = self.fake_lsof(held=[outputs[2]])
+        with mock.patch.object(shutil, "which", return_value="/usr/sbin/lsof"), lsof:
+            preview = engine.cleanup_op(self.store, self.config, False)
+            outcome = engine.cleanup_op(self.store, self.config, True)
+        self.assertEqual([item["reason"] for item in preview["candidates"]], [None, None, "open_process", None])
+        self.assertEqual(sorted(outcome["removed"]), sorted(str(path) for path in outputs if path != outputs[2]))
+        self.assertTrue(outputs[2].exists())
+
+    def test_failed_batch_scan_protects_every_output_without_splitting(self):
+        outputs = self.closed_outputs(4)
+        calls, lsof = self.fake_lsof(fail=True)
+        with mock.patch.object(shutil, "which", return_value="/usr/sbin/lsof"), lsof:
+            outcome = engine.cleanup_op(self.store, self.config, True)
+        self.assertEqual(outcome["removed"], [])
+        self.assertTrue(all(path.exists() for path in outputs))
+        self.assertEqual(len([argv for argv in calls if argv[1] == "-t"]), 1)
+
+    def test_stale_process_evidence_is_scanned_again_before_removal(self):
+        outputs = self.closed_outputs(3)
+        calls, lsof = self.fake_lsof()
+        with mock.patch.object(shutil, "which", return_value="/usr/sbin/lsof"), lsof, \
+             mock.patch.object(engine.ProcessEvidence, "MAX_AGE", -1):
+            outcome = engine.cleanup_op(self.store, self.config, True)
+        self.assertEqual(len(outcome["removed"]), 3)
+        self.assertEqual(len([argv for argv in calls if argv[1] == "-Fn"]), 3)
+        self.assertEqual([len(argv) - 2 for argv in calls if argv[1] == "-t"], [3, 2, 1])
+
+    def test_tick_cleanup_stops_at_its_budget_and_resumes_on_the_next_tick(self):
+        outputs = self.closed_outputs(2)
+        (self.intake / "delivery.mp4").write_bytes(b"inbox file")
+        self.store.set("cleanup_pending", False)
+        calls, lsof = self.fake_lsof()
+        with mock.patch.object(shutil, "which", return_value="/usr/sbin/lsof"), lsof:
+            with mock.patch.object(engine, "CLEANUP_TICK_SECONDS", 0):
+                engine.tick(self.store, self.config)
+            self.assertIsNotNone(self.store.rows("jobs")[0]["receipt"])
+            self.assertTrue(all(path.exists() for path in outputs))
+            self.assertTrue(self.store.get("cleanup_pending"))
+            engine.tick(self.store, self.config)
+        self.assertFalse(any(path.exists() for path in outputs))
+        self.assertFalse(self.store.get("cleanup_pending"))
 
     def test_status_uses_cached_cleanup_preview(self):
         path, ident = self.workspace()

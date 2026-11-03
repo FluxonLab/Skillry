@@ -333,16 +333,38 @@ def pid_running(pid):
         return True
 
 
-def path_open(path):
+def lsof_holders(paths):
+    """One lsof scan of paths: False when no process holds any of them, True when one does,
+    None when the scan failed or lsof is missing."""
     if not shutil.which("lsof"):
-        return True
+        return None
     try:
-        result = subprocess.run(["lsof", "-t", path], capture_output=True, timeout=8, check=False)
-        # macOS lsof can return 1 for an incomplete scan while still reporting
-        # matching PIDs. Those matches must protect the file from retirement.
-        return bool(result.stdout.strip()) or result.returncode not in (0, 1)
+        result = subprocess.run(["lsof", "-t", *paths], capture_output=True, timeout=8, check=False)
     except (OSError, subprocess.TimeoutExpired):
+        return None
+    # macOS lsof can return 1 for an incomplete scan while still reporting
+    # matching PIDs. Those matches must protect the file from retirement.
+    if result.stdout.strip():
         return True
+    return False if result.returncode in (0, 1) else None
+
+
+def path_open(path):
+    return lsof_holders([path]) is not False
+
+
+def open_paths(paths):
+    """The paths a process holds open. One scan covers the whole batch; only a batch that
+    reports a holder is split, and a failed scan protects its whole batch."""
+    if not paths:
+        return set()
+    held = lsof_holders(paths)
+    if held is False:
+        return set()
+    if held is None or len(paths) == 1:
+        return set(paths)
+    middle = len(paths) // 2
+    return open_paths(paths[:middle]) | open_paths(paths[middle:])
 
 
 def tree_open(path):
@@ -356,19 +378,78 @@ def tree_open(path):
         return True
 
 
-def workspace_process_active(path):
+def process_cwds():
+    """Resolved working directories of every process from one lsof scan; None when the scan failed."""
     if not shutil.which("lsof"):
-        return False
+        return []
     try:
         result = subprocess.run(["lsof", "-Fn", "-d", "cwd"], capture_output=True, timeout=8, check=False)
-        for line in result.stdout.splitlines():
-            if line.startswith(b"n"):
-                cwd = os.fsdecode(line[1:])
-                if os.path.isabs(cwd) and (os.path.realpath(cwd) == os.path.realpath(path) or inside(cwd, [path])):
-                    return True
-        return False
     except (OSError, subprocess.TimeoutExpired):
+        return None
+    cwds = []
+    for line in result.stdout.splitlines():
+        if line.startswith(b"n"):
+            cwd = os.fsdecode(line[1:])
+            if os.path.isabs(cwd):
+                cwds.append(os.path.realpath(cwd))
+    return cwds
+
+
+def cwd_inside(cwds, path):
+    if cwds is None:
         return True
+    actual = os.path.realpath(path)
+    return any(os.path.commonpath((cwd, actual)) == actual for cwd in cwds)
+
+
+def workspace_process_active(path):
+    return cwd_inside(process_cwds(), path)
+
+
+class ProcessEvidence:
+    """Open-process evidence for one cleanup pass.
+
+    workspace_process_active and path_open each make lsof walk every process on the
+    machine. On a loaded Mac that cost 5-6 seconds per output, and one tick spent hours
+    in cleanup holding tick.lock while inbox transfers waited. Here one cwd scan serves
+    every output and one batched path scan serves the next WINDOW outputs of the pass.
+    An answer older than MAX_AGE seconds is scanned again, so the evidence behind a
+    removal stays about as fresh as a scan per output was.
+    """
+    MAX_AGE = 15
+    WINDOW = 200
+
+    def __init__(self, paths):
+        self.paths = list(dict.fromkeys(paths))
+        self.position = {path: index for index, path in enumerate(self.paths)}
+        self.cwds = None
+        self.cwds_at = None
+        self.held = {}
+
+    def fresh(self, taken):
+        return taken is not None and time.monotonic() - taken <= self.MAX_AGE
+
+    def workspace_active(self, path):
+        if not self.fresh(self.cwds_at):
+            self.cwds_at = time.monotonic()
+            self.cwds = process_cwds()
+        return cwd_inside(self.cwds, path)
+
+    def path_open(self, path):
+        answer, taken = self.held.get(path, (True, None))
+        if self.fresh(taken):
+            return answer
+        batch = [path]
+        for other in self.paths[self.position.get(path, len(self.paths)) + 1:]:
+            if len(batch) >= self.WINDOW:
+                break
+            if not self.fresh(self.held.get(other, (True, None))[1]) and os.path.lexists(other):
+                batch.append(other)
+        taken = time.monotonic()
+        held = open_paths(batch)
+        for other in batch:
+            self.held[other] = (other in held, taken)
+        return path in held
 
 
 def git_tracked(path):
@@ -449,8 +530,9 @@ def public_workspaces(store):
     return [{key: row[key] for key in ("id", "path", "name", "owner", "state", "hold")} for row in store.rows("workspaces")]
 
 
-def cleanup_candidate(row, relative, config, measure=True):
+def cleanup_candidate(row, relative, config, measure=True, evidence=None):
     path = os.path.join(row["path"], relative)
+    evidence = evidence or ProcessEvidence([path])
     reason = None
     if row["state"] != "closed" or row["hold"] or pid_running(row["pid"]):
         reason = "workspace_active_or_held"
@@ -463,7 +545,7 @@ def cleanup_candidate(row, relative, config, measure=True):
             no_symlink_components(path)
             if git_tracked(path):
                 reason = "tracked"
-            elif workspace_process_active(row["path"]) or path_open(path):
+            elif evidence.workspace_active(row["path"]) or evidence.path_open(path):
                 reason = "open_process"
             elif os.path.isdir(path):
                 if not shutil.rmtree.avoids_symlink_attacks:
@@ -479,8 +561,14 @@ def cleanup_candidate(row, relative, config, measure=True):
             "reason": reason, "bytes": tree_bytes(path) if reason is None and measure else 0}
 
 
+def cleanup_evidence(store):
+    return ProcessEvidence(os.path.join(row["path"], relative) for row in store.rows("workspaces")
+                           if row["state"] == "closed" and not row["hold"] for relative in json.loads(row["outputs"]))
+
+
 def cleanup_candidates(store, config):
-    return [cleanup_candidate(row, relative, config) for row in store.rows("workspaces")
+    evidence = cleanup_evidence(store)
+    return [cleanup_candidate(row, relative, config, evidence=evidence) for row in store.rows("workspaces")
             for relative in json.loads(row["outputs"])]
 
 
@@ -532,43 +620,59 @@ def record_removed(store, logical_bytes, before, after):
         store.set("last_space_measurement", now())
 
 
-def cleanup_op(store, config, apply):
+# A tick holds tick.lock for its whole run. Cleanup inside a tick stops after this many
+# seconds and goes on in the next tick, so inbox transfers never wait for a whole pass.
+CLEANUP_TICK_SECONDS = 300
+
+
+def cleanup_op(store, config, apply, deadline=None):
     if apply and store.get("paused", False):
         raise StorageError("paused", "Worker is paused")
     if apply and not config["automatic_cleanup"]:
         raise StorageError("not_enabled", "Automatic cleanup is disabled")
-    candidates = cleanup_candidates(store, config)
-    candidate_bytes = sum(item["bytes"] for item in candidates if item["eligible"])
-    store.set("cleanup_preview", {"candidate_bytes": candidate_bytes, "at": now()})
-    removed = []
-    if apply:
-        for item in candidates:
-            if store.get("paused", False):
-                break
-            if not item["eligible"]:
-                continue
-            row = store.db.execute("SELECT * FROM workspaces WHERE id=?", (item["workspace_id"],)).fetchone()
-            fresh = cleanup_candidate(row, os.path.relpath(item["path"], row["path"]), config, measure=False) if row else None
-            if not fresh or not fresh["eligible"]:
-                continue
-            if store.get("paused", False):
-                break
-            before = free_bytes(os.path.dirname(item["path"]))
-            try:
-                remove_generated(item["path"])
-            except FileNotFoundError:
-                # Taken by another cleanup between the check and the removal.
-                continue
-            record_removed(store, item["bytes"], before, free_bytes(os.path.dirname(item["path"])))
-            removed.append(item["path"])
-            store.event("cleanup", "removed", "Generated output removed", item["path"])
-        if not store.get("paused", False):
-            store.set("cleanup_preview", {"candidate_bytes": 0, "at": now()})
-            store.set("cleanup_pending", False)
-            store.set("cleanup_retry_at", now() + 3600)
-        else:
-            store.set("cleanup_preview", None)
-    return {"candidates": candidates, "removed": removed, "candidate_bytes": candidate_bytes}
+    if not apply:
+        candidates = cleanup_candidates(store, config)
+        candidate_bytes = sum(item["bytes"] for item in candidates if item["eligible"])
+        store.set("cleanup_preview", {"candidate_bytes": candidate_bytes, "at": now()})
+        return {"candidates": candidates, "removed": [], "candidate_bytes": candidate_bytes}
+    # Each output is checked immediately before its removal. The row is read again because
+    # a workspace can be reopened while the pass runs.
+    evidence = cleanup_evidence(store)
+    store.set("cleanup_preview", None)
+    candidates, removed, stopped = [], [], False
+    for ident, relative in [(row["id"], relative) for row in store.rows("workspaces") for relative in json.loads(row["outputs"])]:
+        if store.get("paused", False):
+            break
+        if deadline is not None and time.monotonic() >= deadline:
+            stopped = True
+            break
+        row = store.db.execute("SELECT * FROM workspaces WHERE id=?", (ident,)).fetchone()
+        if not row:
+            continue
+        item = cleanup_candidate(row, relative, config, measure=False, evidence=evidence)
+        candidates.append(item)
+        if not item["eligible"]:
+            continue
+        item["bytes"] = tree_bytes(item["path"])
+        if store.get("paused", False):
+            break
+        before = free_bytes(os.path.dirname(item["path"]))
+        try:
+            remove_generated(item["path"])
+        except FileNotFoundError:
+            # Taken by another cleanup between the check and the removal.
+            continue
+        record_removed(store, item["bytes"], before, free_bytes(os.path.dirname(item["path"])))
+        removed.append(item["path"])
+        store.event("cleanup", "removed", "Generated output removed", item["path"])
+    if stopped:
+        store.set("cleanup_pending", True)
+    elif not store.get("paused", False):
+        store.set("cleanup_preview", {"candidate_bytes": 0, "at": now()})
+        store.set("cleanup_pending", False)
+        store.set("cleanup_retry_at", now() + 3600)
+    return {"candidates": candidates, "removed": removed,
+            "candidate_bytes": sum(item["bytes"] for item in candidates if item["eligible"])}
 
 
 PARTIAL = (".crdownload", ".part", ".download", ".tmp")
@@ -1066,7 +1170,7 @@ def tick(store, config):
                     errors.append({"id": row["id"], "code": exc.code})
         retry_at = store.get("cleanup_retry_at")
         if config["automatic_cleanup"] and not store.get("paused", False) and (store.get("cleanup_pending", False) or retry_at is None or retry_at <= now()):
-            cleanup_op(store, config, True)
+            cleanup_op(store, config, True, deadline=time.monotonic() + CLEANUP_TICK_SECONDS)
     finally:
         store.set("worker_state", "idle")
         store.set("last_run", now())
