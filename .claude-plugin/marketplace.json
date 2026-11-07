@@ -95,7 +95,7 @@
     {
       "name": "skillry-testing-and-qa",
       "source": "./plugins/testing-and-qa",
-      "description": "Smoke test and repair (build/typecheck), Playwright E2E and visual regression, and UAT acceptance with functional test design."
+      "description": "Smoke test and repair, Playwright E2E and visual regression, UAT acceptance, test-suite planning, and the real-user release gate with its customer lens."
     }
   ]
 }

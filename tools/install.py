@@ -150,8 +150,11 @@ def safe_destination(
     if root.exists() and not root.is_dir():
         raise SafetyError(f"target root is not a directory: {root}")
     _reject_symlink_components(path, root)
-    if path.exists() and not path.is_file():
-        raise SafetyError(f"destination is not a regular file: {path}")
+    if path.exists():
+        if not path.is_file():
+            raise SafetyError(f"destination is not a regular file: {path}")
+        if path.lstat().st_nlink > 1:
+            raise SafetyError(f"hardlinked destination is not allowed: {path}")
     return path
 
 
@@ -342,7 +345,8 @@ def md_to_toml_agent(text: str) -> str:
     body = re.sub(
         r"^---\n.*?\n---\n", "", text, count=1, flags=re.S
     ).strip()
-    sandbox = "read-only" if has_read_only_tools(text) else "workspace-write"
+    readonly = fm_field(text, "permissionMode") == "plan" or has_read_only_tools(text)
+    sandbox = "read-only" if readonly else "workspace-write"
     return (
         f"name = {toml_string(name)}\n"
         f"description = {toml_string(description)}\n"
@@ -581,12 +585,14 @@ def build_target_plan(
         claimed[destination] = name
 
     writes = []
+    preimages: dict[pathlib.Path, str | None] = {}
     unchanged = []
     for destination, item in sorted(
         desired.items(), key=lambda pair: os.fspath(pair[0])
     ):
         if not destination.exists():
             writes.append(destination)
+            preimages[destination] = None
             continue
 
         current = destination_hash(destination, item["root"])
@@ -606,6 +612,7 @@ def build_target_plan(
             unchanged.append(destination)
         elif current == prior[destination]:
             writes.append(destination)
+            preimages[destination] = prior[destination]
         else:
             raise SafetyError(
                 f"locally modified managed file would be overwritten: "
@@ -626,6 +633,7 @@ def build_target_plan(
                 f"{destination}"
             )
         removals.append(destination)
+        preimages[destination] = previous_hash
 
     return {
         "name": name,
@@ -633,6 +641,8 @@ def build_target_plan(
         "skill_files": skill_file_count,
         "agents": len(agents),
         "desired": desired,
+        "prior": dict(prior),
+        "preimages": preimages,
         "writes": writes,
         "removals": removals,
         "unchanged": unchanged,
@@ -640,14 +650,19 @@ def build_target_plan(
     }
 
 
-def manifest_bytes(plan: dict) -> bytes:
+def manifest_bytes(plan: dict, managed: dict[pathlib.Path, str] | None = None) -> bytes:
+    entries = (
+        managed
+        if managed is not None
+        else {dest: item["sha256"] for dest, item in plan["desired"].items()}
+    )
     files = [
         {
             "path": os.fspath(destination),
-            "sha256": item["sha256"],
+            "sha256": sha256,
         }
-        for destination, item in sorted(
-            plan["desired"].items(), key=lambda pair: os.fspath(pair[0])
+        for destination, sha256 in sorted(
+            entries.items(), key=lambda pair: os.fspath(pair[0])
         )
     ]
     data = {
@@ -685,33 +700,81 @@ def atomic_write_manifest(path: pathlib.Path, content: bytes) -> None:
             temporary.unlink()
 
 
-def apply_target_plan(plan: dict) -> None:
-    for destination in plan["writes"]:
-        item = plan["desired"][destination]
-        safe_destination(destination, item["root"], HOME)
-        destination.parent.mkdir(parents=True, exist_ok=True)
-        destination = safe_destination(destination, item["root"], HOME)
-        destination.write_bytes(item["content"])
-        if item["mode"] is not None:
-            destination.chmod(item["mode"])
-
-    for destination in plan["removals"]:
-        root = managed_root(
-            destination,
-            tuple(
-                dict.fromkeys(
-                    item["root"] for item in plan["desired"].values()
-                )
-            ),
-        )
-        destination = safe_destination(destination, root, HOME)
-        if destination.exists():
-            destination.unlink()
-
-    atomic_write_manifest(
-        plan["manifest_path"],
-        manifest_bytes(plan),
+def atomic_write_destination(
+    destination: pathlib.Path, content: bytes, mode: int | None
+) -> None:
+    descriptor, temporary_name = tempfile.mkstemp(
+        prefix=f".{destination.name}.",
+        suffix=".tmp",
+        dir=destination.parent,
     )
+    temporary = pathlib.Path(temporary_name)
+    try:
+        with os.fdopen(descriptor, "wb") as handle:
+            handle.write(content)
+            handle.flush()
+            os.fsync(handle.fileno())
+        if mode is not None:
+            temporary.chmod(mode)
+        os.replace(temporary, destination)
+    finally:
+        if temporary.exists():
+            temporary.unlink()
+
+
+def apply_target_plan(plan: dict) -> None:
+    # The manifest records only what reached disk, so an interrupted run leaves a
+    # manifest that matches the files and the next run resumes safely.
+    committed: dict[pathlib.Path, str] = dict(plan.get("prior", {}))
+    for destination in plan["unchanged"]:
+        committed[destination] = plan["desired"][destination]["sha256"]
+    preimages: dict[pathlib.Path, str | None] = plan.get("preimages", {})
+    completed = False
+    try:
+        for destination in plan["writes"]:
+            item = plan["desired"][destination]
+            safe_destination(destination, item["root"], HOME)
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination = safe_destination(destination, item["root"], HOME)
+            expected = preimages.get(destination)
+            if expected is None:
+                if destination.exists() or destination.is_symlink():
+                    raise SafetyError(
+                        f"untracked destination collision: {destination}. "
+                        "Remove or relocate the file, then rerun."
+                    )
+            elif not destination.exists() or destination_hash(destination, item["root"]) != expected:
+                raise SafetyError(
+                    f"locally modified managed file would be overwritten: {destination}"
+                )
+            atomic_write_destination(destination, item["content"], item["mode"])
+            committed[destination] = item["sha256"]
+
+        for destination in plan["removals"]:
+            root = managed_root(
+                destination,
+                tuple(
+                    dict.fromkeys(
+                        item["root"] for item in plan["desired"].values()
+                    )
+                ),
+            )
+            destination = safe_destination(destination, root, HOME)
+            if destination.exists():
+                expected = preimages.get(destination)
+                if expected is not None and destination_hash(destination, root) != expected:
+                    raise SafetyError(
+                        f"locally modified stale managed file would be removed: {destination}"
+                    )
+                destination.unlink()
+            committed.pop(destination, None)
+        completed = True
+    finally:
+        if completed or committed or plan["manifest_path"].exists():
+            atomic_write_manifest(
+                plan["manifest_path"],
+                manifest_bytes(plan, None if completed else committed),
+            )
 
 
 def display_path(path: pathlib.Path) -> str:

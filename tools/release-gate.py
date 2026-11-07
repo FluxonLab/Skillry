@@ -45,6 +45,7 @@ PACKAGE_FILES = (
     "tools/jev/cli.py",
     "tools/jev/core.py",
     "tools/jev/install.py",
+    "tools/jev/operations.py",
     "tools/jev/provider.py",
     "tools/jev/requirements.txt",
     "tools/jev/requirements.in",
@@ -251,6 +252,15 @@ def check_package_manifest(gate: Gate) -> None:
         scripts.get("prepack") == expected_command,
         "package.json prepack must invoke tools/release-gate.py directly",
     )
+
+    # Claude Code's marketplace updates an installed plugin only when its version changes.
+    version = manifest.get("version")
+    for plugin_json in sorted((REPO / "plugins").glob("*/.claude-plugin/plugin.json")):
+        plugin_version = json.loads(plugin_json.read_text(encoding="utf-8")).get("version")
+        gate.require(
+            plugin_version == version,
+            f"{plugin_json.relative_to(REPO)} version {plugin_version} must match package.json {version}",
+        )
 
     for item in PACKAGE_FILES:
         relative = item[:-1] if item.endswith("/") else item

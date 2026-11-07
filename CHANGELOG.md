@@ -6,6 +6,43 @@ All notable changes to Skillry are documented here. The format is based on
 
 ## [Unreleased]
 
+## [3.2.0] - 2026-11-07
+
+### Added
+
+- `real-user-release-gate`: before release, and again right after deploying, use the integrated
+  product the way a stranger meets it: cold sign-up with a real inbox, onboarding, core jobs on
+  live providers, payment through processor test mode and a 100%-off live promotion code,
+  settings, an exploratory charter and self-serve account deletion, with an evidence packet.
+- `customer-lens-testing`, the customer layer of that gate: the agent uses the product as a real
+  free and paid customer at beginner, intermediate and expert level, checks ease of use, confusion,
+  motion and polish against a rubric, and proposes what it would want. Bugs, copy and small
+  improvements inside the design language are built; pricing, plans, large features, brand and
+  legal text go to a human. The first gate is one full baseline; later releases cover what changed.
+- `test-suite-planning` links both.
+
+### Fixed (from an independent review of 3.1.0, each finding checked against the code)
+
+- Storage cleanup now sees files held open inside output directories (`lsof +D`).
+- A critical second archive copy must be independent of the primary (another device, another
+  object) on receive and on verify.
+- The npm package ships `tools/jev/operations.py`; CI packs the tarball and imports the packaged
+  modules.
+- The installer writes files atomically, refuses hardlinked destinations, re-checks each file
+  before overwriting it and records only what reached disk, so an interrupted install resumes
+  cleanly.
+- Codex agent profiles of `permissionMode: plan` agents run read-only; SECURITY.md describes
+  read-only intent as it is enforced per client.
+- `research-ledger` reports `hit_fresh` only within the same topic and question scope.
+- `skillry help` and `skillry update` print the real plugin name and a valid `npx` ref.
+- CI runs the whole unit suite. Install docs state prerequisites, current counts and the legacy
+  Antigravity path.
+
+### Changed
+
+- Every plugin version follows the package version, so Claude Code's marketplace sees updates;
+  the release gate checks it.
+
 ## [3.1.0] - 2026-11-07
 
 Launch film: see the [3.1.0 release](https://github.com/FluxonLab/Skillry/releases/tag/v3.1.0).

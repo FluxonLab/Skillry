@@ -25,6 +25,8 @@ Define, select, and sequence project-type quality test suites and release verifi
 | `security-and-secrets-review` | Security & secrets | Secret scanning, dependency CVE audits, and configuration hardening. |
 | `i18n-locale-parity-review` | Localization (i18n) | Multilingual key parity, regional formatters, and layout expansion. |
 | `release-readiness-check` | Release candidate gating | Final sign-off gate before staging promotion or production release. |
+| `real-user-release-gate` | Real-user release gate | End-to-end pre-release and post-deploy verification with live providers, real inbox checks, and bounded payments. |
+| `customer-lens-testing` | Customer lens | Inside the same gate: use the product as a free and paid customer at beginner, intermediate and expert level; ease, motion and polish; proposals. |
 
 ## References
 
@@ -73,6 +75,7 @@ Severity tiers:
 | 3D & animation QA | `P` | O | O | O | O | O | G0 | G0 | — | Three.js checks, 5-level deterministic ladder |
 | Mobile device QA | `P` | O | O | G0 | G0 | G0 | O | — | — | Maestro, Detox, Patrol, `mobile-app-review` |
 | Accessibility (a11y) | `P` | G0 | G0 | G0 | G0 | G0 | G0 | G0 | — | axe-core, Lighthouse, pa11y, screen readers |
+| Real-user release gate | `C` | G0 | G0 | G0 | G0 | G0 | G0 | G0 | G0 | `real-user-release-gate`, live providers, subaddressed inbox |
 
 ## Procedure
 
@@ -158,7 +161,7 @@ maestro test .maestro/critical-flow.yaml
 Emit a structured evidence packet for each verified gate:
 
 ```yaml
-gate: test-suite-planning/<gate-id>   # e.g. smoke, e2e, mobile, release-candidate
+gate: test-suite-planning/<gate-id>   # e.g. smoke, e2e, mobile, real-user-release-gate, release-candidate
 verdict: pass | fail | waived | deferred
 scope:
   project: <project-name>

@@ -6,7 +6,9 @@ permissions. We take the supply-chain surface seriously.
 ## Principles
 
 - **Least privilege.** Subagents declare an explicit `tools` allowlist. Review/audit agents
-  ship with no file-write tools.
+  ship with no dedicated file-edit tools and declare read-only intent (`permissionMode: plan`
+  or read-only tool sets). Some review/planning agents include `Bash` for inspection; runtime
+  enforcement depends on the host client and parent session sandbox.
 - **Trusted sources only.** Redistributed third-party content (under `community/` or merged into
   skill-hub references) is limited to permissively
   licensed sources that have been reviewed. Anything that runs shell commands, performs

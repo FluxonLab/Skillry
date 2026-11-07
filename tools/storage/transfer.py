@@ -477,6 +477,24 @@ def verify_remote(archive, digest, size, critical=False, second_expected=None, r
     return None
 
 
+def require_independent_second(primary_root, primary_path, second, second_path=None):
+    if second.get("kind") == "none":
+        raise StorageError("second_copy_required", "Receiver has no second archive")
+    if second.get("kind") == "local":
+        check_archive_root(second)
+        if (os.path.realpath(primary_root) == os.path.realpath(second["root"])
+                or os.stat(primary_root).st_dev == os.stat(second["root"]).st_dev):
+            raise StorageError("second_not_independent", "Critical second copy is on the same device")
+    if second_path is not None:
+        if second_path == primary_path:
+            raise StorageError("second_not_independent", "Critical second copy resolves to primary object")
+        if second.get("kind") == "local" and (
+                os.path.realpath(primary_path) == os.path.realpath(second_path)
+                or os.path.samestat(os.stat(primary_path), os.stat(second_path))
+                or os.stat(primary_path).st_dev == os.stat(second_path).st_dev):
+            raise StorageError("second_not_independent", "Critical second copy is on the same device")
+
+
 def receiver_main(args):
     try:
         check_archive_root({"root": args.root, "expected_device": args.expected_device, "mount_path": args.mount_path})
@@ -494,9 +512,9 @@ def receiver_main(args):
             from .engine import load_config
             config = load_config(pathlib.Path(args.config))
             second = config["second_archive"]
-            if second["kind"] == "none":
-                raise StorageError("second_copy_required", "Receiver has no second archive")
+            require_independent_second(args.root, result["path"], second)
             second_result = transfer(result["path"], second, args.sha256, args.bytes)
+            require_independent_second(args.root, result["path"], second, second_result["path"])
             result["second_receipt"] = {"sha256": args.sha256, "bytes": args.bytes, "path": second_result["path"],
                                         "kind": second["kind"], "root": second["root"]}
             _, receipt_file = target_paths(args.root, args.sha256)
@@ -530,8 +548,10 @@ def verifier_main(args):
         try:
             config = load_config(pathlib.Path(args.config))
             second = config["second_archive"]
+            require_independent_second(args.root, path, second)
             secondary_path = verify_remote(second, args.sha256, args.bytes)
             if secondary_path:
+                require_independent_second(args.root, path, second, secondary_path)
                 second_receipt = {"sha256": args.sha256, "bytes": args.bytes, "path": secondary_path,
                                   "kind": second["kind"], "root": second["root"]}
             else:

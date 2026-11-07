@@ -341,8 +341,12 @@ def search_sqlite(query: str, topic: str | None, db_path: str, limit: int = 32) 
 
     if not records and words:
         like_clauses = ["question LIKE ?" for _ in words[:4]]
-        params = [f"%{w}%" for w in words[:4]]
-        sql = f"SELECT data_json FROM research_records WHERE {' OR '.join(like_clauses)} ORDER BY researched_on DESC LIMIT ?"
+        params: list = [f"%{w}%" for w in words[:4]]
+        where_sql = f"({' OR '.join(like_clauses)})"
+        if topic:
+            where_sql += " AND (topic = ? OR topic LIKE ?)"
+            params.extend([topic, f"%{topic}%"])
+        sql = f"SELECT data_json FROM research_records WHERE {where_sql} ORDER BY researched_on DESC LIMIT ?"
         params.append(limit)
         try:
             rows = conn.execute(sql, params).fetchall()
@@ -455,11 +459,18 @@ def lookup_record(question: str, topic: str | None = None) -> dict:
         overlap_q_ratio = len(overlap_q) / len(q_words) if q_words else 0
         overlap_all_ratio = len(overlap_all) / len(q_words) if q_words else 0
 
-        is_strong_match = (
-            exact_q or
-            overlap_q_ratio >= 0.6 or
-            (len(q_words) <= 2 and overlap_q_ratio >= 0.5) or
-            (overlap_all_ratio >= 0.75)
+        top_topic_words = set(re.findall(r'[\w]+', top_topic))
+        record_words = top_q_words | top_claim_words | top_topic_words
+        topic_matches = (not topic) or (topic.lower() == top_topic or topic.lower() in top_topic)
+
+        is_strong_match = topic_matches and (
+            exact_q or (
+                bool(q_words) and q_words <= record_words and (
+                    overlap_q_ratio >= 0.6 or
+                    (len(q_words) <= 2 and overlap_q_ratio >= 0.5) or
+                    (overlap_all_ratio >= 0.75)
+                )
+            )
         )
 
         if is_strong_match:

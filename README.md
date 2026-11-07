@@ -18,6 +18,17 @@ instruction files.
 
 ---
 
+## What's new in 3.2
+
+Two skills that make a release prove itself the way a customer would:
+
+| Skill | What it does |
+| --- | --- |
+| `real-user-release-gate` | Before release and right after deploy: sign up cold, verify a real inbox, run core jobs on live providers, pay with a 100%-off live code, delete the account, and keep the evidence |
+| `customer-lens-testing` | In the same session: use the product as a free and paid customer at beginner, intermediate and expert level, score ease, motion and polish, and propose what you would want |
+
+3.2 also carries the fixes from an independent review of 3.1 (installer, storage, packaging and docs); see the [changelog](CHANGELOG.md).
+
 ## What's new in 3.1
 
 [![Watch the one-minute Skillry 3.1 launch film](assets/skillry-3.1-launch-poster.jpg)](https://github.com/FluxonLab/Skillry/releases/download/v3.1.0/skillry-3.1-launch.mp4)
@@ -34,7 +45,7 @@ Seven first-party skills for the work a small team skips:
 | `transactional-email` | Templates, threaded replies and an approval step before anything is sent |
 | `research-ledger` | Dated research with freshness classes and a small CLI, so nothing is researched twice |
 
-Install them like every other Skillry skill: preview first, then `--apply`. Music in the film: MiniMax-Music3.
+Install them like every other Skillry skill: preview first, then `--apply`.
 
 ## What Skillry provides
 
@@ -49,6 +60,9 @@ labels. They do not create permanent autonomous teams or require every task to p
 fixed organization chart.
 
 ## Portable installation
+
+Requires **Node.js >= 16**, **Git**, and **Python 3** (`Python 3.11+` or `tomli` for
+`tools/release-gate.py`).
 
 Preview is the default and writes nothing:
 
@@ -81,7 +95,7 @@ The portable installer installs only platform skills and agent definitions.
 | Claude Code | Skills and Claude-compatible agents | CLAUDE.md |
 | OpenAI Codex | Skills and Codex-compatible agent profiles | AGENTS.md |
 | Cursor | Native skills and agents with inherited model and explicit read-only intent | AGENTS.md and .cursor/rules |
-| Gemini | Skills and Gemini-compatible agents | GEMINI.md and AGENTS.md |
+| Gemini (`--targets antigravity`) | Skills and Gemini/Antigravity agents | GEMINI.md and AGENTS.md |
 | GitHub Copilot | Skills and Copilot-compatible custom agents | .github/copilot-instructions.md and AGENTS.md |
 
 The installer does **not** copy, generate, merge, append, reconcile, back up, or otherwise modify
