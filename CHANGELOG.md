@@ -6,6 +6,18 @@ All notable changes to Skillry are documented here. The format is based on
 
 ## [Unreleased]
 
+## [3.2.1] - 2026-11-07
+
+### Fixed
+
+- The npm package no longer ships local Python bytecode. 3.2.0 carried four stale
+  `tools/storage/__pycache__/*.pyc` files from the publishing machine; Python never loaded them
+  (their recorded source time and size do not match the packaged files), but they embedded that
+  machine's absolute source paths. The root `.npmignore` cannot exclude files inside a directory
+  listed in `package.json#files`, so the `files` list now excludes `__pycache__` and `*.py[cod]`
+  itself, and the release gate inspects the exact file list `npm pack` will publish and fails on
+  local development artifacts.
+
 ## [3.2.0] - 2026-11-07
 
 ### Added

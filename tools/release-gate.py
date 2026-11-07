@@ -25,6 +25,7 @@ import json
 import os
 import pathlib
 import re
+import shutil
 import stat
 import subprocess
 import tempfile
@@ -68,6 +69,16 @@ PACKAGE_FILES = (
     "README.md",
     "SECURITY.md",
     "THIRD-PARTY-NOTICES.md",
+    # The root .npmignore cannot exclude anything inside a directory named above, so local
+    # Python caches (which embed the builder's absolute source paths) are excluded here.
+    "!**/__pycache__/**",
+    "!**/*.py[cod]",
+)
+
+# Local development artifacts that must never reach the published tarball (mirrors .npmignore).
+PACKLIST_JUNK = re.compile(
+    r"(^|/)(__pycache__|\.pytest_cache|\.mypy_cache|\.ruff_cache|\.venv|venv|htmlcov|node_modules)/"
+    r"|\.py[cod]$|\$py\.class$|(^|/)\.coverage$|\.log$|\.tgz$"
 )
 
 HEX_40 = re.compile(r"^[0-9a-f]{40}$")
@@ -263,6 +274,8 @@ def check_package_manifest(gate: Gate) -> None:
         )
 
     for item in PACKAGE_FILES:
+        if item.startswith("!"):
+            continue
         relative = item[:-1] if item.endswith("/") else item
         pure = pathlib.PurePosixPath(relative)
         safe_node(
@@ -272,6 +285,38 @@ def check_package_manifest(gate: Gate) -> None:
             "directory" if item.endswith("/") else "file",
             f"package runtime input {item}",
         )
+
+
+def packlist_violations(paths: list[str]) -> list[str]:
+    return sorted(path for path in paths if PACKLIST_JUNK.search(path))
+
+
+def check_packlist(gate: Gate) -> None:
+    """Inspect the exact file list npm will publish; prepack runs before the tarball is built."""
+    npm = shutil.which("npm")
+    if npm is None:
+        gate.fail("npm is required to inspect the package file list")
+    result = run_relay(
+        "npm pack --dry-run",
+        [npm, "pack", "--dry-run", "--json", "--ignore-scripts"],
+        relay_on_success=False,
+    )
+    gate.require(
+        result is not None and result.returncode == 0,
+        "npm pack --dry-run --ignore-scripts must succeed",
+    )
+    try:
+        paths = [entry["path"] for entry in json.loads(result.stdout)[0]["files"]]
+    except (ValueError, LookupError, TypeError) as exc:
+        gate.fail(f"npm pack --dry-run returned an unreadable file list: {exc}")
+    offending = packlist_violations(paths)
+    gate.require(
+        not offending,
+        "package file list contains local development artifacts: "
+        + ", ".join(offending[:10])
+        + (f" (+{len(offending) - 10} more)" if len(offending) > 10 else ""),
+    )
+    print(f"release-gate: packlist PASS files={len(paths)}")
 
 
 def replay_output(result: subprocess.CompletedProcess) -> None:
@@ -1183,6 +1228,7 @@ def main() -> int:
     try:
         check_existing_tools(gate)
         check_package_manifest(gate)
+        check_packlist(gate)
 
         sidecars = load_source_lock(gate)
         skills = load_component_registry(

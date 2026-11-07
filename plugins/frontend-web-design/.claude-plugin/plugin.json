@@ -1,7 +1,7 @@
 {
   "name": "skillry-frontend-web-design",
   "description": "Web design review (UI consistency, polish, responsive layout, dashboards, design systems), accessibility, landing-page conversion, i18n parity, and Next.js RSC.",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "author": {
     "name": "FluxonLab",
     "url": "https://fluxonlab.com"
