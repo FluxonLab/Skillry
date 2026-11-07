@@ -1,9 +1,9 @@
 {
   "version": "0.2.0",
   "counts": {
-    "original": 62,
+    "original": 64,
     "community": 3,
-    "total": 65
+    "total": 67
   },
   "skills": [
     {
@@ -464,7 +464,7 @@
       "lines": 184,
       "files": 2,
       "checksum_scope": "component-tree-v1",
-      "checksum": "ed452a1611c510f9036b283d768d83c1cde71cd6a8f28265de4a742f4f09d85b"
+      "checksum": "d2f6ae00d9e3f53c45c5a0628897db8244fbbbcfbd96440e8c1d0bb9398952c4"
     },
     {
       "id": "product-requirements-review",
@@ -587,6 +587,26 @@
       "checksum": "17ac3fa959409d35fef21cc5cc7b0765b7efb247cb7eb1a3cc0ffaad53b03acf"
     },
     {
+      "id": "real-user-release-gate",
+      "folder": "102-real-user-release-gate",
+      "department": "testing-and-qa",
+      "origin": "original",
+      "lines": 177,
+      "files": 1,
+      "checksum_scope": "component-tree-v1",
+      "checksum": "5e4eeb800d35f9431f130d921dc5029cac52e693069621385b9b58730a1b7717"
+    },
+    {
+      "id": "customer-lens-testing",
+      "folder": "103-customer-lens-testing",
+      "department": "testing-and-qa",
+      "origin": "original",
+      "lines": 145,
+      "files": 2,
+      "checksum_scope": "component-tree-v1",
+      "checksum": "d27bfed08041d902b103f10b22f0e5a21247457d0bccc618431aa752d1c5426a"
+    },
+    {
       "id": "smoke-test-and-repair",
       "folder": "52-smoke-test-and-repair",
       "department": "testing-and-qa",
@@ -621,10 +641,10 @@
       "folder": "97-test-suite-planning",
       "department": "testing-and-qa",
       "origin": "original",
-      "lines": 217,
+      "lines": 220,
       "files": 4,
       "checksum_scope": "component-tree-v1",
-      "checksum": "47d21e60cf98d01dfcf983b3fa6e687b7759c8187a6ee7f8e3af0684cb9d01b5"
+      "checksum": "1950b4bc32c1e43b9732e3e03d3aee0a0e523b7811afb58c853b8a6723c2005b"
     },
     {
       "id": "frontend-ui-engineering",

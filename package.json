@@ -1,6 +1,6 @@
 {
   "name": "skillry",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "Installable, permission-bounded, multi-platform agent skills & subagents for Claude Code, OpenAI Codex, Cursor, GitHub Copilot, and Google Antigravity (Gemini).",
   "keywords": [
     "claude-code",
@@ -44,6 +44,7 @@
     "tools/jev/cli.py",
     "tools/jev/core.py",
     "tools/jev/install.py",
+    "tools/jev/operations.py",
     "tools/jev/provider.py",
     "tools/jev/requirements.txt",
     "tools/jev/requirements.in",

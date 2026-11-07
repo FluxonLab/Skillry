@@ -44,7 +44,7 @@ Examples:
 
 Claude Code users can also use the native plugin marketplace:
   /plugin marketplace add FluxonLab/Skillry
-  /plugin install core-operations@skillry`;
+  /plugin install skillry-core-operations@skillry`;
 
 function runPython(script, args) {
   for (const py of ['python3', 'python']) {
@@ -79,7 +79,7 @@ function update() {
       else console.log(`\nCould not reach GitHub to check. To update anyway:`);
       console.log(`  Claude Code:   /plugin marketplace update skillry   (then re-run /plugin install <plugin>@skillry)`);
       console.log(`  npm (global):  npm install -g skillry@latest`);
-      console.log(`  npx:           npx github:FluxonLab/Skillry@latest install --apply --targets <platforms>`);
+      console.log(`  npx:           npx github:FluxonLab/Skillry${latest ? '#' + latest : ''} install --apply --targets <platforms>`);
       console.log(fromClone
         ? `  this clone:    git pull && python3 tools/install.py --apply --targets <platforms>`
         : `  from a clone:  git clone https://github.com/FluxonLab/Skillry && cd Skillry && python3 tools/install.py --apply --targets <platforms>`);

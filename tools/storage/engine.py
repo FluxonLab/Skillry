@@ -338,8 +338,11 @@ def lsof_holders(paths):
     None when the scan failed or lsof is missing."""
     if not shutil.which("lsof"):
         return None
+    args = []
+    for path in paths:
+        args.extend(["+D", path] if os.path.isdir(path) and not os.path.islink(path) else [path])
     try:
-        result = subprocess.run(["lsof", "-t", *paths], capture_output=True, timeout=8, check=False)
+        result = subprocess.run(["lsof", "-t", *args], capture_output=True, timeout=8, check=False)
     except (OSError, subprocess.TimeoutExpired):
         return None
     # macOS lsof can return 1 for an incomplete scan while still reporting

@@ -251,7 +251,13 @@ class StorageEngineTest(unittest.TestCase):
             outcome = engine.cleanup_op(self.store, self.config, True)
         self.assertEqual(sorted(outcome["removed"]), sorted(map(str, outputs)))
         self.assertEqual([argv[:2] for argv in calls], [["lsof", "-Fn"], ["lsof", "-t"]])
-        self.assertEqual(sorted(calls[1][2:]), sorted(map(str, outputs)))
+        scanned = [arg for arg in calls[1][2:] if arg != "+D"]
+        self.assertEqual(sorted(scanned), sorted(map(str, outputs)))
+        # Output directories are scanned recursively, so a file held open inside one counts (R-01).
+        for path in outputs:
+            if path.is_dir():
+                index = calls[1].index(str(path))
+                self.assertEqual(calls[1][index - 1], "+D")
 
     def test_batched_scan_protects_only_the_output_a_process_holds(self):
         outputs = self.closed_outputs(4)
@@ -280,7 +286,8 @@ class StorageEngineTest(unittest.TestCase):
             outcome = engine.cleanup_op(self.store, self.config, True)
         self.assertEqual(len(outcome["removed"]), 3)
         self.assertEqual(len([argv for argv in calls if argv[1] == "-Fn"]), 3)
-        self.assertEqual([len(argv) - 2 for argv in calls if argv[1] == "-t"], [3, 2, 1])
+        self.assertEqual([len([arg for arg in argv[2:] if arg != "+D"]) for argv in calls if argv[1] == "-t"],
+                         [3, 2, 1])
 
     def test_tick_cleanup_stops_at_its_budget_and_resumes_on_the_next_tick(self):
         outputs = self.closed_outputs(2)

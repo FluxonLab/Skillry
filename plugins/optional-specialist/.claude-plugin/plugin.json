@@ -1,7 +1,7 @@
 {
   "name": "skillry-optional-specialist",
   "description": "Domain specialists: e-commerce and WordPress/WooCommerce, NFC/linktree and print design, local LLM runtime, Chrome extensions, maps/geo, analytics, SEO/GEO, cost control, and monorepo.",
-  "version": "0.1.0",
+  "version": "3.2.0",
   "author": {
     "name": "FluxonLab",
     "url": "https://fluxonlab.com"

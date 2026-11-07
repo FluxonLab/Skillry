@@ -50,7 +50,7 @@ python3 scripts/research_ledger.py lookup "<question>" [--topic "<topic>"]
 
 Inspect the returned JSON object and handle the status code:
 
-1. **`hit_fresh`:** An exact or strong match exists and its expiration date has not passed. **Do not perform external web queries.** Directly consume the existing findings, claims, and citations.
+1. **`hit_fresh`:** An exact or strong match exists within the same topic, product/provider identity, and version scope, and its expiration date has not passed. If the entity or scope differs, treat the result as `partial`. When scope matches, **do not perform external web queries** and directly consume the existing findings, claims, and citations.
 2. **`hit_stale`:** A matching record exists but its validity period has expired (`valid_until < today`). Re-verify only the specific claims that may have changed (e.g., pricing or version numbers). Retain unchanged foundational facts.
 3. **`partial`:** Related records or topical overlaps exist. Review existing findings to refine your query and narrow the scope of external investigation.
 4. **`miss`:** No relevant records found in the ledger. Proceed with full external research.

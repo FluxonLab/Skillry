@@ -1,10 +1,12 @@
 # Installing Skillry
 
-Skillry 3.0.0 ships **54 permission-bounded skill hubs + 73 subagents** across 18 departments,
-plus an attributed `community/` set (3 skill hubs + 49 agents). Hubs route to merged references,
-so the 223 skills of 2.x remain reachable under 57 names; see the 3.0.0 entry in
+Skillry 3.2.0 ships **64 permission-bounded skill hubs + 73 subagents** across 18 departments,
+plus an attributed `community/` set (3 skill hubs + 49 agents; 67 skill hubs and 122 subagents total). Hubs route to merged references,
+so the 223 skills of 2.x remain reachable under 67 names; see the 3.0.0, 3.1.0 and 3.2.0 entries in
 [`CHANGELOG.md`](../CHANGELOG.md) for where each former skill now lives. Install into one or
 more platforms.
+
+**Prerequisites:** Node.js `>=16` (for `npx`/`skillry`), Git, and Python 3 (`Python 3.11+` or `tomli` for `tools/release-gate.py`).
 
 ## Option A — Claude Code native marketplace (recommended for Claude)
 
@@ -64,7 +66,7 @@ Install locations per platform:
 | OpenAI Codex | `~/.codex/skills/<name>/SKILL.md` | `~/.codex/agents/<name>.toml` |
 | Cursor | `~/.cursor/skills/<name>/SKILL.md` | `~/.cursor/agents/<name>.md` |
 | GitHub Copilot | `~/.copilot/skills/<name>/SKILL.md` | `~/.copilot/agents/<name>.agent.md` |
-| Google Antigravity | `~/.gemini/antigravity/skills/<name>/SKILL.md` | `~/.gemini/antigravity/agents/<name>.md` |
+| Google Antigravity (legacy IDE path) | `~/.gemini/antigravity/skills/<name>/SKILL.md` | `~/.gemini/antigravity/agents/<name>.md` (raw Markdown; current App/CLI uses `~/.gemini/config/` and native subagent schema) |
 
 The installer verifies source checksums and managed destination hashes before updating.
 It refuses unmanaged collisions and user-modified files, and converts agents into each

@@ -42,6 +42,9 @@ jobs:
       - name: Validate optional Jev contracts and portable instruction boundary
         run: python3 -m unittest discover -s tests -p 'test_jev*.py'
 
+      - name: Run the full unit test suite (storage, installer and every other contract)
+        run: python3 -m unittest discover -s tests -p 'test_*.py'
+
       - name: Validate native Cursor installation contracts
         run: python3 tests/test_cursor_install.py
 
@@ -65,3 +68,12 @@ jobs:
           test "$(ls "$skillry_smoke_home/.codex/agents/"*.toml | wc -l)" -ge 60
           test "$(find "$skillry_smoke_home/.cursor/skills" -name SKILL.md | wc -l)" -ge 50
           test "$(ls "$skillry_smoke_home/.cursor/agents/"*.md | wc -l)" -ge 60
+      - name: Pack npm tarball and smoke-test packaged runtime modules
+        run: |
+          pack_dir="$(mktemp -d)"
+          tarball="$(npm pack --pack-destination "$pack_dir" | tail -n 1)"
+          tar -xzf "$pack_dir/$tarball" -C "$pack_dir"
+          node "$pack_dir/package/bin/skillry.js" version
+          PYTHONPATH="$pack_dir/package/tools" python3 -c "import jev.core, jev.operations, storage.engine, storage.transfer"
+          pack_home="$(mktemp -d)"
+          env HOME="$pack_home" node "$pack_dir/package/bin/skillry.js" install --targets claude
