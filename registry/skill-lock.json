@@ -1,9 +1,9 @@
 {
   "version": "0.2.0",
   "counts": {
-    "original": 55,
+    "original": 62,
     "community": 3,
-    "total": 58
+    "total": 65
   },
   "skills": [
     {
@@ -45,6 +45,16 @@
       "files": 3,
       "checksum_scope": "component-tree-v1",
       "checksum": "4f8c6390431a93a3f4d4521fe46642c74b3d0cbc33c008f98f9f522a9c8f40eb"
+    },
+    {
+      "id": "transactional-email",
+      "folder": "100-transactional-email",
+      "department": "backend-and-api",
+      "origin": "original",
+      "lines": 154,
+      "files": 3,
+      "checksum_scope": "component-tree-v1",
+      "checksum": "09e78a6805a8f48717fd0e7462f465f7589b1334b6dfb99543a9e389d4a782e9"
     },
     {
       "id": "api-and-interface-design",
@@ -187,6 +197,16 @@
       "checksum": "aa1d25fd9128dd349812ac71db12352bf48735faaf5f9398c2e3d01084be975a"
     },
     {
+      "id": "project-intake",
+      "folder": "96-project-intake",
+      "department": "core-operations",
+      "origin": "original",
+      "lines": 124,
+      "files": 3,
+      "checksum_scope": "component-tree-v1",
+      "checksum": "77721cbef3a45433d7c7456a627604e73946eb777acaf501b6ec1dbf286f4f73"
+    },
+    {
       "id": "data-pipeline-review",
       "folder": "311-data-pipeline-review",
       "department": "data-ml-ai-engineering",
@@ -275,6 +295,16 @@
       "files": 3,
       "checksum_scope": "component-tree-v1",
       "checksum": "de767e48d4921db2b0e253729e5749acf955f1c2ee2bb99efbb29dc751531b00"
+    },
+    {
+      "id": "design-capture",
+      "folder": "99-design-capture",
+      "department": "frontend-web-design",
+      "origin": "original",
+      "lines": 158,
+      "files": 3,
+      "checksum_scope": "component-tree-v1",
+      "checksum": "b7a334f3db6a3d8b74dfd5f90e0953b1682eaf42450714f5f86d7060690662fb"
     },
     {
       "id": "threejs-webgl-patterns",
@@ -427,6 +457,16 @@
       "checksum": "175fe6cd3656b96b6ce224bb9a1c9b7d4d5ffb35c9b26ffc83baf3615dd556b2"
     },
     {
+      "id": "research-ledger",
+      "folder": "101-research-ledger",
+      "department": "product-docs-and-research",
+      "origin": "original",
+      "lines": 184,
+      "files": 2,
+      "checksum_scope": "component-tree-v1",
+      "checksum": "ed452a1611c510f9036b283d768d83c1cde71cd6a8f28265de4a742f4f09d85b"
+    },
+    {
       "id": "product-requirements-review",
       "folder": "65-product-requirements-review",
       "department": "product-docs-and-research",
@@ -465,6 +505,26 @@
       "files": 8,
       "checksum_scope": "component-tree-v1",
       "checksum": "c922d56075938b933594160b2300129adf16d3f0c353d5b2ec3fe717a032f67a"
+    },
+    {
+      "id": "strategy-office",
+      "folder": "95-strategy-office",
+      "department": "product-docs-and-research",
+      "origin": "original",
+      "lines": 161,
+      "files": 4,
+      "checksum_scope": "component-tree-v1",
+      "checksum": "9d7ca521ba53f5f1ec8c25f695426fda925997f92ffa285c42bdb698ab68a257"
+    },
+    {
+      "id": "growth-and-acquisition",
+      "folder": "98-growth-and-acquisition",
+      "department": "product-docs-and-research",
+      "origin": "original",
+      "lines": 124,
+      "files": 3,
+      "checksum_scope": "component-tree-v1",
+      "checksum": "cc280391d51b3244d65bb862a7691b1660ca162ea2c0f0927211f9ef4d36d8c0"
     },
     {
       "id": "runtime-diagnostics",
@@ -555,6 +615,16 @@
       "files": 11,
       "checksum_scope": "component-tree-v1",
       "checksum": "18e28ee6eb2083b2427fe17a1d86568c75b7bbce40a12c985e1094a7eece85f6"
+    },
+    {
+      "id": "test-suite-planning",
+      "folder": "97-test-suite-planning",
+      "department": "testing-and-qa",
+      "origin": "original",
+      "lines": 217,
+      "files": 4,
+      "checksum_scope": "component-tree-v1",
+      "checksum": "47d21e60cf98d01dfcf983b3fa6e687b7759c8187a6ee7f8e3af0684cb9d01b5"
     },
     {
       "id": "frontend-ui-engineering",
