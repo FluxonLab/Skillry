@@ -1,6 +1,6 @@
 # Installing Skillry
 
-Skillry 3.2.0 ships **64 permission-bounded skill hubs + 73 subagents** across 18 departments,
+Skillry 3.2.1 ships **64 permission-bounded skill hubs + 73 subagents** across 18 departments,
 plus an attributed `community/` set (3 skill hubs + 49 agents; 67 skill hubs and 122 subagents total). Hubs route to merged references,
 so the 223 skills of 2.x remain reachable under 67 names; see the 3.0.0, 3.1.0 and 3.2.0 entries in
 [`CHANGELOG.md`](../CHANGELOG.md) for where each former skill now lives. Install into one or

@@ -1,7 +1,7 @@
 {
   "name": "skillry-testing-and-qa",
   "description": "Smoke test and repair, Playwright E2E and visual regression, UAT acceptance, test-suite planning, and the real-user release gate with its customer lens.",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "author": {
     "name": "FluxonLab",
     "url": "https://fluxonlab.com"
