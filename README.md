@@ -18,6 +18,24 @@ instruction files.
 
 ---
 
+## What's new in 3.1
+
+[![Watch the one-minute Skillry 3.1 launch film](assets/skillry-3.1-launch-poster.jpg)](https://github.com/FluxonLab/Skillry/releases/download/v3.1.0/skillry-3.1-launch.mp4)
+
+Seven first-party skills for the work a small team skips:
+
+| Skill | What it does |
+| --- | --- |
+| `strategy-office` | Feasibility, market, competitors and finance before you build |
+| `project-intake` | Several models review a new or inherited repo, settle what they disagree on, and leave one plan |
+| `test-suite-planning` | The right test suite for the product you ship |
+| `growth-and-acquisition` | Search, AI answers and app stores from the first draft |
+| `design-capture` | Adapt what you admire, never copy it |
+| `transactional-email` | Templates, threaded replies and an approval step before anything is sent |
+| `research-ledger` | Dated research with freshness classes and a small CLI, so nothing is researched twice |
+
+Install them like every other Skillry skill: preview first, then `--apply`. Music in the film: MiniMax-Music3.
+
 ## What Skillry provides
 
 - Platform-ready skills and agent definitions maintained from a shared library.

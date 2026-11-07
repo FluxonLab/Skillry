@@ -6,8 +6,20 @@ All notable changes to Skillry are documented here. The format is based on
 
 ## [Unreleased]
 
+## [3.1.0] - 2026-11-07
+
+Launch film: see the [3.1.0 release](https://github.com/FluxonLab/Skillry/releases/tag/v3.1.0).
+
 ### Added
 
+- Seven first-party skills for the work a small team skips:
+  `strategy-office` (feasibility, market, competitors and finance before you build),
+  `project-intake` (several models review a new or inherited repo, settle disagreements and leave one
+  plan), `test-suite-planning` (the right test suite for the product you ship),
+  `growth-and-acquisition` (search, AI answers and app stores from day one), `design-capture` (adapt
+  what you admire, never copy it), `transactional-email` (templates, threading and send approval) and
+  `research-ledger` (dated research with freshness classes and a standard-library CLI, so nothing is
+  researched twice).
 - Optional Jev advisory helper: ten bounded modes, verified client inventories,
   explicit public-data policy, local duplicate suppression and no execution authority.
 - Native Cursor skill and agent installation, including Cursor-specific agent
