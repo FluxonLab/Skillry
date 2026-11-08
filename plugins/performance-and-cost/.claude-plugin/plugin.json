@@ -1,7 +1,7 @@
 {
   "name": "skillry-performance-and-cost",
   "description": "Performance engineering: frontend performance budgets and Core Web Vitals, backend latency, memory and resource profiling, caching, and Python performance.",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "author": {
     "name": "FluxonLab",
     "url": "https://fluxonlab.com"

@@ -1,7 +1,7 @@
 {
   "name": "skillry-gaming-interactive-media",
   "description": "Game architecture, gameplay systems, game UI/UX, performance, prototypes, engine triage, and browser-game stacks (Phaser, Three.js, PixiJS).",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "author": {
     "name": "FluxonLab",
     "url": "https://fluxonlab.com"

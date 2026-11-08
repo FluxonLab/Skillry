@@ -211,10 +211,10 @@
       "folder": "96-project-intake",
       "department": "core-operations",
       "origin": "original",
-      "lines": 140,
+      "lines": 143,
       "files": 3,
       "checksum_scope": "component-tree-v1",
-      "checksum": "e81c07bb34e68560b075f8cc6bc8080ab653310f319a449aff70caadb122a584"
+      "checksum": "bbf7208d28ffad6df362fe70108d6332ffc5688968ad0adc443b06b0f49645a6"
     },
     {
       "id": "data-pipeline-review",
@@ -474,7 +474,7 @@
       "lines": 192,
       "files": 2,
       "checksum_scope": "component-tree-v1",
-      "checksum": "345c37793d6232bd2981ef68b606aa17d9f1b6907c69a53a24fa2bc79212e556"
+      "checksum": "b448fe62027554f897ad5f6e9f27fb36eb22a888e15b182a4930a63935a301f7"
     },
     {
       "id": "product-requirements-review",
@@ -614,7 +614,7 @@
       "lines": 161,
       "files": 2,
       "checksum_scope": "component-tree-v1",
-      "checksum": "2c6e2bbccc10579981bc4e6e338fef65bc5d56f69f2b5e884d2fed0f01197cf1"
+      "checksum": "e1c4f49daa6165ff161ee57bc67826e1076e52c1c8f32a659b531f1cd6fe757b"
     },
     {
       "id": "smoke-test-and-repair",

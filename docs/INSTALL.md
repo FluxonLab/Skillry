@@ -1,6 +1,6 @@
 # Installing Skillry
 
-Skillry 3.4.0 ships **65 permission-bounded skill hubs + 73 subagents** across 18 departments,
+Skillry 3.4.1 ships **65 permission-bounded skill hubs + 73 subagents** across 18 departments,
 plus an attributed `community/` set (3 skill hubs + 49 agents; 68 skill hubs and 122 subagents total). Hubs route to merged references,
 so the 223 skills of 2.x remain reachable; see the 3.0.0, 3.1.0 and 3.2.0 entries in
 [`CHANGELOG.md`](../CHANGELOG.md) for where each former skill now lives. Install into one or
@@ -189,10 +189,13 @@ with its hash and the source commit.
 
 License detection is a candidate, not a verdict. A license file is `recognized` only when its
 text matches the canonical MIT, ISC, BSD-2-Clause, BSD-3-Clause or Apache-2.0 text apart from
-the copyright and title lines. Anything else that looks like one of them is `needs-review`, and
-the import stops until a person has read it and passes
-`--accept-license <sha256 of that file>`. An unknown license is never accepted. A skill whose
-own license file differs from the repository's root license is listed as a conflict. This is a
+plain copyright and title lines; a copyright line that carries anything more, such as an extra
+condition, counts as a difference. Anything else that looks like one of them is `needs-review`,
+and the import stops until a person has read it and passes
+`--accept-license <sha256 of that file>`. An unknown license is never accepted. Every license
+file that covers copied content must pass: the nearest one above each skill and any inside the
+skill folder, such as `assets/LICENSE`. License files in folders the import does not copy do not
+block it. A license that differs from the one it sits under is listed as a conflict. This is a
 technical check, not legal advice.
 
 ## Uninstall

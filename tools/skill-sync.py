@@ -117,6 +117,13 @@ LICENSE_TITLE_LINES = {
     "all rights reserved", "all rights reserved.",
 }
 FENCE = re.compile(r"^\s{0,3}(```|~~~)")
+# A copyright line is dropped only when it is a plain notice: one clause and no words that could
+# carry an extra condition. Anything else stays, so the text differs and needs review.
+SINGLE_CLAUSE = re.compile(r"^[^.;:!?]*\.?$")
+CONDITION_WORDS = re.compile(
+    r"\b(not|no|only|except|unless|without|must|shall|may|prohibit\w*|forbid\w*|restrict\w*|"
+    r"commercial|licen[cs]\w*|permi\w*|grant\w*|terms?|condition\w*)\b"
+)
 
 _CANONICAL_CACHE: dict = {}
 
@@ -216,24 +223,42 @@ def markdown_cell(value: str) -> str:
 # --- licenses -------------------------------------------------------------
 
 
-def normalize_license_text(text: str, cut_apache_appendix: bool = False) -> str:
-    """Reduce a license text to a comparable form (see classify_license)."""
+def _plain_notice(stripped: str) -> bool:
+    return bool(SINGLE_CLAUSE.match(stripped)) and not CONDITION_WORDS.search(
+        PLACEHOLDER.sub("", stripped)
+    )
+
+
+def normalize_license_text(
+    text: str, cut_apache_appendix: bool = False, template: bool = False
+) -> str:
+    """Reduce a license text to a comparable form (see classify_license).
+
+    Only plain copyright notices, year lines and known title lines are dropped. `<...>`
+    placeholders are removed from canonical templates only, never from a candidate text.
+    """
     kept = []
     for line in text.lower().splitlines():
         stripped = line.strip()
         if stripped in LICENSE_TITLE_LINES:
             continue
-        if len(stripped) <= MAX_COPYRIGHT_LINE and (
-            COPYRIGHT_LINE.match(stripped)
-            or (stripped.startswith("(c)") and re.search(r"\d{4}|<", stripped))
-            or YEAR_LINE.fullmatch(stripped)
+        if YEAR_LINE.fullmatch(stripped):
+            continue
+        if (
+            len(stripped) <= MAX_COPYRIGHT_LINE
+            and (
+                COPYRIGHT_LINE.match(stripped)
+                or (stripped.startswith("(c)") and re.search(r"\d{4}|<", stripped))
+            )
+            and _plain_notice(stripped)
         ):
             continue
         kept.append(line)
     text = "\n".join(kept)
     for quote, plain in QUOTE_CHARS.items():
         text = text.replace(quote, plain)
-    text = PLACEHOLDER.sub("", text)
+    if template:
+        text = PLACEHOLDER.sub("", text)
     text = " ".join(text.split())
     if cut_apache_appendix:
         index = text.find(APACHE_APPENDIX)
@@ -250,7 +275,7 @@ def _canonical_normalized(spdx_id: str) -> str:
             raw = path.read_text(encoding="utf-8", errors="replace")
         except OSError as exc:
             raise SafetyError(f"canonical license text is missing: {path}") from exc
-        cached = normalize_license_text(raw, spdx_id == "Apache-2.0")
+        cached = normalize_license_text(raw, spdx_id == "Apache-2.0", template=True)
         _CANONICAL_CACHE[spdx_id] = cached
     return cached
 
@@ -334,10 +359,12 @@ def license_report(clone_root: pathlib.Path, skill_dirs: list) -> dict:
         root_info = classify_license(None)
 
     skills = {}
+    scopes = {}
     conflicts = []
     for skill_dir in skill_dirs:
         skill_dir = _lexical(pathlib.Path(skill_dir))
         key = _relative(skill_dir, root).as_posix()
+        prefix = "" if key == "." else key + "/"
         effective = None
         current = skill_dir
         while True:
@@ -364,11 +391,24 @@ def license_report(clone_root: pathlib.Path, skill_dirs: list) -> dict:
             conflict["root_file"] = root_info["file"]
             conflict["root_candidate"] = root_info["candidate"]
             conflicts.append(conflict)
+        # A license file deeper inside the skill (for example assets/LICENSE) governs files the
+        # import copies, so it joins the skill's scope and must pass the same gate.
+        inner = [info for rel, info in sorted(infos.items())
+                 if rel.startswith(prefix) and rel != effective["file"]]
+        scopes[key] = [effective] + inner
+        for info in inner:
+            if info["candidate"] != effective["candidate"] or info["sha256"] != effective["sha256"]:
+                conflict = dict(info)
+                conflict["skill"] = key
+                conflict["root_file"] = effective["file"]
+                conflict["root_candidate"] = effective["candidate"]
+                conflicts.append(conflict)
 
     return {
         "root": root_info,
         "files": [infos[key] for key in sorted(infos)],
         "skills": skills,
+        "scopes": scopes,
         "conflicts": conflicts,
     }
 
@@ -376,15 +416,18 @@ def license_report(clone_root: pathlib.Path, skill_dirs: list) -> dict:
 def license_refusals(report: dict, accepted: set) -> list:
     """Return the license files that block the import, with affected skills."""
     refused = {}
-    for skill, info in report["skills"].items():
-        if info["status"] == "recognized" and info["candidate"] in SPDX_IDS:
-            continue
-        if info["status"] == "needs-review" and info["sha256"] in accepted:
-            continue
-        entry = refused.setdefault(
-            (info["file"], info["sha256"]), dict(info, skills=[])
-        )
-        entry["skills"].append(skill)
+    scopes = report.get("scopes") or {skill: [info] for skill, info in report["skills"].items()}
+    for skill, scope in scopes.items():
+        for info in scope:
+            if info["status"] == "recognized" and info["candidate"] in SPDX_IDS:
+                continue
+            if info["status"] == "needs-review" and info["sha256"] in accepted:
+                continue
+            entry = refused.setdefault(
+                (info["file"], info["sha256"]), dict(info, skills=[])
+            )
+            if skill not in entry["skills"]:
+                entry["skills"].append(skill)
     return list(refused.values())
 
 
