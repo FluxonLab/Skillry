@@ -79,8 +79,14 @@ def from_package(table):
         print("npm and node are required for the package smoke test")
         return 1
     work = Path(tempfile.mkdtemp(prefix="skillry-pack-"))
-    packed = subprocess.run([npm, "pack", "--pack-destination", str(work)], cwd=ROOT, check=True,
-                            capture_output=True, text=True).stdout.strip().splitlines()[-1]
+    # The release gate (prepack) runs in the validate job; here only the packed files matter, and
+    # Windows runners have no python3 command for the prepack script.
+    pack = subprocess.run([npm, "pack", "--ignore-scripts", "--pack-destination", str(work)], cwd=ROOT,
+                          capture_output=True, text=True)
+    if pack.returncode != 0:
+        print("npm pack failed:", pack.stdout[-2000:], pack.stderr[-2000:])
+        return 1
+    packed = pack.stdout.strip().splitlines()[-1]
     with tarfile.open(work / packed) as archive:
         archive.extractall(work)
     cli = work / "package" / "bin" / "skillry.js"

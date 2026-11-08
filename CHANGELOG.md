@@ -24,6 +24,9 @@ All notable changes to Skillry are documented here. The format is based on
 - Windows clones: a `.gitattributes` file now keeps LF line endings in every checkout.
   Windows git converted text files to CRLF, so the installer refused every skill with a
   checksum mismatch. The new Windows CI job found this.
+- Windows: the `skillry` command looks for Python through the `py -3` launcher, then `python`,
+  then `python3`. A Microsoft Store alias that answers 9009 counts as not found, so an
+  installed Python is no longer hidden behind the alias.
 - The installer removes folders that a removal leaves empty.
 - `real-user-release-gate` and `customer-lens-testing` have shorter descriptions (159 and
   154 characters), and the README's 3.2 section now describes the 3.2.2 rules.

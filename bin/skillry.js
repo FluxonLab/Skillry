@@ -47,9 +47,15 @@ Claude Code users can also use the native plugin marketplace:
   /plugin install skillry-core-operations@skillry`;
 
 function runPython(script, args) {
-  for (const py of ['python3', 'python']) {
-    const r = spawnSync(py, [path.join(REPO, 'tools', script), ...args], { stdio: 'inherit' });
+  // On Windows the Python launcher comes first: `python3` there is often the Microsoft Store
+  // alias, which answers 9009 when no Store Python is installed behind it.
+  const candidates = process.platform === 'win32'
+    ? [['py', ['-3']], ['python', []], ['python3', []]]
+    : [['python3', []], ['python', []]];
+  for (const [py, pre] of candidates) {
+    const r = spawnSync(py, [...pre, path.join(REPO, 'tools', script), ...args], { stdio: 'inherit' });
     if (r.error && r.error.code === 'ENOENT') continue; // try next interpreter
+    if (process.platform === 'win32' && r.status === 9009) continue; // Store alias without Python
     process.exit(r.status == null ? 1 : r.status);
   }
   console.error('Skillry requires Python 3. Install it from https://python.org and retry.');
