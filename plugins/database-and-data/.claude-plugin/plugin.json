@@ -1,7 +1,7 @@
 {
   "name": "skillry-database-and-data",
   "description": "Prisma, Postgres/Supabase, migrations, seeds/fixtures, query performance, and RLS/edge functions.",
-  "version": "3.2.3",
+  "version": "3.2.4",
   "author": {
     "name": "FluxonLab",
     "url": "https://fluxonlab.com"

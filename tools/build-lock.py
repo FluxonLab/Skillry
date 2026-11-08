@@ -34,6 +34,10 @@ def sha_tree(root: pathlib.Path) -> tuple[str, int]:
     for path in root.rglob("*"):
         if path.is_symlink():
             raise RuntimeError(f"component tree contains a symlink: {path}")
+        # Python bytecode caches appear when a skill's script runs in place; they are never
+        # part of a component, so they never change its checksum.
+        if "__pycache__" in path.relative_to(root).parts or path.suffix in (".pyc", ".pyo"):
+            continue
         if path.is_file():
             files.append(path)
 

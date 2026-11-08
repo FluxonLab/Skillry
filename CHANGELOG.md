@@ -6,6 +6,34 @@ All notable changes to Skillry are documented here. The format is based on
 
 ## [Unreleased]
 
+## [3.2.4] - 2026-11-08
+
+3.2.3 was not published to npm on its own; its changes ship in this release.
+
+### Fixed (from a second, detailed independent review of 3.2.2, each finding checked against the code)
+
+- `research-ledger`: two questions that shared their first 60 characters got the same key,
+  so the second save replaced the first. Keys now end in a hash of the whole normalized
+  topic and question, and saving the same question again keeps the earlier version as a
+  revision. `migrate` moves a database written by an earlier release, after a backup.
+- `research-ledger`: invalid input is now rejected instead of being repaired into something
+  that looks reliable. An unknown evidence class no longer becomes `fact`, and a malformed
+  date no longer becomes today. Future dates, unknown or duplicate source ids, and facts
+  without sources are refused.
+  Incomplete records are saved as drafts and never come back as a fresh hit. Questions about
+  current information, and `lookup --revalidate`, return `hit_stale`. The ledger now has
+  its own tests.
+- `real-user-release-gate` and `customer-lens-testing` used opposite severity scales (S0
+  was the blocker in one, S4 in the other). Both now use blocker, high, medium, low and
+  informational. The customer lens keeps Nielsen's 0-4 as `ux_severity` and maps it. An
+  unclassified finding stops the sign-off, and a selected journey that did not run fails.
+- The installer and the lock builder ignore Python bytecode caches (`__pycache__`, `.pyc`)
+  inside a skill. Running a skill's script in place no longer breaks its checksum, and
+  caches are never installed.
+- Touched-area selection now also counts journeys that depend on a changed shared layer
+  (auth, config, schema, middleware, shared components, build settings). The gate keeps a
+  small dependency map and always runs a short critical set.
+
 ## [3.2.3] - 2026-11-08
 
 ### Fixed (from an independent review of 3.2.2, each finding checked against the code)

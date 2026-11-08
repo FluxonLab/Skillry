@@ -145,6 +145,9 @@ def source_tree_files(root: pathlib.Path) -> list[pathlib.Path]:
     for path in root.rglob("*"):
         if path.is_symlink():
             raise SafetyError(f"component tree contains a symlink: {path}")
+        # Bytecode caches from running a skill's script in place are neither verified nor installed.
+        if "__pycache__" in path.relative_to(root).parts or path.suffix in (".pyc", ".pyo"):
+            continue
         if path.is_file():
             safe_source_file(path, REPO)
             files.append(path)

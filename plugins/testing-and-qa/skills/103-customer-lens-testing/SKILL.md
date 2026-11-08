@@ -27,7 +27,7 @@ Act as the customer layer of `real-user-release-gate` inside the same release ga
 - **Shared session and account:** Run inside the active `real-user-release-gate` session and reuse its `qa+<project>-<date>-<sha>@<team-domain>` account (`qa_test: true`).
 - **No duplicate lifecycle runs:** Piggyback on `real-user-release-gate` journeys `J1`–`J8` so sign-up, inbox verification, payment, and account deletion execute once.
 - **Baseline (one-time):** Once per product, when its test ledger has no baseline, test every page and app surface, `Free` and `Paid` plans, `Beginner`, `Intermediate`, and `Expert` passes, and the motion/polish pass as part of that release's work item. Customer testing done at launch counts when it is recorded; repeat the baseline only on request or after a rewrite changes most of the product.
-- **Pre-release update (on touch):** On later releases, test only the screens and components the release changed and the customer flows they belong to, on the release candidate (a local development host or a designated staging or preview host).
+- **Pre-release update (on touch):** On later releases, test only the screens and components the release changed and the customer flows they belong to, on the release candidate (a local development host or a designated staging or preview host), including flows that depend on a changed shared layer such as auth, config, a schema or a shared component.
 - **Post-deploy update (read-only):** Right after deploy, load the touched screens on production, read any mail the touched area delivered, and check the error tracker, without an account. A live journey runs only for a touched area that exists only in production: a human creates the account, signs in, pays with a 100%-off promotion code, and deletes it, or explicitly approves each step. The agent may walk the product read-only in the human's signed-in session and runs a step itself only after the human approves that step. Record every run in the product's test ledger.
 
 ## Persona card, patience budget, and anti-sycophancy rules
@@ -43,7 +43,7 @@ Act as the customer layer of `real-user-release-gate` inside the same release ga
 - **Patience budget (`WOULD_ABANDON` — Lu et al., `UXAgent`, `arXiv:2502.12561`, 2025):**
   - Log `WOULD_ABANDON` whenever the next action is not visually obvious within `15 seconds` or `2 wrong clicks`.
   - Log `WOULD_ABANDON` whenever an unlabelled loading state or blocking spinner lasts `> 8 seconds`.
-  - Classify every `WOULD_ABANDON` event as an `S3` major friction defect even if the agent finds a workaround to finish the test.
+  - Classify every `WOULD_ABANDON` event as `ux_severity` 3, release severity `high`, even if the agent finds a workaround to finish the test.
 - **Anti-sycophancy rules (NN/g, 2024–2025; Hämäläinen et al., CHI 2023; Agnew et al., CHI 2024):**
   - Drive the live UI, CLI, or API/MCP surface with realistic domain payloads (multi-row imports, real documents, diacritics, quota boundaries) and never `"test 123"`.
   - Emit a concurrent think-aloud thought (Ericsson & Simon, 1984; `neuhai/UXAgent`) and cognitive tag (`DELIGHT`, `CONFUSION`, `FRICTION`, `WOULD_ABANDON`, `BLOCKER`) at each step.
@@ -70,14 +70,14 @@ Execute four passes using the checklists, metrics, and thresholds in [references
   - `5. Measurable Verification Signal`: expected delta in step ratio ($S/R$), `TTFV`, Lostness ($L$), or `INP`/`CLS`.
 - **Triage and de-duplication against project authority:** Compare every finding against `PLAN.md`, `DECISIONS.md`, and open issues:
   - `DUPLICATE_OPEN`: already in `PLAN.md` -> append fresh session evidence to the existing item without creating a duplicate.
-  - `REGRESSION_OF_DONE`: marked done in `PLAN.md` but broken live -> reopen as `S3` or `S4` with regression evidence.
+  - `REGRESSION_OF_DONE`: marked done in `PLAN.md` but broken live -> reopen with `ux_severity` 3 or 4 and regression evidence.
   - `CONTRADICTS_DECISION`: conflicts with an active recorded decision -> drop unless new primary evidence justifies asking a human to supersede it.
   - `NEW_VALIDATED`: route into Track A (Defects & Friction) or Track B (Customer Wishes).
 - **Scoring tracks:**
-  - **Track A — Defects & UX Friction:** Rate with Nielsen `0–4` Severity (`S4` Catastrophe/Blocker, `S3` Major Friction / `WOULD_ABANDON`, `S2` Minor Friction, `S1` Cosmetic) and rank by the Scope-Guarded Priority score $P$ in [references/ux-rubric.md](references/ux-rubric.md).
+  - **Track A — Defects & UX Friction:** Rate with Nielsen's `0–4` scale as `ux_severity` and give each finding the release severity of `real-user-release-gate`: `4` catastrophe → `blocker`, `3` major friction or `WOULD_ABANDON` → `high`, `2` minor friction → `medium`, `1` cosmetic → `low`, `0` → `informational`. A finding without both values stops the sign-off. Rank by the Scope-Guarded Priority score $P$ in [references/ux-rubric.md](references/ux-rubric.md).
   - **Track B — Customer Wishes:** Classify by Kano category (`Must-Be`, `One-Dimensional`, `Attractive`, `Indifferent`, `Reverse` — Kano et al., 1984) and score `ICE` ($\frac{\text{Impact}_{1..10} \times \text{Confidence}}{\text{Effort}_{1..10}}$) or `RICE` ($\frac{\text{Reach} \times \text{Impact} \times \text{Confidence}}{\text{Effort}}$) using evidence-bound Confidence (`1.0` = session friction + competitor pattern + JTBD, `0.7` = session friction + JTBD, `0.4` = speculative).
 - **Autonomy boundary (`AUTO-IMPLEMENT` vs. `ASK-HUMAN`):**
-  - `AUTO-IMPLEMENT` (`[CL-AUTO]` in `PLAN.md`): bugs (`S1`–`S4`), copy/localization/anti-slop fixes across shipped locales, and small improvements inside the existing design language (empty-state guidance, shortcuts, bulk actions, exports, copy buttons, and motion/polish fixes) implemented in one coherent batch with lead design acceptance.
+  - `AUTO-IMPLEMENT` (`[CL-AUTO]` in `PLAN.md`): bugs of any severity, copy/localization/anti-slop fixes across shipped locales, and small improvements inside the existing design language (empty-state guidance, shortcuts, bulk actions, exports, copy buttons, and motion/polish fixes) implemented in one coherent batch with lead design acceptance.
   - `ASK-HUMAN` (`[CL-PROPOSAL]` in `PLAN.md`): pricing, plan/quota/credit limits, billing rules, large new features, new paid providers, brand changes, and legal/tax copy presented as a batched multiple-choice decision.
 
 ## Procedure
@@ -93,7 +93,7 @@ Execute four passes using the checklists, metrics, and thresholds in [references
 - Reuses the `real-user-release-gate` session and `qa+` test account with zero duplicate sign-up or payment runs.
 - The baseline (once per product) covers every page, app, plan (`Free` and `Paid`), and expertise tier (`Beginner`, `Intermediate`, `Expert`); later runs cover only touched screens and their flows.
 - Every step records a think-aloud note, cognitive tag (`DELIGHT`/`CONFUSION`/`FRICTION`/`WOULD_ABANDON`/`BLOCKER`), and Wharton `Q1`–`Q4` result.
-- Steps exceeding `15s`, `2` wrong clicks, or `8s` on an unlabelled spinner log `WOULD_ABANDON` (`S3`).
+- Steps exceeding `15s`, `2` wrong clicks, or `8s` on an unlabelled spinner log `WOULD_ABANDON` (`ux_severity` 3, `high`).
 - Every UX proposal satisfies all 5 fields of the Scope-Preserving Proposal Contract and scores `>= 4` on `ScopeKept`.
 - `[CL-AUTO]` items are implemented and verified in `PLAN.md`; `[CL-PROPOSAL]` items are queued for human decision.
 
@@ -118,9 +118,9 @@ Write `CUSTOMER-REPORT.md` and `customer-lens-summary.json` (recording `run_id`,
 | 1 | `/onboarding` | Beginner | First-run empty state | Fail Q1/Q2 | FRICTION | "No starter CTA or sample data visible." | `shots/01.png` |
 
 ## Defects & Friction (Track A) and Customer Wishes (Track B)
-| ID | Track & Class (`S1-S4` or `Kano`) | Score (`P` or `ICE/RICE`) | Dedup Status | Scope-Preserving Proposal / Job Story | Authority (`[CL-AUTO]` / `[CL-PROPOSAL]`) | Status & Commit |
+| ID | Track & Class (`ux_severity` / release severity, or `Kano`) | Score (`P` or `ICE/RICE`) | Dedup Status | Scope-Preserving Proposal / Job Story | Authority (`[CL-AUTO]` / `[CL-PROPOSAL]`) | Status & Commit |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `CL-01` | `S3` / `B2` | `P = 18.0` | `NEW_VALIDATED` | Add 1-click sample dataset + primary CTA; keep all import options (`CLS=0`). | `[CL-AUTO]` | `Done (<sha>)` |
+| `CL-01` | `3` / `high` / `B2` | `P = 18.0` | `NEW_VALIDATED` | Add 1-click sample dataset + primary CTA; keep all import options (`CLS=0`). | `[CL-AUTO]` | `Done (<sha>)` |
 ```
 
 ## Common issues & anti-patterns

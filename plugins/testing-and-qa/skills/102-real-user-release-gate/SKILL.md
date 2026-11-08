@@ -41,6 +41,8 @@ Test the integrated product end to end the way a real customer meets it, on real
 | A user-facing screen or component | `customer-lens-testing` on that screen |
 | Large UI changes across flows | a short `J7` charter over the changed flows |
 
+Touched means directly or transitively affected. A change to a shared layer (auth or session, config, the database schema, middleware, a shared component, the build configuration, or a dependency upgrade those use) touches every journey that depends on it. Keep a small map in the ledger of which journeys depend on which shared layers, and run a short critical set (sign-in and the core job) whenever a shared layer changes. If the impact cannot be worked out, widen the scope and record why. A copy-only change does not trigger payment journeys.
+
 ## Where it runs
 
 - **Before release (release candidate):** On a local development host, or on a staging or preview host the team designated, with test accounts, real providers, and minimal payloads. Store apps run the selected journeys on the simulator or emulator build before upload.
@@ -156,10 +158,11 @@ error_tracker:
   release_tag: <version>
   new_unhandled_events: 0
 findings:
-  s0_blocker: 0
-  s1_high: 0
-  s2_medium: 0
-  s3_low: 0
+  blocker: 0
+  high: 0
+  medium: 0
+  low: 0
+  informational: 0
 artifacts_dir: <path-outside-git-repo>
 test_ledger_updated: true
 teardown_status: ui_deleted_and_idempotent_sweep_clean | not_run | not_applicable
@@ -168,12 +171,16 @@ completed_at: <ISO-8601 timestamp>
 
 ## Severity, pass/fail, and retest rules
 
-- **`S0` (Blocker):** Crash, blank screen, auth or sign-up failure, payment or webhook failure, data loss or corruption, secret leak, account deletion failure, or unhandled error-tracker exception on `J1`–`J8`.
-- **`S1` (High):** Core provider feature fails without graceful recovery, email delivery exceeds 60 seconds, layout overlap blocks a primary button, or untranslated/placeholder text appears on a primary screen.
-- **`S2` (Medium):** Non-blocking UX friction, minor visual misalignment on a secondary screen, or response time 10–25% over budget with a working loading state.
-- **`S3` (Low):** Cosmetic polish note or minor copy adjustment.
-- **Pass:** 100% of the selected journeys (the baseline, or the touched set) complete on real providers with `0` `S0` findings, `0` `S1` findings, `0` uncaught console errors, `0` unexpected 4xx/5xx responses, and `0` new unhandled error-tracker events.
-- **Fail:** Any `S0` or `S1` finding, any skipped selected journey, or any mocked provider where a live provider is required.
+One severity scale serves every QA report, including `customer-lens-testing`: `blocker`, `high`, `medium`, `low`, `informational`.
+
+- **`blocker`:** Crash, blank screen, auth or sign-up failure, payment or webhook failure, data loss or corruption, secret leak, account deletion failure, or unhandled error-tracker exception on `J1`–`J8`.
+- **`high`:** Core provider feature fails without graceful recovery, email delivery exceeds 60 seconds, layout overlap blocks a primary button, or untranslated/placeholder text appears on a primary screen.
+- **`medium`:** Non-blocking UX friction, minor visual misalignment on a secondary screen, or response time 10–25% over budget with a working loading state.
+- **`low`:** Cosmetic polish note or minor copy adjustment.
+- **`informational`:** An observation that needs no change.
+- **Unknown severity and checks that did not run:** A finding without a valid severity stops the sign-off until it is classified. A selected journey that did not run fails the gate; `not_run` is only for journeys the release did not touch, and `not_applicable` needs a written reason.
+- **Pass:** 100% of the selected journeys (the baseline, or the touched set) complete on real providers with `0` `blocker` findings, `0` `high` findings, `0` uncaught console errors, `0` unexpected 4xx/5xx responses, and `0` new unhandled error-tracker events.
+- **Fail:** Any `blocker` or `high` finding, any finding without a valid severity, any skipped selected journey, or any mocked provider where a live provider is required.
 - **Retest rule:** Fix the root cause, build or deploy the patched candidate, and retest only the failed journey and directly coupled flows instead of restarting the full passing suite.
 
 ## Human-only steps
@@ -212,4 +219,4 @@ completed_at: <ISO-8601 timestamp>
 
 ## Completion criteria
 
-Done means the scoped candidate run (the full baseline once per product, otherwise the journeys the release touched) ran end to end on a local development host or a designated staging or preview host against real providers without auth or onboarding bypasses, all selected journeys passed with zero `S0`/`S1` findings, the post-deploy read-only check of the error tracker, the touched pages, and any delivered mail found zero new issues, any production-only live journey was completed by a human or with explicit per-step approval, any test account created for the run was deleted through the UI and swept by idempotent teardown, the test ledger was updated, and the YAML evidence packet was written.
+Done means the scoped candidate run (the full baseline once per product, otherwise the journeys the release touched) ran end to end on a local development host or a designated staging or preview host against real providers without auth or onboarding bypasses, all selected journeys passed with zero `blocker` or `high` findings, the post-deploy read-only check of the error tracker, the touched pages, and any delivered mail found zero new issues, any production-only live journey was completed by a human or with explicit per-step approval, any test account created for the run was deleted through the UI and swept by idempotent teardown, the test ledger was updated, and the YAML evidence packet was written.
