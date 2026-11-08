@@ -18,6 +18,22 @@ instruction files.
 
 ---
 
+## What's new in 3.4
+
+Four fixes from a detailed independent review:
+
+- **Whole skill packages.** `skill-sync import` now brings a skill's references, scripts and
+  templates along with SKILL.md, checks that its relative links resolve, and records every file
+  in `IMPORT-MANIFEST.json`. Nothing it imports is run.
+- **Licenses need a person.** Only a text that matches a canonical permissive license passes on
+  its own. A license that merely looks like MIT or Apache waits for `--accept-license` after a
+  human read it.
+- **Native Copilot agents.** Copilot gets its own custom agent format with explicit tool aliases;
+  read-only roles get no shell and no edit tools.
+- **Lighter defaults.** `project-intake` and `customer-lens-testing` have fast, standard and deep
+  modes, keep a project's existing documents where they are, and label agent findings apart from
+  real user tests.
+
 ## What's new in 3.3
 
 Install only what you need, check it later, and remove it cleanly:
@@ -117,7 +133,7 @@ The portable installer installs only platform skills and agent definitions.
 | OpenAI Codex | Skills and Codex-compatible agent profiles | AGENTS.md |
 | Cursor | Native skills and agents with inherited model and explicit read-only intent | AGENTS.md and .cursor/rules |
 | Gemini (`--targets antigravity`) | Skills and Gemini/Antigravity agents | GEMINI.md and AGENTS.md |
-| GitHub Copilot | Skills and Copilot-compatible custom agents | .github/copilot-instructions.md and AGENTS.md |
+| GitHub Copilot | Skills and native Copilot custom agents with explicit tool aliases | .github/copilot-instructions.md and AGENTS.md |
 | OpenCode | Skills and OpenCode subagents with a permission map | AGENTS.md |
 
 The installer does **not** copy, generate, merge, append, reconcile, back up, or otherwise modify

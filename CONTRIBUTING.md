@@ -60,8 +60,10 @@ A PR that adds content under `community/` must:
 - **Not** include content under proprietary or non-redistributable terms (e.g. service
   agreements). When in doubt, link to it instead of bundling it.
 
-Prefer `tools/skill-sync.py` to import and normalize upstream skills — it records provenance
-automatically.
+Prefer `tools/skill-sync.py` to import and normalize upstream skills. It copies whole skill
+packages, checks their relative links, records provenance in `IMPORT-MANIFEST.json`, and treats
+license detection as a candidate that a person confirms (`--accept-license`) unless the text
+matches a canonical permissive license.
 
 ## Commit & PR style
 

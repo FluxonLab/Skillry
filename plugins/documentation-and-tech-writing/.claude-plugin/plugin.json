@@ -1,7 +1,7 @@
 {
   "name": "skillry-documentation-and-tech-writing",
   "description": "Technical documentation agents (docs reviewer, technical writer). Their skill, technical-writing-review, ships in the product-docs-and-research plugin.",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "author": {
     "name": "FluxonLab",
     "url": "https://fluxonlab.com"

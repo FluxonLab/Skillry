@@ -1,6 +1,6 @@
 # Installing Skillry
 
-Skillry 3.3.0 ships **65 permission-bounded skill hubs + 73 subagents** across 18 departments,
+Skillry 3.4.0 ships **65 permission-bounded skill hubs + 73 subagents** across 18 departments,
 plus an attributed `community/` set (3 skill hubs + 49 agents; 68 skill hubs and 122 subagents total). Hubs route to merged references,
 so the 223 skills of 2.x remain reachable; see the 3.0.0, 3.1.0 and 3.2.0 entries in
 [`CHANGELOG.md`](../CHANGELOG.md) for where each former skill now lives. Install into one or
@@ -65,7 +65,7 @@ Install locations per platform:
 | Claude Code | `~/.claude/skills/<name>/SKILL.md` | `~/.claude/agents/<name>.md` |
 | OpenAI Codex | `~/.codex/skills/<name>/SKILL.md` | `~/.codex/agents/<name>.toml` |
 | Cursor | `~/.cursor/skills/<name>/SKILL.md` | `~/.cursor/agents/<name>.md` |
-| GitHub Copilot | `~/.copilot/skills/<name>/SKILL.md` | `~/.copilot/agents/<name>.agent.md` |
+| GitHub Copilot | `~/.copilot/skills/<name>/SKILL.md` | `~/.copilot/agents/<name>.agent.md` (native custom agent format) |
 | Google Antigravity (app, `agy` CLI and standalone IDE) | `~/.gemini/config/skills/<name>/SKILL.md` | `~/.gemini/config/agents/<name>.md` (native agent format) |
 | OpenCode | `~/.config/opencode/skills/<name>/SKILL.md` | `~/.config/opencode/agents/<name>.md` (subagent with a `permission` map) |
 
@@ -98,6 +98,15 @@ so you can move it first. See Antigravity's
 [customization discovery](https://antigravity.google/docs/extend/customization-discovery/),
 [skills](https://antigravity.google/docs/skills) and
 [subagents](https://antigravity.google/docs/subagents).
+
+Copilot agents use the native custom agent format: `name`, `description` and a `tools` list
+of Copilot aliases (`read`, `search`, `edit`, `execute`, `agent`, `web`, `todo`). Copilot has
+no permission mode, and a shell can change files, so read-only roles (`permissionMode: plan` or
+only read tools) get only `read`, `search` and the web tools they declare. Claude-only fields
+and Claude model names are left out, so the agent uses Copilot's default model. This is the
+installed file's contract; whether Copilot's own permission prompts stop a file change has not
+yet been checked in a live Copilot client. See GitHub's
+[custom agents configuration](https://docs.github.com/en/copilot/reference/custom-agents-configuration).
 
 The optional storage engine (`skillry storage`) runs on macOS and Linux. It relies on
 POSIX file locks and `lsof`. On Windows it answers with an `unsupported_platform` error;
@@ -167,15 +176,26 @@ python3 tools/validate.py     # structure, frontmatter, least-privilege, attribu
 
 ```bash
 python3 tools/skill-sync.py discover https://github.com/<owner>/<repo>      # read-only audit
+python3 tools/skill-sync.py import   https://github.com/<owner>/<repo>      # preview
 python3 tools/skill-sync.py import   https://github.com/<owner>/<repo> --apply
 ```
 
-skill-sync only accepts permissively licensed sources, scans each skill for risk
-signals, writes a `REVIEW.md`, and **stages** into `community/` for human review —
-it never auto-enables anything.
+skill-sync **stages** a source into `community/<source>/` for human review and never enables,
+runs or makes anything executable. An import copies each skill's whole folder (references,
+scripts, templates and other files), refuses symlinks, paths outside the skill and oversized
+files, and stops when a relative link in a skill points at a file that is not there. Scripts
+are listed in `REVIEW.md` with their risk signals, and `IMPORT-MANIFEST.json` records every file
+with its hash and the source commit.
+
+License detection is a candidate, not a verdict. A license file is `recognized` only when its
+text matches the canonical MIT, ISC, BSD-2-Clause, BSD-3-Clause or Apache-2.0 text apart from
+the copyright and title lines. Anything else that looks like one of them is `needs-review`, and
+the import stops until a person has read it and passes
+`--accept-license <sha256 of that file>`. An unknown license is never accepted. A skill whose
+own license file differs from the repository's root license is listed as a conflict. This is a
+technical check, not legal advice.
 
 ## Uninstall
 
-Remove the installed `<name>` directories/files from the platform locations above
-(restore any `*.bak-skillry` backups), or for Claude Code:
-`/plugin uninstall <plugin>@skillry`.
+Use `skillry uninstall --targets <platform...> --apply` (see "Checking and removing an install").
+For a Claude Code marketplace install: `/plugin uninstall <plugin>@skillry`.

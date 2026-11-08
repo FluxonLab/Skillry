@@ -54,6 +54,7 @@ PACKAGE_FILES = (
     "tools/storage/",
     "tools/release-gate.py",
     "tools/skill-sync.py",
+    "tools/licenses/",
     "tools/validate.py",
     "plugins/",
     "community/",
@@ -1080,7 +1081,7 @@ def run_disposable_installs(
                 f"installer target {target} has an invalid agent extension",
             )
             gate.require(
-                agent_fmt in {"md", "toml", "cursor", "antigravity", "opencode"},
+                agent_fmt in {"md", "toml", "cursor", "antigravity", "opencode", "copilot"},
                 f"installer target {target} has an unsupported agent format",
             )
             contracts.append(
