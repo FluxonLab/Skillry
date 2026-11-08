@@ -25,7 +25,7 @@ Define, select, and sequence project-type quality test suites and release verifi
 | `security-and-secrets-review` | Security & secrets | Secret scanning, dependency CVE audits, and configuration hardening. |
 | `i18n-locale-parity-review` | Localization (i18n) | Multilingual key parity, regional formatters, and layout expansion. |
 | `release-readiness-check` | Release candidate gating | Final sign-off gate before staging promotion or production release. |
-| `real-user-release-gate` | Real-user release gate | End-to-end pre-release and post-deploy verification with live providers, real inbox checks, and bounded payments. |
+| `real-user-release-gate` | Real-user release gate | A full end-to-end baseline once per product, then the journeys a release touches, on a local or staging candidate with live providers and real inbox checks; read-only checks after deploy, with live account and payment steps left to a human. |
 | `customer-lens-testing` | Customer lens | Inside the same gate: use the product as a free and paid customer at beginner, intermediate and expert level; ease, motion and polish; proposals. |
 
 ## References
