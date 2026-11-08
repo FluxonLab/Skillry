@@ -1,13 +1,13 @@
 ---
 name: real-user-release-gate
-description: "Use this skill before a release and right after deploy to test the product end to end as a real customer on real providers: a full baseline once per product, then only the journeys a release touches, on a local or staging candidate; after deploy, read-only checks, with live account and payment steps left to a human."
+description: "Use this skill before a release and right after deploy to test the product end to end as a real customer on real providers: a full baseline once per product, then only touched journeys on a local, staging, or preview candidate; after deploy, read-only checks, with production-only live steps done by a human or approved step by step."
 ---
 
 # Real-User Release Gate
 
 ## Purpose
 
-Test the integrated product end to end the way a real customer meets it, on real upstream providers, without seeded authentication state, mocked responses, or skipped onboarding. Run the whole product once as a baseline; on every later release run only the journeys whose areas the release touches. Run them where an agent may act on its own: a local development host, or a staging or preview host the team designated. After deploy, check production read-only; creating accounts, signing in, paying, and deleting accounts on live production are a human's steps. Keep a per-product test ledger, and emit a YAML evidence packet recording scope, journeys, provider spend, error-tracker status, and account teardown. The same session and test account run `customer-lens-testing`, the customer layer: the agent uses the product as a real free and paid customer at three levels of expertise and proposes what it would want.
+Test the integrated product end to end the way a real customer meets it, on real upstream providers, without seeded authentication state, mocked responses, or skipped onboarding. Run the whole product once as a baseline; on every later release run only the journeys whose areas the release touches. Run them where an agent may act on its own: a local development host, or a staging or preview host the team designated. After deploy, check production read-only (error tracker, touched pages, and delivered mail). Creating accounts, signing in, paying with a 100%-off promotion code, and deleting accounts on live production are a human's steps, or need explicit approval for each step, and happen only when a touched area exists only in production. Keep a per-product test ledger, and emit a YAML evidence packet recording scope, journeys, provider spend, error-tracker status, and account teardown. During the baseline, and whenever a release touches user-facing screens, the same session and test account run `customer-lens-testing`, the customer layer: the agent uses the scoped screens as a real free and paid customer at three levels of expertise and proposes what it would want.
 
 ## When to use
 
@@ -44,9 +44,9 @@ Test the integrated product end to end the way a real customer meets it, on real
 ## Where it runs
 
 - **Before release (release candidate):** On a local development host, or on a staging or preview host the team designated, with test accounts, real providers, and minimal payloads. Store apps run the selected journeys on the simulator or emulator build before upload.
-- **Test payments:** An agent completes processor test-mode checkouts only on a local development host. On a hosted staging or preview environment a human completes the test checkout, unless the team's agent policy explicitly allows agent test payments there.
+- **Test payments:** An agent completes processor test-mode checkouts only on a local development host. On a hosted staging or preview environment, a human completes the test checkout.
 - **After deploy (read-only):** Query the error tracker for new errors, load the touched pages or screens, and read any mail the touched area delivered. No account is needed.
-- **Live journeys (human steps):** Only when a touched area depends on something that exists only in production, such as live payment webhooks, a live provider account, or mail from the production domain. A human creates the test account, signs in, pays with a 100%-off promotion code, and deletes the account, or explicitly approves each step. The agent prepares the checklist (account address, promotion code, expected results), watches, and verifies the outcome read-only. A release without such an area, such as a dependency update, has no live journey.
+- **Live journeys (human steps):** Only when a touched area depends on something that exists only in production, such as live payment webhooks, a live provider account, or mail from the production domain. A human creates the test account, signs in, pays with a 100%-off promotion code, and deletes the account, or explicitly approves each step. The agent prepares the checklist (account address, promotion code, expected results), watches, and verifies the outcome read-only; it runs a live step itself only after the human explicitly approves that step. A release without such an area, such as a dependency update, has no live journey.
 
 ## Personas
 
@@ -62,7 +62,7 @@ The baseline runs every applicable journey; a later release runs the touched set
 - **`J1` Discovery & Sign-Up:** Load the candidate URL or binary in a clean profile, register via the real auth provider (OAuth, magic link, OTP, or password), receive the real email or SMS, and click the verification link or enter the OTP; on live production a human creates the account or approves each step; pass condition: an authenticated session starts without seeded state.
 - **`J2` Onboarding & Empty-State-to-First-Value:** Walk every first-run onboarding screen without database seeding and create the first entity or project; pass condition: empty states clear and onboarding state persists across reload or app restart.
 - **`J3` Core Jobs with Real Live Providers:** Run the primary value workflow against live upstream APIs (LLMs, embeddings, media, search, storage, or exports) with minimal real payloads; pass condition: valid non-empty output renders in the UI and request ID, latency, and spend are recorded.
-- **`J4` Payments, Entitlements & Invoicing:** Trigger the paywall or upgrade flow, complete checkout in processor test mode (by an agent only on a local development host; on hosted staging or preview, by a human), and open the customer billing portal; on live production a human completes checkout with a 100%-off promotion code; pass condition: the webhook updates entitlements within 10 seconds, the receipt email arrives, and the billing portal opens.
+- **`J4` Payments, Entitlements & Invoicing:** Trigger the paywall or upgrade flow, complete checkout in processor test mode (by an agent only on a local development host; on hosted staging or preview, by a human), and open the customer billing portal; on live production, only for a production-only touched area, a human completes checkout with a 100%-off promotion code or explicitly approves the step; pass condition: the webhook updates entitlements within 10 seconds, the receipt email arrives, and the billing portal opens.
 - **`J5` Transactional Email & Notification Loop:** Read the delivered email in a subaddressed mailbox the team owns (`qa+<project>-<date>-<sha>@<team-domain>`) via IMAP or mail API instead of trusting an HTTP 200 send response; pass condition: `From`/`Reply-To` headers and SPF/DKIM pass, HTML/text links render, and action links work.
 - **`J6` Settings, Locale & Profile Mutation:** Change display name, avatar, shipped locales, notification preferences, and API tokens, then reload; pass condition: all mutations persist after reload.
 - **`J7` Exploratory Charter:** Run a 10–15 minute time-boxed Session-Based Test Management (SBTM) tour on changed and adjacent surfaces using `P4-EdgeAdversarialUser` inputs; pass condition: zero uncaught console errors, zero unexpected 4xx/5xx responses, zero new error-tracker issues, and no broken layouts.
@@ -76,17 +76,17 @@ The baseline runs every applicable journey; a later release runs the touched set
    - Create a subaddressed address (`qa+<project>-<date>-<sha>@<team-domain>`) in a mailbox the team owns.
    - Flag the test account (`qa_test: true`) so it is excluded from analytics and mailing lists.
 2. **Execute the selected journeys among `J1`–`J3` on real providers on the candidate host.**
-   - Complete cold sign-up, real inbox or SMS verification, and all onboarding screens without seeding.
-   - Execute the core workflow against live providers with minimal payloads and log request IDs, latency, and spend.
-3. **Verify payments (`J4`) under processor rules.**
+   - (`J1`, `J2`) Complete cold sign-up, real inbox or SMS verification, and the onboarding screens without seeding.
+   - (`J3`) Execute the touched core workflow against live providers with minimal payloads and log request IDs, latency, and spend.
+3. **Verify payments (`J4`, when selected) under processor rules.**
    - Use payment processor test mode or sandbox test clocks on the release candidate: an agent completes test checkouts only on a local development host; on hosted staging or preview, a human completes them.
-   - In production, and only for a touched area that exists only there, a human completes checkout with a 100%-off live promotion code at 0.00, because processors forbid live testing with real card details.
+   - In production, and only for a touched area that exists only there, a human completes checkout with a 100%-off live promotion code at 0.00, or explicitly approves the step, because processors forbid live testing with real card details.
    - A real charge after a payment-code change is a human decision each time, made against the processor's terms.
    - Refund any real-money charge the same day and issue a credit note (check your local invoicing rules for real charges).
 4. **Execute the selected journeys among `J5`–`J8` and capture artifacts.**
-   - Verify inbox messages, mutate profile and locale settings, and run 1–3 exploratory charters.
+   - (`J5`–`J7`) Verify inbox messages, mutate profile and locale settings, and run exploratory charters: 1–3 on the baseline, or a short charter over the changed flows.
    - Record Playwright traces (`trace.zip` with DOM snapshots and network HAR) or mobile video (`xcrun simctl io booted recordVideo` or `maestro record`) plus runtime logs (`xcrun simctl spawn booted log collect` or `adb logcat`).
-   - Delete the account through the product UI (`J8`) and run the idempotent teardown script; on live production a human does both, or approves each step.
+   - (`J8`) Delete the account through the product UI and run the idempotent teardown script; do the same for any disposable test account created for the run. On live production a human does both, or explicitly approves each step.
 5. **Check production read-only after deploy, verify the error tracker, record, and sign off.**
    - After deploy, load the touched pages or screens and read any mail the touched area delivered; no account is needed.
    - Query the error-tracking API for the release tag and environment to confirm zero new unhandled exceptions.
@@ -97,14 +97,13 @@ The baseline runs every applicable journey; a later release runs the touched set
 
 - The test ledger was read before the run and updated after it; after the baseline, only touched journeys ran.
 - Candidate journeys ran on a local development host or a designated staging or preview host.
-- `P1-FreshVisitor` starts in a clean browser profile or freshly erased simulator.
-- Sign-up and onboarding finish without seeded database state or injected auth tokens.
-- Transactional emails are read from the team's subaddressed inbox with SPF/DKIM, headers, and links verified.
-- Live AI and upstream provider calls use minimal payloads with request IDs and spend recorded.
-- Candidate payment checks use processor test mode, agent-run only on a local development host; production checks, when needed, are completed by a human with a 100%-off live promotion code.
+- (`J1`, `J2`) `P1-FreshVisitor` starts in a clean browser profile or freshly erased simulator, and sign-up and onboarding finish without seeded database state or injected auth tokens.
+- (`J5`) Transactional emails are read from the team's subaddressed inbox with SPF/DKIM, headers, and links verified.
+- (`J3`) Live AI and upstream provider calls use minimal payloads with request IDs and spend recorded.
+- (`J4`) Candidate payment checks use processor test mode, agent-run only on a local development host and otherwise completed by a human; production checks, only for a production-only touched area, are completed by a human or with explicit per-step approval using a 100%-off live promotion code.
 - Any explicitly approved real-money charge has a same-day refund ID and credit note recorded.
-- Test accounts are flagged, excluded from analytics and mailing lists, deleted via the product UI, and swept by idempotent teardown.
-- After deploy, the touched pages were loaded read-only and the error-tracking API shows zero new unhandled exceptions for the release tag.
+- Test accounts are flagged and excluded from analytics and mailing lists; any account created for the run is deleted via the product UI and swept by idempotent teardown.
+- After deploy, the touched pages and any delivered mail were checked read-only, and the error-tracking API shows zero new unhandled exceptions for the release tag.
 
 ## Exploratory charter template
 
@@ -130,9 +129,9 @@ scope:
   environment: <release-candidate | production>
   host: local | staging | preview | production
   touched_areas: [<area from the release diff> | all]
-  test_account: qa+<project>-<date>-<sha>@<team-domain>
-  analytics_and_mailing_excluded: true
-  personas_run: [P1-FreshVisitor, P2-PaidBuyer, P3-ReturningUpgrader, P4-EdgeAdversarialUser]
+  test_account: qa+<project>-<date>-<sha>@<team-domain> | not_applicable
+  analytics_and_mailing_excluded: true | not_applicable
+  personas_run: [<personas used by the selected journeys>]
 journeys:
   J1_signup: pass | fail | not_run
   J2_onboarding: pass | fail | not_run
@@ -143,8 +142,8 @@ journeys:
   J7_exploratory_charter: pass | fail | not_run
   J8_account_deletion: pass | fail | not_run
 payment_verification:
-  mode: processor-test-mode | live-100pct-promo-code | approved-real-charge
-  completed_by: agent-local | human | not_applicable
+  mode: processor-test-mode | live-100pct-promo-code | approved-real-charge | not_applicable
+  completed_by: agent-local | human | agent-with-approval | not_applicable
   session_or_charge_id: <id>
   refund_id: <id | not_applicable>
   credit_note_id: <id | not_applicable>
@@ -163,7 +162,7 @@ findings:
   s3_low: 0
 artifacts_dir: <path-outside-git-repo>
 test_ledger_updated: true
-teardown_status: ui_deleted_and_idempotent_sweep_clean
+teardown_status: ui_deleted_and_idempotent_sweep_clean | not_run | not_applicable
 completed_at: <ISO-8601 timestamp>
 ```
 
@@ -180,7 +179,7 @@ completed_at: <ISO-8601 timestamp>
 ## Human-only steps
 
 - Creating accounts, signing in with passwords or one-time codes, paying, and deleting accounts on live production, unless a human explicitly approves each step.
-- Completing processor test-mode checkouts on a hosted staging or preview environment when the agent's policy limits test payments to local hosts.
+- Completing processor test-mode checkouts on a hosted staging or preview environment.
 - Completing anti-bot CAPTCHA or proof-of-work challenges.
 - Approving real-money 3D Secure (3DS) bank prompts when a live charge is explicitly authorized.
 - Confirming app store biometric prompts (Face ID, Touch ID, or store purchase authentication).
@@ -190,7 +189,7 @@ completed_at: <ISO-8601 timestamp>
 
 - **Seeding auth or onboarding state:** Injecting tokens or database rows hides broken sign-up and first-run transitions.
 - **Trusting HTTP 200 for email:** Checking only the send API response misses DNS, SPF/DKIM, and broken link bugs.
-- **Running unapproved live card tests:** Processors forbid live testing with real card details; use test mode on candidates and a human-run 100%-off promotion code in production.
+- **Running unapproved live card tests:** Processors forbid live testing with real card details; use test mode on candidates and, when a touched area exists only in production, a 100%-off promotion code completed by a human or with explicit per-step approval.
 - **Re-running everything each release:** After the baseline, run only the touched journeys; a full run repeats work and adds provider spend.
 - **Agent actions on live accounts:** An agent that signs up, pays, or deletes accounts on production without a human's approval acts outside its authority; keep agent runs on candidate hosts.
 - **Leaving test users in analytics:** Unflagged test accounts distort funnels and receive marketing emails.
@@ -213,4 +212,4 @@ completed_at: <ISO-8601 timestamp>
 
 ## Completion criteria
 
-Done means the scoped run (the full baseline once per product, otherwise the journeys the release touched) ran end to end on a local development host or a designated staging or preview host against real providers without auth or onboarding bypasses, all selected journeys passed with zero `S0`/`S1` findings, the post-deploy read-only check found zero new error-tracker events, any live journey was completed by a human or with per-step approval, test accounts were deleted through the UI and swept by idempotent teardown, the test ledger was updated, and the YAML evidence packet was written.
+Done means the scoped candidate run (the full baseline once per product, otherwise the journeys the release touched) ran end to end on a local development host or a designated staging or preview host against real providers without auth or onboarding bypasses, all selected journeys passed with zero `S0`/`S1` findings, the post-deploy read-only check of the error tracker, the touched pages, and any delivered mail found zero new issues, any production-only live journey was completed by a human or with explicit per-step approval, any test account created for the run was deleted through the UI and swept by idempotent teardown, the test ledger was updated, and the YAML evidence packet was written.
