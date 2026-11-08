@@ -18,7 +18,7 @@ import tarfile
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-ALL_TARGETS = ["claude", "codex", "copilot", "antigravity", "cursor"]
+ALL_TARGETS = ["claude", "codex", "copilot", "antigravity", "cursor", "opencode"]
 MIN_SKILLS = 50
 MIN_AGENTS = 60
 
@@ -69,7 +69,20 @@ def run(argv, env, cwd=None):
 def from_repo(table):
     home = Path(tempfile.mkdtemp(prefix="skillry-home-"))
     run([sys.executable, ROOT / "tools" / "install.py", "--apply", "--targets", *ALL_TARGETS], throwaway_env(home))
-    return check(count(home, table, ALL_TARGETS))
+    status = check(count(home, table, ALL_TARGETS))
+    # A second install over the first must change nothing.
+    again = subprocess.run([sys.executable, str(ROOT / "tools" / "install.py"), "--apply", "--targets", *ALL_TARGETS],
+                           env=throwaway_env(home), capture_output=True, text=True)
+    changed = [line for line in again.stdout.splitlines() if "write:" in line and "write:0 remove:0" not in line]
+    if again.returncode != 0 or changed:
+        print("second install was not a no-op:", again.returncode, changed, again.stderr[-1000:])
+        return 1
+    doctor = subprocess.run([sys.executable, str(ROOT / "tools" / "install.py"), "--doctor"],
+                            env=throwaway_env(home), capture_output=True, text=True)
+    if doctor.returncode != 0:
+        print("doctor found problems after a clean install:", doctor.stdout[-2000:], doctor.stderr[-1000:])
+        return 1
+    return status
 
 
 def from_package(table):

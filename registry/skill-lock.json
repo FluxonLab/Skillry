@@ -1,11 +1,21 @@
 {
   "version": "0.2.0",
   "counts": {
-    "original": 64,
+    "original": 65,
     "community": 3,
-    "total": 67
+    "total": 68
   },
   "skills": [
+    {
+      "id": "free-model-workers",
+      "folder": "104-free-model-workers",
+      "department": "ai-and-agent-systems",
+      "origin": "original",
+      "lines": 110,
+      "files": 1,
+      "checksum_scope": "component-tree-v1",
+      "checksum": "41f1f5eb7d8666668710ebdc6be9b384bf9a71e899d22c42e5bd704624200e9d"
+    },
     {
       "id": "agent-workflow-design",
       "folder": "40-agent-workflow-design",

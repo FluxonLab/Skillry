@@ -49,7 +49,7 @@ jobs:
         run: python3 tests/test_cursor_install.py
 
       - name: Dry-run installer for all platforms (no writes)
-        run: python3 tools/install.py --targets claude codex copilot antigravity cursor
+        run: python3 tools/install.py --targets claude codex copilot antigravity cursor opencode
 
   install-smoke:
     name: Install into a throwaway home (${{ matrix.os }})

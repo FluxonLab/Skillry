@@ -10,7 +10,7 @@
     {
       "name": "skillry-ai-and-agent-systems",
       "source": "./plugins/ai-and-agent-systems",
-      "description": "Agent workflow design (LangChain, MCP servers, Copilot SDK), prompt systems and execution prompts, RAG/vector search, and LLM evaluation."
+      "description": "Agent workflow design (LangChain, MCP servers, Copilot SDK), prompt systems and execution prompts, RAG/vector search, LLM evaluation, and free-model workers through OpenCode."
     },
     {
       "name": "skillry-backend-and-api",

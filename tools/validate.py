@@ -53,11 +53,16 @@ ok("plugins have skills", len(skill_files) > 0, f"found {len(skill_files)}")
 bad_frontmatter = []
 shallow = []
 name_mismatch = []
+long_descriptions = []
+# Every skill's description is shown to the model on every turn, so it has a budget.
+DESCRIPTION_BUDGET = 240
 for skill_file in skill_files:
     text = skill_file.read_text(encoding="utf-8")
     fields = frontmatter(text)
     if not fields.get("name") or not fields.get("description"):
         bad_frontmatter.append(str(skill_file.relative_to(ROOT)))
+    if len(fields.get("description") or "") > DESCRIPTION_BUDGET:
+        long_descriptions.append(f"{skill_file.parent.name} ({len(fields['description'])})")
     folder = re.sub(r"^\d+-", "", skill_file.parent.name)
     if fields.get("name") and fields["name"] != folder:
         name_mismatch.append(
@@ -71,6 +76,11 @@ ok(
     "all skills have name+description",
     not bad_frontmatter,
     "; ".join(bad_frontmatter[:5]),
+)
+ok(
+    f"skill descriptions within {DESCRIPTION_BUDGET} characters",
+    not long_descriptions,
+    "; ".join(long_descriptions[:5]),
 )
 ok(
     "skill folder names match frontmatter",

@@ -1,7 +1,7 @@
 {
   "name": "skillry-ai-and-agent-systems",
-  "description": "Agent workflow design (LangChain, MCP servers, Copilot SDK), prompt systems and execution prompts, RAG/vector search, and LLM evaluation.",
-  "version": "3.2.4",
+  "description": "Agent workflow design (LangChain, MCP servers, Copilot SDK), prompt systems and execution prompts, RAG/vector search, LLM evaluation, and free-model workers through OpenCode.",
+  "version": "3.3.0",
   "author": {
     "name": "FluxonLab",
     "url": "https://fluxonlab.com"

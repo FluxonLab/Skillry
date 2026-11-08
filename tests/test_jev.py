@@ -316,7 +316,7 @@ class CatalogTests(unittest.TestCase):
 
     def test_real_registry_ids_and_paths(self):
         catalog = build_public()
-        self.assertEqual(len(catalog["entries"]), 189)
+        self.assertEqual(len(catalog["entries"]), 190)
         for entry in catalog["entries"]:
             self.assertTrue((ROOT / entry["source_path"]).is_file())
         # Frontmatter ID differs from numbered source folder ID for some entries.
