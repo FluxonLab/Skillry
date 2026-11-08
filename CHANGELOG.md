@@ -27,6 +27,9 @@ All notable changes to Skillry are documented here. The format is based on
   was the blocker in one, S4 in the other). Both now use blocker, high, medium, low and
   informational. The customer lens keeps Nielsen's 0-4 as `ux_severity` and maps it. An
   unclassified finding stops the sign-off, and a selected journey that did not run fails.
+- The installer and the lock builder ignore Python bytecode caches (`__pycache__`, `.pyc`)
+  inside a skill. Running a skill's script in place no longer breaks its checksum, and
+  caches are never installed.
 - Touched-area selection now also counts journeys that depend on a changed shared layer
   (auth, config, schema, middleware, shared components, build settings). The gate keeps a
   small dependency map and always runs a short critical set.

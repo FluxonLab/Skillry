@@ -19,6 +19,8 @@ import unittest
 from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
+# Loading the module from the skill folder must not leave a __pycache__ there.
+sys.dont_write_bytecode = True
 _SPEC = importlib.util.spec_from_file_location(
     "research_ledger",
     ROOT / "plugins/product-docs-and-research/skills/101-research-ledger/scripts/research_ledger.py")
