@@ -6,6 +6,25 @@ All notable changes to Skillry are documented here. The format is based on
 
 ## [Unreleased]
 
+## [3.2.2] - 2026-11-08
+
+### Changed
+
+- `real-user-release-gate` no longer repeats passing work. The full end-to-end run is a one-time
+  baseline per product (recorded launch testing counts). Every later release runs only the
+  journeys of the areas it touches, chosen from a touched-area table, and a per-product test
+  ledger records each test's kind, last run and result.
+- The gate now says where an agent may act. Release-candidate journeys run on a local development
+  host or a designated staging or preview host with test accounts. An agent completes processor
+  test-mode checkouts only on a local development host; on hosted staging or preview a human
+  completes them. After deploy the checks are read-only: the error tracker, the touched pages and
+  any delivered mail.
+- Creating accounts, signing in, paying with the 100%-off promotion code and deleting accounts on
+  live production are a human's steps, or need explicit approval for each step, and happen only
+  when a touched area exists only in production. The evidence packet records the run scope, the
+  host and who completed live and payment steps.
+- `customer-lens-testing` and `test-suite-planning` follow the same cadence and hosts.
+
 ## [3.2.1] - 2026-11-07
 
 ### Fixed

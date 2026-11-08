@@ -1,18 +1,18 @@
 ---
 name: customer-lens-testing
-description: "Use this skill inside the real-user-release-gate session before and right after release to test the product as a real customer across free and paid plans and beginner, intermediate, and expert levels, verify everything works, and propose or implement improvements."
+description: "Use this skill inside the real-user-release-gate session to test the product as a real customer on a local, staging, or preview candidate across free and paid plans and beginner, intermediate, and expert levels (a full baseline once per product, then the screens a release touches), check touched screens read-only after deploy, and propose or implement improvements."
 ---
 
 # Customer-Lens Testing
 
 ## Purpose
 
-Act as the customer layer of `real-user-release-gate` inside the same release gate session and test account (`qa+<project>-<date>-<sha>@<team-domain>`). Use the release candidate before shipping and live production right after deploy as a real customer across `Free` and `Paid` plans and `Beginner`, `Intermediate`, and `Expert` levels. Verify that every flow works on live providers and audit ease of use, confusion resistance, component motion, and visual polish. Propose what a real customer would want from the customer's seat. Implement bugs, copy fixes, and small improvements inside the existing design language directly in `PLAN.md` with evidence, and route pricing, plans, large features, brand, and legal changes to a human decision. Open [references/ux-rubric.md](references/ux-rubric.md) for checklists (`B1`–`B5`, `I1`–`I5`, `E1`–`E5`, `P1`–`P5`), motion rules, runtime metrics, Smith's Lostness ($L$), the five-dimension rubric, and the priority formula.
+Act as the customer layer of `real-user-release-gate` inside the same release gate session and test account (`qa+<project>-<date>-<sha>@<team-domain>`). Use the release candidate (a local development host or a designated staging or preview host) before shipping as a real customer across `Free` and `Paid` plans and `Beginner`, `Intermediate`, and `Expert` levels, and right after deploy check the touched production screens, delivered mail, and the error tracker read-only. Run the full baseline once per product; on later releases cover only the screens the release touches and the flows they belong to. Verify that every flow in scope works on real providers and audit ease of use, confusion resistance, component motion, and visual polish. Propose what a real customer would want from the customer's seat. Implement bugs, copy fixes, and small improvements inside the existing design language directly in `PLAN.md` with evidence, and route pricing, plans, large features, brand, and legal changes to a human decision. Open [references/ux-rubric.md](references/ux-rubric.md) for checklists (`B1`–`B5`, `I1`–`I5`, `E1`–`E5`, `P1`–`P5`), motion rules, runtime metrics, Smith's Lostness ($L$), the five-dimension rubric, and the priority formula.
 
 ## When to use
 
 - Inside a `real-user-release-gate` run before shipping a release candidate and right after deploying to production.
-- The first time a product passes the release gate, to run one full end-to-end customer baseline across every page, app, plan tier, and expertise level.
+- Once per product, when its test ledger has no baseline, to run one full end-to-end customer baseline across every page, app, plan tier, and expertise level.
 - On every subsequent release, to test changed surfaces and the end-to-end customer flows they touch.
 
 ## When not to use
@@ -20,13 +20,15 @@ Act as the customer layer of `real-user-release-gate` inside the same release ga
 - As a scheduled cron job, weekly routine, or standalone audit outside a release gate.
 - As imaginary roleplay from source code or static screenshots without driving the running product.
 - During unfinished implementation before the release candidate is integrated.
+- Repeating the baseline, or testing screens the release did not touch.
 
 ## Cadence and pairing with real-user-release-gate
 
 - **Shared session and account:** Run inside the active `real-user-release-gate` session and reuse its `qa+<project>-<date>-<sha>@<team-domain>` account (`qa_test: true`).
 - **No duplicate lifecycle runs:** Piggyback on `real-user-release-gate` journeys `J1`–`J8` so sign-up, inbox verification, payment, and account deletion execute once.
-- **First-release full baseline:** The first time a product passes the gate, test every page and app surface, `Free` and `Paid` plans, `Beginner`, `Intermediate`, and `Expert` passes, and the motion/polish pass as part of the first release work item.
-- **Subsequent update gates:** On later releases, test changed surfaces and the customer flows they touch on the pre-release candidate (Stage 1) and the 5-minute post-deploy production check (Stage 2).
+- **Baseline (one-time):** Once per product, when its test ledger has no baseline, test every page and app surface, `Free` and `Paid` plans, `Beginner`, `Intermediate`, and `Expert` passes, and the motion/polish pass as part of that release's work item. Customer testing done at launch counts when it is recorded; repeat the baseline only on request or after a rewrite changes most of the product.
+- **Pre-release update (on touch):** On later releases, test only the screens and components the release changed and the customer flows they belong to, on the release candidate (a local development host or a designated staging or preview host).
+- **Post-deploy update (read-only):** Right after deploy, load the touched screens on production, read any mail the touched area delivered, and check the error tracker, without an account. A live journey runs only for a touched area that exists only in production: a human creates the account, signs in, pays with a 100%-off promotion code, and deletes it, or explicitly approves each step. The agent may walk the product read-only in the human's signed-in session and runs a step itself only after the human approves that step. Record every run in the product's test ledger.
 
 ## Persona card, patience budget, and anti-sycophancy rules
 
@@ -80,16 +82,16 @@ Execute four passes using the checklists, metrics, and thresholds in [references
 
 ## Procedure
 
-1. **Load project authority:** Read `AGENTS.md`, `DECISIONS.md`, `PLAN.md`, and open issues, and select full-baseline or changed-surface scope.
-2. **Execute Free-plan journeys (`J1`–`J3`):** Run Passes 1–3 on real providers and log UI time ($T_{\text{UI\_execution}} + T_{\text{app\_response}}$), step counts ($S, N, R$), and Cognitive Walkthrough results.
-3. **Execute Paid-plan upgrade and value audit (`J4`):** Upgrade via processor test mode on the candidate or a 100%-off live promotion code (`0.00`) in production, test paid features, and record the renewal verdict.
-4. **Audit motion, polish, cancel/withdrawal, and deletion (`J6`–`J8`):** Run Pass 4 telemetry, verify data export, 2-click self-serve cancellation, and 2-step electronic withdrawal where consumer withdrawal law applies (EU Directive (EU) 2023/2673 Art. 11a; Germany § 312k BGB; Austria FAGG), and delete the test account.
-5. **Deduplicate, implement `[CL-AUTO]`, and report:** Update `PLAN.md` (never a second backlog file), implement `[CL-AUTO]` fixes in one coherent batch, retest affected flows, write `CUSTOMER-REPORT.md` and `customer-lens-summary.json` outside git, and batch `[CL-PROPOSAL]` questions for human decision.
+1. **Load project authority:** Read `AGENTS.md`, `DECISIONS.md`, `PLAN.md`, open issues, and the product's test ledger, and select full-baseline or changed-surface scope.
+2. **Execute Free-plan journeys (`J1`–`J3`, as in scope):** On the candidate host, run Passes 1–3 on real providers over the scope (the baseline, or the touched screens and flows; a live journey follows the post-deploy rule above) and log UI time ($T_{\text{UI\_execution}} + T_{\text{app\_response}}$), step counts ($S, N, R$), and Cognitive Walkthrough results.
+3. **Execute Paid-plan upgrade and value audit (`J4`, when in scope):** On the baseline, or when paid screens or billing flows are touched, upgrade via processor test mode on a local development candidate (on hosted staging or preview, a human completes the test checkout); in production, only for a production-only touched area, a human completes it with a 100%-off live promotion code (`0.00`) or explicitly approves the step. Test the paid features in scope and record the renewal verdict.
+4. **Audit motion, polish, cancel/withdrawal, and deletion (`J6`–`J8`, as in scope):** Run Pass 4 telemetry on the baseline or the touched screens; when in scope, verify data export, 2-click self-serve cancellation, and 2-step electronic withdrawal where consumer withdrawal law applies (EU Directive (EU) 2023/2673 Art. 11a; Germany § 312k BGB; Austria FAGG); delete any test account created for the run (on live production a human does it, or explicitly approves it).
+5. **Deduplicate, implement `[CL-AUTO]`, and report:** Update `PLAN.md` (never a second backlog file), implement `[CL-AUTO]` fixes in one coherent batch, retest affected flows, write `CUSTOMER-REPORT.md` and `customer-lens-summary.json` outside git, record the run in the test ledger, and batch `[CL-PROPOSAL]` questions for human decision.
 
 ## Concrete checks
 
 - Reuses the `real-user-release-gate` session and `qa+` test account with zero duplicate sign-up or payment runs.
-- First release gate pass covers every page, app, plan (`Free` and `Paid`), and expertise tier (`Beginner`, `Intermediate`, `Expert`).
+- The baseline (once per product) covers every page, app, plan (`Free` and `Paid`), and expertise tier (`Beginner`, `Intermediate`, `Expert`); later runs cover only touched screens and their flows.
 - Every step records a think-aloud note, cognitive tag (`DELIGHT`/`CONFUSION`/`FRICTION`/`WOULD_ABANDON`/`BLOCKER`), and Wharton `Q1`–`Q4` result.
 - Steps exceeding `15s`, `2` wrong clicks, or `8s` on an unlabelled spinner log `WOULD_ABANDON` (`S3`).
 - Every UX proposal satisfies all 5 fields of the Scope-Preserving Proposal Contract and scores `>= 4` on `ScopeKept`.
@@ -97,12 +99,12 @@ Execute four passes using the checklists, metrics, and thresholds in [references
 
 ## Report format
 
-Write `CUSTOMER-REPORT.md` and `customer-lens-summary.json` (recording `run_id`, `mode`, `personas_tested`, `counts`, `compliance`, `spend`, and `evidence_dir`) in the external `artifacts_dir` alongside the `real-user-release-gate` YAML packet, and log `[CL-AUTO]` and `[CL-PROPOSAL]` items in `PLAN.md`:
+Write `CUSTOMER-REPORT.md` and `customer-lens-summary.json` (recording `run_id`, `stage`, `scope`, `personas_tested`, `counts`, `compliance`, `spend`, and `evidence_dir`) in the external `artifacts_dir` alongside the `real-user-release-gate` YAML packet, and log `[CL-AUTO]` and `[CL-PROPOSAL]` items in `PLAN.md`:
 
 ```markdown
 # Customer Lens Report: <Product> (<YYYY-MM-DD>)
-- **Run ID & Mode:** `cl-<project>-<YYYYMMDD>-<sha>` | `first-full-baseline` | `release-update` | `post-deploy-live`
-- **Account & Plans:** `qa+<project>-<YYYYMMDD>-<sha>@<team-domain>` (Deleted: `yes`) | `Free` -> `Paid` (`<mode>`, spend `<amount>`)
+- **Run ID, Stage & Scope:** `cl-<project>-<YYYYMMDD>-<sha>` | `release-candidate` or `post-deploy-live` | `baseline` or `on-touch` | host `<local | staging | preview | production>`
+- **Account & Plans:** `qa+<project>-<YYYYMMDD>-<sha>@<team-domain>` or `not_applicable` (Deleted: `yes` | `not_run`) | `<plans in scope, e.g. Free -> Paid>` (`<payment mode>`, spend `<amount>`)
 - **Locales & Viewports:** `<locales>` | `1440x900` desktop + `390x844` mobile
 - **Personas:** `<Persona Card(s): ID, tier, habit, JTBD, patience budget>`
 - **5D Rubric (1-5):** Ease `<X.X>` | Confusion `<X.X>` | Motion `<X.X>` | Polish `<X.X>` | Scope Kept `<5.0 req>`
@@ -130,16 +132,16 @@ Write `CUSTOMER-REPORT.md` and `customer-lens-summary.json` (recording `run_id`,
 
 ## Required output
 
-- Mode executed (`first-full-baseline`, `release-update`, or `post-deploy-live`), persona cards, and 5-dimension rubric scores.
+- Stage (`release-candidate` or `post-deploy-live`), run scope (`baseline` or `on-touch`), host, persona cards, and 5-dimension rubric scores.
 - Friction log, checklists (`B1`–`B5`, `I1`–`I5`, `E1`–`E5`, `P1`–`P5`), runtime vitals (`INP`, `CLS`, `LoAF`), Lostness ($L$), and anchored UMUX-Lite.
 - Deduplicated Track A and Track B table with commits for completed `[CL-AUTO]` items and batched `[CL-PROPOSAL]` questions.
 - Paths to `CUSTOMER-REPORT.md` and `customer-lens-summary.json` in the external evidence directory.
 
 ## Safety
 
-- Follow all `real-user-release-gate` payment, secret, and teardown safeguards (processor test mode on candidate, 100%-off promo code in production, evidence outside git).
+- Follow all `real-user-release-gate` payment, secret, and teardown safeguards (agent test-mode checkouts only on a local development host; production-only live account steps and 100%-off promotion-code payments by a human or with explicit per-step approval; evidence outside git).
 - Never modify live pricing, plan quotas, billing rules, brand identity, or legal/tax terms without explicit human approval.
 
 ## Completion criteria
 
-Done means the customer lens ran inside the `real-user-release-gate` session across `Free` and `Paid` plans and all required expertise and motion/polish passes, findings were deduplicated against `PLAN.md` and `DECISIONS.md`, eligible `[CL-AUTO]` fixes were implemented and verified with lead design sign-off, `[CL-PROPOSAL]` items were batched for human decision, and `CUSTOMER-REPORT.md` plus `customer-lens-summary.json` were written outside version control.
+Done means the customer lens ran inside the `real-user-release-gate` session over its scope (the full baseline once per product across `Free` and `Paid` plans and all expertise and motion/polish passes, otherwise the touched screens with their plans and passes on the candidate host plus the read-only post-deploy check), the run was recorded in the test ledger, findings were deduplicated against `PLAN.md` and `DECISIONS.md`, eligible `[CL-AUTO]` fixes were implemented and verified with lead design sign-off, `[CL-PROPOSAL]` items were batched for human decision, and `CUSTOMER-REPORT.md` plus `customer-lens-summary.json` were written outside version control.
