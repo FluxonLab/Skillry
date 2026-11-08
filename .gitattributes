@@ -1,0 +1,23 @@
+# Keep LF in every checkout. The skill and agent checksums in registry/ are computed over LF
+# text, and Windows git (core.autocrlf=true) would otherwise check files out with CRLF, so the
+# installer would refuse every skill with a checksum mismatch.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.mp4 binary
+*.mov binary
+*.webm binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.zip binary
+*.gz binary
+*.tgz binary
+# Third-party file kept byte-for-byte as published upstream (stored with CRLF).
+plugins/frontend-web-design/skills/91-i18n-locale-parity-review/references/localize-anything/LICENSE -text
