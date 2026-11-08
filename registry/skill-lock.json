@@ -594,7 +594,7 @@
       "lines": 215,
       "files": 1,
       "checksum_scope": "component-tree-v1",
-      "checksum": "ca5a445ba6e5d5de1f70b4c1bc3bdebd7506f51fab5b41279fa81a986cbbdc97"
+      "checksum": "5d09f74da5176849c0e70b3388143123fb9d8c1ca9dbab6d452b7917a13c080a"
     },
     {
       "id": "customer-lens-testing",
@@ -604,7 +604,7 @@
       "lines": 147,
       "files": 2,
       "checksum_scope": "component-tree-v1",
-      "checksum": "e8ca547d21922c4a0cc5de720e24b6e72618ae53550989d0bceed6350c035f2c"
+      "checksum": "152122d4735508b8514efcad19b0c5f910eec902512a0292976e203e1a6c001e"
     },
     {
       "id": "smoke-test-and-repair",

@@ -1,6 +1,6 @@
 ---
 name: customer-lens-testing
-description: "Use this skill inside the real-user-release-gate session to test the product as a real customer on a local, staging, or preview candidate across free and paid plans and beginner, intermediate, and expert levels (a full baseline once per product, then the screens a release touches), check touched screens read-only after deploy, and propose or implement improvements."
+description: "Customer lens inside the release gate: use the product as a free and paid beginner, intermediate and expert; score ease, motion and polish; propose fixes."
 ---
 
 # Customer-Lens Testing

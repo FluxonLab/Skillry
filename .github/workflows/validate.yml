@@ -52,28 +52,29 @@ jobs:
         run: python3 tools/install.py --targets claude codex copilot antigravity cursor
 
   install-smoke:
-    name: Install into a throwaway HOME and re-validate
-    runs-on: ubuntu-latest
+    name: Install into a throwaway home (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install into isolated HOME (does not touch the runner's real config)
-        run: |
-          skillry_smoke_home="$(mktemp -d)"
-          env HOME="$skillry_smoke_home" python3 tools/install.py --apply --targets claude codex copilot antigravity cursor
-          echo "Installed skills (claude): $(find "$skillry_smoke_home/.claude/skills" -name SKILL.md | wc -l)"
-          test "$(find "$skillry_smoke_home/.claude/skills" -name SKILL.md | wc -l)" -ge 50
-          test "$(ls "$skillry_smoke_home/.codex/agents/"*.toml | wc -l)" -ge 60
-          test "$(find "$skillry_smoke_home/.cursor/skills" -name SKILL.md | wc -l)" -ge 50
-          test "$(ls "$skillry_smoke_home/.cursor/agents/"*.md | wc -l)" -ge 60
-      - name: Pack npm tarball and smoke-test packaged runtime modules
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install every target from the checkout (--apply) and count skills and agents
+        run: python tests/install_smoke.py repo
+      - name: Pack the npm tarball, install from the packed CLI (--apply) and count
+        run: python tests/install_smoke.py package
+      - name: Import the packaged runtime modules (POSIX only; the storage engine needs fcntl)
+        if: runner.os != 'Windows'
+        shell: bash
         run: |
           pack_dir="$(mktemp -d)"
           tarball="$(npm pack --pack-destination "$pack_dir" | tail -n 1)"
           tar -xzf "$pack_dir/$tarball" -C "$pack_dir"
-          node "$pack_dir/package/bin/skillry.js" version
           PYTHONPATH="$pack_dir/package/tools" python3 -c "import jev.core, jev.operations, storage.engine, storage.transfer"
-          pack_home="$(mktemp -d)"
-          env HOME="$pack_home" node "$pack_dir/package/bin/skillry.js" install --targets claude

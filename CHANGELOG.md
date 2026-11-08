@@ -6,6 +6,37 @@ All notable changes to Skillry are documented here. The format is based on
 
 ## [Unreleased]
 
+## [3.2.3] - 2026-11-08
+
+### Fixed (from an independent review of 3.2.2, each finding checked against the code)
+
+- Antigravity: skills and agents now install where the Antigravity app, the `agy` CLI and
+  the standalone IDE read them, `~/.gemini/config/skills` and `~/.gemini/config/agents`. Agents are
+  written in Antigravity's native format, with a tool list mapped from each role.
+  Read-only roles get read tools with commands off. Roles with shell get `run_command`
+  in the sandbox. Only tool names that load in the CLI are written. The next install
+  removes the unchanged files earlier releases put in `~/.gemini/antigravity/`; the IDE
+  still reads that folder as a fallback and would otherwise list every skill twice. An
+  edited file there stops the install and is named.
+- Windows: `skillry storage` now answers with an `unsupported_platform` JSON error instead
+  of failing on a missing `fcntl` import. The storage engine stays macOS and Linux only;
+  the installer and the skills work on Windows.
+- Windows clones: a `.gitattributes` file now keeps LF line endings in every checkout.
+  Windows git converted text files to CRLF, so the installer refused every skill with a
+  checksum mismatch. The new Windows CI job found this.
+- Windows: the `skillry` command looks for Python through the `py -3` launcher, then `python`,
+  then `python3`. A Microsoft Store alias that answers 9009 counts as not found, so an
+  installed Python is no longer hidden behind the alias.
+- The installer removes folders that a removal leaves empty.
+- `real-user-release-gate` and `customer-lens-testing` have shorter descriptions (159 and
+  154 characters), and the README's 3.2 section now describes the 3.2.2 rules.
+
+### Changed
+
+- CI installs every target into a throwaway home on Linux, macOS and Windows with
+  `--apply` and counts the skills and agents. It also installs the packed npm tarball
+  with `--apply` instead of a dry run.
+
 ## [3.2.2] - 2026-11-08
 
 ### Changed

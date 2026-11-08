@@ -1,6 +1,6 @@
 ---
 name: real-user-release-gate
-description: "Use this skill before a release and right after deploy to test the product end to end as a real customer on real providers: a full baseline once per product, then only touched journeys on a local, staging, or preview candidate; after deploy, read-only checks, with production-only live steps done by a human or approved step by step."
+description: "Release gate as a real customer: full baseline once, then only touched journeys on a local or staging candidate; read-only after deploy, live steps by a human."
 ---
 
 # Real-User Release Gate

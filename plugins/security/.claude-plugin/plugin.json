@@ -1,7 +1,7 @@
 {
   "name": "skillry-security",
   "description": "Secrets and config hardening (env, Electron, Redis), AI and agent security (governance, MCP gatekeeping), and dependency and agent supply chain.",
-  "version": "3.2.2",
+  "version": "3.2.3",
   "author": {
     "name": "FluxonLab",
     "url": "https://fluxonlab.com"

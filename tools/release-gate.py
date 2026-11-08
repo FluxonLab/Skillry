@@ -1080,7 +1080,7 @@ def run_disposable_installs(
                 f"installer target {target} has an invalid agent extension",
             )
             gate.require(
-                agent_fmt in {"md", "toml", "cursor"},
+                agent_fmt in {"md", "toml", "cursor", "antigravity"},
                 f"installer target {target} has an unsupported agent format",
             )
             contracts.append(
