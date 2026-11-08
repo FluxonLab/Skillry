@@ -48,7 +48,7 @@ TARGETS = {
         "skills": HOME / ".copilot/skills",
         "agents": HOME / ".copilot/agents",
         "agent_ext": ".agent.md",
-        "agent_fmt": "md",
+        "agent_fmt": "copilot",
     },
     "opencode": {
         # OpenCode reads personal skills from ~/.config/opencode/skills and agents from
@@ -91,6 +91,21 @@ ANTIGRAVITY_TOOLS = {
 ANTIGRAVITY_READ_ONLY = frozenset(
     {"view_file", "grep_search", "find_by_name", "list_dir", "search_web", "read_url_content"}
 )
+# Copilot custom agents name tools by alias (docs.github.com, custom agents configuration).
+COPILOT_TOOLS = {
+    "Read": "read",
+    "Grep": "search",
+    "Glob": "search",
+    "Edit": "edit",
+    "MultiEdit": "edit",
+    "Write": "edit",
+    "Bash": "execute",
+    "Task": "agent",
+    "WebSearch": "web",
+    "WebFetch": "web",
+    "TodoWrite": "todo",
+}
+COPILOT_READ_ONLY = frozenset({"read", "search", "web", "todo"})
 SKILL_NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 AGENT_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]*$")
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
@@ -442,6 +457,36 @@ def md_to_antigravity_agent(text: str) -> str:
     )
 
 
+def md_to_copilot_agent(text: str) -> str:
+    """Translate a role to a Copilot custom agent: explicit tool aliases and the default model.
+
+    Copilot has no permission mode and a shell can change files, so a read-only role gets only
+    read, search and the web tools it declares. Claude-only fields such as permissionMode and a
+    Claude model name are left out; the agent inherits Copilot's model.
+    """
+    name = fm_field(text, "name")
+    if not SKILL_NAME.fullmatch(name):
+        raise SafetyError(f"invalid Copilot agent name: {name!r}")
+    description = re.sub(r"\s+", " ", fm_field(text, "description"))
+    body = re.sub(r"^---\n.*?\n---\n", "", text, count=1, flags=re.S).strip()
+    readonly = fm_field(text, "permissionMode") == "plan" or has_read_only_tools(text)
+    declared = declared_tools(text)
+    tools: list[str] = []
+    for claude_tool, alias in COPILOT_TOOLS.items():
+        if claude_tool in declared and alias not in tools:
+            tools.append(alias)
+    if readonly:
+        tools = [tool for tool in tools if tool in COPILOT_READ_ONLY]
+    return (
+        "---\n"
+        f"name: {name}\n"
+        f"description: {json.dumps(description, ensure_ascii=False)}\n"
+        f"tools: {json.dumps(tools)}\n"
+        "---\n\n"
+        f"{body}\n"
+    )
+
+
 def md_to_opencode_agent(text: str) -> str:
     """Translate a role to an OpenCode agent: description, subagent mode, least-privilege rules.
 
@@ -662,13 +707,13 @@ def build_target_plan(
     for agent_file in agents:
         source = safe_source_file(agent_file, REPO)
         source_bytes = source.read_bytes()
-        if cfg["agent_fmt"] in {"toml", "cursor", "antigravity", "opencode"}:
+        if cfg["agent_fmt"] in {"toml", "cursor", "antigravity", "opencode", "copilot"}:
             try:
                 text = source_bytes.decode("utf-8")
             except UnicodeDecodeError as exc:
                 raise SafetyError(f"agent is not valid UTF-8: {source}") from exc
             convert = {"cursor": md_to_cursor_agent, "antigravity": md_to_antigravity_agent,
-                       "opencode": md_to_opencode_agent}.get(
+                       "opencode": md_to_opencode_agent, "copilot": md_to_copilot_agent}.get(
                 cfg["agent_fmt"], md_to_toml_agent
             )
             content = convert(text).encode("utf-8")

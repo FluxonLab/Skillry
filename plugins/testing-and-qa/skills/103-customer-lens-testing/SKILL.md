@@ -22,6 +22,18 @@ Act as the customer layer of `real-user-release-gate` inside the same release ga
 - During unfinished implementation before the release candidate is integrated.
 - Repeating the baseline, or testing screens the release did not touch.
 
+## Modes, defaults and what this is not
+
+- **Modes:** `fast` checks the touched screens at the one tier the change matters to, for copy, styling or a
+  single component; it writes the friction log and skips persona narratives. `standard` (the default on a
+  release) is the on-touch run below. `deep` is the one-time baseline. Say which mode ran.
+- **Thresholds are defaults:** the patience budget (15 s, 2 wrong clicks, 8 s on an unlabelled spinner), the
+  motion budget (under 300 ms) and the vitals targets (INP 200 ms, CLS 0.10) suit most consumer products. A
+  product may set its own values; record them with the reason in its decision record and use them here.
+- **Agent review is not user research:** this skill is an agent walking the product. Label every finding
+  `agent-review`; a finding from a session with a real person is `human-test`. The report never presents
+  agent findings as user research, and it says when no human test exists for the scope.
+
 ## Cadence and pairing with real-user-release-gate
 
 - **Shared session and account:** Run inside the active `real-user-release-gate` session and reuse its `qa+<project>-<date>-<sha>@<team-domain>` account (`qa_test: true`).
@@ -103,7 +115,8 @@ Write `CUSTOMER-REPORT.md` and `customer-lens-summary.json` (recording `run_id`,
 
 ```markdown
 # Customer Lens Report: <Product> (<YYYY-MM-DD>)
-- **Run ID, Stage & Scope:** `cl-<project>-<YYYYMMDD>-<sha>` | `release-candidate` or `post-deploy-live` | `baseline` or `on-touch` | host `<local | staging | preview | production>`
+- **Run ID, Stage, Mode & Scope:** `cl-<project>-<YYYYMMDD>-<sha>` | `release-candidate` or `post-deploy-live` | `fast`, `standard` or `deep` | `baseline` or `on-touch` | host `<local | staging | preview | production>`
+- **Source:** `agent-review` (and `human-test` findings, if any, listed separately)
 - **Account & Plans:** `qa+<project>-<YYYYMMDD>-<sha>@<team-domain>` or `not_applicable` (Deleted: `yes` | `not_run`) | `<plans in scope, e.g. Free -> Paid>` (`<payment mode>`, spend `<amount>`)
 - **Locales & Viewports:** `<locales>` | `1440x900` desktop + `390x844` mobile
 - **Personas:** `<Persona Card(s): ID, tier, habit, JTBD, patience budget>`
@@ -128,11 +141,12 @@ Write `CUSTOMER-REPORT.md` and `customer-lens-summary.json` (recording `run_id`,
 - **Sycophantic summaries:** Praising a broken or confusing flow instead of applying deterministic deductions and logging `WOULD_ABANDON`.
 - **Feature amputation disguised as simplification:** Removing expert controls or burying daily intermediate tools `> 2` clicks deep.
 - **Shadow backlogs:** Creating `WISHLIST.md` or `BACKLOG.md` instead of updating the project's single `PLAN.md`.
+- **Agent review passed off as user research:** Reporting agent findings as what customers think. Label them `agent-review` and keep `human-test` findings apart.
 - **Wall-clock time pollution:** Counting agent LLM inference time inside product `TTFV` or task efficiency metrics.
 
 ## Required output
 
-- Stage (`release-candidate` or `post-deploy-live`), run scope (`baseline` or `on-touch`), host, persona cards, and 5-dimension rubric scores.
+- Stage (`release-candidate` or `post-deploy-live`), mode (`fast`, `standard` or `deep`), run scope (`baseline` or `on-touch`), host, finding source labels, persona cards, and 5-dimension rubric scores.
 - Friction log, checklists (`B1`–`B5`, `I1`–`I5`, `E1`–`E5`, `P1`–`P5`), runtime vitals (`INP`, `CLS`, `LoAF`), Lostness ($L$), and anchored UMUX-Lite.
 - Deduplicated Track A and Track B table with commits for completed `[CL-AUTO]` items and batched `[CL-PROPOSAL]` questions.
 - Paths to `CUSTOMER-REPORT.md` and `customer-lens-summary.json` in the external evidence directory.

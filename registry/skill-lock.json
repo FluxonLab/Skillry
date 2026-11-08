@@ -211,10 +211,10 @@
       "folder": "96-project-intake",
       "department": "core-operations",
       "origin": "original",
-      "lines": 124,
+      "lines": 140,
       "files": 3,
       "checksum_scope": "component-tree-v1",
-      "checksum": "77721cbef3a45433d7c7456a627604e73946eb777acaf501b6ec1dbf286f4f73"
+      "checksum": "e81c07bb34e68560b075f8cc6bc8080ab653310f319a449aff70caadb122a584"
     },
     {
       "id": "data-pipeline-review",
@@ -611,10 +611,10 @@
       "folder": "103-customer-lens-testing",
       "department": "testing-and-qa",
       "origin": "original",
-      "lines": 147,
+      "lines": 161,
       "files": 2,
       "checksum_scope": "component-tree-v1",
-      "checksum": "bc6df676f9137443c08d9744e0d2e58f3308a5e7ce8eec2ac17c09c5cdcd04fd"
+      "checksum": "2c6e2bbccc10579981bc4e6e338fef65bc5d56f69f2b5e884d2fed0f01197cf1"
     },
     {
       "id": "smoke-test-and-repair",

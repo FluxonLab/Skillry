@@ -6,6 +6,42 @@ All notable changes to Skillry are documented here. The format is based on
 
 ## [Unreleased]
 
+## [3.4.0] - 2026-11-08
+
+### Changed (from the detailed independent review of 3.2.2: F04, F05)
+
+- `skill-sync import` copies each skill's whole folder (references, scripts, templates and
+  other files) instead of only SKILL.md. It refuses symlinks, paths outside the skill, files
+  over 1 MiB and skills over 10 MiB or 500 files, and it writes `IMPORT-MANIFEST.json` with
+  every file's hash and the source commit. Nothing is run, imported or made executable;
+  scripts are listed in `REVIEW.md` with their risk signals.
+- The import stops when a relative link in a skill points at a missing file or outside the
+  skill. Example links inside code fences are ignored; a script path named anywhere in
+  SKILL.md must exist.
+- License detection is a candidate, not a verdict. A license is `recognized` only when its
+  text matches the canonical MIT, ISC, BSD-2-Clause, BSD-3-Clause or Apache-2.0 text apart
+  from copyright and title lines. A text that only resembles one of them is `needs-review`
+  and blocks the import until a person passes `--accept-license <sha256>`; an unknown
+  license is never accepted. A skill whose own license differs from the root license is
+  reported as a conflict. The canonical texts ship in `tools/licenses/`.
+
+### Changed (F07, F13)
+
+- Copilot agents are written in Copilot's native custom agent format: `name`, `description`
+  and a `tools` list of Copilot aliases. Read-only roles get only `read`, `search` and the web
+  tools they declare, because Copilot has no permission mode and a shell can change files.
+  Claude-only fields and Claude model names are no longer copied, so agents use Copilot's
+  default model. Whether Copilot's own prompts stop a file change has not been checked in a
+  live Copilot client yet.
+- `project-intake` has `fast`, `standard` (default) and `deep` modes. It keeps the project's
+  existing contract, decision record and plan where they are, creates only what is missing,
+  and never moves or merges a document without the owner's approval. A small maintenance task
+  needs no intake.
+- `customer-lens-testing` has `fast`, `standard` and `deep` modes. Its patience, motion and
+  vitals thresholds are defaults that a product may change with a recorded reason. Every
+  finding is labelled `agent-review` or `human-test`, and agent findings are never presented
+  as user research.
+
 ## [3.3.0] - 2026-11-08
 
 ### Added

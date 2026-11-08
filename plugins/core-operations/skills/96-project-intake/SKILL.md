@@ -1,6 +1,6 @@
 ---
 name: project-intake
-description: "Run software intake for new, taken-over, or paused projects: conduct multi-model reviews, debate architecture, batch owner questions, configure skill packs, schedule domain gates, and write canonical project docs."
+description: "Run intake for new, taken-over or paused projects in fast, standard or deep mode: review the repo, settle disagreements with evidence, batch owner questions, pick skill packs, schedule gates, keep or add project docs."
 ---
 
 # Project Intake
@@ -21,6 +21,20 @@ Establish a verified technical, architectural, product, and governance baseline 
 - Tasks that are already in the middle of an approved execution phase (use `implementation-plan` directly).
 - Diagnostic-only inspections that do not establish project governance (use `repo-diagnostics` instead).
 
+## Modes
+
+Pick the smallest mode that answers the question, and say which one you use:
+
+| Mode | Use it for | Reviews | Documents |
+|---|---|---|---|
+| `fast` | A quick health check, or taking over a project for a small piece of work | One agent, one pass | None written; findings and questions go in the reply |
+| `standard` (default) | Taking over or resuming a project | One agent applies the three perspectives of step 2 in turn | Only documents the project lacks; existing ones stay where they are |
+| `deep` | A new project, or one whose plans and decisions conflict | Three independent reviewers and a debate round, when the budget allows several models or agents | The full set, after the owner agrees to any move or merge |
+
+Every mode keeps the project's own contract: its AGENTS.md or CLAUDE.md, its decision record (an ADR
+folder, DECISIONS.md or similar) and its plan or roadmap. Intake never moves, renames or merges an
+existing document without the owner's approval. A small maintenance task needs no intake at all.
+
 ## Procedure
 
 1. **Recall context, stakeholder instructions, and repository facts**
@@ -29,8 +43,8 @@ Establish a verified technical, architectural, product, and governance baseline 
    - Inspect the codebase in read-only mode using `repo-diagnostics`: identify repository root, git branch, commit status, runtime, package manager, build scripts, and existing documentation. Do not install dependencies or run build loops.
    - Catalog existing documentation. If multiple conflicting plans or todo lists exist, mark them as legacy evidence to be retired into the canonical document trio.
 
-2. **Run independent multi-model intake reviews**
-   - Dispatch three independent read-only reviews across distinct models or agent perspectives to prevent blind spots and groupthink:
+2. **Review the project from three perspectives**
+   - In `fast` mode, one read-only pass covers the inventory and the riskiest findings. In `standard` mode, one agent applies the three perspectives below in turn. In `deep` mode, dispatch three independent read-only reviews across distinct models or agents to prevent blind spots and groupthink:
      - **Reviewer 1 (Inventory & Hygiene):** Map file tree, manifests, package scripts, configuration, localization files, environment variable references, dead code, and conflicting legacy documentation.
      - **Reviewer 2 (Architecture, Engineering, Security & QA):** Audit system boundaries, data and authentication models, technical debt, automated test coverage, CI/CD pipelines, dependency vulnerabilities, secret exposure risks, and release readiness.
      - **Reviewer 3 (Product, Feasibility, Market & Design):** Evaluate feasibility, identify audience and competitor gaps, audit UI/UX patterns and content standards, and outline initial requirements.
@@ -61,7 +75,7 @@ Establish a verified technical, architectural, product, and governance baseline 
      - **Wave 2 (Design, Component Adaptation & Media):** Design direction, reference pattern adaptation (captured from live motion, never copied 1:1), unique project media, and interface copy review.
      - **Wave 3 (Coherent QA Bundle & Release Readiness):** Project-fit test suite (smoke, E2E, UAT, accessibility, security, performance), locale parity sign-off, store submission metadata (for mobile), error monitoring setup, transactional communications, and green CI build.
      - **Wave 4 (Acquisition, Observability & Hygiene):** Stakeholder-approved publication schedule, production monitoring, and workspace artifact cleanup.
-   - Write exactly three canonical root documents:
+   - Keep the project's existing documents and their layout. Create only what is missing, and only in `standard` or `deep` mode. A project without them gets three canonical root documents:
      - `DECISIONS.md`: Active decision register (newest entry first). Initial entry records charter, scope, stack choices, stakeholder answers, kill criteria, and retired legacy documents.
      - `AGENTS.md`: Canonical project contract for all AI agents and tools. Defines identity, authority hierarchy, runtime commands, environment variable names (never values), installed skill pack, and operating boundaries.
      - `PLAN.md`: Active execution plan (top block first). Outlines deliverables grouped into coherent batches with domain gate checkpoints.
@@ -74,12 +88,12 @@ Establish a verified technical, architectural, product, and governance baseline 
   - Exactly one repository root, runtime, and package manager are identified.
 
 - **Review and Debate:**
-  - At least three independent review perspectives were executed without write access.
+  - The review matched the mode: one pass (`fast`), three perspectives by one agent (`standard`), or three independent reviewers (`deep`), all without write access.
   - Contradictions are documented and resolved with citations in `intake-synthesis.md`.
   - Open questions are presented in a single batched questionnaire with trade-offs.
 
 - **Governance and Documentation:**
-  - Exactly three canonical root documents exist: `AGENTS.md`, `DECISIONS.md`, and `PLAN.md`.
+  - The project's existing documents are where they were; any missing contract, decision record or plan was created once, and nothing was moved or merged without approval.
   - All competing plans, ad-hoc todo lists, and legacy status files are retired.
   - No credential values or secret tokens are printed or committed; only variable names are referenced.
   - Four domain gate waves are explicitly scheduled in `PLAN.md` with verifiable pass criteria.
@@ -87,6 +101,8 @@ Establish a verified technical, architectural, product, and governance baseline 
 ## Common issues & anti-patterns
 
 - **Writing code during intake:** Starting feature implementation before establishing the baseline, leading to wasted rework when requirements or architecture shift.
+- **Intake bureaucracy on small work:** Turning a one-line fix or a short maintenance task into reviews, a questionnaire and new documents. Use `fast` mode or skip intake.
+- **Reshaping a mature project:** Replacing a working ADR folder, roadmap or contributor guide with a new document set the owner did not ask for.
 - **Micro-questioning the user:** Interrupting the stakeholder with one question at a time instead of presenting a single, structured multiple-choice batch.
 - **Duplicate planning documents:** Creating separate todo lists, status files, or alternative plans that drift out of sync with `PLAN.md`.
 - **Assuming rather than verifying:** Guessing runtime versions, package managers, or environment variables instead of reading lockfiles and configuration files directly.
@@ -99,7 +115,7 @@ Establish a verified technical, architectural, product, and governance baseline 
 Return:
 1. The completed `intake-synthesis.md` in the project evidence directory.
 2. The stakeholder multiple-choice questionnaire (if open questions remain) or confirmation that all requirements are resolved.
-3. The root `AGENTS.md`, `DECISIONS.md`, and `PLAN.md` files written with the confirmed skill pack and scheduled domain gates.
+3. The mode used, and the documents created or confirmed (in `standard` or `deep` mode), with the confirmed skill pack and scheduled domain gates.
 4. The list of retired legacy planning files and the single next work item in `PLAN.md`.
 
 ## Safety & boundaries
@@ -112,11 +128,11 @@ Return:
 ## Completion criteria
 
 Intake is complete when:
-- Independent multi-model reviews and debate synthesis are recorded in project evidence.
+- The reviews for the chosen mode, and in `deep` mode the debate synthesis, are recorded in project evidence.
 - All open requirements are resolved through the batched questionnaire and recorded in `DECISIONS.md`.
 - The project type is classified and its default skill pack is configured.
 - The four lifecycle gate waves are scheduled in `PLAN.md`.
-- Root `AGENTS.md`, `DECISIONS.md`, and `PLAN.md` are committed as the sole canonical governance documents.
+- The project has one contract, one decision record and one plan, in its existing layout or newly created where missing.
 
 ## Supporting references
 
