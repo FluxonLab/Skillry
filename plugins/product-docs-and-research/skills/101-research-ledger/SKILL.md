@@ -81,6 +81,14 @@ python3 scripts/research_ledger.py save --json record.json
 
 The script validates required fields, computes `valid_until` from the freshness tier, updates the SQLite database and full-text search index, and returns confirmation.
 
+What save enforces:
+
+- **Keys.** Each record's key ends in a hash of the whole normalized topic and question, so two different questions never share a key. Saving the same question again stores a new revision; earlier revisions stay in `research_revisions`.
+- **Strict records.** Save rejects an unknown evidence class, a malformed or future date, an unknown freshness or confidence value, a duplicate source id, a `source_id` that names no source, and a `fact` without a source. A finding without a class counts as `inference`.
+- **Verified or draft.** A record with findings and sources, where every finding cites a source, is `verified`. Anything else is saved as a `draft`, and a draft never comes back as `hit_fresh`, only as `partial`.
+- **Current information.** A lookup asking for current information (today, current, latest, price, policy) returns `hit_stale` unless the record was researched today. `lookup --revalidate` does the same on request.
+- **Upgrading.** `research_ledger.py migrate` previews moving a database written by an earlier release to these keys; `migrate --apply` backs the database up first, refuses on key conflicts and changes nothing on a second run.
+
 ## Record schema
 
 ```json

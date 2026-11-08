@@ -461,10 +461,10 @@
       "folder": "101-research-ledger",
       "department": "product-docs-and-research",
       "origin": "original",
-      "lines": 184,
+      "lines": 192,
       "files": 2,
       "checksum_scope": "component-tree-v1",
-      "checksum": "d2f6ae00d9e3f53c45c5a0628897db8244fbbbcfbd96440e8c1d0bb9398952c4"
+      "checksum": "345c37793d6232bd2981ef68b606aa17d9f1b6907c69a53a24fa2bc79212e556"
     },
     {
       "id": "product-requirements-review",
@@ -591,10 +591,10 @@
       "folder": "102-real-user-release-gate",
       "department": "testing-and-qa",
       "origin": "original",
-      "lines": 215,
+      "lines": 222,
       "files": 1,
       "checksum_scope": "component-tree-v1",
-      "checksum": "5d09f74da5176849c0e70b3388143123fb9d8c1ca9dbab6d452b7917a13c080a"
+      "checksum": "a5b64f30ef59dc99e7de77fc0967b1ea3e677db1e70d7645005e12e2795ef5d2"
     },
     {
       "id": "customer-lens-testing",
@@ -604,7 +604,7 @@
       "lines": 147,
       "files": 2,
       "checksum_scope": "component-tree-v1",
-      "checksum": "152122d4735508b8514efcad19b0c5f910eec902512a0292976e203e1a6c001e"
+      "checksum": "bc6df676f9137443c08d9744e0d2e58f3308a5e7ce8eec2ac17c09c5cdcd04fd"
     },
     {
       "id": "smoke-test-and-repair",
