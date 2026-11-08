@@ -6,6 +6,28 @@ All notable changes to Skillry are documented here. The format is based on
 
 ## [Unreleased]
 
+## [3.4.1] - 2026-11-08
+
+### Fixed (from an independent recheck of 3.4.0)
+
+- `research-ledger`: a record saved with `"evidence": "draft"` stays a draft; it was upgraded
+  to `verified` whenever its structure was complete. A record counts as verified only when
+  every cited source says where it can be checked (`url`, `path` or `artifact`); a source id
+  alone no longer does. Structure and review state are stored apart (`structure_complete` and
+  `evidence`), and `migrate` applies the same rules.
+- `skill-sync`: a license file inside a skill folder, such as `assets/LICENSE`, now has to pass
+  the license gate too; before, only the license above the skill was checked although the
+  folder's files were copied. License files in folders the import does not copy still do not
+  block it.
+- `skill-sync`: license comparison no longer drops a copyright line that carries an extra
+  condition, and no longer removes `<...>` text from a candidate license; only the canonical
+  templates lose their placeholders. Such texts are now `needs-review`.
+- `project-intake`: the required output and the completion criteria follow the mode; `fast`
+  writes no file. Both `project-intake` and `customer-lens-testing` name the project's own
+  contract, decision record and plan instead of fixed file names.
+- The package smoke test installs all six targets from the packed CLI, then checks that a
+  second install changes nothing and that `skillry doctor` finds no problem.
+
 ## [3.4.0] - 2026-11-08
 
 ### Changed (from the detailed independent review of 3.2.2: F04, F05)

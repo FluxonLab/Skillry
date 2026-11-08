@@ -7,7 +7,7 @@ description: "Customer lens inside the release gate: use the product as a free a
 
 ## Purpose
 
-Act as the customer layer of `real-user-release-gate` inside the same release gate session and test account (`qa+<project>-<date>-<sha>@<team-domain>`). Use the release candidate (a local development host or a designated staging or preview host) before shipping as a real customer across `Free` and `Paid` plans and `Beginner`, `Intermediate`, and `Expert` levels, and right after deploy check the touched production screens, delivered mail, and the error tracker read-only. Run the full baseline once per product; on later releases cover only the screens the release touches and the flows they belong to. Verify that every flow in scope works on real providers and audit ease of use, confusion resistance, component motion, and visual polish. Propose what a real customer would want from the customer's seat. Implement bugs, copy fixes, and small improvements inside the existing design language directly in `PLAN.md` with evidence, and route pricing, plans, large features, brand, and legal changes to a human decision. Open [references/ux-rubric.md](references/ux-rubric.md) for checklists (`B1`–`B5`, `I1`–`I5`, `E1`–`E5`, `P1`–`P5`), motion rules, runtime metrics, Smith's Lostness ($L$), the five-dimension rubric, and the priority formula.
+Act as the customer layer of `real-user-release-gate` inside the same release gate session and test account (`qa+<project>-<date>-<sha>@<team-domain>`). Use the release candidate (a local development host or a designated staging or preview host) before shipping as a real customer across `Free` and `Paid` plans and `Beginner`, `Intermediate`, and `Expert` levels, and right after deploy check the touched production screens, delivered mail, and the error tracker read-only. Run the full baseline once per product; on later releases cover only the screens the release touches and the flows they belong to. Verify that every flow in scope works on real providers and audit ease of use, confusion resistance, component motion, and visual polish. Propose what a real customer would want from the customer's seat. Implement bugs, copy fixes, and small improvements inside the existing design language directly in the project's plan with evidence, and route pricing, plans, large features, brand, and legal changes to a human decision. Open [references/ux-rubric.md](references/ux-rubric.md) for checklists (`B1`–`B5`, `I1`–`I5`, `E1`–`E5`, `P1`–`P5`), motion rules, runtime metrics, Smith's Lostness ($L$), the five-dimension rubric, and the priority formula.
 
 ## When to use
 
@@ -61,7 +61,7 @@ Act as the customer layer of `real-user-release-gate` inside the same release ga
   - Emit a concurrent think-aloud thought (Ericsson & Simon, 1984; `neuhai/UXAgent`) and cognitive tag (`DELIGHT`, `CONFUSION`, `FRICTION`, `WOULD_ABANDON`, `BLOCKER`) at each step.
   - Answer the four Wharton Cognitive Walkthrough questions (Wharton et al., 1994) per step: (1) right sub-goal formed, (2) control visible, (3) label matches user terms, (4) immediate progress feedback.
   - Omit generic praise and record an explicit renewal verdict (`YES`, `HESITANT`, or `NO`) on whether the paid plan is worth renewing out of pocket next month.
-  - Triangulate feature wishes against error-tracker events, `PLAN.md`, and 2 named live competitors (`AgentA/B`, Lu et al., `arXiv:2504.09723`, 2025).
+  - Triangulate feature wishes against error-tracker events, the project's plan, and 2 named live competitors (`AgentA/B`, Lu et al., `arXiv:2504.09723`, 2025).
 
 ## Three expertise passes and motion/polish pass
 
@@ -80,25 +80,25 @@ Execute four passes using the checklists, metrics, and thresholds in [references
   - `3. Complexity Shift Mechanism`: `Smart Default`, `1-Level Progressive Disclosure`, `Optimistic Undo`, `Inline Scent`, or `Keyboard Accelerator`.
   - `4. Polish & Motion Specification`: interactive states, duration/easing token (`< 300ms`), `CLS = 0.00`, and `prefers-reduced-motion` behavior.
   - `5. Measurable Verification Signal`: expected delta in step ratio ($S/R$), `TTFV`, Lostness ($L$), or `INP`/`CLS`.
-- **Triage and de-duplication against project authority:** Compare every finding against `PLAN.md`, `DECISIONS.md`, and open issues:
-  - `DUPLICATE_OPEN`: already in `PLAN.md` -> append fresh session evidence to the existing item without creating a duplicate.
-  - `REGRESSION_OF_DONE`: marked done in `PLAN.md` but broken live -> reopen with `ux_severity` 3 or 4 and regression evidence.
+- **Triage and de-duplication against project authority:** Compare every finding against the project's plan, its decision record, and open issues:
+  - `DUPLICATE_OPEN`: already in the plan -> append fresh session evidence to the existing item without creating a duplicate.
+  - `REGRESSION_OF_DONE`: marked done in the plan but broken live -> reopen with `ux_severity` 3 or 4 and regression evidence.
   - `CONTRADICTS_DECISION`: conflicts with an active recorded decision -> drop unless new primary evidence justifies asking a human to supersede it.
   - `NEW_VALIDATED`: route into Track A (Defects & Friction) or Track B (Customer Wishes).
 - **Scoring tracks:**
   - **Track A — Defects & UX Friction:** Rate with Nielsen's `0–4` scale as `ux_severity` and give each finding the release severity of `real-user-release-gate`: `4` catastrophe → `blocker`, `3` major friction or `WOULD_ABANDON` → `high`, `2` minor friction → `medium`, `1` cosmetic → `low`, `0` → `informational`. A finding without both values stops the sign-off. Rank by the Scope-Guarded Priority score $P$ in [references/ux-rubric.md](references/ux-rubric.md).
   - **Track B — Customer Wishes:** Classify by Kano category (`Must-Be`, `One-Dimensional`, `Attractive`, `Indifferent`, `Reverse` — Kano et al., 1984) and score `ICE` ($\frac{\text{Impact}_{1..10} \times \text{Confidence}}{\text{Effort}_{1..10}}$) or `RICE` ($\frac{\text{Reach} \times \text{Impact} \times \text{Confidence}}{\text{Effort}}$) using evidence-bound Confidence (`1.0` = session friction + competitor pattern + JTBD, `0.7` = session friction + JTBD, `0.4` = speculative).
 - **Autonomy boundary (`AUTO-IMPLEMENT` vs. `ASK-HUMAN`):**
-  - `AUTO-IMPLEMENT` (`[CL-AUTO]` in `PLAN.md`): bugs of any severity, copy/localization/anti-slop fixes across shipped locales, and small improvements inside the existing design language (empty-state guidance, shortcuts, bulk actions, exports, copy buttons, and motion/polish fixes) implemented in one coherent batch with lead design acceptance.
-  - `ASK-HUMAN` (`[CL-PROPOSAL]` in `PLAN.md`): pricing, plan/quota/credit limits, billing rules, large new features, new paid providers, brand changes, and legal/tax copy presented as a batched multiple-choice decision.
+  - `AUTO-IMPLEMENT` (`[CL-AUTO]` in the plan): bugs of any severity, copy/localization/anti-slop fixes across shipped locales, and small improvements inside the existing design language (empty-state guidance, shortcuts, bulk actions, exports, copy buttons, and motion/polish fixes) implemented in one coherent batch with lead design acceptance.
+  - `ASK-HUMAN` (`[CL-PROPOSAL]` in the plan): pricing, plan/quota/credit limits, billing rules, large new features, new paid providers, brand changes, and legal/tax copy presented as a batched multiple-choice decision.
 
 ## Procedure
 
-1. **Load project authority:** Read `AGENTS.md`, `DECISIONS.md`, `PLAN.md`, open issues, and the product's test ledger, and select full-baseline or changed-surface scope.
+1. **Load project authority:** Read the project's contract (such as `AGENTS.md`), its decision record (such as `DECISIONS.md` or an ADR folder), its plan (such as `PLAN.md` or a roadmap), open issues, and the product's test ledger, and select full-baseline or changed-surface scope.
 2. **Execute Free-plan journeys (`J1`–`J3`, as in scope):** On the candidate host, run Passes 1–3 on real providers over the scope (the baseline, or the touched screens and flows; a live journey follows the post-deploy rule above) and log UI time ($T_{\text{UI\_execution}} + T_{\text{app\_response}}$), step counts ($S, N, R$), and Cognitive Walkthrough results.
 3. **Execute Paid-plan upgrade and value audit (`J4`, when in scope):** On the baseline, or when paid screens or billing flows are touched, upgrade via processor test mode on a local development candidate (on hosted staging or preview, a human completes the test checkout); in production, only for a production-only touched area, a human completes it with a 100%-off live promotion code (`0.00`) or explicitly approves the step. Test the paid features in scope and record the renewal verdict.
 4. **Audit motion, polish, cancel/withdrawal, and deletion (`J6`–`J8`, as in scope):** Run Pass 4 telemetry on the baseline or the touched screens; when in scope, verify data export, 2-click self-serve cancellation, and 2-step electronic withdrawal where consumer withdrawal law applies (EU Directive (EU) 2023/2673 Art. 11a; Germany § 312k BGB; Austria FAGG); delete any test account created for the run (on live production a human does it, or explicitly approves it).
-5. **Deduplicate, implement `[CL-AUTO]`, and report:** Update `PLAN.md` (never a second backlog file), implement `[CL-AUTO]` fixes in one coherent batch, retest affected flows, write `CUSTOMER-REPORT.md` and `customer-lens-summary.json` outside git, record the run in the test ledger, and batch `[CL-PROPOSAL]` questions for human decision.
+5. **Deduplicate, implement `[CL-AUTO]`, and report:** Update the project's plan (never a second backlog file), implement `[CL-AUTO]` fixes in one coherent batch, retest affected flows, write `CUSTOMER-REPORT.md` and `customer-lens-summary.json` outside git, record the run in the test ledger, and batch `[CL-PROPOSAL]` questions for human decision.
 
 ## Concrete checks
 
@@ -107,11 +107,11 @@ Execute four passes using the checklists, metrics, and thresholds in [references
 - Every step records a think-aloud note, cognitive tag (`DELIGHT`/`CONFUSION`/`FRICTION`/`WOULD_ABANDON`/`BLOCKER`), and Wharton `Q1`–`Q4` result.
 - Steps exceeding `15s`, `2` wrong clicks, or `8s` on an unlabelled spinner log `WOULD_ABANDON` (`ux_severity` 3, `high`).
 - Every UX proposal satisfies all 5 fields of the Scope-Preserving Proposal Contract and scores `>= 4` on `ScopeKept`.
-- `[CL-AUTO]` items are implemented and verified in `PLAN.md`; `[CL-PROPOSAL]` items are queued for human decision.
+- `[CL-AUTO]` items are implemented and verified in the plan; `[CL-PROPOSAL]` items are queued for human decision.
 
 ## Report format
 
-Write `CUSTOMER-REPORT.md` and `customer-lens-summary.json` (recording `run_id`, `stage`, `scope`, `personas_tested`, `counts`, `compliance`, `spend`, and `evidence_dir`) in the external `artifacts_dir` alongside the `real-user-release-gate` YAML packet, and log `[CL-AUTO]` and `[CL-PROPOSAL]` items in `PLAN.md`:
+Write `CUSTOMER-REPORT.md` and `customer-lens-summary.json` (recording `run_id`, `stage`, `scope`, `personas_tested`, `counts`, `compliance`, `spend`, and `evidence_dir`) in the external `artifacts_dir` alongside the `real-user-release-gate` YAML packet, and log `[CL-AUTO]` and `[CL-PROPOSAL]` items in the project's plan:
 
 ```markdown
 # Customer Lens Report: <Product> (<YYYY-MM-DD>)
@@ -140,7 +140,7 @@ Write `CUSTOMER-REPORT.md` and `customer-lens-summary.json` (recording `run_id`,
 
 - **Sycophantic summaries:** Praising a broken or confusing flow instead of applying deterministic deductions and logging `WOULD_ABANDON`.
 - **Feature amputation disguised as simplification:** Removing expert controls or burying daily intermediate tools `> 2` clicks deep.
-- **Shadow backlogs:** Creating `WISHLIST.md` or `BACKLOG.md` instead of updating the project's single `PLAN.md`.
+- **Shadow backlogs:** Creating `WISHLIST.md` or `BACKLOG.md` instead of updating the project's single plan.
 - **Agent review passed off as user research:** Reporting agent findings as what customers think. Label them `agent-review` and keep `human-test` findings apart.
 - **Wall-clock time pollution:** Counting agent LLM inference time inside product `TTFV` or task efficiency metrics.
 
@@ -158,4 +158,4 @@ Write `CUSTOMER-REPORT.md` and `customer-lens-summary.json` (recording `run_id`,
 
 ## Completion criteria
 
-Done means the customer lens ran inside the `real-user-release-gate` session over its scope (the full baseline once per product across `Free` and `Paid` plans and all expertise and motion/polish passes, otherwise the touched screens with their plans and passes on the candidate host plus the read-only post-deploy check), the run was recorded in the test ledger, findings were deduplicated against `PLAN.md` and `DECISIONS.md`, eligible `[CL-AUTO]` fixes were implemented and verified with lead design sign-off, `[CL-PROPOSAL]` items were batched for human decision, and `CUSTOMER-REPORT.md` plus `customer-lens-summary.json` were written outside version control.
+Done means the customer lens ran inside the `real-user-release-gate` session over its scope (the full baseline once per product across `Free` and `Paid` plans and all expertise and motion/polish passes, otherwise the touched screens with their plans and passes on the candidate host plus the read-only post-deploy check), the run was recorded in the test ledger, findings were deduplicated against the project's plan and decision record, eligible `[CL-AUTO]` fixes were implemented and verified with lead design sign-off, `[CL-PROPOSAL]` items were batched for human decision, and `CUSTOMER-REPORT.md` plus `customer-lens-summary.json` were written outside version control.

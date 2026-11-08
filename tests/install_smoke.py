@@ -66,23 +66,27 @@ def run(argv, env, cwd=None):
     subprocess.run([str(a) for a in argv], env=env, cwd=cwd, check=True)
 
 
-def from_repo(table):
-    home = Path(tempfile.mkdtemp(prefix="skillry-home-"))
-    run([sys.executable, ROOT / "tools" / "install.py", "--apply", "--targets", *ALL_TARGETS], throwaway_env(home))
-    status = check(count(home, table, ALL_TARGETS))
-    # A second install over the first must change nothing.
-    again = subprocess.run([sys.executable, str(ROOT / "tools" / "install.py"), "--apply", "--targets", *ALL_TARGETS],
-                           env=throwaway_env(home), capture_output=True, text=True)
+def idempotent_and_clean(install_argv, doctor_argv, env):
+    """A second install over the first must change nothing, and doctor must find no problem."""
+    again = subprocess.run([str(a) for a in install_argv], env=env, capture_output=True, text=True)
     changed = [line for line in again.stdout.splitlines() if "write:" in line and "write:0 remove:0" not in line]
     if again.returncode != 0 or changed:
         print("second install was not a no-op:", again.returncode, changed, again.stderr[-1000:])
         return 1
-    doctor = subprocess.run([sys.executable, str(ROOT / "tools" / "install.py"), "--doctor"],
-                            env=throwaway_env(home), capture_output=True, text=True)
+    doctor = subprocess.run([str(a) for a in doctor_argv], env=env, capture_output=True, text=True)
     if doctor.returncode != 0:
         print("doctor found problems after a clean install:", doctor.stdout[-2000:], doctor.stderr[-1000:])
         return 1
-    return status
+    return 0
+
+
+def from_repo(table):
+    home = Path(tempfile.mkdtemp(prefix="skillry-home-"))
+    installer = [sys.executable, ROOT / "tools" / "install.py"]
+    run([*installer, "--apply", "--targets", *ALL_TARGETS], throwaway_env(home))
+    status = check(count(home, table, ALL_TARGETS))
+    return status or idempotent_and_clean([*installer, "--apply", "--targets", *ALL_TARGETS],
+                                          [*installer, "--doctor"], throwaway_env(home))
 
 
 def from_package(table):
@@ -106,8 +110,11 @@ def from_package(table):
     home = Path(tempfile.mkdtemp(prefix="skillry-home-"))
     env = throwaway_env(home)
     run([node, cli, "version"], env)
-    run([node, cli, "install", "--apply", "--targets", "claude"], env)
-    status = check(count(home, table, ["claude"]))
+    run([node, cli, "install", "--apply", "--targets", *ALL_TARGETS], env)
+    status = check(count(home, table, ALL_TARGETS)) or idempotent_and_clean(
+        [node, cli, "install", "--apply", "--targets", *ALL_TARGETS], [node, cli, "doctor"], env)
+    if status:
+        return status
     storage = subprocess.run([node, cli, "storage", "--help"], env=env, capture_output=True, text=True)
     if os.name == "nt":
         answer = json.loads(storage.stdout or "{}")

@@ -1,7 +1,7 @@
 {
   "name": "skillry-data-ml-ai-engineering",
   "description": "Data and ML engineering: data pipelines, ETL/ELT, data quality & validation, feature engineering, notebook hygiene, model training/serving, experiment tracking, and dataset versioning.",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "author": {
     "name": "FluxonLab",
     "url": "https://fluxonlab.com"

@@ -85,7 +85,7 @@ What save enforces:
 
 - **Keys.** Each record's key ends in a hash of the whole normalized topic and question, so two different questions never share a key. Saving the same question again stores a new revision; earlier revisions stay in `research_revisions`.
 - **Strict records.** Save rejects an unknown evidence class, a malformed or future date, an unknown freshness or confidence value, a duplicate source id, a `source_id` that names no source, and a `fact` without a source. A finding without a class counts as `inference`.
-- **Verified or draft.** A record with findings and sources, where every finding cites a source, is `verified`. Anything else is saved as a `draft`, and a draft never comes back as `hit_fresh`, only as `partial`.
+- **Verified or draft.** A record is structurally complete (`structure_complete`) when it has findings and sources, every finding cites a source, and every cited source has a `url`, `path` or `artifact` saying where it can be checked; an id alone does not count. A complete record is `verified` unless you save it with `"evidence": "draft"`, which always stays a draft; asking for `verified` on an incomplete record is refused. A draft never comes back as `hit_fresh`, only as `partial`.
 - **Current information.** A lookup asking for current information (today, current, latest, price, policy) returns `hit_stale` unless the record was researched today. `lookup --revalidate` does the same on request.
 - **Upgrading.** `research_ledger.py migrate` previews moving a database written by an earlier release to these keys; `migrate --apply` backs the database up first, refuses on key conflicts and changes nothing on a second run.
 

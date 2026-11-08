@@ -496,6 +496,45 @@ class LicenseTests(SkillSyncTestCase):
         info = skill_sync.classify_license(self.write("LICENSE", bsd))
         self.assertEqual((info["candidate"], info["status"]), ("BSD-3-Clause", "recognized"))
 
+    def test_a_condition_added_to_the_copyright_line_needs_review(self):
+        text = mit_with_copyright().replace(
+            "Copyright (c) 2024 Example Author",
+            "Copyright (c) 2024 Example Author. Commercial redistribution is prohibited.")
+        info = skill_sync.classify_license(self.write("LICENSE", text))
+        self.assertEqual(info["status"], "needs-review")
+        text = mit_with_copyright().replace(
+            "Copyright (c) 2024 Example Author", "Copyright (c) 2024 Example Author, not for resale")
+        self.assertEqual(skill_sync.classify_license(self.write("LICENSE", text))["status"], "needs-review")
+
+    def test_a_condition_in_angle_brackets_is_not_removed(self):
+        text = mit_with_copyright().replace(
+            "Copyright (c) 2024 Example Author",
+            "Copyright (c) 2024 Example Author\n\n<commercial redistribution is prohibited>")
+        self.assertEqual(skill_sync.classify_license(self.write("LICENSE", text))["status"], "needs-review")
+
+    def test_an_unknown_license_inside_a_skill_folder_blocks_the_import(self):
+        url = self.make_repo(self.demo_files(mit_with_copyright(), {
+            "skills/demo/assets/LICENSE": "These assets are proprietary. All use requires written consent.\n",
+            "skills/demo/assets/logo.txt": "logo\n"}))
+        output = self.assert_refused_license(url)
+        self.assertIn("skills/demo/assets/LICENSE", output)
+        self.assertIn("unknown", output)
+
+    def test_a_reviewed_license_inside_a_skill_folder_can_be_accepted(self):
+        inner = mit_with_restriction()
+        url = self.make_repo(self.demo_files(mit_with_copyright(), {
+            "skills/demo/assets/LICENSE": inner, "skills/demo/assets/logo.txt": "logo\n"}))
+        self.assert_refused_license(url)
+        digest = hashlib.sha256(inner.encode("utf-8")).hexdigest()
+        self.run_import(url, apply=True, accept=[digest])
+        self.assertTrue((self.staged(url) / "skills" / "demo" / "assets" / "logo.txt").is_file())
+
+    def test_a_license_in_an_unrelated_folder_does_not_block(self):
+        url = self.make_repo(self.demo_files(mit_with_copyright(), {
+            "website/LICENSE": "All rights reserved. Not for reuse.\n", "website/index.html": "<p>hi</p>\n"}))
+        self.run_import(url, apply=True)
+        self.assertTrue((self.staged(url) / "skills" / "demo" / "SKILL.md").is_file())
+
     def test_family_guesses_and_unknown(self):
         cases = {
             "Apache License\nSome other terms.\n": "Apache-like",

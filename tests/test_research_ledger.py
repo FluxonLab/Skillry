@@ -273,6 +273,42 @@ class TestRecordValidation(BaseTempDirTestCase):
             })
 
 
+class TestReviewStateAndStructure(BaseTempDirTestCase):
+    """Review F01 recheck: an explicit draft stays a draft and an id alone is not a source."""
+
+    def record(self, **overrides):
+        base = {"question": "How long does the cache live?", "topic": "cache/ttl",
+                "findings": [{"claim": "Entries live 5 minutes", "class": "vendor", "source_ids": ["s1"]}],
+                "sources": [{"id": "s1", "url": "https://example.org/cache"}]}
+        base.update(overrides)
+        return base
+
+    def test_an_explicit_draft_stays_a_draft(self):
+        norm = research_ledger.validate_and_normalize_record(self.record(evidence="draft"))
+        self.assertEqual(norm["evidence"], "draft")
+        self.assertTrue(norm["structure_complete"])
+
+    def test_a_source_without_url_path_or_artifact_keeps_the_record_a_draft(self):
+        norm = research_ledger.validate_and_normalize_record(self.record(sources=[{"id": "s1"}]))
+        self.assertEqual(norm["evidence"], "draft")
+        self.assertFalse(norm["structure_complete"])
+        for locator in ({"path": "evidence/cache.md"}, {"artifact": "receipt-42"}):
+            norm = research_ledger.validate_and_normalize_record(self.record(sources=[{"id": "s1", **locator}]))
+            self.assertEqual(norm["evidence"], "verified")
+
+    def test_verified_is_refused_without_a_locator(self):
+        with self.assertRaises(ValueError):
+            research_ledger.validate_and_normalize_record(self.record(sources=[{"id": "s1"}], evidence="verified"))
+
+    def test_migration_keeps_drafts_and_unlocated_sources_as_drafts(self):
+        state, reasons = research_ledger._evaluate_record_for_migration(self.record(evidence="draft"))
+        self.assertEqual(state, "draft")
+        self.assertTrue(any("draft" in r for r in reasons))
+        state, reasons = research_ledger._evaluate_record_for_migration(self.record(sources=[{"id": "s1"}]))
+        self.assertEqual(state, "draft")
+        self.assertTrue(any("no url, path or artifact" in r for r in reasons))
+
+
 class TestKeysAndRevisions(BaseTempDirTestCase):
     """Tests for section 1 hashed topic keys and revision tracking."""
 

@@ -113,6 +113,14 @@ def _parse_iso_date_strict(value: object, field_name: str, today_utc: date) -> d
     return parsed_date
 
 
+SOURCE_LOCATORS = ('url', 'path', 'artifact')
+
+
+def _has_locator(source: dict) -> bool:
+    """A source can be checked again only when it says where: a url, a file path or an artifact id."""
+    return any(isinstance(source.get(key), str) and source.get(key).strip() for key in SOURCE_LOCATORS)
+
+
 def validate_and_normalize_record(record: dict) -> dict:
     if not isinstance(record, dict):
         raise ValueError("Record must be a JSON object")
@@ -249,22 +257,33 @@ def validate_and_normalize_record(record: dict) -> dict:
             'as_of': as_of_str,
         })
 
-    qualifies_verified = (
+    # Structure and review state are kept apart. A record is structurally complete when it has
+    # findings and sources, every finding cites a source, and every cited source says where it can
+    # be checked (a url, a file path or an artifact id); an id alone does not count. The review
+    # state is `evidence`: an explicit 'draft' always stays a draft, and 'verified' needs the
+    # complete structure.
+    cited = {sid for f in findings for sid in f['source_ids']}
+    structure_complete = (
         len(findings) >= 1
         and len(sources) >= 1
         and all(len(f['source_ids']) >= 1 for f in findings)
+        and all(_has_locator(s) for s in sources if s['id'] in cited)
     )
-    computed_evidence = 'verified' if qualifies_verified else 'draft'
-
+    requested_evidence = None
     if 'evidence' in record and record['evidence'] is not None:
-        input_evidence = record['evidence']
-        if not isinstance(input_evidence, str) or input_evidence not in VALID_EVIDENCE:
-            raise ValueError(f"Invalid evidence: expected one of {sorted(VALID_EVIDENCE)}, got {input_evidence!r}")
-        if input_evidence == 'verified' and computed_evidence != 'verified':
+        requested_evidence = record['evidence']
+        if not isinstance(requested_evidence, str) or requested_evidence not in VALID_EVIDENCE:
+            raise ValueError(f"Invalid evidence: expected one of {sorted(VALID_EVIDENCE)}, got {requested_evidence!r}")
+        if requested_evidence == 'verified' and not structure_complete:
             raise ValueError(
-                "Record specifies evidence='verified' but does not qualify "
-                "(requires at least one finding, at least one source, and every finding citing at least one source)"
+                "Record specifies evidence='verified' but does not qualify (requires at least one finding, "
+                "at least one source, every finding citing a source, and every cited source having a url, "
+                "path or artifact)"
             )
+    if requested_evidence == 'draft':
+        computed_evidence = 'draft'
+    else:
+        computed_evidence = 'verified' if structure_complete else 'draft'
 
     contradictions = record.get('contradictions', [])
     if not isinstance(contradictions, list):
@@ -298,6 +317,7 @@ def validate_and_normalize_record(record: dict) -> dict:
         'supersedes': supersedes,
         'confidence': confidence,
         'evidence': computed_evidence,
+        'structure_complete': structure_complete,
         'revision': revision,
     }
     return norm
@@ -694,6 +714,7 @@ def _evaluate_record_for_migration(data: dict) -> tuple[str, list[str]]:
 
     sources_raw = data.get('sources')
     valid_source_ids: set[str] = set()
+    located_source_ids: set[str] = set()
     valid_sources_count = 0
     if sources_raw is not None and not isinstance(sources_raw, list):
         reasons.append("Record 'sources' is not a list")
@@ -712,6 +733,8 @@ def _evaluate_record_for_migration(data: dict) -> tuple[str, list[str]]:
                 continue
             valid_source_ids.add(sid)
             valid_sources_count += 1
+            if _has_locator(s):
+                located_source_ids.add(sid)
 
     findings_raw = data.get('findings')
     valid_findings_count = 0
@@ -757,6 +780,9 @@ def _evaluate_record_for_migration(data: dict) -> tuple[str, list[str]]:
 
             if not cited_valid:
                 all_findings_cite_source = False
+            for sid in cited_valid:
+                if sid not in located_source_ids:
+                    reasons.append(f"Finding[{idx}] cites source {sid!r} that has no url, path or artifact")
 
             if 'as_of' in f and f['as_of'] is not None:
                 try:
@@ -764,6 +790,8 @@ def _evaluate_record_for_migration(data: dict) -> tuple[str, list[str]]:
                 except ValueError as exc:
                     reasons.append(str(exc))
 
+    if data.get('evidence') == 'draft':
+        reasons.append("Record is marked evidence='draft'")
     if valid_findings_count == 0:
         reasons.append("Record has no findings")
     if valid_sources_count == 0:
