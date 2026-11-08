@@ -21,6 +21,9 @@ All notable changes to Skillry are documented here. The format is based on
 - Windows: `skillry storage` now answers with an `unsupported_platform` JSON error instead
   of failing on a missing `fcntl` import. The storage engine stays macOS and Linux only;
   the installer and the skills work on Windows.
+- Windows clones: a `.gitattributes` file now keeps LF line endings in every checkout.
+  Windows git converted text files to CRLF, so the installer refused every skill with a
+  checksum mismatch. The new Windows CI job found this.
 - The installer removes folders that a removal leaves empty.
 - `real-user-release-gate` and `customer-lens-testing` have shorter descriptions (159 and
   154 characters), and the README's 3.2 section now describes the 3.2.2 rules.
