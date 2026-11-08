@@ -51,14 +51,38 @@ TARGETS = {
         "agent_fmt": "md",
     },
     "antigravity": {
-        "skills": HOME / ".gemini/antigravity/skills",
-        "agents": HOME / ".gemini/antigravity/agents",
+        # The current Antigravity app and CLI read personal skills and agents from
+        # ~/.gemini/config (antigravity.google/docs/extend/customization-discovery).
+        "skills": HOME / ".gemini/config/skills",
+        "agents": HOME / ".gemini/config/agents",
         "agent_ext": ".md",
-        "agent_fmt": "md",
+        "agent_fmt": "antigravity",
+        # Earlier releases installed here; unchanged files Skillry put there are removed
+        # on the next install, locally modified ones stop the install with a message.
+        "legacy_roots": (
+            HOME / ".gemini/antigravity/skills",
+            HOME / ".gemini/antigravity/agents",
+        ),
     },
 }
 
 READ_ONLY_TOOLS = frozenset({"Read", "Glob", "Grep", "WebSearch", "WebFetch"})
+# Antigravity agent tool names, checked against agy 1.5.3 (8 Nov 2026). An unknown name stops
+# the agent ("tool not found in registry"), so only these names are ever written.
+ANTIGRAVITY_TOOLS = {
+    "Read": ("view_file",),
+    "Grep": ("grep_search",),
+    "Glob": ("find_by_name", "list_dir"),
+    "WebSearch": ("search_web",),
+    "WebFetch": ("read_url_content",),
+    "Edit": ("replace_file_content", "multi_replace_file_content"),
+    "MultiEdit": ("multi_replace_file_content",),
+    "Write": ("write_to_file",),
+    "Bash": ("run_command",),
+}
+ANTIGRAVITY_READ_ONLY = frozenset(
+    {"view_file", "grep_search", "find_by_name", "list_dir", "search_web", "read_url_content"}
+)
 SKILL_NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 AGENT_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]*$")
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
@@ -375,6 +399,38 @@ def md_to_cursor_agent(text: str) -> str:
     )
 
 
+def md_to_antigravity_agent(text: str) -> str:
+    """Translate a role to Antigravity's native agent schema with a verified tool list."""
+    name = fm_field(text, "name")
+    if not SKILL_NAME.fullmatch(name):
+        raise SafetyError(f"invalid Antigravity agent name: {name!r}")
+    description = re.sub(r"\s+", " ", fm_field(text, "description"))
+    body = re.sub(r"^---\n.*?\n---\n", "", text, count=1, flags=re.S).strip()
+    readonly = fm_field(text, "permissionMode") == "plan" or has_read_only_tools(text)
+    declared = declared_tools(text)
+    tools: list[str] = []
+    for claude_tool, native in ANTIGRAVITY_TOOLS.items():
+        if claude_tool in declared:
+            tools.extend(tool for tool in native if tool not in tools)
+    if readonly:
+        tools = [tool for tool in tools if tool in ANTIGRAVITY_READ_ONLY]
+    policy = "sandbox" if "run_command" in tools else "off"
+    tool_lines = "".join(f"  - {tool}\n" for tool in tools) if tools else ""
+    return (
+        "---\n"
+        f"name: {name}\n"
+        f"description: {json.dumps(description, ensure_ascii=False)}\n"
+        + ("tools:\n" + tool_lines if tools else "tools: []\n")
+        + "mcpServers: []\n"
+        "mainAgent: false\n"
+        "subagent: true\n"
+        "model: inherit\n"
+        f"commandExecutionPolicy: {policy}\n"
+        "---\n\n"
+        f"{body}\n"
+    )
+
+
 def manifest_location(target: str) -> pathlib.Path:
     root = _lexical(MANIFEST_ROOT)
     _relative(root, HOME)
@@ -532,7 +588,8 @@ def build_target_plan(
 ) -> dict:
     skill_root = prepare_target_root(cfg["skills"])
     agent_root = prepare_target_root(cfg["agents"])
-    roots = tuple(dict.fromkeys((skill_root, agent_root)))
+    legacy_roots = tuple(prepare_target_root(root) for root in cfg.get("legacy_roots", ()))
+    roots = tuple(dict.fromkeys((skill_root, agent_root, *legacy_roots)))
     desired: dict[pathlib.Path, dict] = {}
     skill_file_count = 0
 
@@ -555,12 +612,14 @@ def build_target_plan(
     for agent_file in agents:
         source = safe_source_file(agent_file, REPO)
         source_bytes = source.read_bytes()
-        if cfg["agent_fmt"] in {"toml", "cursor"}:
+        if cfg["agent_fmt"] in {"toml", "cursor", "antigravity"}:
             try:
                 text = source_bytes.decode("utf-8")
             except UnicodeDecodeError as exc:
                 raise SafetyError(f"agent is not valid UTF-8: {source}") from exc
-            convert = md_to_cursor_agent if cfg["agent_fmt"] == "cursor" else md_to_toml_agent
+            convert = {"cursor": md_to_cursor_agent, "antigravity": md_to_antigravity_agent}.get(
+                cfg["agent_fmt"], md_to_toml_agent
+            )
             content = convert(text).encode("utf-8")
         else:
             content = source_bytes
@@ -647,6 +706,7 @@ def build_target_plan(
         "removals": removals,
         "unchanged": unchanged,
         "manifest_path": manifest_path,
+        "roots": roots,
     }
 
 
@@ -750,15 +810,11 @@ def apply_target_plan(plan: dict) -> None:
             atomic_write_destination(destination, item["content"], item["mode"])
             committed[destination] = item["sha256"]
 
+        removal_roots = plan.get("roots") or tuple(
+            dict.fromkeys(item["root"] for item in plan["desired"].values())
+        )
         for destination in plan["removals"]:
-            root = managed_root(
-                destination,
-                tuple(
-                    dict.fromkeys(
-                        item["root"] for item in plan["desired"].values()
-                    )
-                ),
-            )
+            root = managed_root(destination, removal_roots)
             destination = safe_destination(destination, root, HOME)
             if destination.exists():
                 expected = preimages.get(destination)
@@ -767,6 +823,7 @@ def apply_target_plan(plan: dict) -> None:
                         f"locally modified stale managed file would be removed: {destination}"
                     )
                 destination.unlink()
+                prune_empty_parents(destination, root)
             committed.pop(destination, None)
         completed = True
     finally:
@@ -775,6 +832,17 @@ def apply_target_plan(plan: dict) -> None:
                 plan["manifest_path"],
                 manifest_bytes(plan, None if completed else committed),
             )
+
+
+def prune_empty_parents(path: pathlib.Path, root: pathlib.Path) -> None:
+    """Remove folders a removal left empty, up to but not including the target root."""
+    parent = path.parent
+    while parent != root and root in parent.parents:
+        try:
+            parent.rmdir()
+        except OSError:
+            return
+        parent = parent.parent
 
 
 def display_path(path: pathlib.Path) -> str:

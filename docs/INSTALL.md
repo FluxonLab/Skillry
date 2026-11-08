@@ -1,6 +1,6 @@
 # Installing Skillry
 
-Skillry 3.2.2 ships **64 permission-bounded skill hubs + 73 subagents** across 18 departments,
+Skillry 3.2.3 ships **64 permission-bounded skill hubs + 73 subagents** across 18 departments,
 plus an attributed `community/` set (3 skill hubs + 49 agents; 67 skill hubs and 122 subagents total). Hubs route to merged references,
 so the 223 skills of 2.x remain reachable under 67 names; see the 3.0.0, 3.1.0 and 3.2.0 entries in
 [`CHANGELOG.md`](../CHANGELOG.md) for where each former skill now lives. Install into one or
@@ -66,7 +66,7 @@ Install locations per platform:
 | OpenAI Codex | `~/.codex/skills/<name>/SKILL.md` | `~/.codex/agents/<name>.toml` |
 | Cursor | `~/.cursor/skills/<name>/SKILL.md` | `~/.cursor/agents/<name>.md` |
 | GitHub Copilot | `~/.copilot/skills/<name>/SKILL.md` | `~/.copilot/agents/<name>.agent.md` |
-| Google Antigravity (legacy IDE path) | `~/.gemini/antigravity/skills/<name>/SKILL.md` | `~/.gemini/antigravity/agents/<name>.md` (raw Markdown; current App/CLI uses `~/.gemini/config/` and native subagent schema) |
+| Google Antigravity (app and `agy` CLI) | `~/.gemini/config/skills/<name>/SKILL.md` | `~/.gemini/config/agents/<name>.md` (native agent format) |
 
 The installer verifies source checksums and managed destination hashes before updating.
 It refuses unmanaged collisions and user-modified files, and converts agents into each
@@ -80,6 +80,25 @@ precedence over compatibility copies discovered from other clients. Existing fil
 without a Cursor manifest remain collisions, not permission to overwrite them.
 See Cursor's [skill discovery](https://cursor.com/docs/skills) and
 [subagent format](https://cursor.com/docs/subagents).
+
+Antigravity agents use the native format: `name`, `description`, a `tools` list of
+Antigravity tool names, `mcpServers: []`, `mainAgent: false`, `subagent: true`,
+`model: inherit` and `commandExecutionPolicy`. Read-only roles (`permissionMode: plan`
+or only read tools) get `view_file`, `grep_search`, `find_by_name` and `list_dir` with
+commands off. Roles that edit get `replace_file_content`, `multi_replace_file_content`
+and `write_to_file`, and roles with shell get `run_command` with commands in the
+sandbox. Only tool names that load in the current CLI are written, because an unknown
+name stops the agent. Releases before 3.2.3 installed into `~/.gemini/antigravity/`,
+which the current app no longer reads. The next install removes the files Skillry put
+there that are still unchanged. A file you edited there stops the install and is named,
+so you can move it first. See Antigravity's
+[customization discovery](https://antigravity.google/docs/extend/customization-discovery/),
+[skills](https://antigravity.google/docs/skills) and
+[subagents](https://antigravity.google/docs/subagents).
+
+The optional storage engine (`skillry storage`) runs on macOS and Linux. It relies on
+POSIX file locks and `lsof`. On Windows it answers with an `unsupported_platform` error;
+the installer and the skills work there.
 
 ## Project instruction files
 
