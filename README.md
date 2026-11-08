@@ -27,7 +27,7 @@ Two skills that make a release prove itself the way a customer would:
 | `real-user-release-gate` | Test a release the way a customer meets it: the whole product once as a baseline, then only the journeys a release touches, on a local or staging candidate with real providers and a real inbox. After deploy the checks are read-only; live sign-up, payment and account deletion stay with a human |
 | `customer-lens-testing` | In the same session: use the product (all of it once, then the screens a release touches) as a free and paid customer at beginner, intermediate and expert level, score ease, motion and polish, and propose what you would want |
 
-3.2 also carries the fixes from an independent review of 3.1 (installer, storage, packaging and docs). 3.2.2 set how often and where the gate runs; 3.2.3 installs Antigravity skills and agents where the current app reads them, answers clearly on Windows where the storage engine cannot run, and tests real installs on Linux, macOS and Windows. See the [changelog](CHANGELOG.md).
+3.2 also carries the fixes from an independent review of 3.1 (installer, storage, packaging and docs). 3.2.2 set how often and where the gate runs; 3.2.3 installs Antigravity skills and agents where the app, the CLI and the IDE read them, answers clearly on Windows where the storage engine cannot run, and tests real installs on Linux, macOS and Windows. See the [changelog](CHANGELOG.md).
 
 ## What's new in 3.1
 

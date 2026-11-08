@@ -66,7 +66,7 @@ Install locations per platform:
 | OpenAI Codex | `~/.codex/skills/<name>/SKILL.md` | `~/.codex/agents/<name>.toml` |
 | Cursor | `~/.cursor/skills/<name>/SKILL.md` | `~/.cursor/agents/<name>.md` |
 | GitHub Copilot | `~/.copilot/skills/<name>/SKILL.md` | `~/.copilot/agents/<name>.agent.md` |
-| Google Antigravity (app and `agy` CLI) | `~/.gemini/config/skills/<name>/SKILL.md` | `~/.gemini/config/agents/<name>.md` (native agent format) |
+| Google Antigravity (app, `agy` CLI and standalone IDE) | `~/.gemini/config/skills/<name>/SKILL.md` | `~/.gemini/config/agents/<name>.md` (native agent format) |
 
 The installer verifies source checksums and managed destination hashes before updating.
 It refuses unmanaged collisions and user-modified files, and converts agents into each
@@ -88,8 +88,10 @@ or only read tools) get `view_file`, `grep_search`, `find_by_name` and `list_dir
 commands off. Roles that edit get `replace_file_content`, `multi_replace_file_content`
 and `write_to_file`, and roles with shell get `run_command` with commands in the
 sandbox. Only tool names that load in the current CLI are written, because an unknown
-name stops the agent. Releases before 3.2.3 installed into `~/.gemini/antigravity/`,
-which the current app no longer reads. The next install removes the files Skillry put
+name stops the agent. Releases before 3.2.3 installed into `~/.gemini/antigravity/`.
+The app and the CLI do not read that folder. The standalone IDE reads
+`~/.gemini/config/skills/` and still reads the old `skills/` folder as a fallback, so it
+would list every skill twice. The next install therefore removes the files Skillry put
 there that are still unchanged. A file you edited there stops the install and is named,
 so you can move it first. See Antigravity's
 [customization discovery](https://antigravity.google/docs/extend/customization-discovery/),
