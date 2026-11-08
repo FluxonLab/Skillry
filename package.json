@@ -1,7 +1,7 @@
 {
   "name": "skillry",
-  "version": "3.2.4",
-  "description": "Installable, permission-bounded, multi-platform agent skills & subagents for Claude Code, OpenAI Codex, Cursor, GitHub Copilot, and Google Antigravity (Gemini).",
+  "version": "3.3.0",
+  "description": "Installable, permission-bounded, multi-platform agent skills & subagents for Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Google Antigravity (Gemini) and OpenCode.",
   "keywords": [
     "claude-code",
     "claude",
@@ -9,6 +9,7 @@
     "copilot",
     "antigravity",
     "gemini",
+    "opencode",
     "agent",
     "agents",
     "subagents",

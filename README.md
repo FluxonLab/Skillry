@@ -4,7 +4,7 @@
 
 # Skillry
 
-**Reusable, permission-bounded skills and agents for Claude Code, OpenAI Codex, Cursor, Gemini, and GitHub Copilot.**
+**Reusable, permission-bounded skills and agents for Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Google Antigravity and OpenCode.**
 
 One maintained library, adapted to each supported runtime without taking ownership of a project's
 instruction files.
@@ -17,6 +17,27 @@ instruction files.
 </div>
 
 ---
+
+## What's new in 3.3
+
+Install only what you need, check it later, and remove it cleanly:
+
+| Command | What it does |
+| --- | --- |
+| `skillry install --departments security core-operations` | Install chosen departments, or single skills with `--skills`; `--no-agents` leaves the agents out |
+| `skillry list` | Show departments, skills and agents, and what each platform has installed |
+| `skillry doctor` | Compare installed files with their manifests and report missing or locally changed files |
+| `skillry uninstall --targets claude` | Remove what Skillry wrote and keep the files you changed |
+
+Install and uninstall preview first and write only with `--apply`. Choices are remembered per
+platform, so an update keeps them; an update that would remove something you installed stops
+until you pass `--allow-removal`.
+
+OpenCode is the sixth platform. Skills go to `~/.config/opencode/skills`, and agents become
+OpenCode subagents with a permission map. The new `free-model-workers` skill shows how a lead
+agent hands small jobs to free models through `opencode run`, each in its own folder with tools
+denied, and checks every result before using it. See the [install guide](docs/INSTALL.md) and
+the [changelog](CHANGELOG.md).
 
 ## What's new in 3.2
 
@@ -97,6 +118,7 @@ The portable installer installs only platform skills and agent definitions.
 | Cursor | Native skills and agents with inherited model and explicit read-only intent | AGENTS.md and .cursor/rules |
 | Gemini (`--targets antigravity`) | Skills and Gemini/Antigravity agents | GEMINI.md and AGENTS.md |
 | GitHub Copilot | Skills and Copilot-compatible custom agents | .github/copilot-instructions.md and AGENTS.md |
+| OpenCode | Skills and OpenCode subagents with a permission map | AGENTS.md |
 
 The installer does **not** copy, generate, merge, append, reconcile, back up, or otherwise modify
 project CLAUDE.md, AGENTS.md, GEMINI.md, or Copilot instruction files. Those files express local

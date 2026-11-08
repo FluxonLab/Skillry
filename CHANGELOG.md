@@ -6,6 +6,46 @@ All notable changes to Skillry are documented here. The format is based on
 
 ## [Unreleased]
 
+## [3.3.0] - 2026-11-08
+
+### Added
+
+- Selective installs. `--departments` installs chosen departments and `--skills` chosen
+  skills; given together, you get both. `--no-agents` leaves the agents out, and `--all`
+  goes back to everything. An unknown department or skill name stops the install.
+- Remembered choices. Each platform's choice of departments, skills, community content
+  and agents is saved in `~/.skillry/manifests/selection.json`, and a later
+  `skillry install --apply` without choice flags keeps it. For installs made before 3.3,
+  the community choice is read from the manifest.
+- An update that would remove components you installed earlier stops and lists them;
+  `--allow-removal` lets it go ahead.
+- `skillry list` shows departments, skills, agents and what each platform has installed
+  (`--json` for scripts).
+- `skillry doctor` compares installed files with their manifests, reports missing and
+  locally changed files, and exits non-zero when it finds either.
+- `skillry uninstall --targets <p..>` previews, and with `--apply` removes, the files
+  Skillry wrote. A file you changed stays in place and is reported.
+- OpenCode target (`--targets opencode`). Skills go to `~/.config/opencode/skills`, and
+  agents go to `~/.config/opencode/agents` as subagents with a `permission` map: a role
+  without `Edit`/`Write` gets `edit: deny`, a role without `Bash` gets `bash: deny`, and web
+  tools are denied unless the role declares them. OpenCode 1.19 applies this map and
+  ignores the newer `permissions` list.
+- `free-model-workers` (ai-and-agent-systems). A lead agent hands small, checkable jobs to
+  free models through `opencode run`: OpenCode Zen free models, NVIDIA's API catalog trial
+  or OpenRouter's free models. Each job runs in its own folder with shell, subagents and
+  outside paths denied, keys stay in the environment of one command, and the lead checks
+  every result. The skill lists each provider's limits and data terms and allows only
+  public or synthetic inputs.
+
+### Changed
+
+- `validate.py` fails a skill whose description is longer than 240 characters, because
+  clients show every description to the model.
+- The install smoke test installs twice, requires the second run to change nothing, and
+  then runs `doctor`, on Linux, macOS and Windows.
+- The README and the install guide cover OpenCode, the new commands and the new counts
+  (65 first-party skill hubs; 68 with the community set).
+
 ## [3.2.4] - 2026-11-08
 
 3.2.3 was not published to npm on its own; its changes ship in this release.

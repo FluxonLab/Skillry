@@ -50,6 +50,14 @@ TARGETS = {
         "agent_ext": ".agent.md",
         "agent_fmt": "md",
     },
+    "opencode": {
+        # OpenCode reads personal skills from ~/.config/opencode/skills and agents from
+        # ~/.config/opencode/agents (opencode.ai/docs/skills, opencode.ai/docs/agents).
+        "skills": HOME / ".config/opencode/skills",
+        "agents": HOME / ".config/opencode/agents",
+        "agent_ext": ".md",
+        "agent_fmt": "opencode",
+    },
     "antigravity": {
         # The current Antigravity app and CLI read personal skills and agents from
         # ~/.gemini/config (antigravity.google/docs/extend/customization-discovery).
@@ -434,6 +442,39 @@ def md_to_antigravity_agent(text: str) -> str:
     )
 
 
+def md_to_opencode_agent(text: str) -> str:
+    """Translate a role to an OpenCode agent: description, subagent mode, least-privilege rules.
+
+    The `permission` map is the format OpenCode 1.19 applies (checked with `opencode debug
+    agent`); 1.19 ignores the V2 `permissions` list, and V2 still reads this map.
+    """
+    name = fm_field(text, "name")
+    if not SKILL_NAME.fullmatch(name):
+        raise SafetyError(f"invalid OpenCode agent name: {name!r}")
+    description = re.sub(r"\s+", " ", fm_field(text, "description"))
+    body = re.sub(r"^---\n.*?\n---\n", "", text, count=1, flags=re.S).strip()
+    readonly = fm_field(text, "permissionMode") == "plan" or has_read_only_tools(text)
+    declared = declared_tools(text)
+    denied = []
+    if readonly or not declared & {"Edit", "Write", "MultiEdit"}:
+        denied.append("edit")
+    if readonly or "Bash" not in declared:
+        denied.append("bash")
+    if "WebFetch" not in declared:
+        denied.append("webfetch")
+    if "WebSearch" not in declared:
+        denied.append("websearch")
+    rules = "".join(f"  {action}: deny\n" for action in denied)
+    return (
+        "---\n"
+        f"description: {json.dumps(description, ensure_ascii=False)}\n"
+        "mode: subagent\n"
+        + ("permission:\n" + rules if rules else "")
+        + "---\n\n"
+        f"{body}\n"
+    )
+
+
 def manifest_location(target: str) -> pathlib.Path:
     root = _lexical(MANIFEST_ROOT)
     _relative(root, HOME)
@@ -582,6 +623,13 @@ def destination_hash(path: pathlib.Path, root: pathlib.Path) -> str:
         raise SafetyError(f"cannot read destination for hashing: {path}: {exc}") from exc
 
 
+def target_roots(cfg: dict) -> tuple[pathlib.Path, ...]:
+    legacy_roots = tuple(prepare_target_root(root) for root in cfg.get("legacy_roots", ()))
+    return tuple(dict.fromkeys(
+        (prepare_target_root(cfg["skills"]), prepare_target_root(cfg["agents"]), *legacy_roots)
+    ))
+
+
 def build_target_plan(
     name: str,
     cfg: dict,
@@ -591,8 +639,7 @@ def build_target_plan(
 ) -> dict:
     skill_root = prepare_target_root(cfg["skills"])
     agent_root = prepare_target_root(cfg["agents"])
-    legacy_roots = tuple(prepare_target_root(root) for root in cfg.get("legacy_roots", ()))
-    roots = tuple(dict.fromkeys((skill_root, agent_root, *legacy_roots)))
+    roots = target_roots(cfg)
     desired: dict[pathlib.Path, dict] = {}
     skill_file_count = 0
 
@@ -615,12 +662,13 @@ def build_target_plan(
     for agent_file in agents:
         source = safe_source_file(agent_file, REPO)
         source_bytes = source.read_bytes()
-        if cfg["agent_fmt"] in {"toml", "cursor", "antigravity"}:
+        if cfg["agent_fmt"] in {"toml", "cursor", "antigravity", "opencode"}:
             try:
                 text = source_bytes.decode("utf-8")
             except UnicodeDecodeError as exc:
                 raise SafetyError(f"agent is not valid UTF-8: {source}") from exc
-            convert = {"cursor": md_to_cursor_agent, "antigravity": md_to_antigravity_agent}.get(
+            convert = {"cursor": md_to_cursor_agent, "antigravity": md_to_antigravity_agent,
+                       "opencode": md_to_opencode_agent}.get(
                 cfg["agent_fmt"], md_to_toml_agent
             )
             content = convert(text).encode("utf-8")
@@ -873,62 +921,383 @@ def report_plan(plan: dict, apply: bool) -> None:
     )
 
 
-def parse_args() -> argparse.Namespace:
+SELECTION_VERSION = 1
+DEFAULT_SELECTION = {"community": False, "departments": None, "skills": None, "agents": True}
+
+
+def component_group(path: pathlib.Path) -> str:
+    """The department of a first-party component, or community/<source> for a community one."""
+    parts = path.relative_to(REPO).parts
+    return parts[1] if parts[0] == "plugins" else f"community/{parts[1]}"
+
+
+def is_community(path: pathlib.Path) -> bool:
+    return path.relative_to(REPO).parts[0] == "community"
+
+
+def selection_location() -> pathlib.Path:
+    root = _lexical(MANIFEST_ROOT)
+    _relative(root, HOME)
+    _reject_symlink_components(root, HOME)
+    return safe_destination(root / "selection.json", root, HOME)
+
+
+def load_selections() -> dict:
+    path = selection_location()
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=_unique_json_object)
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError) as exc:
+        raise SafetyError(f"malformed install selection {path}: {exc}") from exc
+    if (not isinstance(data, dict) or data.get("schema_version") != SELECTION_VERSION
+            or not isinstance(data.get("targets"), dict)):
+        raise SafetyError(f"malformed install selection structure: {path}")
+    for target, selection in data["targets"].items():
+        if target not in TARGETS:
+            continue
+        if (not isinstance(selection, dict) or set(selection) != set(DEFAULT_SELECTION)
+                or not isinstance(selection["community"], bool)
+                or not isinstance(selection["agents"], bool)
+                or not all(value is None or (isinstance(value, list) and all(isinstance(v, str) for v in value))
+                           for value in (selection["departments"], selection["skills"]))):
+            raise SafetyError(f"malformed install selection for {target}: {path}")
+    return data["targets"]
+
+
+def save_selections(selections: dict) -> None:
+    content = json.dumps(
+        {"schema_version": SELECTION_VERSION, "targets": selections}, indent=2, sort_keys=True
+    ) + "\n"
+    root = _lexical(MANIFEST_ROOT)
+    _relative(root, HOME)
+    _reject_symlink_components(root, HOME)
+    root.mkdir(parents=True, exist_ok=True)
+    path = selection_location()
+    descriptor, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=root)
+    temporary = pathlib.Path(temporary_name)
+    try:
+        with os.fdopen(descriptor, "wb") as handle:
+            handle.write(content.encode("utf-8"))
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, path)
+    finally:
+        if temporary.exists():
+            temporary.unlink()
+
+
+def component_of(destination: pathlib.Path, cfg: dict) -> str | None:
+    """The skill name or agent id a managed destination belongs to."""
+    skill_roots = [_lexical(cfg["skills"])] + [
+        _lexical(root) for root in cfg.get("legacy_roots", ()) if _lexical(root).name == "skills"
+    ]
+    agent_roots = [_lexical(cfg["agents"])] + [
+        _lexical(root) for root in cfg.get("legacy_roots", ()) if _lexical(root).name == "agents"
+    ]
+    for root in skill_roots:
+        try:
+            return destination.relative_to(root).parts[0]
+        except ValueError:
+            pass
+    for root in agent_roots:
+        try:
+            relative = destination.relative_to(root)
+        except ValueError:
+            continue
+        name = relative.parts[0]
+        for ext in (cfg["agent_ext"], ".md"):
+            if name.endswith(ext):
+                return name[: -len(ext)]
+        return name
+    return None
+
+
+def infer_selection(target: str, cfg: dict, community_names: set[str]) -> dict:
+    """Releases before 3.3 did not store the choice; read it from what the manifest lists."""
+    _, prior, has_manifest = load_manifest(target, target_roots(cfg))
+    selection = dict(DEFAULT_SELECTION)
+    if has_manifest:
+        installed = {component_of(destination, cfg) for destination in prior}
+        selection["community"] = bool(installed & community_names)
+    return selection
+
+
+def resolve_selection(target: str, cfg: dict, args, saved: dict, library) -> dict:
+    skills, agents = library
+    community_names = {name for folder, name in skills if is_community(folder)} | {
+        agent.stem for agent in agents if is_community(agent)
+    }
+    if target in saved:
+        selection = dict(saved[target])
+    else:
+        selection = infer_selection(target, cfg, community_names)
+    if args.all:
+        selection.update(departments=None, skills=None, agents=True)
+    if args.departments:
+        groups = {component_group(folder) for folder, _ in skills} | {component_group(a) for a in agents}
+        unknown = sorted(set(args.departments) - groups)
+        if unknown:
+            raise SafetyError(f"unknown department: {', '.join(unknown)}")
+    if args.skills:
+        names = {name for _, name in skills}
+        unknown = sorted(set(args.skills) - names)
+        if unknown:
+            raise SafetyError(f"unknown skill: {', '.join(unknown)}")
+    if args.departments or args.skills:
+        # A command that names departments or skills replaces both remembered filters.
+        selection["departments"] = sorted(set(args.departments)) if args.departments else None
+        selection["skills"] = sorted(set(args.skills)) if args.skills else None
+    if args.no_agents:
+        selection["agents"] = False
+    if args.community:
+        selection["community"] = True
+    if args.no_community:
+        selection["community"] = False
+    return selection
+
+
+def select_components(library, selection: dict):
+    skills, agents = library
+    if not selection["community"]:
+        skills = [item for item in skills if not is_community(item[0])]
+        agents = [agent for agent in agents if not is_community(agent)]
+    departments, names = selection["departments"], selection["skills"]
+    if departments is not None or names is not None:
+        # The skills of the named departments plus the named skills; agents follow departments.
+        groups, wanted = set(departments or ()), set(names or ())
+        skills = [item for item in skills if component_group(item[0]) in groups or item[1] in wanted]
+    if departments is not None:
+        agents = [agent for agent in agents if component_group(agent) in set(departments)]
+    if not selection["agents"]:
+        agents = []
+    return skills, agents
+
+
+def deselected_components(plan: dict, cfg: dict, library, selected) -> list[str]:
+    """Components still in the library that this run would remove because they were deselected."""
+    skills, agents = library
+    library_names = {name for _, name in skills} | {agent.stem for agent in agents}
+    chosen = {name for _, name in selected[0]} | {agent.stem for agent in selected[1]}
+    names = {component_of(destination, cfg) for destination in plan["removals"]}
+    return sorted(name for name in names if name in library_names and name not in chosen)
+
+
+def describe_selection(selection: dict) -> str:
+    parts = ["community" if selection["community"] else "first-party"]
+    if selection["departments"] is not None:
+        parts.append("departments=" + ",".join(selection["departments"]))
+    if selection["skills"] is not None:
+        parts.append("skills=" + ",".join(selection["skills"]))
+    if not selection["agents"]:
+        parts.append("no agents")
+    return " ".join(parts)
+
+
+def list_library(library, as_json: bool) -> int:
+    skills, agents = library
+    groups: dict[str, dict[str, list[str]]] = {}
+    for folder, name in skills:
+        groups.setdefault(component_group(folder), {"skills": [], "agents": []})["skills"].append(name)
+    for agent in agents:
+        groups.setdefault(component_group(agent), {"skills": [], "agents": []})["agents"].append(agent.stem)
+    saved = load_selections()
+    installed = {}
+    for target, cfg in TARGETS.items():
+        _, prior, has_manifest = load_manifest(target, target_roots(cfg))
+        if has_manifest:
+            names = {component_of(destination, cfg) for destination in prior}
+            installed[target] = {"components": len(names), "files": len(prior),
+                                 "selection": saved.get(target)}
+    if as_json:
+        print(json.dumps({"departments": groups, "installed": installed}, indent=2, sort_keys=True))
+        return 0
+    print("Departments (skills / agents):")
+    for group in sorted(groups):
+        print(f"  {group:34} {len(groups[group]['skills']):3} / {len(groups[group]['agents']):3}")
+    print("\nInstalled:" if installed else "\nInstalled: nothing yet")
+    for target, info in installed.items():
+        selection = info["selection"]
+        text = describe_selection(selection) if selection else "selection not recorded (before 3.3)"
+        print(f"  {target:12} {info['components']} components, {info['files']} files ({text})")
+    return 0
+
+
+def doctor(as_json: bool) -> int:
+    report = {"python": sys.version.split()[0], "platform": sys.platform, "targets": {}, "notes": []}
+    problems = 0
+    if sys.version_info < (3, 9):
+        report["notes"].append("Python 3.9 or newer is required")
+        problems += 1
+    if os.name == "nt":
+        report["notes"].append("skillry storage runs on macOS and Linux only; installs work on Windows")
+    for target, cfg in TARGETS.items():
+        roots = target_roots(cfg)
+        try:
+            _, prior, has_manifest = load_manifest(target, roots)
+        except SafetyError as exc:
+            report["targets"][target] = {"error": str(exc)}
+            problems += 1
+            continue
+        if not has_manifest:
+            continue
+        missing, modified = [], []
+        for destination, digest in sorted(prior.items(), key=lambda pair: os.fspath(pair[0])):
+            root = managed_root(destination, roots)
+            if not destination.exists():
+                missing.append(display_path(destination))
+            elif destination_hash(destination, root) != digest:
+                modified.append(display_path(destination))
+        report["targets"][target] = {"files": len(prior), "missing": missing, "modified": modified}
+        problems += len(missing) + len(modified)
+    if as_json:
+        print(json.dumps(report, indent=2, sort_keys=True))
+    else:
+        print(f"Python {report['python']} on {report['platform']}")
+        if not report["targets"]:
+            print("No Skillry install found.")
+        for target, info in report["targets"].items():
+            if "error" in info:
+                print(f"  {target:12} ERROR {info['error']}")
+                continue
+            state = "ok" if not info["missing"] and not info["modified"] else "needs attention"
+            print(f"  {target:12} {info['files']} files, {len(info['missing'])} missing, "
+                  f"{len(info['modified'])} changed locally: {state}")
+            for path in info["missing"][:10]:
+                print(f"      missing  {path}")
+            for path in info["modified"][:10]:
+                print(f"      changed  {path}")
+        for note in report["notes"]:
+            print(f"  note: {note}")
+    return 1 if problems else 0
+
+
+def uninstall(targets: list[str], apply: bool) -> int:
+    saved = load_selections()
+    prefix = "" if apply else "WOULD "
+    for target in targets:
+        cfg = TARGETS[target]
+        roots = target_roots(cfg)
+        manifest_path, prior, has_manifest = load_manifest(target, roots)
+        if not has_manifest:
+            print(f"  {target:12} nothing installed by Skillry")
+            continue
+        remove, keep = [], []
+        for destination, digest in sorted(prior.items(), key=lambda pair: os.fspath(pair[0])):
+            root = managed_root(destination, roots)
+            if not destination.exists():
+                continue
+            if destination_hash(destination, root) == digest:
+                remove.append((destination, root))
+            else:
+                keep.append(destination)
+        print(f"  {target:12} remove:{len(remove)} keep (changed locally):{len(keep)}")
+        for destination, _ in remove:
+            print(f"    {prefix}REMOVE {display_path(destination)}")
+        for destination in keep:
+            print(f"    {prefix}KEEP   {display_path(destination)} (changed locally; no longer managed)")
+        if apply:
+            for destination, root in remove:
+                destination = safe_destination(destination, root, HOME)
+                if destination.exists() and destination_hash(destination, root) == prior[destination]:
+                    destination.unlink()
+                    prune_empty_parents(destination, root)
+            manifest_path.unlink()
+            saved.pop(target, None)
+    if apply:
+        save_selections(saved)
+    print("\nDone" + ("" if apply else " (dry-run; nothing removed)"))
+    return 0
+
+
+def parse_args(argv=None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__, allow_abbrev=False)
+    action = parser.add_mutually_exclusive_group()
+    action.add_argument("--list", action="store_true", help="list departments, skills and agents, and what is installed")
+    action.add_argument("--doctor", action="store_true", help="check installed files against their manifests")
+    action.add_argument("--uninstall", action="store_true", help="remove what Skillry installed for --targets")
+    parser.add_argument("--json", action="store_true", help="machine-readable output for --list and --doctor")
     parser.add_argument(
         "--apply",
         action="store_true",
-        help="write verified platform components; default is dry-run",
+        help="write (or with --uninstall remove) files; default is dry-run",
     )
     parser.add_argument(
         "--community",
         action="store_true",
-        help="include reviewed community skills and agents",
+        help="include reviewed community skills and agents (remembered)",
     )
+    parser.add_argument("--no-community", action="store_true", help="leave community content out (remembered)")
     parser.add_argument(
         "--targets",
         nargs="+",
         choices=sorted(TARGETS),
         help="one or more target platforms; default is all",
     )
-    return parser.parse_args()
+    parser.add_argument("--departments", nargs="+", metavar="NAME",
+                        help="install only these departments (remembered); see --list")
+    parser.add_argument("--skills", nargs="+", metavar="NAME", help="install only these skills (remembered)")
+    parser.add_argument("--no-agents", action="store_true", help="install skills only (remembered)")
+    parser.add_argument("--all", action="store_true", help="go back to every department, skill and agent")
+    parser.add_argument("--allow-removal", action="store_true",
+                        help="allow an --apply that removes components you deselected")
+    args = parser.parse_args(argv)
+    if args.community and args.no_community:
+        parser.error("--community and --no-community exclude each other")
+    if args.uninstall and not args.targets:
+        parser.error("--uninstall needs --targets")
+    return args
 
 
-def main():
-    args = parse_args()
+def main(argv=None) -> int:
+    args = parse_args(argv)
+    if args.doctor:
+        verified_components(True)
+        return doctor(args.json)
+    if args.uninstall:
+        return uninstall(args.targets, args.apply)
+    library = verified_components(True)
+    if args.list:
+        return list_library(library, args.json)
+
     selected = args.targets or list(TARGETS)
-    skills, agents = verified_components(args.community)
-
+    saved = load_selections()
     claimed: dict[pathlib.Path, str] = {}
-    plans = [
-        build_target_plan(
-            name,
-            TARGETS[name],
-            skills,
-            agents,
-            claimed,
-        )
-        for name in selected
-    ]
+    plans, selections, blocked = [], {}, []
+    for name in selected:
+        selection = resolve_selection(name, TARGETS[name], args, saved, library)
+        components = select_components(library, selection)
+        plan = build_target_plan(name, TARGETS[name], components[0], components[1], claimed)
+        dropped = deselected_components(plan, TARGETS[name], library, components)
+        if dropped and not args.allow_removal:
+            blocked.append((name, dropped))
+        plans.append(plan)
+        selections[name] = selection
 
     print(f"{'APPLY' if args.apply else 'DRY-RUN'} - Skillry install")
-    print(
-        f"Targets: {', '.join(selected)}   "
-        f"Community: {'yes' if args.community else 'no'}\n"
-    )
+    print(f"Targets: {', '.join(selected)}\n")
     for plan in plans:
+        print(f"  {plan['name']:12} selection: {describe_selection(selections[plan['name']])}")
         report_plan(plan, args.apply)
+    for name, dropped in blocked:
+        print(f"\n  {name}: this selection removes components you installed earlier: {', '.join(dropped)}."
+              " Pass --allow-removal to remove them, or widen the selection.")
 
     if args.apply:
+        if blocked:
+            raise SafetyError("the selection would remove installed components; nothing was changed")
         for plan in plans:
             apply_target_plan(plan)
+        saved.update(selections)
+        save_selections(saved)
 
     print("\nDone" + ("" if args.apply else " (dry-run; no files written)"))
+    return 0
 
 
 if __name__ == "__main__":
     try:
-        main()
+        sys.exit(main())
     except SafetyError as exc:
         print(f"REFUSED: {exc}", file=sys.stderr)
         sys.exit(2)

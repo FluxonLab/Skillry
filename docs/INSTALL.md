@@ -1,8 +1,8 @@
 # Installing Skillry
 
-Skillry 3.2.4 ships **64 permission-bounded skill hubs + 73 subagents** across 18 departments,
-plus an attributed `community/` set (3 skill hubs + 49 agents; 67 skill hubs and 122 subagents total). Hubs route to merged references,
-so the 223 skills of 2.x remain reachable under 67 names; see the 3.0.0, 3.1.0 and 3.2.0 entries in
+Skillry 3.3.0 ships **65 permission-bounded skill hubs + 73 subagents** across 18 departments,
+plus an attributed `community/` set (3 skill hubs + 49 agents; 68 skill hubs and 122 subagents total). Hubs route to merged references,
+so the 223 skills of 2.x remain reachable; see the 3.0.0, 3.1.0 and 3.2.0 entries in
 [`CHANGELOG.md`](../CHANGELOG.md) for where each former skill now lives. Install into one or
 more platforms.
 
@@ -27,7 +27,7 @@ Marketplace installs are reproducible: pin a plugin to a commit SHA in
 ```bash
 # Runs directly from GitHub — no global install, no npm account needed:
 npx github:FluxonLab/Skillry install                              # dry-run, all platforms
-npx github:FluxonLab/Skillry install --apply --targets claude     # codex | cursor | copilot | antigravity
+npx github:FluxonLab/Skillry install --apply --targets claude     # codex | cursor | copilot | antigravity | opencode
 npx github:FluxonLab/Skillry install --apply --targets claude --community
 
 # Or install the CLI globally (published on npm):
@@ -42,14 +42,14 @@ skillry update      # check for a newer release and see how to update
 > `github:FluxonLab/Skillry` form (optionally pinned to a reviewed commit) for the
 > repository version; a Git commit does not publish a new npm release.
 
-## Option C — Portable installer (Claude, Codex, Cursor, Copilot, Gemini/Antigravity)
+## Option C — Portable installer (Claude, Codex, Cursor, Copilot, Antigravity, OpenCode)
 
 ```bash
 git clone https://github.com/FluxonLab/Skillry
 cd Skillry
 
 # Preview (writes nothing):
-python3 tools/install.py --targets claude codex cursor copilot antigravity
+python3 tools/install.py --targets claude codex cursor copilot antigravity opencode
 
 # Install original skills + agents:
 python3 tools/install.py --apply --targets claude
@@ -67,6 +67,7 @@ Install locations per platform:
 | Cursor | `~/.cursor/skills/<name>/SKILL.md` | `~/.cursor/agents/<name>.md` |
 | GitHub Copilot | `~/.copilot/skills/<name>/SKILL.md` | `~/.copilot/agents/<name>.agent.md` |
 | Google Antigravity (app, `agy` CLI and standalone IDE) | `~/.gemini/config/skills/<name>/SKILL.md` | `~/.gemini/config/agents/<name>.md` (native agent format) |
+| OpenCode | `~/.config/opencode/skills/<name>/SKILL.md` | `~/.config/opencode/agents/<name>.md` (subagent with a `permission` map) |
 
 The installer verifies source checksums and managed destination hashes before updating.
 It refuses unmanaged collisions and user-modified files, and converts agents into each
@@ -101,6 +102,48 @@ so you can move it first. See Antigravity's
 The optional storage engine (`skillry storage`) runs on macOS and Linux. It relies on
 POSIX file locks and `lsof`. On Windows it answers with an `unsupported_platform` error;
 the installer and the skills work there.
+
+OpenCode agents carry `description`, `mode: subagent` and a `permission` map. That is the
+format OpenCode 1.19 applies; it ignores the newer `permissions` list, and OpenCode 2 still
+reads the map. A role without `Edit`/`Write` gets `edit: deny`, a role without `Bash` gets
+`bash: deny`, and read-only roles (`permissionMode: plan` or only read tools) get both. Web tools are denied unless the role declares them. OpenCode
+also reads `~/.claude/skills`, so if you install both targets it sees each skill twice
+and loads the copy in `~/.config/opencode/skills`. See OpenCode's
+[skills](https://opencode.ai/docs/skills) and [agents](https://opencode.ai/docs/agents).
+
+## Choosing what to install
+
+By default every first-party department is installed. You can narrow that:
+
+```bash
+skillry list                                              # departments, skills, agents, installs
+skillry install --apply --targets claude --departments security core-operations
+skillry install --apply --targets opencode --skills repo-diagnostics --no-agents
+skillry install --apply --targets claude --all            # back to everything
+```
+
+`--departments` installs the skills and agents of those departments. `--skills` installs the
+named skills; next to `--departments` it adds them to the departments' skills. Agents follow
+`--departments` (every agent when no department is named) unless you pass `--no-agents`. A
+command that names departments or skills replaces both remembered filters.
+
+Choices about departments, skills, community content and agents are remembered for each
+target in `~/.skillry/manifests/selection.json`. A later `skillry install --apply` with no
+choice flags keeps them. An update that would remove components you installed earlier stops
+with a list; pass `--allow-removal` when that is what you want. For installs made before
+3.3, the community choice is read from what the manifest lists.
+
+## Checking and removing an install
+
+```bash
+skillry doctor                                  # compare installed files with their manifests
+skillry uninstall --targets claude              # preview
+skillry uninstall --targets claude --apply      # remove
+```
+
+`doctor` reports missing files and files changed locally, and exits non-zero when it finds
+either. `uninstall` removes only files that still match what Skillry wrote. A file you
+changed stays in place, is reported, and is no longer managed.
 
 ## Project instruction files
 

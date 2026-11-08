@@ -1,7 +1,7 @@
 {
   "name": "skillry-skill-library-and-installation",
   "description": "Skill librarian, deduplication, skill-to-agent routing, installation audit, and path hygiene.",
-  "version": "3.2.4",
+  "version": "3.3.0",
   "author": {
     "name": "FluxonLab",
     "url": "https://fluxonlab.com"

@@ -24,6 +24,10 @@ const HELP = `Skillry v${localVersion()} — installable, permission-bounded, mu
 
 Usage:
   skillry install [--apply] [--targets <p..>] [--community]     Install skills and agents
+          [--departments <d..>] [--skills <s..>] [--no-agents] [--all] [--allow-removal]
+  skillry list [--json]                                       Departments, skills, agents and what is installed
+  skillry doctor [--json]                                     Check installed files against their manifests
+  skillry uninstall --targets <p..> [--apply]                 Remove what Skillry installed (keeps your edits)
   skillry jev <status|assess|hook|synthetic|install> [args]      Optional bounded Jev advice
   skillry storage [--config PATH] <command> [args]            Optional local storage lifecycle engine
   skillry validate                                            Lint structure, frontmatter, permissions
@@ -33,7 +37,9 @@ Usage:
   skillry update                                              Check for a newer release and show how to update
   skillry help                                                Show this help
 
-Platforms (for --targets): claude  codex  cursor  copilot  antigravity
+Platforms (for --targets): claude  codex  cursor  copilot  antigravity  opencode
+Install choices (departments, skills, community, agents) are remembered for the next update;
+an update that would remove components you installed needs --allow-removal.
 Skill installation previews by default; --apply is required to install.
 Storage actions use explicit commands and the owner's configured lifecycle scope.
 
@@ -99,6 +105,9 @@ function update() {
 
 switch (cmd) {
   case 'install':  runPython('install.py', rest); break;
+  case 'list':     runPython('install.py', ['--list', ...rest]); break;
+  case 'doctor':   runPython('install.py', ['--doctor', ...rest]); break;
+  case 'uninstall': runPython('install.py', ['--uninstall', ...rest]); break;
   case 'validate': runPython('validate.py', rest); break;
   case 'sync':     runPython('skill-sync.py', rest); break;
   case 'lock':     runPython('build-lock.py', rest); break;
