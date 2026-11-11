@@ -333,23 +333,78 @@ def pid_running(pid):
         return True
 
 
+def run_probe(argv, timeout):
+    """(returncode, stdout) of a short read-only probe, or None when it failed or did not finish in time.
+
+    A process stuck in an uninterruptible kernel call (for example lsof stat-ing a network mount that
+    stopped answering) cannot be killed or reaped until that call returns. subprocess.run waits for the
+    killed child after a timeout, so one such lsof froze the storage worker for hours on 11 Nov 2026. A
+    child that outlives kill is abandoned here instead; subprocess reaps it later without blocking."""
+    try:
+        child = subprocess.Popen(argv, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+    except OSError:
+        return None
+    try:
+        stdout, _ = child.communicate(timeout=timeout)
+        return child.returncode, stdout
+    except subprocess.TimeoutExpired:
+        child.kill()
+        try:
+            child.communicate(timeout=2)
+        except subprocess.TimeoutExpired:
+            pass
+        return None
+
+
+def _elapsed_seconds(etime):
+    """Seconds in a ps etime value ([[dd-]hh:]mm:ss)."""
+    days, _, clock = etime.rpartition("-")
+    parts = [int(part) for part in clock.split(":") if part.isdigit()]
+    seconds = 0
+    for part in parts:
+        seconds = seconds * 60 + part
+    return seconds + int(days or 0) * 86400
+
+
+def lsof_stuck(min_seconds=60):
+    """True when an lsof has sat in uninterruptible kernel wait (ps state U or D) for at least min_seconds.
+    Then a mount has stopped answering, every new lsof would hang behind it, and starting more only piles up
+    stuck processes, so callers skip the scan and treat their paths as held."""
+    try:
+        listing = subprocess.run(["ps", "-axo", "stat=,etime=,comm="], capture_output=True, text=True, timeout=5, check=False)
+    except (OSError, subprocess.TimeoutExpired):
+        return False
+    for line in listing.stdout.splitlines():
+        fields = line.split(None, 2)
+        if len(fields) == 3 and os.path.basename(fields[2].strip()) == "lsof" and fields[0][:1] in ("U", "D"):
+            if _elapsed_seconds(fields[1]) >= min_seconds:
+                return True
+    return False
+
+
+def lsof_scan(args, timeout):
+    """(returncode, stdout) of one lsof run, or None when lsof is missing, a stuck lsof shows that a mount
+    stopped answering, or this run failed or did not finish in time. None never authorizes a removal."""
+    if not shutil.which("lsof") or lsof_stuck():
+        return None
+    return run_probe(["lsof", *args], timeout)
+
+
 def lsof_holders(paths):
     """One lsof scan of paths: False when no process holds any of them, True when one does,
     None when the scan failed or lsof is missing."""
-    if not shutil.which("lsof"):
-        return None
     args = []
     for path in paths:
         args.extend(["+D", path] if os.path.isdir(path) and not os.path.islink(path) else [path])
-    try:
-        result = subprocess.run(["lsof", "-t", *args], capture_output=True, timeout=8, check=False)
-    except (OSError, subprocess.TimeoutExpired):
+    result = lsof_scan(["-t", *args], 8)
+    if result is None:
         return None
+    returncode, stdout = result
     # macOS lsof can return 1 for an incomplete scan while still reporting
     # matching PIDs. Those matches must protect the file from retirement.
-    if result.stdout.strip():
+    if stdout.strip():
         return True
-    return False if result.returncode in (0, 1) else None
+    return False if returncode in (0, 1) else None
 
 
 def path_open(path):
@@ -371,26 +426,22 @@ def open_paths(paths):
 
 
 def tree_open(path):
-    if not shutil.which("lsof"):
+    result = lsof_scan(["-t", "+D", path] if os.path.isdir(path) else ["-t", path], 10)
+    if result is None:
         return True
-    try:
-        command = ["lsof", "-t", "+D", path] if os.path.isdir(path) else ["lsof", "-t", path]
-        result = subprocess.run(command, capture_output=True, timeout=10, check=False)
-        return bool(result.stdout.strip()) or result.returncode not in (0, 1)
-    except (OSError, subprocess.TimeoutExpired):
-        return True
+    returncode, stdout = result
+    return bool(stdout.strip()) or returncode not in (0, 1)
 
 
 def process_cwds():
     """Resolved working directories of every process from one lsof scan; None when the scan failed."""
     if not shutil.which("lsof"):
         return []
-    try:
-        result = subprocess.run(["lsof", "-Fn", "-d", "cwd"], capture_output=True, timeout=8, check=False)
-    except (OSError, subprocess.TimeoutExpired):
+    result = lsof_scan(["-Fn", "-d", "cwd"], 8)
+    if result is None:
         return None
     cwds = []
-    for line in result.stdout.splitlines():
+    for line in result[1].splitlines():
         if line.startswith(b"n"):
             cwd = os.fsdecode(line[1:])
             if os.path.isabs(cwd):
