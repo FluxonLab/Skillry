@@ -18,6 +18,8 @@ from unittest import mock
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 from storage import engine, transfer
 
+REAL_LSOF_SCAN = engine.lsof_scan
+
 
 class StorageEngineTest(unittest.TestCase):
     def test_app_retirement_rechecks_target_and_preserves_newly_active_bundle(self):
@@ -41,19 +43,65 @@ class StorageEngineTest(unittest.TestCase):
         self.assertEqual(calls.count(str(retired)), 2)
 
     def test_lsof_partial_result_still_protects_active_paths(self):
-        with mock.patch.object(shutil, "which", return_value="/usr/sbin/lsof"), \
-             mock.patch.object(subprocess, "run", return_value=SimpleNamespace(returncode=1, stdout=b"57052\n")):
+        with mock.patch.object(engine, "lsof_scan", REAL_LSOF_SCAN), \
+             mock.patch.object(shutil, "which", return_value="/usr/sbin/lsof"), \
+             mock.patch.object(engine, "lsof_stuck", return_value=False), \
+             mock.patch.object(engine, "run_probe", return_value=(1, b"57052\n")):
             self.assertTrue(engine.path_open("/example/file"))
             self.assertTrue(engine.tree_open("/example/app"))
 
+    def test_probe_abandons_a_child_the_kernel_will_not_release(self):
+        # An lsof stuck on a dead network mount ignores kill until its system call returns; waiting for it
+        # froze the worker on 11 Nov 2026. The probe must give up and report an unknown result.
+        child = mock.Mock()
+        child.communicate.side_effect = subprocess.TimeoutExpired(["lsof"], 1)
+        with mock.patch.object(subprocess, "Popen", return_value=child):
+            self.assertIsNone(engine.run_probe(["lsof", "-t", "/example/file"], 1))
+        child.kill.assert_called_once()
+        child.wait.assert_not_called()
+
+    def test_probe_kills_a_slow_child_and_returns_quickly(self):
+        import time
+        started = time.monotonic()
+        self.assertIsNone(engine.run_probe([sys.executable, "-c", "import time; time.sleep(30)"], 0.3))
+        self.assertLess(time.monotonic() - started, 5)
+        self.assertEqual(engine.run_probe([sys.executable, "-c", "print(42)"], 10), (0, b"42\n"))
+
+    def test_a_stuck_lsof_skips_new_scans_and_protects_paths(self):
+        listing = SimpleNamespace(stdout="Ss   01:02:03 /usr/sbin/sshd\nU      05:12 /usr/sbin/lsof\nR+   00:01 /usr/sbin/lsof\n")
+        with mock.patch.object(subprocess, "run", return_value=listing):
+            self.assertTrue(engine.lsof_stuck())
+        with mock.patch.object(engine, "lsof_scan", REAL_LSOF_SCAN), \
+             mock.patch.object(shutil, "which", return_value="/usr/sbin/lsof"), \
+             mock.patch.object(engine, "lsof_stuck", return_value=True), \
+             mock.patch.object(engine, "run_probe") as probe:
+            self.assertIsNone(engine.lsof_holders(["/example/file"]))
+            self.assertTrue(engine.path_open("/example/file"))
+            self.assertTrue(engine.tree_open("/example/app"))
+            self.assertIsNone(engine.process_cwds())
+        probe.assert_not_called()
+
+    def test_a_briefly_waiting_lsof_does_not_count_as_stuck(self):
+        listing = SimpleNamespace(stdout="U      00:12 /usr/sbin/lsof\nS    1-02:00:00 /usr/sbin/lsof\n")
+        with mock.patch.object(subprocess, "run", return_value=listing):
+            self.assertFalse(engine.lsof_stuck())
+        self.assertEqual(engine._elapsed_seconds("1-02:03:04"), 93784)
+        self.assertEqual(engine._elapsed_seconds("05:12"), 312)
+
     def test_missing_lsof_does_not_authorize_removal(self):
-        with mock.patch.object(shutil, "which", return_value=None):
+        with mock.patch.object(engine, "lsof_scan", REAL_LSOF_SCAN), mock.patch.object(shutil, "which", return_value=None):
             self.assertTrue(engine.path_open("/example/file"))
             self.assertTrue(engine.tree_open("/example/app"))
 
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
+        # No host process holds the synthetic fixtures. A real lsof would make these tests depend on the
+        # host's mounts and processes (on 11 Nov 2026 every lsof on the Pro hung on a dead SMB mount), so the
+        # scan answers "nobody holds it" unless a test replaces it; the lsof tests use REAL_LSOF_SCAN.
+        quiet = mock.patch.object(engine, "lsof_scan", side_effect=lambda args, timeout: (0, b"") if args[:1] == ["-Fn"] else (1, b""))
+        quiet.start()
+        self.addCleanup(quiet.stop)
         # macOS exposes the temporary root through /var -> /private/var.
         # Resolve the owned fixture before exercising production symlink guards.
         self.root = Path(self.temp.name).resolve(strict=True)
@@ -231,18 +279,17 @@ class StorageEngineTest(unittest.TestCase):
 
     def fake_lsof(self, held=(), fail=False):
         """Answer lsof like a machine where no process works in the fixtures; other commands run for real."""
-        calls, real_run = [], subprocess.run
-        def run(argv, **kwargs):
-            if argv[0] != "lsof":
-                return real_run(argv, **kwargs)
+        calls = []
+        def scan(args, timeout):
+            argv = ["lsof", *args]
             calls.append(argv)
             if argv[1] == "-Fn":
-                return SimpleNamespace(returncode=0, stdout=b"p1\nfcwd\nn/\n")
+                return 0, b"p1\nfcwd\nn/\n"
             if fail:
-                raise subprocess.TimeoutExpired(argv, 8)
+                return None
             hit = any(str(path) in argv[2:] for path in held)
-            return SimpleNamespace(returncode=0 if hit else 1, stdout=b"4242\n" if hit else b"")
-        return calls, mock.patch.object(subprocess, "run", side_effect=run)
+            return (0, b"4242\n") if hit else (1, b"")
+        return calls, mock.patch.object(engine, "lsof_scan", side_effect=scan)
 
     def test_cleanup_pass_scans_processes_once_instead_of_twice_per_output(self):
         outputs = self.closed_outputs(5)
