@@ -263,7 +263,7 @@ class Store:
           CREATE TABLE IF NOT EXISTS workspaces(
             id TEXT PRIMARY KEY,path TEXT UNIQUE NOT NULL,name TEXT NOT NULL,owner TEXT NOT NULL,
             state TEXT NOT NULL,hold INTEGER NOT NULL DEFAULT 0, heartbeat INTEGER NOT NULL,
-            pid INTEGER, outputs TEXT NOT NULL);
+            pid INTEGER, outputs TEXT NOT NULL, closed_at INTEGER);
           CREATE TABLE IF NOT EXISTS jobs(
             id TEXT PRIMARY KEY,path TEXT UNIQUE NOT NULL,name TEXT NOT NULL,category TEXT NOT NULL,
             state TEXT NOT NULL,size INTEGER NOT NULL,mtime_ns INTEGER NOT NULL,dev INTEGER NOT NULL,
@@ -288,6 +288,14 @@ class Store:
         if "claim_started_at" not in columns:
             self.db.execute("ALTER TABLE jobs ADD COLUMN claim_started_at INTEGER")
         self.db.commit()
+        if "closed_at" not in {row[1] for row in self.db.execute("PRAGMA table_info(workspaces)")}:
+            with self.db:
+                self.db.execute("BEGIN IMMEDIATE")
+                # Another worker can finish the upgrade while this one waits for the lock.
+                if "closed_at" not in {row[1] for row in self.db.execute("PRAGMA table_info(workspaces)")}:
+                    self.db.execute("ALTER TABLE workspaces ADD COLUMN closed_at INTEGER")
+                    # Store the heartbeat's epoch time in nanoseconds, like filesystem mtimes.
+                    self.db.execute("UPDATE workspaces SET closed_at=heartbeat*? WHERE state='closed'", (1_000_000_000,))
 
     def get(self, key, default=None):
         row = self.db.execute("SELECT value FROM meta WHERE key=?", (key,)).fetchone()
@@ -542,12 +550,12 @@ def workspace_op(store, config, action, args):
                 if prior["owner"] != args.owner and (live or prior["hold"]):
                     raise StorageError("workspace_owned", "An active or held workspace belongs to another owner")
                 pid = args.pid if args.pid is not None else prior["pid"] if live and pid_running(prior["pid"]) else None
-                store.db.execute("UPDATE workspaces SET name=?,owner=?,state=?,heartbeat=?,pid=?,outputs=? WHERE id=?",
+                store.db.execute("UPDATE workspaces SET name=?,owner=?,state=?,heartbeat=?,pid=?,outputs=?,closed_at=NULL WHERE id=?",
                                  (args.name or os.path.basename(path), args.owner, args.state, now(), pid, dump(outputs), prior["id"]))
                 ident = prior["id"]
             else:
                 ident = uuid.uuid4().hex
-                store.db.execute("INSERT INTO workspaces VALUES (?,?,?,?,?,?,?,?,?)",
+                store.db.execute("INSERT INTO workspaces (id,path,name,owner,state,hold,heartbeat,pid,outputs) VALUES (?,?,?,?,?,?,?,?,?)",
                                  (ident, path, args.name or os.path.basename(path), args.owner, args.state, 0, now(), args.pid, dump(outputs)))
             store.db.commit()
         except Exception:
@@ -561,15 +569,16 @@ def workspace_op(store, config, action, args):
     if not row:
         raise StorageError("not_found", "Workspace not found")
     if action == "heartbeat":
-        store.db.execute("UPDATE workspaces SET heartbeat=?,state='active',pid=COALESCE(?,pid) WHERE id=?", (now(), args.pid, args.id))
+        store.db.execute("UPDATE workspaces SET heartbeat=?,state='active',pid=COALESCE(?,pid),closed_at=NULL WHERE id=?", (now(), args.pid, args.id))
     elif action == "finish":
-        store.db.execute("UPDATE workspaces SET state=?,pid=NULL WHERE id=?", (args.state, args.id))
+        store.db.execute("UPDATE workspaces SET state=?,pid=NULL,closed_at=NULL WHERE id=?", (args.state, args.id))
     elif action == "close":
         if not args.accepted:
             raise StorageError("not_accepted", "Close requires --accepted")
         if pid_running(row["pid"]):
             raise StorageError("active_process", "Registered process is still running")
-        store.db.execute("UPDATE workspaces SET state='closed',pid=NULL WHERE id=?", (args.id,))
+        store.db.execute("UPDATE workspaces SET state='closed',pid=NULL,closed_at=COALESCE(closed_at,?) WHERE id=?",
+                         (time.time_ns(), args.id))
     elif action in ("pin", "unpin"):
         store.db.execute("UPDATE workspaces SET hold=? WHERE id=?", (action == "pin", args.id))
     store.db.commit()
@@ -601,14 +610,30 @@ def cleanup_candidate(row, relative, config, measure=True, evidence=None):
                 reason = "tracked"
             elif evidence.workspace_active(row["path"]) or evidence.path_open(path):
                 reason = "open_process"
-            elif os.path.isdir(path):
-                if not shutil.rmtree.avoids_symlink_attacks:
-                    reason = "unsafe_platform"
-                else:
-                    for base, dirs, files in os.walk(path, followlinks=False):
-                        if ".git" in dirs + files or ".skillry-keep" in dirs + files:
-                            reason = "meaningful_state"
-                            break
+            elif row["closed_at"] is None:
+                # Closing accepted the output as it was at that moment. Without the moment nothing proves
+                # that what is at the path now is what was accepted.
+                reason = "close_time_unknown"
+            else:
+                # An output that was rebuilt, or changed in any entry, after the close is not the accepted one.
+                cutoff = row["closed_at"]
+                entry = os.lstat(path)
+                changed = entry.st_mtime_ns > cutoff
+                if stat.S_ISDIR(entry.st_mode):
+                    if not shutil.rmtree.avoids_symlink_attacks:
+                        reason = "unsafe_platform"
+                    else:
+                        for base, dirs, files in os.walk(path, followlinks=False):
+                            if ".git" in dirs + files or ".skillry-keep" in dirs + files:
+                                reason = "meaningful_state"
+                                break
+                            if not changed:
+                                changed = any(os.lstat(os.path.join(base, name)).st_mtime_ns > cutoff
+                                              for name in dirs + files)
+                if reason is None and changed:
+                    reason = "changed_after_close"
+        except FileNotFoundError:
+            reason = "missing"
         except StorageError as exc:
             reason = exc.code
     return {"workspace_id": row["id"], "path": path, "eligible": reason is None,

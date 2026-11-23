@@ -127,13 +127,158 @@ class StorageEngineTest(unittest.TestCase):
 
     def test_closed_registered_output_only(self):
         path, ident = self.workspace()
-        (path / "dist").mkdir()
-        (path / "dist" / "generated").write_text("compiled")
+        output = path / "dist"
+        output.mkdir()
+        (output / "generated").write_text("compiled")
         self.assertFalse(engine.cleanup_op(self.store, self.config, False)["candidates"][0]["eligible"])
-        args = type("Args", (), {"id": ident, "accepted": True})()
+        args = SimpleNamespace(id=ident, accepted=True)
         engine.workspace_op(self.store, self.config, "close", args)
-        engine.cleanup_op(self.store, self.config, True)
-        self.assertFalse((path / "dist").exists())
+        closed_at = self.store.rows("workspaces")[0]["closed_at"]
+        preview = engine.cleanup_op(self.store, self.config, False)
+        applied = engine.cleanup_op(self.store, self.config, True)
+        self.assertEqual(preview["candidates"], applied["candidates"])
+        self.assertEqual(applied["removed"], [str(output)])
+        self.assertFalse(output.exists())
+
+        output.mkdir()
+        (output / "generated").write_text("rebuilt")
+        with mock.patch.object(engine.time, "time_ns", return_value=(output / "generated").stat().st_mtime_ns + 1):
+            engine.workspace_op(self.store, self.config, "close", args)
+        self.assertEqual(self.store.rows("workspaces")[0]["closed_at"], closed_at)
+        preview = engine.cleanup_op(self.store, self.config, False)
+        applied = engine.cleanup_op(self.store, self.config, True)
+        self.assertEqual(preview["candidates"], applied["candidates"])
+        self.assertEqual(applied["candidates"][0]["reason"], "changed_after_close")
+        self.assertEqual(applied["removed"], [])
+        self.assertEqual((output / "generated").read_text(), "rebuilt")
+        self.assertEqual([row["state"] for row in self.store.rows("events") if row["action"] == "cleanup"], ["removed"])
+
+        self.assertEqual(self.workspace()[1], ident)
+        self.assertIsNone(self.store.rows("workspaces")[0]["closed_at"])
+        engine.workspace_op(self.store, self.config, "close", args)
+        engine.workspace_op(self.store, self.config, "pin", args)
+        self.assertEqual(engine.cleanup_op(self.store, self.config, True)["removed"], [])
+        engine.workspace_op(self.store, self.config, "unpin", args)
+        self.assertEqual(engine.cleanup_op(self.store, self.config, True)["removed"], [str(output)])
+
+    def test_nested_directory_and_direct_file_changes_protect_closed_output(self):
+        path, ident = self.workspace()
+        output = path / "dist"
+        nested = output / "assets" / "images"
+        nested.mkdir(parents=True)
+        direct_file = output / "manifest.json"
+        direct_file.write_text("{}")
+        # The changes can happen later in the very same second as close.
+        second = 1_700_000_000_000_000_000
+        for entry in (output, nested.parent, nested, direct_file):
+            os.utime(entry, ns=(second, second))
+        with mock.patch.object(engine.time, "time_ns", return_value=second + 100_000_000):
+            engine.workspace_op(self.store, self.config, "close", SimpleNamespace(id=ident, accepted=True))
+
+        for entry in (nested, direct_file):
+            with self.subTest(entry=entry):
+                newer = second + 500_000_000
+                os.utime(entry, ns=(newer, newer))
+                preview = engine.cleanup_op(self.store, self.config, False)
+                applied = engine.cleanup_op(self.store, self.config, True)
+                self.assertEqual(preview["candidates"], applied["candidates"])
+                self.assertEqual(applied["candidates"][0]["reason"], "changed_after_close")
+                self.assertEqual(applied["removed"], [])
+                self.assertTrue(entry.exists())
+                os.utime(entry, ns=(second, second))
+
+    def test_a_file_changed_deep_in_the_tree_protects_closed_output(self):
+        path, ident = self.workspace()
+        output = path / "dist"
+        deep = output / "assets" / "images" / "logo.bin"
+        deep.parent.mkdir(parents=True)
+        deep.write_text("v1")
+        second = 1_700_000_000_000_000_000
+        for entry in (output, deep.parent.parent, deep.parent, deep):
+            os.utime(entry, ns=(second, second))
+        with mock.patch.object(engine.time, "time_ns", return_value=second + 100_000_000):
+            engine.workspace_op(self.store, self.config, "close", SimpleNamespace(id=ident, accepted=True))
+        # Rewritten in place: no directory of the tree gets a new modification time.
+        newer = second + 500_000_000
+        os.utime(deep, ns=(newer, newer))
+        self.assertEqual([entry.stat().st_mtime_ns for entry in (output, deep.parent.parent, deep.parent)], [second] * 3)
+        preview = engine.cleanup_op(self.store, self.config, False)
+        applied = engine.cleanup_op(self.store, self.config, True)
+        self.assertEqual(preview["candidates"], applied["candidates"])
+        self.assertEqual(applied["candidates"][0]["reason"], "changed_after_close")
+        self.assertEqual(applied["removed"], [])
+        self.assertEqual(deep.read_text(), "v1")
+
+    def test_a_registration_that_was_live_again_gets_a_new_close_time(self):
+        for action, extra in (("heartbeat", {"pid": None}), ("finish", {"state": "delivered"})):
+            with self.subTest(action=action):
+                path, ident = self.workspace()
+                output = path / "dist"
+                output.mkdir(exist_ok=True)
+                (output / "generated").write_text("first")
+                close = SimpleNamespace(id=ident, accepted=True)
+                engine.workspace_op(self.store, self.config, "close", close)
+                first = self.store.rows("workspaces")[0]["closed_at"]
+                self.assertIsNotNone(first)
+                engine.workspace_op(self.store, self.config, action, SimpleNamespace(id=ident, **extra))
+                self.assertIsNone(self.store.rows("workspaces")[0]["closed_at"])
+                (output / "generated").write_text("second")
+                later = max(entry.stat().st_mtime_ns for entry in (output, output / "generated")) + 1
+                with mock.patch.object(engine.time, "time_ns", return_value=later):
+                    engine.workspace_op(self.store, self.config, "close", close)
+                self.assertEqual(self.store.rows("workspaces")[0]["closed_at"], later)
+                self.assertEqual(engine.cleanup_op(self.store, self.config, True)["removed"], [str(output)])
+
+    def test_closed_row_without_a_close_time_keeps_its_output(self):
+        path, ident = self.workspace()
+        output = path / "dist"
+        output.mkdir()
+        (output / "generated").write_text("compiled")
+        engine.workspace_op(self.store, self.config, "close", SimpleNamespace(id=ident, accepted=True))
+        self.store.db.execute("UPDATE workspaces SET closed_at=NULL WHERE id=?", (ident,))
+        self.store.db.commit()
+        preview = engine.cleanup_op(self.store, self.config, False)
+        applied = engine.cleanup_op(self.store, self.config, True)
+        self.assertEqual(preview["candidates"], applied["candidates"])
+        self.assertEqual(applied["candidates"][0]["reason"], "close_time_unknown")
+        self.assertEqual(applied["removed"], [])
+        self.assertTrue((output / "generated").exists())
+
+    def test_legacy_closed_workspaces_use_heartbeat_as_cleanup_cutoff(self):
+        path = self.workspace_root / "legacy"
+        path.mkdir()
+        older = path / "older"
+        older.write_text("old build")
+        newer = path / "newer"
+        newer.mkdir()
+        heartbeat = 1_700_000_000
+        os.utime(older, (heartbeat - 1, heartbeat - 1))
+        os.utime(newer, (heartbeat + 1, heartbeat + 1))
+        state_dir = self.root / "legacy-state"
+        state_dir.mkdir()
+        legacy = sqlite3.connect(state_dir / "state.sqlite")
+        try:
+            legacy.execute("""CREATE TABLE workspaces(
+                id TEXT PRIMARY KEY,path TEXT UNIQUE NOT NULL,name TEXT NOT NULL,owner TEXT NOT NULL,
+                state TEXT NOT NULL,hold INTEGER NOT NULL DEFAULT 0, heartbeat INTEGER NOT NULL,
+                pid INTEGER, outputs TEXT NOT NULL)""")
+            legacy.execute("INSERT INTO workspaces VALUES (?,?,?,?,?,?,?,?,?)",
+                           ("legacy", str(path), "legacy", "fixture", "closed", 0, heartbeat, None, '["older", "newer"]'))
+            legacy.commit()
+        finally:
+            legacy.close()
+
+        config = {**self.config, "state_dir": str(state_dir)}
+        store = engine.Store(config)
+        self.addCleanup(store.db.close)
+        self.assertEqual(store.rows("workspaces")[0]["closed_at"], heartbeat * 1_000_000_000)
+        preview = engine.cleanup_op(store, config, False)
+        applied = engine.cleanup_op(store, config, True)
+        self.assertEqual(preview["candidates"], applied["candidates"])
+        self.assertEqual([item["reason"] for item in applied["candidates"]], [None, "changed_after_close"])
+        self.assertEqual(applied["removed"], [str(older)])
+        self.assertFalse(older.exists())
+        self.assertTrue(newer.exists())
 
     def test_cleanup_goes_on_when_another_cleanup_took_a_path_first(self):
         path = self.workspace_root / "job"
